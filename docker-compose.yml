@@ -1,0 +1,24 @@
+services:
+  portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: murphy-portal:latest
+    container_name: murphy-portal
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    networks:
+      - murphy-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  murphy-network:
+    external: true
