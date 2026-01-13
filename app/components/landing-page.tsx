@@ -15,6 +15,9 @@ import {
   Shield,
   Globe,
   Sparkles,
+  ChevronDown,
+  Boxes,
+  UsersRound,
 } from "lucide-react";
 import Link from "next/link";
 import Footer from "./footer";
@@ -185,25 +188,111 @@ const advantages = [
     icon: Zap,
     title: "高效便捷",
     description: "简洁的操作流程，快速上手使用",
+    details: {
+      product: {
+        title: "产品高效便捷",
+        items: [
+          "简洁直观的操作界面，零学习成本快速上手",
+          "AI 驱动的智能功能，自动化处理繁琐任务",
+          "一站式解决方案，无需切换多个工具",
+          "实时数据同步，信息随时更新",
+        ],
+      },
+      team: {
+        title: "团队高效交付",
+        items: [
+          "20+ 位核心开发者，15年+ 平均开发经验",
+          "7天内快速组建专项团队启动项目",
+          "2周敏捷迭代周期，持续交付可见成果",
+          "世界500强工程实践：GitOps、CI/CD、自动化测试",
+        ],
+      },
+    },
   },
   {
     icon: Shield,
     title: "安全可靠",
     description: "企业级数据安全保障，隐私加密存储",
+    details: {
+      product: {
+        title: "产品安全保障",
+        items: [
+          "企业级数据加密，全程 HTTPS 传输",
+          "多层权限控制，精细化访问管理",
+          "定期安全审计，及时修复潜在风险",
+          "数据备份与恢复机制，确保业务连续性",
+        ],
+      },
+      team: {
+        title: "团队可靠背景",
+        items: [
+          "核心成员均来自世界500强企业技术团队",
+          "20年+ 企业级项目经验，服务电力、通信等头部客户",
+          "CVE 漏洞修复、合规性管理、AppSec 安全扫描",
+          "代码审查 + SonarQube 质量管理 + 自动化测试保障",
+        ],
+      },
+    },
   },
   {
     icon: Users,
     title: "团队协作",
     description: "支持多人协作，高效沟通无障碍",
+    details: {
+      product: {
+        title: "产品协作能力",
+        items: [
+          "多人实时协作，支持团队成员同时在线编辑",
+          "任务分配与进度追踪，清晰掌控项目状态",
+          "评论与通知系统，高效团队沟通",
+          "权限分级管理，灵活控制访问范围",
+        ],
+      },
+      team: {
+        title: "专业团队构成",
+        items: [
+          "工程总监、首席架构师、全栈工程师协同作战",
+          "AI/ML 专家、基础设施专家多领域覆盖",
+          "管理 30+ GitHub 代码仓库，4大核心产品平台",
+          "跨地域团队协作经验（中国 + 全球）",
+        ],
+      },
+    },
   },
   {
     icon: Globe,
     title: "随时随地",
     description: "Web端访问，不受设备和地点限制",
+    details: {
+      product: {
+        title: "产品随时可用",
+        items: [
+          "纯 Web 端架构，无需安装任何软件",
+          "响应式设计，完美适配手机、平板、电脑",
+          "云端数据存储，多设备无缝切换",
+          "离线模式支持，断网也能继续工作",
+        ],
+      },
+      team: {
+        title: "服务随时响应",
+        items: [
+          "7×24 小时技术支持（关键项目）",
+          "快速响应机制，问题及时解决",
+          "项目交付后持续技术支持与维护",
+          "远程协作能力，全球化服务覆盖",
+        ],
+      },
+    },
   },
 ];
 
 export default function LandingPage() {
+  const [expandedAdvantage, setExpandedAdvantage] = useState<string | null>(null);
+
+  const handleAdvantageClick = (title: string) => {
+    setExpandedAdvantage(expandedAdvantage === title ? null : title);
+  };
+
   return (
     <main className="min-h-screen flex flex-col">
       {/* 顶部导航 */}
@@ -521,53 +610,211 @@ export default function LandingPage() {
             viewport={{ once: true, margin: "-50px" }}
             variants={staggerContainer}
           >
-            {advantages.map((item, index) => (
-              <motion.div
-                key={item.title}
-                variants={scaleIn}
-                className="text-center group"
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {/* 图标容器 - 悬停动画 */}
+            {advantages.map((item, index) => {
+              const isExpanded = expandedAdvantage === item.title;
+              return (
                 <motion.div
-                  className="inline-flex h-16 w-16 rounded-2xl bg-linear-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 items-center justify-center mb-5 relative overflow-hidden"
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 10px 30px rgba(99, 102, 241, 0.3)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400 }}
+                  key={item.title}
+                  variants={scaleIn}
+                  className={`text-center group cursor-pointer relative ${
+                    isExpanded 
+                      ? "bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50 rounded-2xl p-6 -m-6 ring-2 ring-blue-500/30" 
+                      : ""
+                  }`}
+                  whileHover={{ y: isExpanded ? 0 : -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  onClick={() => handleAdvantageClick(item.title)}
                 >
-                  {/* 光晕效果 */}
+                  {/* 图标容器 - 悬停动画 */}
                   <motion.div
-                    className="absolute inset-0 bg-linear-to-r from-blue-400/0 via-white/30 to-purple-400/0"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.6 }}
-                  />
-                  <item.icon className="h-8 w-8 text-blue-600 dark:text-blue-400 relative z-10" />
-                </motion.div>
+                    className={`inline-flex h-16 w-16 rounded-2xl items-center justify-center mb-5 relative overflow-hidden ${
+                      isExpanded
+                        ? "bg-linear-to-br from-blue-500 to-purple-500"
+                        : "bg-linear-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50"
+                    }`}
+                    whileHover={{
+                      scale: 1.1,
+                      boxShadow: "0 10px 30px rgba(99, 102, 241, 0.3)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    {/* 光晕效果 */}
+                    <motion.div
+                      className="absolute inset-0 bg-linear-to-r from-blue-400/0 via-white/30 to-purple-400/0"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "100%" }}
+                      transition={{ duration: 0.6 }}
+                    />
+                    <item.icon className={`h-8 w-8 relative z-10 ${
+                      isExpanded ? "text-white" : "text-blue-600 dark:text-blue-400"
+                    }`} />
+                  </motion.div>
 
-                <motion.h3
-                  className="text-xl font-semibold mb-2"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
+                  <motion.h3
+                    className="text-xl font-semibold mb-2"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.3 }}
+                  >
+                    {item.title}
+                  </motion.h3>
+                  <motion.p
+                    className="text-muted-foreground mb-3"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.4 }}
+                  >
+                    {item.description}
+                  </motion.p>
+                  
+                  {/* 展开指示器 */}
+                  <motion.div
+                    className="flex items-center justify-center gap-1 text-sm text-blue-600 dark:text-blue-400"
+                    animate={{ opacity: isExpanded ? 0 : 1 }}
+                  >
+                    <span>点击了解更多</span>
+                    <motion.div
+                      animate={{ y: [0, 3, 0] }}
+                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* 展开的详情面板 */}
+          <motion.div
+            initial={false}
+            animate={{
+              height: expandedAdvantage ? "auto" : 0,
+              opacity: expandedAdvantage ? 1 : 0,
+            }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            {advantages.map((item) => {
+              if (expandedAdvantage !== item.title) return null;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="mt-12 bg-linear-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-blue-950/30 dark:to-purple-950/30 rounded-3xl p-8 border border-blue-100 dark:border-blue-900/50"
                 >
-                  {item.title}
-                </motion.h3>
-                <motion.p
-                  className="text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.4 }}
-                >
-                  {item.description}
-                </motion.p>
-              </motion.div>
-            ))}
+                  {/* 标题栏 */}
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-xl bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">{item.title}</h3>
+                        <p className="text-muted-foreground">{item.description}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandedAdvantage(null);
+                      }}
+                      className="p-2 hover:bg-white/50 dark:hover:bg-white/10 rounded-lg transition-colors"
+                    >
+                      <ChevronDown className="h-6 w-6 rotate-180 text-muted-foreground" />
+                    </button>
+                  </div>
+
+                  {/* 两列内容：产品 & 团队 */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* 产品维度 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="bg-white/60 dark:bg-slate-800/60 rounded-2xl p-6 backdrop-blur-sm border border-blue-100/50 dark:border-blue-800/30"
+                    >
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
+                          <Boxes className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <h4 className="text-lg font-semibold text-blue-700 dark:text-blue-300">
+                          {item.details.product.title}
+                        </h4>
+                      </div>
+                      <ul className="space-y-3">
+                        {item.details.product.items.map((text, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + idx * 0.1 }}
+                            className="flex items-start gap-3"
+                          >
+                            <CheckCircle2 className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                            <span className="text-sm text-muted-foreground">{text}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+
+                    {/* 团队维度 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-white/60 dark:bg-slate-800/60 rounded-2xl p-6 backdrop-blur-sm border border-purple-100/50 dark:border-purple-800/30"
+                    >
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="h-10 w-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
+                          <UsersRound className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                        </div>
+                        <h4 className="text-lg font-semibold text-purple-700 dark:text-purple-300">
+                          {item.details.team.title}
+                        </h4>
+                      </div>
+                      <ul className="space-y-3">
+                        {item.details.team.items.map((text, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.4 + idx * 0.1 }}
+                            className="flex items-start gap-3"
+                          >
+                            <CheckCircle2 className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
+                            <span className="text-sm text-muted-foreground">{text}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  </div>
+
+                  {/* 底部装饰线 */}
+                  <div className="mt-8 flex items-center justify-center gap-2">
+                    {advantages.map((adv, idx) => (
+                      <button
+                        key={adv.title}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpandedAdvantage(adv.title);
+                        }}
+                        className={`h-2 rounded-full transition-all ${
+                          expandedAdvantage === adv.title 
+                            ? "w-8 bg-linear-to-r from-blue-500 to-purple-500" 
+                            : "w-2 bg-slate-300 dark:bg-slate-600 hover:bg-blue-400"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
