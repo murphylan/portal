@@ -22,6 +22,7 @@ import {
 import Link from "next/link";
 import Footer from "./footer";
 import ContactDialog from "./contact-dialog";
+import Mascot3D from "./mascot/mascot-3d";
 
 
 // 动画变体
@@ -918,6 +919,9 @@ export default function LandingPage() {
       </section>
 
       <Footer showContactId={true} />
+
+      {/* 3D 吉祥物助手 */}
+      <Mascot3D />
     </main>
   );
 }
