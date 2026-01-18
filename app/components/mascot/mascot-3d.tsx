@@ -5,6 +5,9 @@ import { useRef, useState, useEffect, useCallback, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 
+// 动作类型
+type MoodType = "idle" | "happy" | "sleep" | "wave" | "lookAround" | "stretch" | "blink";
+
 // 鼠标位置 Hook
 function useMousePosition() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -25,17 +28,36 @@ function useMousePosition() {
 }
 
 // 眼睛组件
-function Eye({ position, mousePos }: { position: [number, number, number]; mousePos: { x: number; y: number } }) {
+function Eye({ 
+  position, 
+  mousePos, 
+  isAsleep,
+  isBlinking 
+}: { 
+  position: [number, number, number]; 
+  mousePos: { x: number; y: number };
+  isAsleep: boolean;
+  isBlinking: boolean;
+}) {
   const pupilRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
-    if (pupilRef.current) {
-      // 眼珠跟随鼠标，限制在眼眶范围内
+    if (pupilRef.current && !isAsleep && !isBlinking) {
       const maxOffset = 0.08;
       pupilRef.current.position.x = mousePos.x * maxOffset;
       pupilRef.current.position.y = mousePos.y * maxOffset * 0.5;
     }
   });
+
+  // 闭眼状态
+  if (isAsleep || isBlinking) {
+    return (
+      <mesh position={position} rotation={[0, 0, position[0] < 0 ? 0.2 : -0.2]}>
+        <boxGeometry args={[0.2, 0.03, 0.02]} />
+        <meshStandardMaterial color="#1a1a2e" />
+      </mesh>
+    );
+  }
 
   return (
     <group position={position}>
@@ -58,23 +80,13 @@ function Eye({ position, mousePos }: { position: [number, number, number]; mouse
   );
 }
 
-// 闭眼组件
-function ClosedEye({ position }: { position: [number, number, number] }) {
-  return (
-    <mesh position={position} rotation={[0, 0, 0.2]}>
-      <boxGeometry args={[0.2, 0.03, 0.02]} />
-      <meshStandardMaterial color="#1a1a2e" />
-    </mesh>
-  );
-}
-
 // 3D 小精灵角色
 function BlueBuddy({
   mood,
   mousePos,
   onClick,
 }: {
-  mood: "idle" | "happy" | "sleep" | "wave";
+  mood: MoodType;
   mousePos: { x: number; y: number };
   onClick: () => void;
 }) {
@@ -85,37 +97,79 @@ function BlueBuddy({
   
   const [hovered, setHovered] = useState(false);
 
-  // 待机动画
   useFrame((state) => {
     if (!groupRef.current) return;
     
     const time = state.clock.elapsedTime;
     
-    // 身体上下浮动
-    groupRef.current.position.y = Math.sin(time * 2) * 0.05;
-    
-    // 身体轻微摇摆
-    groupRef.current.rotation.z = Math.sin(time * 1.5) * 0.03;
-    
-    // 根据心情调整
-    if (mood === "happy" && bodyRef.current) {
-      // 开心时跳跃更高
-      groupRef.current.position.y = Math.abs(Math.sin(time * 4)) * 0.15;
+    // ===== 基础待机动画 =====
+    if (mood === "idle") {
+      groupRef.current.position.y = Math.sin(time * 2) * 0.05;
+      groupRef.current.rotation.z = Math.sin(time * 1.5) * 0.03;
     }
     
+    // ===== 开心跳跃 =====
+    if (mood === "happy") {
+      groupRef.current.position.y = Math.abs(Math.sin(time * 4)) * 0.15;
+      groupRef.current.rotation.z = Math.sin(time * 6) * 0.08;
+    }
+    
+    // ===== 睡觉 =====
     if (mood === "sleep") {
-      // 睡觉时呼吸感更强
+      // 呼吸效果
+      groupRef.current.position.y = Math.sin(time * 0.8) * 0.02;
       if (bodyRef.current) {
-        bodyRef.current.scale.x = 1 + Math.sin(time) * 0.02;
+        bodyRef.current.scale.x = 1 + Math.sin(time) * 0.03;
         bodyRef.current.scale.y = 1 - Math.sin(time) * 0.02;
       }
+      // 身体微微倾斜（打盹）
+      groupRef.current.rotation.z = 0.1 + Math.sin(time * 0.5) * 0.02;
+    } else if (bodyRef.current) {
+      bodyRef.current.scale.x = 1;
+      bodyRef.current.scale.y = 1;
     }
 
+    // ===== 挥手 =====
     if (mood === "wave" && armRightRef.current) {
-      // 挥手动画
       armRightRef.current.rotation.z = Math.sin(time * 8) * 0.5 + 0.8;
+    } else if (armRightRef.current && mood !== "stretch") {
+      armRightRef.current.rotation.z = 0.3;
+    }
+
+    // ===== 四处张望 =====
+    if (mood === "lookAround") {
+      groupRef.current.rotation.y = Math.sin(time * 1.2) * 0.5;
+      groupRef.current.position.y = 0.05 + Math.sin(time * 2) * 0.03;
+    } else if (mood !== "sleep") {
+      groupRef.current.rotation.y = 0;
+    }
+
+    // ===== 伸懒腰 =====
+    if (mood === "stretch") {
+      // 身体拉伸
+      if (bodyRef.current) {
+        bodyRef.current.scale.y = 1 + Math.sin(time * 2) * 0.15;
+      }
+      // 双手举起
+      if (armLeftRef.current) {
+        armLeftRef.current.rotation.z = -1.2 + Math.sin(time * 2) * 0.2;
+      }
+      if (armRightRef.current) {
+        armRightRef.current.rotation.z = 1.2 + Math.sin(time * 2) * 0.2;
+      }
+      groupRef.current.position.y = 0.1;
+    } else if (armLeftRef.current) {
+      armLeftRef.current.rotation.z = -0.3;
+    }
+
+    // ===== 眨眼 =====
+    if (mood === "blink") {
+      groupRef.current.position.y = Math.sin(time * 2) * 0.05;
     }
   });
+
+  const isAsleep = mood === "sleep";
+  const isBlinking = mood === "blink";
 
   return (
     <group
@@ -124,11 +178,11 @@ function BlueBuddy({
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      {/* 身体 - 蓝色椭圆 */}
+      {/* 身体 - 橙色椭圆 */}
       <mesh ref={bodyRef} position={[0, 0, 0]} castShadow>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial
-          color={hovered ? "#5B9BF8" : "#4A90E2"}
+          color={hovered ? "#FF8C42" : "#F97316"}
           roughness={0.3}
           metalness={0.1}
         />
@@ -137,37 +191,30 @@ function BlueBuddy({
       {/* 肚子高光 */}
       <mesh position={[0, -0.1, 0.35]}>
         <sphereGeometry args={[0.25, 32, 32]} />
-        <meshStandardMaterial color="#7CB8FF" roughness={0.4} />
+        <meshStandardMaterial color="#FDBA74" roughness={0.4} />
       </mesh>
 
       {/* 眼睛 */}
-      {mood !== "sleep" ? (
-        <>
-          <Eye position={[-0.15, 0.15, 0.4]} mousePos={mousePos} />
-          <Eye position={[0.15, 0.15, 0.4]} mousePos={mousePos} />
-        </>
-      ) : (
-        /* 睡觉时的闭眼 */
-        <>
-          <ClosedEye position={[-0.15, 0.15, 0.45]} />
-          <mesh position={[0.15, 0.15, 0.45]} rotation={[0, 0, -0.2]}>
-            <boxGeometry args={[0.2, 0.03, 0.02]} />
-            <meshStandardMaterial color="#1a1a2e" />
-          </mesh>
-        </>
-      )}
+      <Eye position={[-0.15, 0.15, 0.4]} mousePos={mousePos} isAsleep={isAsleep} isBlinking={isBlinking} />
+      <Eye position={[0.15, 0.15, 0.4]} mousePos={mousePos} isAsleep={isAsleep} isBlinking={isBlinking} />
 
       {/* 嘴巴 */}
       {mood === "happy" ? (
-        /* 开心的微笑 */
+        /* 开心大笑 */
         <mesh position={[0, -0.1, 0.48]} rotation={[0.3, 0, 0]}>
           <torusGeometry args={[0.1, 0.02, 16, 32, Math.PI]} />
           <meshStandardMaterial color="#1a1a2e" />
         </mesh>
       ) : mood === "sleep" ? (
-        /* 睡觉的小嘴 */
+        /* 睡觉小嘴 */
         <mesh position={[0, -0.12, 0.48]}>
           <sphereGeometry args={[0.04, 16, 16]} />
+          <meshStandardMaterial color="#1a1a2e" />
+        </mesh>
+      ) : mood === "stretch" ? (
+        /* 伸懒腰打哈欠 - 大张嘴 */
+        <mesh position={[0, -0.1, 0.46]}>
+          <sphereGeometry args={[0.1, 16, 16]} />
           <meshStandardMaterial color="#1a1a2e" />
         </mesh>
       ) : (
@@ -191,25 +238,25 @@ function BlueBuddy({
       {/* 左手臂 */}
       <mesh ref={armLeftRef} position={[-0.5, -0.1, 0]} rotation={[0, 0, -0.3]}>
         <capsuleGeometry args={[0.08, 0.2, 8, 16]} />
-        <meshStandardMaterial color="#4A90E2" roughness={0.3} />
+        <meshStandardMaterial color="#F97316" roughness={0.3} />
       </mesh>
 
       {/* 右手臂 */}
-      <mesh ref={armRightRef} position={[0.5, -0.1, 0]} rotation={[0, 0, mood === "wave" ? 0.8 : 0.3]}>
+      <mesh ref={armRightRef} position={[0.5, -0.1, 0]} rotation={[0, 0, 0.3]}>
         <capsuleGeometry args={[0.08, 0.2, 8, 16]} />
-        <meshStandardMaterial color="#4A90E2" roughness={0.3} />
+        <meshStandardMaterial color="#F97316" roughness={0.3} />
       </mesh>
 
       {/* 左脚 */}
       <mesh position={[-0.2, -0.55, 0.1]}>
         <capsuleGeometry args={[0.1, 0.1, 8, 16]} />
-        <meshStandardMaterial color="#3A7BC8" roughness={0.3} />
+        <meshStandardMaterial color="#EA580C" roughness={0.3} />
       </mesh>
 
       {/* 右脚 */}
       <mesh position={[0.2, -0.55, 0.1]}>
         <capsuleGeometry args={[0.1, 0.1, 8, 16]} />
-        <meshStandardMaterial color="#3A7BC8" roughness={0.3} />
+        <meshStandardMaterial color="#EA580C" roughness={0.3} />
       </mesh>
 
       {/* 睡觉时的 ZZZ */}
@@ -238,28 +285,16 @@ function Scene({
   mood,
   onClick,
 }: {
-  mood: "idle" | "happy" | "sleep" | "wave";
+  mood: MoodType;
   onClick: () => void;
 }) {
   const mousePos = useMousePosition();
 
   return (
     <>
-      {/* 环境光 */}
       <ambientLight intensity={0.6} />
-      
-      {/* 主光源 */}
-      <directionalLight
-        position={[5, 5, 5]}
-        intensity={1}
-        castShadow
-        shadow-mapSize={[1024, 1024]}
-      />
-      
-      {/* 补光 */}
-      <pointLight position={[-3, 2, 4]} intensity={0.3} color="#87CEEB" />
-      
-      {/* 角色 */}
+      <directionalLight position={[5, 5, 5]} intensity={1} castShadow shadow-mapSize={[1024, 1024]} />
+      <pointLight position={[-3, 2, 4]} intensity={0.3} color="#FED7AA" />
       <BlueBuddy mood={mood} mousePos={mousePos} onClick={onClick} />
     </>
   );
@@ -282,77 +317,116 @@ function SpeechBubble({ message, onClose }: { message: string; onClose: () => vo
       >
         ×
       </button>
-      {/* 气泡尖角 */}
       <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white border-r border-b border-gray-100 transform rotate-45" />
     </motion.div>
   );
 }
 
+// 待机动作列表
+const idleActions: Array<{ mood: MoodType; duration: number; message?: string }> = [
+  { mood: "sleep", duration: 5000, message: "zzZ... 💤" },
+  { mood: "lookAround", duration: 3000, message: "🤔 在看什么呢..." },
+  { mood: "stretch", duration: 2500, message: "🥱 好困啊~" },
+  { mood: "wave", duration: 2000, message: "👋 嗨！" },
+  { mood: "blink", duration: 1500 },
+  { mood: "idle", duration: 2000 }, // 有时候就待着
+];
+
 // 主组件
 export default function Mascot3D() {
   const [isMinimized, setIsMinimized] = useState(false);
-  const [mood, setMood] = useState<"idle" | "happy" | "sleep" | "wave">("idle");
+  const [mood, setMood] = useState<MoodType>("idle");
   const [showBubble, setShowBubble] = useState(false);
   const [bubbleMessage, setBubbleMessage] = useState("你好！我是 Murphy 小助手~");
   const [mounted, setMounted] = useState(false);
 
-  // 确保只在客户端渲染
+  const lastActivityRef = useRef(Date.now());
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const actionTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 初始化
   useEffect(() => {
     setMounted(true);
     
-    // 初始动画：3秒后挥手打招呼
+    // 初始动画：2秒后挥手打招呼
     const timer = setTimeout(() => {
       setMood("wave");
       setShowBubble(true);
-      
-      // 3秒后恢复待机
-      setTimeout(() => {
-        setMood("idle");
-      }, 3000);
+      setTimeout(() => setMood("idle"), 3000);
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // 自动进入睡眠模式
+  // 监听用户活动
   useEffect(() => {
-    let sleepTimer: NodeJS.Timeout;
-    
-    const resetSleepTimer = () => {
-      clearTimeout(sleepTimer);
-      if (mood === "sleep") {
+    const handleActivity = () => {
+      lastActivityRef.current = Date.now();
+      
+      // 如果正在执行特殊动作，恢复待机
+      if (mood !== "idle" && mood !== "happy") {
         setMood("idle");
+        setShowBubble(false);
       }
-      sleepTimer = setTimeout(() => {
-        if (mood === "idle") {
-          setMood("sleep");
-          setBubbleMessage("zzZ...");
-          setShowBubble(true);
-          setTimeout(() => setShowBubble(false), 2000);
-        }
-      }, 30000); // 30秒无操作后睡觉
     };
 
-    window.addEventListener("mousemove", resetSleepTimer);
-    window.addEventListener("click", resetSleepTimer);
-    
-    resetSleepTimer();
+    window.addEventListener("mousemove", handleActivity);
+    window.addEventListener("click", handleActivity);
+    window.addEventListener("keydown", handleActivity);
 
     return () => {
-      clearTimeout(sleepTimer);
-      window.removeEventListener("mousemove", resetSleepTimer);
-      window.removeEventListener("click", resetSleepTimer);
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("click", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
     };
   }, [mood]);
 
+  // 空闲时随机动作
+  useEffect(() => {
+    const checkIdle = () => {
+      const idleTime = Date.now() - lastActivityRef.current;
+      
+      // 8秒无活动后开始随机动作
+      if (idleTime > 8000 && mood === "idle" && !isMinimized) {
+        performRandomAction();
+      }
+    };
+
+    idleTimerRef.current = setInterval(checkIdle, 4000);
+
+    return () => {
+      if (idleTimerRef.current) clearInterval(idleTimerRef.current);
+      if (actionTimerRef.current) clearTimeout(actionTimerRef.current);
+    };
+  }, [mood, isMinimized]);
+
+  const performRandomAction = useCallback(() => {
+    const randomAction = idleActions[Math.floor(Math.random() * idleActions.length)];
+    
+    setMood(randomAction.mood);
+    
+    if (randomAction.message) {
+      setBubbleMessage(randomAction.message);
+      setShowBubble(true);
+      setTimeout(() => setShowBubble(false), 2000);
+    }
+
+    // 动作完成后回到待机
+    actionTimerRef.current = setTimeout(() => {
+      setMood("idle");
+    }, randomAction.duration);
+  }, []);
+
   const handleClick = useCallback(() => {
-    // 随机消息
+    lastActivityRef.current = Date.now();
+    
     const messages = [
-      "有什么可以帮助你的吗？",
-      "今天也要加油哦！",
+      "有什么可以帮助你的吗？✨",
+      "今天也要加油哦！💪",
       "点击产品卡片了解更多~",
       "Murphy 为你提供最好的服务！",
       "需要联系我们吗？滚动到底部吧~",
+      "嘿嘿，你发现我啦！🎉",
     ];
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     
@@ -360,9 +434,7 @@ export default function Mascot3D() {
     setBubbleMessage(randomMessage);
     setShowBubble(true);
     
-    setTimeout(() => {
-      setMood("idle");
-    }, 2000);
+    setTimeout(() => setMood("idle"), 2000);
   }, []);
 
   const handleMinimize = () => {
@@ -371,9 +443,10 @@ export default function Mascot3D() {
   };
 
   const handleRestore = () => {
+    lastActivityRef.current = Date.now();
     setIsMinimized(false);
     setMood("wave");
-    setBubbleMessage("我回来啦！");
+    setBubbleMessage("我回来啦！👋");
     setShowBubble(true);
     setTimeout(() => {
       setMood("idle");
@@ -387,21 +460,19 @@ export default function Mascot3D() {
     <div className="fixed bottom-4 right-4 z-50">
       <AnimatePresence mode="wait">
         {isMinimized ? (
-          /* 最小化状态 - 小圆点 */
           <motion.button
             key="minimized"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             onClick={handleRestore}
-            className="w-12 h-12 rounded-full bg-linear-to-br from-blue-400 to-blue-600 shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center cursor-pointer"
+            className="w-12 h-12 rounded-full bg-linear-to-br from-orange-400 to-orange-600 shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center cursor-pointer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="text-white text-xl">👋</span>
           </motion.button>
         ) : (
-          /* 完整状态 */
           <motion.div
             key="full"
             initial={{ opacity: 0, scale: 0.5, y: 50 }}
@@ -410,17 +481,12 @@ export default function Mascot3D() {
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             className="relative"
           >
-            {/* 对话气泡 */}
             <AnimatePresence>
               {showBubble && (
-                <SpeechBubble
-                  message={bubbleMessage}
-                  onClose={() => setShowBubble(false)}
-                />
+                <SpeechBubble message={bubbleMessage} onClose={() => setShowBubble(false)} />
               )}
             </AnimatePresence>
 
-            {/* 3D Canvas */}
             <div className="w-32 h-32 cursor-pointer">
               <Canvas
                 camera={{ position: [0, 0, 2.5], fov: 50 }}
@@ -433,7 +499,6 @@ export default function Mascot3D() {
               </Canvas>
             </div>
 
-            {/* 控制按钮 */}
             <div className="absolute -top-1 -right-1 flex gap-1">
               <motion.button
                 whileHover={{ scale: 1.1 }}
