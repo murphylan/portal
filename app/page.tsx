@@ -1,5 +1,5 @@
-import LandingPage from "./components/landing-page";
+import WorkSyncShowcase from "./components/worksync/worksync-showcase";
 
 export default function Home() {
-  return <LandingPage />;
+  return <WorkSyncShowcase />;
 }

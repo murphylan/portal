@@ -275,7 +275,7 @@ export default function ActivityProductPage() {
       {/* 顶部导航 */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/products" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
             <span>返回首页</span>
           </Link>
@@ -921,7 +921,7 @@ export default function ActivityProductPage() {
                   className="border-2 border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                   asChild
                 >
-                  <Link href="/">返回首页</Link>
+                  <Link href="/products">返回首页</Link>
                 </Button>
               </motion.div>
             </motion.div>

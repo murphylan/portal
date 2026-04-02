@@ -308,6 +308,9 @@ export default function LandingPage() {
             </span>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
+              WorkSync
+            </Link>
             <a href="#products" className="hover:text-foreground transition-colors">
               产品服务
             </a>
