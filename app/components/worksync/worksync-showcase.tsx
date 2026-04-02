@@ -82,6 +82,7 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     gradient: "from-blue-500/10 via-indigo-500/5 to-transparent",
     iconColor: "text-blue-500",
     Icon: BarChart3,
+    imageSrc: "/worksync/dashboard.png",
   },
   {
     id: "documents",
@@ -101,6 +102,7 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     gradient: "from-violet-500/10 via-purple-500/5 to-transparent",
     iconColor: "text-violet-500",
     Icon: FileText,
+    imageSrc: "/worksync/document.png",
   },
   {
     id: "tasks",
@@ -120,6 +122,7 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     gradient: "from-sky-500/10 via-cyan-500/5 to-transparent",
     iconColor: "text-sky-500",
     Icon: Kanban,
+    imageSrc: "/worksync/task.png",
   },
   {
     id: "diagrams",
@@ -139,6 +142,7 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
     iconColor: "text-emerald-500",
     Icon: Shapes,
+    imageSrc: "/worksync/diagrams.png",
   },
   {
     id: "whiteboard",
@@ -158,6 +162,7 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     gradient: "from-amber-500/10 via-orange-500/5 to-transparent",
     iconColor: "text-amber-500",
     Icon: Palette,
+    imageSrc: "/worksync/whiteboard.png",
   },
 ];
 
@@ -297,16 +302,7 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
               {link.label}
             </a>
           ))}
-          <Link
-            href="/products"
-            className={`transition-colors ${
-              scrolled
-                ? "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Murphy Cloud
-          </Link>
+          
         </nav>
 
         <ContactDialog>
@@ -473,6 +469,7 @@ function ZoomSection() {
             title="WorkSync 全景预览"
             description="项目协作平台完整界面 — 仪表盘、文档、任务、图表一站式管理"
             variant="laptop"
+            imageSrc="/worksync/roles.png"
           />
         </motion.div>
       </div>
@@ -726,6 +723,7 @@ export default function WorkSyncShowcase() {
             <ScreenPlaceholder
               title="WorkSync Dashboard"
               description="项目协作平台 — 仪表盘、文档、任务、图表集中管理"
+              imageSrc="/worksync/hero.png"
               variant="laptop"
             />
           </motion.div>
