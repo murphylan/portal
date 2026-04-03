@@ -305,18 +305,17 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
           
         </nav>
 
-        <ContactDialog>
-          <Button
+        <Button
             size="sm"
             className={`transition-all ${
               scrolled
                 ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
                 : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
             }`}
+            asChild
           >
-            立即体验
+            <Link href="/login">立即体验</Link>
           </Button>
-        </ContactDialog>
       </div>
     </motion.header>
   );
@@ -691,15 +690,16 @@ export default function WorkSyncShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <ContactDialog>
-              <Button
+            <Button
                 size="lg"
                 className="bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700 shadow-lg shadow-violet-500/25 px-8"
+                asChild
               >
-                立即体验
-                <ArrowRight className="h-4 w-4 ml-2" />
+                <Link href="/login">
+                  立即体验
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
               </Button>
-            </ContactDialog>
             <Button
               size="lg"
               variant="outline"
