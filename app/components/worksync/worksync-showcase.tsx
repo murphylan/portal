@@ -1,19 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   motion,
+  useMotionValueEvent,
   useScroll,
   useTransform,
-  useMotionValueEvent,
 } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
 import {
   ArrowRight,
   BarChart3,
   CheckCircle2,
   Cloud,
+  ExternalLink,
   FileText,
   Kanban,
   LayoutDashboard,
@@ -24,8 +22,12 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
-import Footer from "../footer";
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { WORKSYNC_URL } from "@/lib/product-urls";
 import ContactDialog from "../contact-dialog";
+import Footer from "../footer";
 import ScreenPlaceholder from "./screen-placeholder";
 
 // ---------------------------------------------------------------------------
@@ -185,12 +187,7 @@ const PRICING_TIERS = [
     price: "¥1,999",
     period: "",
     detail: "部署在您指定内网环境，不限人数",
-    features: [
-      "私有化部署",
-      "不限成员数量",
-      "数据完全自主",
-      "一年免费升级",
-    ],
+    features: ["私有化部署", "不限成员数量", "数据完全自主", "一年免费升级"],
     highlighted: true,
   },
   {
@@ -198,12 +195,7 @@ const PRICING_TIERS = [
     price: "¥19,999",
     period: "",
     detail: "完整源代码交付，便于二次开发与自主运维",
-    features: [
-      "完整源代码交付",
-      "二次开发授权",
-      "架构咨询支持",
-      "终身使用权",
-    ],
+    features: ["完整源代码交付", "二次开发授权", "架构咨询支持", "终身使用权"],
     highlighted: false,
   },
 ];
@@ -245,7 +237,12 @@ function FloatingParticles() {
         <motion.div
           key={p.id}
           className="absolute rounded-full bg-linear-to-r from-violet-400 to-indigo-400"
-          style={{ left: p.left, bottom: "-10px", width: p.size, height: p.size }}
+          style={{
+            left: p.left,
+            bottom: "-10px",
+            width: p.size,
+            height: p.size,
+          }}
           animate={{
             y: [0, -900],
             x: [0, Math.sin(p.id) * 20],
@@ -277,15 +274,22 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
           <div className="h-8 w-8 rounded-lg bg-linear-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
             <span className="text-sm font-bold text-white">W</span>
           </div>
-          <span
-            className={`text-lg font-bold tracking-tight transition-colors ${
-              scrolled
-                ? "text-gray-900 dark:text-white"
-                : "text-white"
-            }`}
-          >
-            WorkSync
-          </span>
+          <div className="flex items-baseline gap-2">
+            <span
+              className={`text-lg font-bold tracking-tight transition-colors ${
+                scrolled ? "text-gray-900 dark:text-white" : "text-white"
+              }`}
+            >
+              WorkSync
+            </span>
+            <span
+              className={`text-xs font-medium transition-colors ${
+                scrolled ? "text-gray-500 dark:text-gray-400" : "text-white/55"
+              }`}
+            >
+              Murphy 云
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -302,20 +306,19 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
               {link.label}
             </a>
           ))}
-          
         </nav>
 
         <Button
-            size="sm"
-            className={`transition-all ${
-              scrolled
-                ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
-                : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
-            }`}
-            asChild
-          >
-            <Link href="/login">立即体验</Link>
-          </Button>
+          size="sm"
+          className={`transition-all ${
+            scrolled
+              ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
+              : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
+          }`}
+          asChild
+        >
+          <Link href="/login">立即体验</Link>
+        </Button>
       </div>
     </motion.header>
   );
@@ -355,10 +358,7 @@ function FeatureDeepDive({
           } gap-12 lg:gap-16 items-center`}
         >
           {/* Text side */}
-          <motion.div
-            className="flex-1 space-y-6"
-            style={{ y: textY }}
-          >
+          <motion.div className="flex-1 space-y-6" style={{ y: textY }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -407,10 +407,7 @@ function FeatureDeepDive({
           </motion.div>
 
           {/* Screen side */}
-          <motion.div
-            className="flex-1 w-full"
-            style={{ y: imageY }}
-          >
+          <motion.div className="flex-1 w-full" style={{ y: imageY }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -446,10 +443,7 @@ function ZoomSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative py-32 px-4 overflow-hidden"
-    >
+    <section ref={containerRef} className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div className="text-center mb-16" style={{ opacity }}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
@@ -478,7 +472,10 @@ function ZoomSection() {
 
 function PricingSection() {
   return (
-    <section id="pricing" className="py-24 px-4 bg-gray-50/50 dark:bg-gray-900/30">
+    <section
+      id="pricing"
+      className="py-24 px-4 bg-gray-50/50 dark:bg-gray-900/30"
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -685,25 +682,36 @@ export default function WorkSyncShowcase() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Button
-                size="lg"
-                className="bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700 shadow-lg shadow-violet-500/25 px-8"
-                asChild
-              >
-                <Link href="/login">
-                  立即体验
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Link>
-              </Button>
+              size="lg"
+              className="bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700 shadow-lg shadow-violet-500/25 px-8"
+              asChild
+            >
+              <a href={WORKSYNC_URL} target="_blank" rel="noopener noreferrer">
+                打开 WorkSync
+                <ExternalLink className="h-4 w-4 ml-2" />
+              </a>
+            </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-white/20 text-white bg-white/5 hover:bg-white/10 backdrop-blur-sm"
+              asChild
+            >
+              <Link href="/login">
+                立即体验
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              className="text-white/80 hover:text-white hover:bg-white/10"
               asChild
             >
               <a href="#features">了解更多</a>
@@ -719,7 +727,10 @@ export default function WorkSyncShowcase() {
             opacity: heroOpacity,
           }}
         >
-          <motion.div style={{ borderRadius: heroBorderRadius }} className="overflow-hidden">
+          <motion.div
+            style={{ borderRadius: heroBorderRadius }}
+            className="overflow-hidden"
+          >
             <ScreenPlaceholder
               title="WorkSync Dashboard"
               description="项目协作平台 — 仪表盘、文档、任务、图表集中管理"

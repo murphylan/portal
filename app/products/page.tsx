@@ -1,5 +1,5 @@
-import LandingPage from "../components/landing-page";
+import ProductHub from "../components/product-hub";
 
 export default function ProductsPage() {
-  return <LandingPage />;
+  return <ProductHub />;
 }

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "next-themes";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Murphy Cloud - 一站式企业应用解决方案",
+  title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
   description:
-    "Murphy 云服务平台整合项目管理、活动运营、智能识别等核心能力，为您的业务提供强大的数字化支持。",
+    "Murphy 云：WorkSync 项目文档与协作平台（主力），以及活动现场互动工具（签到、投票、抽奖、表单）与中国象棋辅助工具。按需访问对应子站即可使用。",
   icons: [{ rel: "icon", url: "/favicon.svg" }],
   openGraph: {
-    title: "Murphy Cloud - 一站式企业应用解决方案",
+    title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
     description:
-      "整合项目管理、活动运营、智能识别等核心能力，为您的业务提供强大的数字化支持。",
+      "WorkSync 项目文档与协作；互动工具 sign.murphylan.cloud；象棋辅助 chess.murphylan.cloud。",
     url: "https://murphylan.cloud",
     siteName: "Murphy Cloud",
     images: [
@@ -27,9 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Murphy Cloud - 一站式企业应用解决方案",
-    description:
-      "整合项目管理、活动运营、智能识别等核心能力，为您的业务提供强大的数字化支持。",
+    title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
+    description: "WorkSync 文档协作；互动工具与象棋辅助等在线 SaaS。",
     images: ["https://murphylan.cloud/og-image.png"],
   },
 };

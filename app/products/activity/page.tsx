@@ -1,35 +1,36 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
+  BarChart3,
   CheckCircle2,
+  FileSpreadsheet,
   Gift,
+  Link2,
   ListChecks,
+  MessageSquare,
+  MonitorPlay,
   QrCode,
+  Shield,
+  Smartphone,
   Sparkles,
   Ticket,
   Trophy,
   Users,
   Vote,
   Zap,
-  FileSpreadsheet,
-  MessageSquare,
-  BarChart3,
-  Smartphone,
-  Shield,
-  Link2,
-  MonitorPlay,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import Footer from "@/app/components/footer";
+import { useEffect, useRef, useState } from "react";
 import ContactDialog from "@/app/components/contact-dialog";
+import Footer from "@/app/components/footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { SIGN_URL } from "@/lib/product-urls";
 
 // 浮动粒子组件
 function FloatingParticles() {
@@ -53,12 +54,14 @@ function FloatingParticles() {
         delay: Math.random() * 10,
         duration: 8 + Math.random() * 6,
         size: 2 + Math.random() * 4,
-      }))
+      })),
     );
   }, []);
 
   if (!mounted)
-    return <div className="absolute inset-0 overflow-hidden pointer-events-none" />;
+    return (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" />
+    );
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -151,10 +154,26 @@ const checkinFeatures = {
     "3位验证码防止恶意修改",
   ],
   screenshots: [
-    { src: "/products/activity/10-checkin-new.png", title: "创建签到", desc: "简单配置签到标题、收集信息、签到后行为等选项" },
-    { src: "/products/activity/11-checkin-detail.png", title: "签到详情", desc: "查看二维码、签到链接、统计数据" },
-    { src: "/products/activity/12-checkin-settings.png", title: "签到设置", desc: "背景样式、大屏布局、字段配置等" },
-    { src: "/products/activity/14-checkin-display.png", title: "大屏展示", desc: "实时显示签到动态，弹幕效果震撼全场" },
+    {
+      src: "/products/activity/10-checkin-new.png",
+      title: "创建签到",
+      desc: "简单配置签到标题、收集信息、签到后行为等选项",
+    },
+    {
+      src: "/products/activity/11-checkin-detail.png",
+      title: "签到详情",
+      desc: "查看二维码、签到链接、统计数据",
+    },
+    {
+      src: "/products/activity/12-checkin-settings.png",
+      title: "签到设置",
+      desc: "背景样式、大屏布局、字段配置等",
+    },
+    {
+      src: "/products/activity/14-checkin-display.png",
+      title: "大屏展示",
+      desc: "实时显示签到动态，弹幕效果震撼全场",
+    },
   ],
 };
 
@@ -177,9 +196,21 @@ const voteFeatures = {
     { name: "PK对决", desc: "两个选项的对决模式" },
   ],
   screenshots: [
-    { src: "/products/activity/20-vote-templates.png", title: "投票模板", desc: "四种投票模板可选" },
-    { src: "/products/activity/21-vote-simple-form.png", title: "简单投票", desc: "配置投票标题和选项" },
-    { src: "/products/activity/27-vote-versus-form.png", title: "PK对决", desc: "二选一的投票场景" },
+    {
+      src: "/products/activity/20-vote-templates.png",
+      title: "投票模板",
+      desc: "四种投票模板可选",
+    },
+    {
+      src: "/products/activity/21-vote-simple-form.png",
+      title: "简单投票",
+      desc: "配置投票标题和选项",
+    },
+    {
+      src: "/products/activity/27-vote-versus-form.png",
+      title: "PK对决",
+      desc: "二选一的投票场景",
+    },
   ],
 };
 
@@ -196,10 +227,30 @@ const lotteryFeatures = {
     "大屏中奖弹幕效果",
   ],
   modes: [
-    { icon: "🎡", name: "转盘抽奖", desc: "经典大转盘效果，适合年会现场", src: "/products/activity/33-lottery-wheel-display.png" },
-    { icon: "🎰", name: "老虎机抽奖", desc: "三列滚动效果，依次停止揭晓", src: "/products/activity/35-lottery-slot-display.png" },
-    { icon: "🃏", name: "翻牌抽奖", desc: "神秘感十足的3D翻牌揭晓效果", src: "/products/activity/36-lottery-card-display.png" },
-    { icon: "⬜", name: "九宫格抽奖", desc: "跑马灯效果，顺时针旋转抽奖", src: "/products/activity/37-lottery-grid-display.png" },
+    {
+      icon: "🎡",
+      name: "转盘抽奖",
+      desc: "经典大转盘效果，适合年会现场",
+      src: "/products/activity/33-lottery-wheel-display.png",
+    },
+    {
+      icon: "🎰",
+      name: "老虎机抽奖",
+      desc: "三列滚动效果，依次停止揭晓",
+      src: "/products/activity/35-lottery-slot-display.png",
+    },
+    {
+      icon: "🃏",
+      name: "翻牌抽奖",
+      desc: "神秘感十足的3D翻牌揭晓效果",
+      src: "/products/activity/36-lottery-card-display.png",
+    },
+    {
+      icon: "⬜",
+      name: "九宫格抽奖",
+      desc: "跑马灯效果，顺时针旋转抽奖",
+      src: "/products/activity/37-lottery-grid-display.png",
+    },
   ],
 };
 
@@ -215,10 +266,29 @@ const formFeatures = {
     "SSE 实时推送新提交",
     "CSV 数据导出",
   ],
-  fieldTypes: ["文本输入", "数字输入", "手机号", "邮箱", "单选题", "多选题", "下拉选择", "日期选择", "时间选择", "评分"],
+  fieldTypes: [
+    "文本输入",
+    "数字输入",
+    "手机号",
+    "邮箱",
+    "单选题",
+    "多选题",
+    "下拉选择",
+    "日期选择",
+    "时间选择",
+    "评分",
+  ],
   screenshots: [
-    { src: "/products/activity/40-form-new.png", title: "创建表单", desc: "配置表单标题和描述" },
-    { src: "/products/activity/41-form-field-types.png", title: "字段类型", desc: "丰富的字段类型可选" },
+    {
+      src: "/products/activity/40-form-new.png",
+      title: "创建表单",
+      desc: "配置表单标题和描述",
+    },
+    {
+      src: "/products/activity/41-form-field-types.png",
+      title: "字段类型",
+      desc: "丰富的字段类型可选",
+    },
   ],
 };
 
@@ -275,9 +345,12 @@ export default function ActivityProductPage() {
       {/* 顶部导航 */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/products" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
             <ArrowLeft className="h-4 w-4" />
-            <span>返回首页</span>
+            <span>Murphy 云首页</span>
           </Link>
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-lg bg-linear-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
@@ -286,7 +359,9 @@ export default function ActivityProductPage() {
             <span className="font-semibold">Murphy Activity</span>
           </div>
           <ContactDialog>
-            <Button className="bg-linear-to-r from-emerald-500 to-teal-500 text-white">立即咨询</Button>
+            <Button className="bg-linear-to-r from-emerald-500 to-teal-500 text-white">
+              立即咨询
+            </Button>
           </ContactDialog>
         </div>
       </header>
@@ -298,25 +373,40 @@ export default function ActivityProductPage() {
           <motion.div
             className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-400/30 rounded-full blur-3xl"
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
           />
           <motion.div
             className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-400/30 rounded-full blur-3xl"
             animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
-            transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 1,
+            }}
           />
         </div>
 
         <FloatingParticles />
 
-        <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="max-w-6xl mx-auto">
+        <motion.div
+          style={{ opacity: heroOpacity, scale: heroScale }}
+          className="max-w-6xl mx-auto"
+        >
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge variant="outline" className="mb-6 px-4 py-2 text-sm font-medium bg-emerald-50 border-emerald-200 text-emerald-700">
+            <Badge
+              variant="outline"
+              className="mb-6 px-4 py-2 text-sm font-medium bg-emerald-50 border-emerald-200 text-emerald-700"
+            >
               <Ticket className="h-4 w-4 mr-2" />
               签到 · 投票 · 抽奖 · 表单 —— 一站式活动互动解决方案
             </Badge>
@@ -327,13 +417,23 @@ export default function ActivityProductPage() {
               让每一场活动都精彩互动
             </p>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-              无需下载 APP，手机扫码即可参与，大屏实时展示互动数据，让您的活动更加精彩
+              无需下载
+              APP，手机扫码即可参与，大屏实时展示互动数据，让您的活动更加精彩
             </p>
-            <div className="flex justify-center gap-4">
-              <ContactDialog>
-                <Button size="lg" className="bg-linear-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30">
-                  立即咨询
+            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap items-center">
+              <Button
+                size="lg"
+                className="bg-linear-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30"
+                asChild
+              >
+                <a href={SIGN_URL} target="_blank" rel="noopener noreferrer">
+                  前往线上产品
                   <ArrowRight className="h-4 w-4 ml-2" />
+                </a>
+              </Button>
+              <ContactDialog>
+                <Button size="lg" variant="secondary">
+                  立即咨询
                 </Button>
               </ContactDialog>
               <Button size="lg" variant="outline" asChild>
@@ -373,7 +473,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold mb-4">产品首页展示</h2>
-            <p className="text-muted-foreground">简洁的产品首页，一目了然地展示核心功能模块</p>
+            <p className="text-muted-foreground">
+              简洁的产品首页，一目了然地展示核心功能模块
+            </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -410,7 +512,10 @@ export default function ActivityProductPage() {
       </section>
 
       {/* 核心优势 */}
-      <section id="features" className="py-20 px-4 bg-linear-to-b from-gray-50 to-white">
+      <section
+        id="features"
+        className="py-20 px-4 bg-linear-to-b from-gray-50 to-white"
+      >
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -439,7 +544,9 @@ export default function ActivityProductPage() {
                       <item.icon className="h-6 w-6 text-emerald-600" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm">{item.description}</p>
+                    <p className="text-muted-foreground text-sm">
+                      {item.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -458,7 +565,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold mb-4">管理后台</h2>
-            <p className="text-muted-foreground">统一管理所有活动，快速创建新活动，一站式操控</p>
+            <p className="text-muted-foreground">
+              统一管理所有活动，快速创建新活动，一站式操控
+            </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -477,7 +586,9 @@ export default function ActivityProductPage() {
                   className="w-full h-auto"
                 />
               </div>
-              <p className="text-center text-muted-foreground">安全的账号登录系统，支持邮箱账号登录</p>
+              <p className="text-center text-muted-foreground">
+                安全的账号登录系统，支持邮箱账号登录
+              </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 40 }}
@@ -494,7 +605,9 @@ export default function ActivityProductPage() {
                   className="w-full h-auto"
                 />
               </div>
-              <p className="text-center text-muted-foreground">统一管理所有活动，快速创建新活动</p>
+              <p className="text-center text-muted-foreground">
+                统一管理所有活动，快速创建新活动
+              </p>
             </motion.div>
           </div>
         </div>
@@ -522,7 +635,10 @@ export default function ActivityProductPage() {
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {checkinFeatures.highlights.map((highlight, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white shadow-sm border">
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-lg bg-white shadow-sm border"
+                >
                   <CheckCircle2 className="h-5 w-5 text-emerald-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{highlight}</span>
                 </div>
@@ -542,7 +658,13 @@ export default function ActivityProductPage() {
                 className="space-y-3"
               >
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src={shot.src} alt={shot.title} width={800} height={450} className="w-full h-auto" />
+                  <Image
+                    src={shot.src}
+                    alt={shot.title}
+                    width={800}
+                    height={450}
+                    className="w-full h-auto"
+                  />
                 </div>
                 <div className="text-center">
                   <h4 className="font-semibold">{shot.title}</h4>
@@ -559,19 +681,37 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-semibold text-center mb-8">手机端签到体验</h3>
+            <h3 className="text-xl font-semibold text-center mb-8">
+              手机端签到体验
+            </h3>
             <div className="flex justify-center gap-8 flex-wrap">
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src="/products/activity/13-checkin-mobile.png" alt="手机端签到" width={300} height={600} className="w-full h-auto" />
+                  <Image
+                    src="/products/activity/13-checkin-mobile.png"
+                    alt="手机端签到"
+                    width={300}
+                    height={600}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="text-center text-sm text-muted-foreground">用户扫码后的签到界面</p>
+                <p className="text-center text-sm text-muted-foreground">
+                  用户扫码后的签到界面
+                </p>
               </div>
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src="/products/activity/13-checkin-mobile-filled.png" alt="填写签到信息" width={300} height={600} className="w-full h-auto" />
+                  <Image
+                    src="/products/activity/13-checkin-mobile-filled.png"
+                    alt="填写签到信息"
+                    width={300}
+                    height={600}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="text-center text-sm text-muted-foreground">填写信息后提交签到</p>
+                <p className="text-center text-sm text-muted-foreground">
+                  填写信息后提交签到
+                </p>
               </div>
             </div>
           </motion.div>
@@ -600,7 +740,10 @@ export default function ActivityProductPage() {
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {voteFeatures.highlights.map((highlight, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-blue-50 border border-blue-100">
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-lg bg-blue-50 border border-blue-100"
+                >
                   <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{highlight}</span>
                 </div>
@@ -615,14 +758,21 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-semibold text-center mb-6">四种投票模板</h3>
+            <h3 className="text-xl font-semibold text-center mb-6">
+              四种投票模板
+            </h3>
             <div className="grid md:grid-cols-4 gap-4">
               {voteFeatures.templates.map((template) => (
-                <Card key={template.name} className="text-center hover:shadow-lg transition-all hover:-translate-y-1">
+                <Card
+                  key={template.name}
+                  className="text-center hover:shadow-lg transition-all hover:-translate-y-1"
+                >
                   <CardContent className="p-4">
                     <Vote className="h-8 w-8 text-blue-600 mx-auto mb-3" />
                     <h4 className="font-semibold mb-1">{template.name}</h4>
-                    <p className="text-xs text-muted-foreground">{template.desc}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {template.desc}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -641,7 +791,13 @@ export default function ActivityProductPage() {
                 className="space-y-3"
               >
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src={shot.src} alt={shot.title} width={800} height={450} className="w-full h-auto" />
+                  <Image
+                    src={shot.src}
+                    alt={shot.title}
+                    width={800}
+                    height={450}
+                    className="w-full h-auto"
+                  />
                 </div>
                 <div className="text-center">
                   <h4 className="font-semibold">{shot.title}</h4>
@@ -675,7 +831,10 @@ export default function ActivityProductPage() {
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {lotteryFeatures.highlights.map((highlight, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-amber-50 border border-amber-100">
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-lg bg-amber-50 border border-amber-100"
+                >
                   <CheckCircle2 className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{highlight}</span>
                 </div>
@@ -684,7 +843,9 @@ export default function ActivityProductPage() {
           </motion.div>
 
           {/* 四种抽奖模式 */}
-          <h3 className="text-xl font-semibold text-center mb-8">四种抽奖模式</h3>
+          <h3 className="text-xl font-semibold text-center mb-8">
+            四种抽奖模式
+          </h3>
           <div className="grid md:grid-cols-2 gap-8">
             {lotteryFeatures.modes.map((mode, index) => (
               <motion.div
@@ -703,7 +864,13 @@ export default function ActivityProductPage() {
                   </div>
                 </div>
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src={mode.src} alt={mode.name} width={800} height={450} className="w-full h-auto" />
+                  <Image
+                    src={mode.src}
+                    alt={mode.name}
+                    width={800}
+                    height={450}
+                    className="w-full h-auto"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -716,13 +883,23 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-semibold text-center mb-8">手机端参与抽奖</h3>
+            <h3 className="text-xl font-semibold text-center mb-8">
+              手机端参与抽奖
+            </h3>
             <div className="flex justify-center">
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src="/products/activity/32-lottery-mobile.png" alt="手机端抽奖" width={300} height={600} className="w-full h-auto" />
+                  <Image
+                    src="/products/activity/32-lottery-mobile.png"
+                    alt="手机端抽奖"
+                    width={300}
+                    height={600}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <p className="text-center text-sm text-muted-foreground">用户扫码参与抽奖的界面</p>
+                <p className="text-center text-sm text-muted-foreground">
+                  用户扫码参与抽奖的界面
+                </p>
               </div>
             </div>
           </motion.div>
@@ -751,7 +928,10 @@ export default function ActivityProductPage() {
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {formFeatures.highlights.map((highlight, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-purple-50 border border-purple-100">
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 rounded-lg bg-purple-50 border border-purple-100"
+                >
                   <CheckCircle2 className="h-5 w-5 text-purple-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{highlight}</span>
                 </div>
@@ -766,7 +946,9 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-semibold text-center mb-6">丰富的字段类型</h3>
+            <h3 className="text-xl font-semibold text-center mb-6">
+              丰富的字段类型
+            </h3>
             <div className="flex flex-wrap justify-center gap-3">
               {formFeatures.fieldTypes.map((type) => (
                 <Badge key={type} variant="secondary" className="px-4 py-2">
@@ -788,7 +970,13 @@ export default function ActivityProductPage() {
                 className="space-y-3"
               >
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
-                  <Image src={shot.src} alt={shot.title} width={800} height={450} className="w-full h-auto" />
+                  <Image
+                    src={shot.src}
+                    alt={shot.title}
+                    width={800}
+                    height={450}
+                    className="w-full h-auto"
+                  />
                 </div>
                 <div className="text-center">
                   <h4 className="font-semibold">{shot.title}</h4>
@@ -825,15 +1013,21 @@ export default function ActivityProductPage() {
                 <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 overflow-hidden">
                   <div className={`h-2 bg-linear-to-r ${scenario.color}`} />
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold mb-3">{scenario.title}</h3>
+                    <h3 className="text-lg font-semibold mb-3">
+                      {scenario.title}
+                    </h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground">功能组合：</span>
+                        <span className="text-muted-foreground">
+                          功能组合：
+                        </span>
                         <span className="font-medium">{scenario.features}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-muted-foreground">效果：</span>
-                        <span className="font-medium text-emerald-600">{scenario.effect}</span>
+                        <span className="font-medium text-emerald-600">
+                          {scenario.effect}
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -854,12 +1048,21 @@ export default function ActivityProductPage() {
           <motion.div
             className="absolute -top-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-2xl"
             animate={{ scale: [1, 1.2, 1], x: [0, 30, 0], y: [0, -20, 0] }}
-            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
           />
           <motion.div
             className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-2xl"
             animate={{ scale: [1.2, 1, 1.2], x: [0, -30, 0], y: [0, 20, 0] }}
-            transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 2 }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 2,
+            }}
           />
         </div>
 
@@ -889,39 +1092,62 @@ export default function ActivityProductPage() {
               立即体验 Murphy 互动工具集，开启精彩活动之旅
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <ContactDialog>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                  <Button
-                    size="lg"
-                    variant="secondary"
-                    className="bg-white text-emerald-600 hover:bg-white/90 shadow-xl shadow-black/20"
-                  >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-white text-emerald-600 hover:bg-white/90 shadow-xl shadow-black/20"
+                  asChild
+                >
+                  <a href={SIGN_URL} target="_blank" rel="noopener noreferrer">
                     <span className="flex items-center gap-2">
-                      立即咨询
+                      前往线上产品
                       <motion.span
                         animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Number.POSITIVE_INFINITY,
+                        }}
                       >
                         <ArrowRight className="h-5 w-5" />
                       </motion.span>
                     </span>
+                  </a>
+                </Button>
+              </motion.div>
+              <ContactDialog>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-white/70 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
+                  >
+                    <span className="flex items-center gap-2">立即咨询</span>
                   </Button>
                 </motion.div>
               </ContactDialog>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-2 border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                   asChild
                 >
-                  <Link href="/products">返回首页</Link>
+                  <Link href="/products">产品总览</Link>
                 </Button>
               </motion.div>
             </motion.div>
