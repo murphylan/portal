@@ -6,12 +6,12 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
   description:
-    "Murphy 云：WorkSync 项目文档与协作平台（主力），以及活动现场互动工具（签到、投票、抽奖、表单）与中国象棋辅助工具。按需访问对应子站即可使用。",
+    "Murphy 云：WorkSync 项目文档与协作平台（主力），Rally 活动互动平台（签到、投票、抽奖、表单），以及小卒 — 基于 Pikafish 引擎的中国象棋 AI 辅助平台。按需访问对应子站即可使用。",
   icons: [{ rel: "icon", url: "/favicon.svg" }],
   openGraph: {
     title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
     description:
-      "WorkSync 项目文档与协作；互动工具 sign.murphylan.cloud；象棋辅助 chess.murphylan.cloud。",
+      "WorkSync 项目文档与协作；Rally 活动互动 sign.murphylan.cloud；小卒象棋 AI chess.murphylan.cloud。",
     url: "https://murphylan.cloud",
     siteName: "Murphy Cloud",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
-    description: "WorkSync 文档协作；互动工具与象棋辅助等在线 SaaS。",
+    description: "WorkSync 文档协作；Rally 活动互动与小卒象棋 AI 辅助等在线 SaaS。",
     images: ["https://murphylan.cloud/og-image.png"],
   },
 };

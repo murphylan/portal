@@ -45,7 +45,8 @@ export default function ProductHub() {
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Murphy 云旗下三款
-            SaaS：文档协作、活动现场互动、象棋辅助。点击即可访问线上环境。
+            SaaS：文档协作、Rally 活动互动、象棋 AI
+            辅助。点击即可访问线上环境。
           </p>
         </motion.div>
 
@@ -117,10 +118,11 @@ export default function ProductHub() {
                     <Ticket className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-1">
-                    Murphy 互动工具集
+                    Rally 活动互动平台
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
-                    签到、投票、抽奖、表单；扫码参与、大屏实时展示，适合年会、培训与发布活动。
+                    签到、投票、抽奖、表单一站式覆盖；扫码即用零门槛，大屏秒级同步，3
+                    分钟创建活动。
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2 shrink-0 mt-auto">
                     <Button
@@ -156,10 +158,12 @@ export default function ProductHub() {
                     <Swords className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-1">
-                    中国象棋辅助工具
+                    小卒 — 象棋智能辅助
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
-                    棋谱、对战与复盘辅助，面向象棋爱好者的独立在线工具。
+                    基于顶级引擎
+                    Pikafish，提供实时流式局面分析、最佳走法推荐与在线实时对弈，让每一步棋都有
+                    AI 把关。
                   </p>
                   <Button size="sm" variant="secondary" className="shrink-0 mt-auto" asChild>
                     <a

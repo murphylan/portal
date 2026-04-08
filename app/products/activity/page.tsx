@@ -411,14 +411,15 @@ export default function ActivityProductPage() {
               签到 · 投票 · 抽奖 · 表单 —— 一站式活动互动解决方案
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-linear-to-r from-emerald-600 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-              Murphy 互动工具集
+              Rally
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-4">
-              让每一场活动都精彩互动
+              扫码集结，全场互动 — 让每一场活动都精彩纷呈
             </p>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
               无需下载
-              APP，手机扫码即可参与，大屏实时展示互动数据，让您的活动更加精彩
+              APP，手机扫码即可参与，大屏秒级同步互动数据，3
+              分钟创建活动，一个短码贯穿全流程
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap items-center">
               <Button
@@ -1089,7 +1090,7 @@ export default function ActivityProductPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              立即体验 Murphy 互动工具集，开启精彩活动之旅
+              立即体验 Rally，开启精彩活动之旅
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap"

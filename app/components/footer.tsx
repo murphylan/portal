@@ -19,8 +19,8 @@ function GithubIcon({ className }: { className?: string }) {
 
 const products = [
   { id: "worksync", title: "WorkSync（文档与协作）", url: WORKSYNC_URL },
-  { id: "sign", title: "Murphy 互动工具集", url: SIGN_URL },
-  { id: "chess", title: "中国象棋辅助工具", url: CHESS_URL },
+  { id: "sign", title: "Rally（活动互动平台）", url: SIGN_URL },
+  { id: "chess", title: "小卒（象棋 AI 辅助）", url: CHESS_URL },
 ];
 
 interface FooterProps {
@@ -45,7 +45,8 @@ export default function Footer({ showContactId = true }: FooterProps) {
             </div>
             <p className="text-muted-foreground max-w-md mb-6">
               WorkSync
-              项目文档与协作平台为主力产品；并提供活动现场互动工具与象棋辅助等在线服务。
+              项目文档与协作平台为主力产品；并提供 Rally
+              活动互动平台与小卒象棋 AI 辅助等在线服务。
             </p>
             <div className="flex items-center gap-4">
               <a
