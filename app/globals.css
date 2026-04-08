@@ -402,3 +402,89 @@
   border-radius: 50%;
   animation: particle-float 10s ease-in-out infinite;
 }
+
+/* ===== Apple Design System Tokens ===== */
+
+.apple-nav {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.apple-section-dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.apple-section-light {
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.apple-card-dark {
+  background-color: #272729;
+  border-radius: 8px;
+}
+
+.apple-headline {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Noto Sans SC",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -0.28px;
+}
+
+.apple-subhead {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Noto Sans SC",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.19;
+  letter-spacing: 0.231px;
+}
+
+.apple-body {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Noto Sans SC",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+}
+
+.apple-pill {
+  border-radius: 980px;
+  border: 1px solid currentColor;
+  padding: 8px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.apple-pill:hover {
+  text-decoration: underline;
+}
+
+.apple-btn-blue {
+  background-color: #0071e3;
+  color: #ffffff;
+  border-radius: 980px;
+  padding: 8px 20px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease;
+}
+
+.apple-btn-blue:hover {
+  background-color: #0077ed;
+}
+
+@keyframes apple-scroll-hint {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+.apple-scroll-hint {
+  animation: apple-scroll-hint 2s ease-in-out infinite;
+}

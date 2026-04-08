@@ -21,7 +21,10 @@ export default function ProductHub() {
             Murphy 云
           </Link>
           <nav className="flex items-center gap-4 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">
+            <Link
+              href="/worksync"
+              className="hover:text-foreground transition-colors"
+            >
               WorkSync
             </Link>
             <ContactDialog>
@@ -44,8 +47,7 @@ export default function ProductHub() {
             产品总览
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Murphy 云旗下三款
-            SaaS：文档协作、Rally 活动互动、象棋 AI
+            Murphy 云旗下三款 SaaS：文档协作、Rally 活动互动、象棋 AI
             辅助。点击即可访问线上环境。
           </p>
         </motion.div>
@@ -98,7 +100,7 @@ export default function ProductHub() {
                     </a>
                   </Button>
                   <Button variant="outline" asChild>
-                    <Link href="/">查看介绍</Link>
+                    <Link href="/worksync">查看介绍</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -165,7 +167,12 @@ export default function ProductHub() {
                     Pikafish，提供实时流式局面分析、最佳走法推荐与在线实时对弈，让每一步棋都有
                     AI 把关。
                   </p>
-                  <Button size="sm" variant="secondary" className="shrink-0 mt-auto" asChild>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="shrink-0 mt-auto"
+                    asChild
+                  >
                     <a
                       href={CHESS_URL}
                       target="_blank"

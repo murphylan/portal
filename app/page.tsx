@@ -1,5 +1,5 @@
-import WorkSyncShowcase from "./components/worksync/worksync-showcase";
+import AppleShowcase from "./components/apple-showcase";
 
 export default function Home() {
-  return <WorkSyncShowcase />;
+  return <AppleShowcase />;
 }
