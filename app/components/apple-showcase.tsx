@@ -432,68 +432,83 @@ export default function AppleShowcase() {
         >
           <a
             href="#worksync"
-            className="apple-card-dark p-5 flex flex-col items-center text-center group hover:bg-[#2e2e30] transition-colors"
+            className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02]"
           >
-            <div className="h-10 w-10 rounded-xl bg-[#0071e3]/15 flex items-center justify-center mb-3">
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: "url('/worksync-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
               <FileText className="h-5 w-5 text-[#2997ff]" />
             </div>
             <h3
-              className="text-sm font-semibold text-white mb-1"
+              className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
               WorkSync
             </h3>
             <p
-              className="text-xs leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              className="relative z-10 text-xs leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.7)" }}
             >
               文档 · 看板 · 图表 · 白板
             </p>
-            <ChevronRight className="h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
             href="#xiaozu"
-            className="apple-card-dark p-5 flex flex-col items-center text-center group hover:bg-[#2e2e30] transition-colors"
+            className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02]"
           >
-            <div className="h-10 w-10 rounded-xl bg-[#0071e3]/15 flex items-center justify-center mb-3">
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: "url('/xiaozu-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
               <Swords className="h-5 w-5 text-[#2997ff]" />
             </div>
             <h3
-              className="text-sm font-semibold text-white mb-1"
+              className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
               小卒
             </h3>
             <p
-              className="text-xs leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              className="relative z-10 text-xs leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.7)" }}
             >
               AI 引擎 · 实时分析 · 在线对弈
             </p>
-            <ChevronRight className="h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
             href="#rally"
-            className="apple-card-dark p-5 flex flex-col items-center text-center group hover:bg-[#2e2e30] transition-colors"
+            className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02]"
           >
-            <div className="h-10 w-10 rounded-xl bg-[#0071e3]/15 flex items-center justify-center mb-3">
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: "url('/rally-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
               <Ticket className="h-5 w-5 text-[#2997ff]" />
             </div>
             <h3
-              className="text-sm font-semibold text-white mb-1"
+              className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
               Rally
             </h3>
             <p
-              className="text-xs leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              className="relative z-10 text-xs leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.7)" }}
             >
               签到 · 投票 · 抽奖 · 表单
             </p>
-            <ChevronRight className="h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
         </motion.div>
 
