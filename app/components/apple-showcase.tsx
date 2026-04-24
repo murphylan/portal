@@ -20,6 +20,7 @@ import {
   Shapes,
   ShoppingCart,
   Smartphone,
+  Sparkles,
   Star,
   Swords,
   Tag,
@@ -59,6 +60,11 @@ const WORKSYNC_FEATURES = [
     Icon: Shapes,
     title: "PlantUML 图表",
     desc: "内置编辑器支持时序图、类图、流程图、架构图，实时预览，图表直接嵌入文档",
+  },
+  {
+    Icon: Sparkles,
+    title: "AI 图表助手",
+    desc: "用一句话描述需求，AI 即可生成完整 PlantUML 代码并一键应用到编辑器，流式输出、可中断与重新生成",
   },
   {
     Icon: Palette,
@@ -521,7 +527,7 @@ export default function AppleShowcase() {
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              文档 · 看板 · 图表 · 白板
+              文档 · 看板 · 图表 · 白板 · AI
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -674,7 +680,7 @@ export default function AppleShowcase() {
             style={{ color: "rgba(0,0,0,0.56)" }}
           >
             将文档管理、任务看板、PlantUML
-            技术图表和协作白板整合在同一个工作区。一个
+            技术图表、协作白板与 AI 图表助手整合在同一个工作区。一个
             WorkSync，覆盖项目全生命周期的协作需求。
           </p>
         </motion.div>

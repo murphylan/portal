@@ -83,7 +83,7 @@ export default function ProductHub() {
                   </p>
                   <h2 className="text-xl font-bold mb-2">WorkSync</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    项目文档与协作：知识库、任务看板、PlantUML、白板与数据统计，团队与客户在同一空间对齐交付。适合产研与交付团队，支持云端订阅或按项目私有化部署。
+                    项目文档与协作：知识库、任务看板、PlantUML、白板、AI 图表助手与数据统计，团队与客户在同一空间对齐交付。适合产研与交付团队，支持云端订阅或按项目私有化部署。
                   </p>
                 </div>
                 <div className="flex-1 flex flex-col justify-center min-h-0 py-3">
@@ -94,7 +94,7 @@ export default function ProductHub() {
                     <ul className="text-xs text-muted-foreground space-y-1.5 leading-snug">
                       <li>知识沉淀：树形目录 + Markdown，权限可调、可追溯</li>
                       <li>交付跟踪：看板 / 列表、分配与状态，与大屏统计</li>
-                      <li>研发协同：PlantUML 与白板，评审与方案对齐</li>
+                      <li>研发协同：PlantUML、白板与 AI 图表助手，方案对齐更省力</li>
                     </ul>
                   </div>
                 </div>

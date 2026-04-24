@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Murphy 云 - WorkSync 文档协作与更多在线工具",
   description:
-    "Murphy 云：WorkSync 项目文档与协作平台（主力），Sign 活动互动平台（签到、投票、抽奖、表单），小卒 — 基于 Pikafish 引擎的中国象棋 AI 辅助平台，小商城 H5 移动电商，以及 TimeSlot 课外学习预约系统。按需访问对应子站即可使用。",
+    "Murphy 云：WorkSync 项目文档与协作平台（主力，含文档、任务、PlantUML、AI 图表助手与协作白板），Sign 活动互动平台（签到、投票、抽奖、表单），小卒 — 基于 Pikafish 引擎的中国象棋 AI 辅助平台，小商城 H5 移动电商，以及 TimeSlot 课外学习预约系统。按需访问对应子站即可使用。",
   icons: [{ rel: "icon", url: "/favicon.svg" }],
   openGraph: {
     title: "Murphy 云 - WorkSync 文档协作与更多在线工具",

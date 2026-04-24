@@ -19,6 +19,7 @@ import {
   Palette,
   Shapes,
   Shield,
+  Sparkles,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -45,6 +46,7 @@ const HIGHLIGHT_PILLS = [
   { icon: FileText, label: "文档集中管理", color: "text-violet-500" },
   { icon: Kanban, label: "任务看板", color: "text-sky-500" },
   { icon: Shapes, label: "PlantUML 图表", color: "text-emerald-500" },
+  { icon: Sparkles, label: "AI 图表助手", color: "text-purple-500" },
   { icon: Palette, label: "协作白板", color: "text-amber-500" },
   { icon: BarChart3, label: "数据分析", color: "text-rose-500" },
   { icon: Lock, label: "权限管理", color: "text-indigo-500" },
@@ -145,6 +147,26 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     iconColor: "text-emerald-500",
     Icon: Shapes,
     imageSrc: "/worksync/diagrams.png",
+  },
+  {
+    id: "ai-assistant",
+    badge: "AI 助手",
+    title: "AI 图表助手",
+    subtitle: "自然语言生成 PlantUML",
+    description:
+      "无需记忆 PlantUML 语法。在编辑器侧边栏用一句话描述需求，AI 即可生成完整图表代码并一键应用，让架构图与时序图的产出从「分钟级」走向「秒级」。",
+    bullets: [
+      "对话式生成：描述需求即可产出完整 PlantUML 代码",
+      "上下文感知：基于当前编辑器代码做增量修改",
+      "流式输出 · 可中断 · 可重新生成 · 可清空对话",
+      "支持时序图、类图、用例图、活动图、状态图、组件图、ER 图等全部类型",
+    ],
+    screenTitle: "AI 图表助手",
+    screenDesc: "对话生成 PlantUML，一键应用到编辑器",
+    gradient: "from-purple-500/10 via-fuchsia-500/5 to-transparent",
+    iconColor: "text-purple-500",
+    Icon: Sparkles,
+    imageSrc: "/worksync/ai-assistant.png",
   },
   {
     id: "whiteboard",
@@ -667,7 +689,7 @@ export default function WorkSyncShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            文档集中、任务看板、PlantUML、白板
+            文档集中、任务看板、PlantUML、AI 助手、白板
             <br className="hidden sm:block" />
             团队协作更高效
           </motion.p>
@@ -745,7 +767,7 @@ export default function WorkSyncShowcase() {
       <section className="py-16 px-4 border-b border-gray-100 dark:border-gray-800/50">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
