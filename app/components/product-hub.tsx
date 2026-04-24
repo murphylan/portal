@@ -1,11 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, LayoutDashboard, Swords, Ticket } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarClock,
+  LayoutDashboard,
+  ShoppingCart,
+  Swords,
+  Ticket,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CHESS_URL, SIGN_URL, WORKSYNC_URL } from "@/lib/product-urls";
+import {
+  CHESS_URL,
+  SHOPPING_URL,
+  SIGN_URL,
+  TIMESLOT_URL,
+  WORKSYNC_URL,
+} from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
 
@@ -47,8 +60,8 @@ export default function ProductHub() {
             产品总览
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Murphy 云旗下三款 SaaS：文档协作、Rally 活动互动、象棋 AI
-            辅助。点击即可访问线上环境。
+            Murphy 云旗下五款 SaaS：文档协作、Sign 活动互动、象棋 AI
+            辅助、H5 小商城、课程预约。点击即可访问线上环境。
           </p>
         </motion.div>
 
@@ -120,7 +133,7 @@ export default function ProductHub() {
                     <Ticket className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-1">
-                    Rally 活动互动平台
+                    Sign 活动互动平台
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
                     签到、投票、抽奖、表单一站式覆盖；扫码即用零门槛，大屏秒级同步，3
@@ -186,6 +199,77 @@ export default function ProductHub() {
               </Card>
             </motion.div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.24 }}
+          >
+            <Card className="h-full flex flex-col border-rose-200/80 dark:border-rose-900/60">
+              <CardContent className="p-6 flex flex-col h-full flex-1">
+                <div className="h-10 w-10 rounded-lg bg-linear-to-br from-rose-500 to-pink-600 flex items-center justify-center mb-4">
+                  <ShoppingCart className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">
+                  小商城 — H5 移动电商
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 flex-1">
+                  基于 Next.js 16 的 H5
+                  小商城，支持商品浏览与搜索、购物车管理、订单跟踪。移动端优先设计，随时随地轻松购物。
+                </p>
+                <Button
+                  size="sm"
+                  className="bg-rose-600 hover:bg-rose-700 text-white shrink-0 mt-auto"
+                  asChild
+                >
+                  <a
+                    href={SHOPPING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    进入商城
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.3 }}
+          >
+            <Card className="h-full flex flex-col border-cyan-200/80 dark:border-cyan-900/60">
+              <CardContent className="p-6 flex flex-col h-full flex-1">
+                <div className="h-10 w-10 rounded-lg bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-4">
+                  <CalendarClock className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold mb-1">
+                  TimeSlot — 课外学习预约
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 flex-1">
+                  AP 课程、编程开发、竞赛培训等课程在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。
+                </p>
+                <Button
+                  size="sm"
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white shrink-0 mt-auto"
+                  asChild
+                >
+                  <a
+                    href={TIMESLOT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    预约课程
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </div>
 

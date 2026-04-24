@@ -1,7 +1,13 @@
 "use client";
 
 import { Mail, Sparkles } from "lucide-react";
-import { CHESS_URL, SIGN_URL, WORKSYNC_URL } from "@/lib/product-urls";
+import {
+  CHESS_URL,
+  SHOPPING_URL,
+  SIGN_URL,
+  TIMESLOT_URL,
+  WORKSYNC_URL,
+} from "@/lib/product-urls";
 
 // GitHub 图标
 function GithubIcon({ className }: { className?: string }) {
@@ -19,8 +25,10 @@ function GithubIcon({ className }: { className?: string }) {
 
 const products = [
   { id: "worksync", title: "WorkSync（文档与协作）", url: WORKSYNC_URL },
-  { id: "sign", title: "Rally（活动互动平台）", url: SIGN_URL },
+  { id: "sign", title: "Sign（活动互动平台）", url: SIGN_URL },
   { id: "chess", title: "小卒（象棋 AI 辅助）", url: CHESS_URL },
+  { id: "shopping", title: "小商城（H5 电商）", url: SHOPPING_URL },
+  { id: "timeslot", title: "TimeSlot（课程预约）", url: TIMESLOT_URL },
 ];
 
 interface FooterProps {
@@ -45,8 +53,8 @@ export default function Footer({ showContactId = true }: FooterProps) {
             </div>
             <p className="text-muted-foreground max-w-md mb-6">
               WorkSync
-              项目文档与协作平台为主力产品；并提供 Rally
-              活动互动平台与小卒象棋 AI 辅助等在线服务。
+              项目文档与协作平台为主力产品；并提供 Sign
+              活动互动平台、小卒象棋 AI 辅助、小商城 H5 电商与 TimeSlot 课程预约等在线服务。
             </p>
             <div className="flex items-center gap-4">
               <a

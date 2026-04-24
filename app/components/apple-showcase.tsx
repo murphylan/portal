@@ -4,6 +4,8 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import {
   ArrowDown,
   BarChart3,
+  BookOpen,
+  CalendarClock,
   ChevronRight,
   Cloud,
   FileText,
@@ -16,8 +18,11 @@ import {
   QrCode,
   Server,
   Shapes,
+  ShoppingCart,
   Smartphone,
+  Star,
   Swords,
+  Tag,
   Ticket,
   Users,
   Vote,
@@ -25,7 +30,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { CHESS_URL, SIGN_URL, WORKSYNC_URL } from "@/lib/product-urls";
+import {
+  CHESS_URL,
+  SHOPPING_URL,
+  SIGN_URL,
+  TIMESLOT_URL,
+  WORKSYNC_URL,
+} from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
 
@@ -107,6 +118,52 @@ const RALLY_FEATURES = [
   },
 ];
 
+const SHOPPING_FEATURES = [
+  {
+    Icon: ShoppingCart,
+    title: "商品与购物车",
+    desc: "清晰的商品展示与分类浏览，购物车增删改查与库存校验，流畅的移动端购物体验",
+  },
+  {
+    Icon: Tag,
+    title: "商品搜索与筛选",
+    desc: "关键词搜索、分类筛选、价格排序，帮助用户快速定位心仪商品",
+  },
+  {
+    Icon: Users,
+    title: "用户与订单管理",
+    desc: "NextAuth v5 登录体系，订单创建与状态跟踪，购买记录一目了然",
+  },
+  {
+    Icon: Smartphone,
+    title: "H5 移动优先",
+    desc: "专为手机端设计的紧凑布局，响应式适配各尺寸屏幕，随时随地下单",
+  },
+];
+
+const TIMESLOT_FEATURES = [
+  {
+    Icon: CalendarClock,
+    title: "课程预约",
+    desc: "按日期与时段浏览可用课程，一键预约，自动冲突检测与容量控制",
+  },
+  {
+    Icon: BookOpen,
+    title: "丰富课程体系",
+    desc: "AP 课程、编程开发、竞赛培训等多类目支持，灵活配置课程与教师信息",
+  },
+  {
+    Icon: Star,
+    title: "教师与学员管理",
+    desc: "教师排课与学员预约记录全程可追溯，支持取消与改约操作",
+  },
+  {
+    Icon: Smartphone,
+    title: "移动端扫码预约",
+    desc: "H5 移动优先设计，家长手机扫码即可为孩子预约课程，操作零门槛",
+  },
+];
+
 const ADVANTAGES = [
   {
     Icon: Cloud,
@@ -121,7 +178,7 @@ const ADVANTAGES = [
   {
     Icon: MonitorPlay,
     title: "一站式平台",
-    desc: "文档协作、活动互动、智能棋艺三大产品，统一账号体系与品牌体验",
+    desc: "文档协作、活动互动、智能棋艺、H5 商城、课程预约五大产品，统一品牌体验",
   },
 ];
 
@@ -153,7 +210,7 @@ function AppleNav() {
           Murphy 云
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <a
             href="#worksync"
             className="text-white/70 text-xs hover:text-white transition-colors"
@@ -170,7 +227,19 @@ function AppleNav() {
             href="#rally"
             className="text-white/70 text-xs hover:text-white transition-colors"
           >
-            Rally
+            Sign
+          </a>
+          <a
+            href="#shopping"
+            className="text-white/70 text-xs hover:text-white transition-colors"
+          >
+            小商城
+          </a>
+          <a
+            href="#timeslot"
+            className="text-white/70 text-xs hover:text-white transition-colors"
+          >
+            TimeSlot
           </a>
         </div>
 
@@ -398,14 +467,14 @@ export default function AppleShowcase() {
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-4"
             style={{ color: "rgba(255,255,255,0.8)" }}
           >
-            三款 SaaS 产品，一站式云端解决方案
+            五款 SaaS 产品，一站式云端解决方案
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-8"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
-            文档协作 · 活动互动 · 象棋 AI —
-            为团队协作、企业活动和个人棋艺提升而生
+            文档协作 · 活动互动 · 象棋 AI · H5 商城 · 课程预约 —
+            为团队协作、企业活动、个人棋艺、在线购物与教育培训而生
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <PillOutline href="#worksync" dark>
@@ -425,7 +494,7 @@ export default function AppleShowcase() {
 
         {/* Product preview cards */}
         <motion.div
-          className="relative z-10 max-w-[980px] w-full mt-16 mb-12 grid grid-cols-1 sm:grid-cols-3 gap-4 px-2"
+          className="relative z-10 max-w-[1100px] w-full mt-16 mb-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-2"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -500,13 +569,67 @@ export default function AppleShowcase() {
               className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
-              Rally
+              Sign
             </h3>
             <p
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
               签到 · 投票 · 抽奖 · 表单
+            </p>
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </a>
+
+          <a
+            href="#shopping"
+            className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02]"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: "url('/shopping-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <ShoppingCart className="h-5 w-5 text-[#2997ff]" />
+            </div>
+            <h3
+              className="relative z-10 text-sm font-semibold text-white mb-1"
+              style={{ letterSpacing: "0.196px" }}
+            >
+              小商城
+            </h3>
+            <p
+              className="relative z-10 text-xs leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
+              商品 · 购物车 · 订单
+            </p>
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </a>
+
+          <a
+            href="#timeslot"
+            className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02] col-span-2 sm:col-span-1"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: "url('/timeslot-bg.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <CalendarClock className="h-5 w-5 text-[#2997ff]" />
+            </div>
+            <h3
+              className="relative z-10 text-sm font-semibold text-white mb-1"
+              style={{ letterSpacing: "0.196px" }}
+            >
+              TimeSlot
+            </h3>
+            <p
+              className="relative z-10 text-xs leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
+              课程 · 预约 · 管理
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -643,7 +766,7 @@ export default function AppleShowcase() {
         </motion.div>
       </section>
 
-      {/* ===== 4. Rally ===== */}
+      {/* ===== 4. Sign ===== */}
       <section id="rally" className="apple-section-light py-24 md:py-32 px-6">
         <motion.div
           className="max-w-[980px] mx-auto text-center"
@@ -656,7 +779,7 @@ export default function AppleShowcase() {
             className="apple-headline text-4xl sm:text-5xl md:text-[56px] mb-2"
             style={{ color: "#1d1d1f" }}
           >
-            Rally
+            Sign
           </h2>
           <p
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
@@ -668,7 +791,7 @@ export default function AppleShowcase() {
             className="apple-body text-base mb-4"
             style={{ color: "rgba(0,0,0,0.48)" }}
           >
-            Rally your crowd. 扫码集结，全场互动。
+            Sign in. Stand out. 扫码集结，全场互动。
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
@@ -706,7 +829,123 @@ export default function AppleShowcase() {
         </motion.div>
       </section>
 
-      {/* ===== 5. Why Murphy Cloud ===== */}
+      {/* ===== 5. Shopping ===== */}
+      <section
+        id="shopping"
+        className="apple-section-dark py-24 md:py-32 px-6"
+      >
+        <motion.div
+          className="max-w-[980px] mx-auto text-center"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <h2 className="apple-headline text-4xl sm:text-5xl md:text-[56px] text-white mb-2">
+            小商城
+          </h2>
+          <p
+            className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
+            style={{ color: "rgba(255,255,255,0.9)" }}
+          >
+            H5 移动电商平台
+          </p>
+          <p
+            className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
+            style={{ color: "rgba(255,255,255,0.56)" }}
+          >
+            基于 Next.js 16 打造的 H5
+            小商城，支持商品浏览、购物车、订单管理与商品搜索。移动端优先设计，随时随地轻松购物。
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="max-w-[980px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {SHOPPING_FEATURES.map((f) => (
+            <FeatureCardDark key={f.title} {...f} />
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="max-w-[980px] mx-auto flex items-center justify-center gap-4 mt-12 flex-wrap"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <PillOutline href={SHOPPING_URL} dark>
+            了解更多
+          </PillOutline>
+          <PillFilled href={SHOPPING_URL} external>
+            进入商城
+          </PillFilled>
+        </motion.div>
+      </section>
+
+      {/* ===== 6. TimeSlot ===== */}
+      <section
+        id="timeslot"
+        className="apple-section-light py-24 md:py-32 px-6"
+      >
+        <motion.div
+          className="max-w-[980px] mx-auto text-center"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <h2
+            className="apple-headline text-4xl sm:text-5xl md:text-[56px] mb-2"
+            style={{ color: "#1d1d1f" }}
+          >
+            TimeSlot
+          </h2>
+          <p
+            className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
+            style={{ color: "#1d1d1f" }}
+          >
+            课外学习预约系统
+          </p>
+          <p
+            className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
+            style={{ color: "rgba(0,0,0,0.56)" }}
+          >
+            支持 AP 课程、编程开发、竞赛培训等课程的在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="max-w-[980px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {TIMESLOT_FEATURES.map((f) => (
+            <FeatureCardLight key={f.title} {...f} />
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="max-w-[980px] mx-auto flex items-center justify-center gap-4 mt-12 flex-wrap"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <PillOutline href={TIMESLOT_URL}>了解更多</PillOutline>
+          <PillFilled href={TIMESLOT_URL} external>
+            预约课程
+          </PillFilled>
+        </motion.div>
+      </section>
+
+      {/* ===== 7. Why Murphy Cloud ===== */}
       <section className="apple-section-dark py-24 md:py-32 px-6">
         <motion.div
           className="max-w-[980px] mx-auto text-center"
