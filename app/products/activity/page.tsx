@@ -4,15 +4,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
-  BarChart3,
   CheckCircle2,
   FileSpreadsheet,
-  Gift,
   Link2,
-  ListChecks,
-  MessageSquare,
   MonitorPlay,
-  QrCode,
   Shield,
   Smartphone,
   Sparkles,
@@ -23,13 +18,15 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import ContactDialog from "@/app/components/contact-dialog";
 import Footer from "@/app/components/footer";
+import LocaleSwitcher from "@/app/components/locale-switcher";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/i18n/navigation";
 import { SIGN_URL } from "@/lib/product-urls";
 
 // 浮动粒子组件
@@ -332,6 +329,72 @@ const scenarios = [
 ];
 
 export default function ActivityProductPage() {
+  const t = useTranslations("Activity");
+  const localizedCoreAdvantages = coreAdvantages.map((item, index) => ({
+    ...item,
+    ...(
+      t.raw("coreAdvantages") as Array<{
+        title: string;
+        description: string;
+      }>
+    )[index],
+  }));
+  const localizeFeature = <
+    T extends {
+      highlights: string[];
+      screenshots?: Array<{ title: string; desc: string }>;
+    },
+  >(
+    feature: T,
+    key: "checkin" | "vote" | "lottery" | "form",
+  ) => {
+    const copy = t.raw(key) as Partial<T> & {
+      screenshots?: Array<{ title: string; desc: string }>;
+    };
+    return {
+      ...feature,
+      ...copy,
+      screenshots: feature.screenshots
+        ? feature.screenshots.map((shot, index) => ({
+            ...shot,
+            ...copy.screenshots?.[index],
+          }))
+        : feature.screenshots,
+    };
+  };
+  const localizedCheckin = localizeFeature(checkinFeatures, "checkin");
+  const localizedVote = {
+    ...localizeFeature(voteFeatures, "vote"),
+    templates: voteFeatures.templates.map((template, index) => ({
+      ...template,
+      ...(t.raw("vote.templates") as Array<{ name: string; desc: string }>)[
+        index
+      ],
+    })),
+  };
+  const localizedLottery = {
+    ...localizeFeature(lotteryFeatures, "lottery"),
+    modes: lotteryFeatures.modes.map((mode, index) => ({
+      ...mode,
+      ...(t.raw("lottery.modes") as Array<{ name: string; desc: string }>)[
+        index
+      ],
+    })),
+  };
+  const localizedForm = {
+    ...localizeFeature(formFeatures, "form"),
+    fieldTypes: t.raw("form.fieldTypes") as string[],
+  };
+  const localizedScenarios = scenarios.map((scenario, index) => ({
+    ...scenario,
+    ...(
+      t.raw("scenarios") as Array<{
+        title: string;
+        features: string;
+        effect: string;
+      }>
+    )[index],
+  }));
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -350,19 +413,22 @@ export default function ActivityProductPage() {
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Murphy 云首页</span>
+            <span>{t("backHome")}</span>
           </Link>
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded-lg bg-linear-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
               <Ticket className="h-4 w-4 text-white" />
             </div>
-            <span className="font-semibold">Murphy Activity</span>
+            <span className="font-semibold">{t("brand")}</span>
           </div>
-          <ContactDialog>
-            <Button className="bg-linear-to-r from-emerald-500 to-teal-500 text-white">
-              立即咨询
-            </Button>
-          </ContactDialog>
+          <div className="flex items-center gap-2">
+            <LocaleSwitcher className="text-muted-foreground" />
+            <ContactDialog>
+              <Button className="bg-linear-to-r from-emerald-500 to-teal-500 text-white">
+                {t("consult")}
+              </Button>
+            </ContactDialog>
+          </div>
         </div>
       </header>
 
@@ -408,18 +474,16 @@ export default function ActivityProductPage() {
               className="mb-6 px-4 py-2 text-sm font-medium bg-emerald-50 border-emerald-200 text-emerald-700"
             >
               <Ticket className="h-4 w-4 mr-2" />
-              签到 · 投票 · 抽奖 · 表单 —— 一站式活动互动解决方案
+              {t("heroBadge")}
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-linear-to-r from-emerald-600 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
               Sign
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-4">
-              扫码集结，全场互动 — 让每一场活动都精彩纷呈
+              {t("heroLead")}
             </p>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-              无需下载
-              APP，手机扫码即可参与，大屏秒级同步互动数据，3
-              分钟创建活动，一个短码贯穿全流程
+              {t("heroDesc")}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap items-center">
               <Button
@@ -428,17 +492,17 @@ export default function ActivityProductPage() {
                 asChild
               >
                 <a href={SIGN_URL} target="_blank" rel="noopener noreferrer">
-                  前往线上产品
+                  {t("open")}
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </a>
               </Button>
               <ContactDialog>
                 <Button size="lg" variant="secondary">
-                  立即咨询
+                  {t("consult")}
                 </Button>
               </ContactDialog>
               <Button size="lg" variant="outline" asChild>
-                <a href="#features">查看功能</a>
+                <a href="#features">{t("viewFeatures")}</a>
               </Button>
             </div>
           </motion.div>
@@ -451,13 +515,14 @@ export default function ActivityProductPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="aspect-video relative">
+              {/* biome-ignore lint/a11y/useMediaCaption: The demo video is a silent product walkthrough. */}
               <video
                 className="w-full h-full object-cover"
                 controls
                 poster="/products/activity/01-home-hero.png"
               >
                 <source src="/products/activity/demo.mp4" type="video/mp4" />
-                您的浏览器不支持视频播放
+                {t("videoFallback")}
               </video>
             </div>
           </motion.div>
@@ -473,10 +538,10 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">产品首页展示</h2>
-            <p className="text-muted-foreground">
-              简洁的产品首页，一目了然地展示核心功能模块
-            </p>
+            <h2 className="text-3xl font-bold mb-4">
+              {t("homeShowcaseTitle")}
+            </h2>
+            <p className="text-muted-foreground">{t("homeShowcaseLead")}</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -488,7 +553,7 @@ export default function ActivityProductPage() {
             >
               <Image
                 src="/products/activity/01-home-hero.png"
-                alt="首页 Hero"
+                alt={t("altHomeHero")}
                 width={800}
                 height={450}
                 className="w-full h-auto"
@@ -502,7 +567,7 @@ export default function ActivityProductPage() {
             >
               <Image
                 src="/products/activity/01-home-features.png"
-                alt="功能模块"
+                alt={t("altFeatureModules")}
                 width={800}
                 height={450}
                 className="w-full h-auto"
@@ -524,9 +589,9 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">核心优势</h2>
+            <h2 className="text-3xl font-bold mb-4">{t("coreTitle")}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              一站式解决活动互动的各种需求
+              {t("coreLead")}
             </p>
           </motion.div>
 
@@ -537,7 +602,7 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {coreAdvantages.map((item) => (
+            {localizedCoreAdvantages.map((item) => (
               <motion.div key={item.title} variants={fadeInUp}>
                 <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 border-2 hover:border-emerald-200">
                   <CardContent className="p-6">
@@ -565,10 +630,8 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">管理后台</h2>
-            <p className="text-muted-foreground">
-              统一管理所有活动，快速创建新活动，一站式操控
-            </p>
+            <h2 className="text-3xl font-bold mb-4">{t("adminTitle")}</h2>
+            <p className="text-muted-foreground">{t("adminLead")}</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -581,14 +644,14 @@ export default function ActivityProductPage() {
               <div className="relative rounded-xl overflow-hidden shadow-xl border">
                 <Image
                   src="/products/activity/02-login-page.png"
-                  alt="登录页面"
+                  alt={t("altLogin")}
                   width={800}
                   height={450}
                   className="w-full h-auto"
                 />
               </div>
               <p className="text-center text-muted-foreground">
-                安全的账号登录系统，支持邮箱账号登录
+                {t("loginCaption")}
               </p>
             </motion.div>
             <motion.div
@@ -600,14 +663,14 @@ export default function ActivityProductPage() {
               <div className="relative rounded-xl overflow-hidden shadow-xl border">
                 <Image
                   src="/products/activity/03-dashboard.png"
-                  alt="控制台"
+                  alt={t("altDashboard")}
                   width={800}
                   height={450}
                   className="w-full h-auto"
                 />
               </div>
               <p className="text-center text-muted-foreground">
-                统一管理所有活动，快速创建新活动
+                {t("dashboardCaption")}
               </p>
             </motion.div>
           </div>
@@ -623,8 +686,10 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">{checkinFeatures.title}</h2>
-            <p className="text-muted-foreground">{checkinFeatures.subtitle}</p>
+            <h2 className="text-3xl font-bold mb-4">
+              {localizedCheckin.title}
+            </h2>
+            <p className="text-muted-foreground">{localizedCheckin.subtitle}</p>
           </motion.div>
 
           {/* 功能亮点 */}
@@ -635,9 +700,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {checkinFeatures.highlights.map((highlight, index) => (
+              {localizedCheckin.highlights.map((highlight) => (
                 <div
-                  key={index}
+                  key={highlight}
                   className="flex items-start gap-3 p-4 rounded-lg bg-white shadow-sm border"
                 >
                   <CheckCircle2 className="h-5 w-5 text-emerald-600 mt-0.5 shrink-0" />
@@ -649,7 +714,7 @@ export default function ActivityProductPage() {
 
           {/* 截图展示 */}
           <div className="grid md:grid-cols-2 gap-6">
-            {checkinFeatures.screenshots.map((shot, index) => (
+            {localizedCheckin.screenshots.map((shot, index) => (
               <motion.div
                 key={shot.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -683,35 +748,35 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h3 className="text-xl font-semibold text-center mb-8">
-              手机端签到体验
+              {t("mobileCheckinTitle")}
             </h3>
             <div className="flex justify-center gap-8 flex-wrap">
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
                   <Image
                     src="/products/activity/13-checkin-mobile.png"
-                    alt="手机端签到"
+                    alt={t("altMobileCheckin")}
                     width={300}
                     height={600}
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-center text-sm text-muted-foreground">
-                  用户扫码后的签到界面
+                  {t("mobileCheckinCaption")}
                 </p>
               </div>
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
                   <Image
                     src="/products/activity/13-checkin-mobile-filled.png"
-                    alt="填写签到信息"
+                    alt={t("altMobileCheckinFilled")}
                     width={300}
                     height={600}
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-center text-sm text-muted-foreground">
-                  填写信息后提交签到
+                  {t("mobileCheckinFilledCaption")}
                 </p>
               </div>
             </div>
@@ -728,8 +793,8 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">{voteFeatures.title}</h2>
-            <p className="text-muted-foreground">{voteFeatures.subtitle}</p>
+            <h2 className="text-3xl font-bold mb-4">{localizedVote.title}</h2>
+            <p className="text-muted-foreground">{localizedVote.subtitle}</p>
           </motion.div>
 
           {/* 功能亮点 */}
@@ -740,9 +805,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {voteFeatures.highlights.map((highlight, index) => (
+              {localizedVote.highlights.map((highlight) => (
                 <div
-                  key={index}
+                  key={highlight}
                   className="flex items-start gap-3 p-4 rounded-lg bg-blue-50 border border-blue-100"
                 >
                   <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 shrink-0" />
@@ -760,10 +825,10 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h3 className="text-xl font-semibold text-center mb-6">
-              四种投票模板
+              {t("voteTemplatesTitle")}
             </h3>
             <div className="grid md:grid-cols-4 gap-4">
-              {voteFeatures.templates.map((template) => (
+              {localizedVote.templates.map((template) => (
                 <Card
                   key={template.name}
                   className="text-center hover:shadow-lg transition-all hover:-translate-y-1"
@@ -782,7 +847,7 @@ export default function ActivityProductPage() {
 
           {/* 截图展示 */}
           <div className="grid md:grid-cols-3 gap-6">
-            {voteFeatures.screenshots.map((shot, index) => (
+            {localizedVote.screenshots.map((shot, index) => (
               <motion.div
                 key={shot.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -819,8 +884,10 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">{lotteryFeatures.title}</h2>
-            <p className="text-muted-foreground">{lotteryFeatures.subtitle}</p>
+            <h2 className="text-3xl font-bold mb-4">
+              {localizedLottery.title}
+            </h2>
+            <p className="text-muted-foreground">{localizedLottery.subtitle}</p>
           </motion.div>
 
           {/* 功能亮点 */}
@@ -831,9 +898,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {lotteryFeatures.highlights.map((highlight, index) => (
+              {localizedLottery.highlights.map((highlight) => (
                 <div
-                  key={index}
+                  key={highlight}
                   className="flex items-start gap-3 p-4 rounded-lg bg-amber-50 border border-amber-100"
                 >
                   <CheckCircle2 className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
@@ -845,10 +912,10 @@ export default function ActivityProductPage() {
 
           {/* 四种抽奖模式 */}
           <h3 className="text-xl font-semibold text-center mb-8">
-            四种抽奖模式
+            {t("lotteryModesTitle")}
           </h3>
           <div className="grid md:grid-cols-2 gap-8">
-            {lotteryFeatures.modes.map((mode, index) => (
+            {localizedLottery.modes.map((mode, index) => (
               <motion.div
                 key={mode.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -885,21 +952,21 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h3 className="text-xl font-semibold text-center mb-8">
-              手机端参与抽奖
+              {t("mobileLotteryTitle")}
             </h3>
             <div className="flex justify-center">
               <div className="w-64 space-y-3">
                 <div className="relative rounded-xl overflow-hidden shadow-lg border">
                   <Image
                     src="/products/activity/32-lottery-mobile.png"
-                    alt="手机端抽奖"
+                    alt={t("altMobileLottery")}
                     width={300}
                     height={600}
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-center text-sm text-muted-foreground">
-                  用户扫码参与抽奖的界面
+                  {t("mobileLotteryCaption")}
                 </p>
               </div>
             </div>
@@ -916,8 +983,8 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">{formFeatures.title}</h2>
-            <p className="text-muted-foreground">{formFeatures.subtitle}</p>
+            <h2 className="text-3xl font-bold mb-4">{localizedForm.title}</h2>
+            <p className="text-muted-foreground">{localizedForm.subtitle}</p>
           </motion.div>
 
           {/* 功能亮点 */}
@@ -928,9 +995,9 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {formFeatures.highlights.map((highlight, index) => (
+              {localizedForm.highlights.map((highlight) => (
                 <div
-                  key={index}
+                  key={highlight}
                   className="flex items-start gap-3 p-4 rounded-lg bg-purple-50 border border-purple-100"
                 >
                   <CheckCircle2 className="h-5 w-5 text-purple-600 mt-0.5 shrink-0" />
@@ -948,10 +1015,10 @@ export default function ActivityProductPage() {
             viewport={{ once: true }}
           >
             <h3 className="text-xl font-semibold text-center mb-6">
-              丰富的字段类型
+              {t("fieldTypesTitle")}
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {formFeatures.fieldTypes.map((type) => (
+              {localizedForm.fieldTypes.map((type) => (
                 <Badge key={type} variant="secondary" className="px-4 py-2">
                   {type}
                 </Badge>
@@ -961,7 +1028,7 @@ export default function ActivityProductPage() {
 
           {/* 截图展示 */}
           <div className="grid md:grid-cols-2 gap-6">
-            {formFeatures.screenshots.map((shot, index) => (
+            {localizedForm.screenshots.map((shot, index) => (
               <motion.div
                 key={shot.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -998,12 +1065,12 @@ export default function ActivityProductPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4">🎯 应用场景</h2>
-            <p className="text-muted-foreground">适用于各类活动场景</p>
+            <h2 className="text-3xl font-bold mb-4">{t("scenariosTitle")}</h2>
+            <p className="text-muted-foreground">{t("scenariosLead")}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {scenarios.map((scenario, index) => (
+            {localizedScenarios.map((scenario, index) => (
               <motion.div
                 key={scenario.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -1020,12 +1087,14 @@ export default function ActivityProductPage() {
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center gap-2">
                         <span className="text-muted-foreground">
-                          功能组合：
+                          {t("scenarioFeatures")}
                         </span>
                         <span className="font-medium">{scenario.features}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground">效果：</span>
+                        <span className="text-muted-foreground">
+                          {t("scenarioEffect")}
+                        </span>
                         <span className="font-medium text-emerald-600">
                           {scenario.effect}
                         </span>
@@ -1081,7 +1150,7 @@ export default function ActivityProductPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              让活动互动更精彩 ✨
+              {t("ctaTitle")}
             </motion.h2>
             <motion.p
               className="text-xl text-white/80 mb-10"
@@ -1090,7 +1159,7 @@ export default function ActivityProductPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              立即体验 Sign，开启精彩活动之旅
+              {t("ctaLead")}
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap"
@@ -1110,7 +1179,7 @@ export default function ActivityProductPage() {
                 >
                   <a href={SIGN_URL} target="_blank" rel="noopener noreferrer">
                     <span className="flex items-center gap-2">
-                      前往线上产品
+                      {t("open")}
                       <motion.span
                         animate={{ x: [0, 5, 0] }}
                         transition={{
@@ -1134,7 +1203,9 @@ export default function ActivityProductPage() {
                     variant="outline"
                     className="border-2 border-white/70 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                   >
-                    <span className="flex items-center gap-2">立即咨询</span>
+                    <span className="flex items-center gap-2">
+                      {t("consult")}
+                    </span>
                   </Button>
                 </motion.div>
               </ContactDialog>
@@ -1148,7 +1219,7 @@ export default function ActivityProductPage() {
                   className="border-2 border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                   asChild
                 >
-                  <Link href="/products">产品总览</Link>
+                  <Link href="/products">{t("overview")}</Link>
                 </Button>
               </motion.div>
             </motion.div>

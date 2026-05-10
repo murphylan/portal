@@ -29,8 +29,9 @@ import {
   Vote,
   Zap,
 } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { Link } from "@/i18n/navigation";
 import {
   CHESS_URL,
   SHOPPING_URL,
@@ -40,6 +41,7 @@ import {
 } from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
+import LocaleSwitcher from "./locale-switcher";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -101,7 +103,7 @@ const CHESS_FEATURES = [
   },
 ];
 
-const RALLY_FEATURES = [
+const SIGN_FEATURES = [
   {
     Icon: QrCode,
     title: "扫码签到",
@@ -193,6 +195,8 @@ const ADVANTAGES = [
 // ---------------------------------------------------------------------------
 
 function AppleNav() {
+  const t = useTranslations("Home.nav");
+  const common = useTranslations("Common");
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
 
@@ -211,57 +215,58 @@ function AppleNav() {
       <div className="max-w-[980px] mx-auto w-full px-6 flex items-center justify-between">
         <Link
           href="/"
-          className="text-white/90 text-sm font-medium tracking-tight hover:text-white transition-colors"
+          className="text-white/90 text-lg font-medium tracking-tight hover:text-white transition-colors"
         >
-          Murphy 云
+          {common("brand")}
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
           <a
             href="#worksync"
-            className="text-white/70 text-xs hover:text-white transition-colors"
+            className="text-white/70 text-base hover:text-white transition-colors"
           >
-            WorkSync
+            {t("worksync")}
           </a>
           <a
             href="#xiaozu"
-            className="text-white/70 text-xs hover:text-white transition-colors"
+            className="text-white/70 text-base hover:text-white transition-colors"
           >
-            小卒
+            {t("xiaozu")}
           </a>
           <a
-            href="#rally"
-            className="text-white/70 text-xs hover:text-white transition-colors"
+            href="#sign"
+            className="text-white/70 text-base hover:text-white transition-colors"
           >
-            Sign
+            {t("sign")}
           </a>
           <a
             href="#shopping"
-            className="text-white/70 text-xs hover:text-white transition-colors"
+            className="text-white/70 text-base hover:text-white transition-colors"
           >
-            小商城
+            {t("shopping")}
           </a>
           <a
             href="#timeslot"
-            className="text-white/70 text-xs hover:text-white transition-colors"
+            className="text-white/70 text-base hover:text-white transition-colors"
           >
-            TimeSlot
+            {t("timeslot")}
           </a>
         </div>
 
         <div className="flex items-center gap-4">
+          <LocaleSwitcher className="hidden sm:inline-flex text-white/70" />
           <Link
             href="/products"
-            className="text-white/70 text-xs hover:text-white transition-colors hidden sm:inline"
+            className="text-white/70 text-base hover:text-white transition-colors hidden sm:inline"
           >
-            产品总览
+            {t("products")}
           </Link>
           <ContactDialog>
             <button
               type="button"
-              className="apple-btn-blue text-xs py-1! px-3! cursor-pointer"
+              className="apple-btn-blue text-base py-1! px-3! cursor-pointer"
             >
-              联系我们
+              {t("contact")}
             </button>
           </ContactDialog>
         </div>
@@ -422,6 +427,26 @@ function PillFilled({
 // ---------------------------------------------------------------------------
 
 export default function AppleShowcase() {
+  const t = useTranslations("Home");
+  const featureCopy = t.raw("features") as Record<
+    string,
+    Array<{ title: string; desc: string }>
+  >;
+  const withCopy = (
+    iconItems: Array<{ Icon: React.ComponentType<{ className?: string }> }>,
+    key: string,
+  ) =>
+    featureCopy[key].map((copy, index) => ({
+      ...iconItems[index],
+      ...copy,
+    }));
+  const worksyncFeatures = withCopy(WORKSYNC_FEATURES, "worksync");
+  const chessFeatures = withCopy(CHESS_FEATURES, "chess");
+  const signFeatures = withCopy(SIGN_FEATURES, "sign");
+  const shoppingFeatures = withCopy(SHOPPING_FEATURES, "shopping");
+  const timeslotFeatures = withCopy(TIMESLOT_FEATURES, "timeslot");
+  const advantages = withCopy(ADVANTAGES, "advantages");
+
   return (
     <div className="overflow-x-hidden">
       <AppleNav />
@@ -467,31 +492,30 @@ export default function AppleShowcase() {
             className="apple-headline text-5xl sm:text-6xl md:text-[56px] mb-4"
             style={{ color: "#ffffff" }}
           >
-            Murphy 云
+            {t("hero.title")}
           </h1>
           <p
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-4"
             style={{ color: "rgba(255,255,255,0.8)" }}
           >
-            五款 SaaS 产品，一站式云端解决方案
+            {t("hero.subtitle")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-8"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
-            文档协作 · 活动互动 · 象棋 AI · H5 商城 · 课程预约 —
-            为团队协作、企业活动、个人棋艺、在线购物与教育培训而生
+            {t("hero.description")}
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <PillOutline href="#worksync" dark>
-              探索产品
+              {t("hero.explore")}
             </PillOutline>
             <ContactDialog>
               <button
                 type="button"
                 className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
               >
-                联系我们
+                {t("hero.contact")}
                 <ChevronRight className="h-3.5 w-3.5" />
               </button>
             </ContactDialog>
@@ -527,7 +551,7 @@ export default function AppleShowcase() {
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              文档 · 看板 · 图表 · 白板 · AI
+              {t("preview.worksync")}
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -548,24 +572,24 @@ export default function AppleShowcase() {
               className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
-              小卒
+              {t("sections.xiaozu.title")}
             </h3>
             <p
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              AI 引擎 · 实时分析 · 在线对弈
+              {t("preview.xiaozu")}
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
-            href="#rally"
+            href="#sign"
             className="relative overflow-hidden rounded-lg p-5 flex flex-col items-center text-center group transition-all hover:scale-[1.02]"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-              style={{ backgroundImage: "url('/rally-bg.jpg')" }}
+              style={{ backgroundImage: "url('/sign-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
             <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
@@ -581,7 +605,7 @@ export default function AppleShowcase() {
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              签到 · 投票 · 抽奖 · 表单
+              {t("preview.sign")}
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -602,13 +626,13 @@ export default function AppleShowcase() {
               className="relative z-10 text-sm font-semibold text-white mb-1"
               style={{ letterSpacing: "0.196px" }}
             >
-              小商城
+              {t("sections.shopping.title")}
             </h3>
             <p
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              商品 · 购物车 · 订单
+              {t("preview.shopping")}
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -635,7 +659,7 @@ export default function AppleShowcase() {
               className="relative z-10 text-xs leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              课程 · 预约 · 管理
+              {t("preview.timeslot")}
             </p>
             <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
@@ -673,15 +697,13 @@ export default function AppleShowcase() {
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-4"
             style={{ color: "#1d1d1f" }}
           >
-            项目文档与协作平台
+            {t("sections.worksync.subtitle")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
             style={{ color: "rgba(0,0,0,0.56)" }}
           >
-            将文档管理、任务看板、PlantUML
-            技术图表、协作白板与 AI 图表助手整合在同一个工作区。一个
-            WorkSync，覆盖项目全生命周期的协作需求。
+            {t("sections.worksync.description")}
           </p>
         </motion.div>
 
@@ -692,7 +714,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {WORKSYNC_FEATURES.map((f) => (
+          {worksyncFeatures.map((f) => (
             <FeatureCardLight key={f.title} {...f} />
           ))}
         </motion.div>
@@ -704,9 +726,11 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <PillOutline href="/worksync">了解更多</PillOutline>
+          <PillOutline href="/worksync">
+            {t("sections.worksync.primary")}
+          </PillOutline>
           <PillFilled href={WORKSYNC_URL} external>
-            立即使用
+            {t("sections.worksync.secondary")}
           </PillFilled>
         </motion.div>
       </section>
@@ -721,26 +745,25 @@ export default function AppleShowcase() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="apple-headline text-4xl sm:text-5xl md:text-[56px] text-white mb-2">
-            小卒
+            {t("sections.xiaozu.title")}
           </h2>
           <p
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
             style={{ color: "rgba(255,255,255,0.9)" }}
           >
-            中国象棋智能辅助平台
+            {t("sections.xiaozu.subtitle")}
           </p>
           <p
             className="apple-body text-base mb-4"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
-            小卒过河顶大车
+            {t("sections.xiaozu.tagline")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
             style={{ color: "rgba(255,255,255,0.56)" }}
           >
-            基于顶级象棋引擎 Pikafish，为中国象棋爱好者打造的一站式 AI
-            教练与对弈助手。无论你是在微信小程序中对弈、与朋友在线切磋，还是独自复盘研究——小卒都能在每一步棋为你提供专业级的分析与走法建议。
+            {t("sections.xiaozu.description")}
           </p>
         </motion.div>
 
@@ -751,7 +774,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {CHESS_FEATURES.map((f) => (
+          {chessFeatures.map((f) => (
             <FeatureCardDark key={f.title} {...f} />
           ))}
         </motion.div>
@@ -764,16 +787,16 @@ export default function AppleShowcase() {
           viewport={{ once: true }}
         >
           <PillOutline href={CHESS_URL} dark>
-            了解更多
+            {t("sections.xiaozu.primary")}
           </PillOutline>
           <PillFilled href={CHESS_URL} external>
-            开始下棋
+            {t("sections.xiaozu.secondary")}
           </PillFilled>
         </motion.div>
       </section>
 
       {/* ===== 4. Sign ===== */}
-      <section id="rally" className="apple-section-light py-24 md:py-32 px-6">
+      <section id="sign" className="apple-section-light py-24 md:py-32 px-6">
         <motion.div
           className="max-w-[980px] mx-auto text-center"
           variants={sectionVariants}
@@ -791,21 +814,19 @@ export default function AppleShowcase() {
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
             style={{ color: "#1d1d1f" }}
           >
-            活动互动平台
+            {t("sections.sign.subtitle")}
           </p>
           <p
             className="apple-body text-base mb-4"
             style={{ color: "rgba(0,0,0,0.48)" }}
           >
-            Sign in. Stand out. 扫码集结，全场互动。
+            {t("sections.sign.tagline")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
             style={{ color: "rgba(0,0,0,0.56)" }}
           >
-            签到、投票、抽奖、表单——企业活动最常见的四大互动需求一站式覆盖。参与者无需下载任何
-            APP，手机扫码即可参与，大屏实时展示互动数据。组织者 3
-            分钟即可创建活动，一个短码贯穿全流程。
+            {t("sections.sign.description")}
           </p>
         </motion.div>
 
@@ -816,7 +837,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {RALLY_FEATURES.map((f) => (
+          {signFeatures.map((f) => (
             <FeatureCardLight key={f.title} {...f} />
           ))}
         </motion.div>
@@ -828,18 +849,17 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <PillOutline href="/products/activity">了解更多</PillOutline>
+          <PillOutline href="/products/activity">
+            {t("sections.sign.primary")}
+          </PillOutline>
           <PillFilled href={SIGN_URL} external>
-            创建活动
+            {t("sections.sign.secondary")}
           </PillFilled>
         </motion.div>
       </section>
 
       {/* ===== 5. Shopping ===== */}
-      <section
-        id="shopping"
-        className="apple-section-dark py-24 md:py-32 px-6"
-      >
+      <section id="shopping" className="apple-section-dark py-24 md:py-32 px-6">
         <motion.div
           className="max-w-[980px] mx-auto text-center"
           variants={sectionVariants}
@@ -848,20 +868,19 @@ export default function AppleShowcase() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="apple-headline text-4xl sm:text-5xl md:text-[56px] text-white mb-2">
-            小商城
+            {t("sections.shopping.title")}
           </h2>
           <p
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
             style={{ color: "rgba(255,255,255,0.9)" }}
           >
-            H5 移动电商平台
+            {t("sections.shopping.subtitle")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
             style={{ color: "rgba(255,255,255,0.56)" }}
           >
-            基于 Next.js 16 打造的 H5
-            小商城，支持商品浏览、购物车、订单管理与商品搜索。移动端优先设计，随时随地轻松购物。
+            {t("sections.shopping.description")}
           </p>
         </motion.div>
 
@@ -872,7 +891,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {SHOPPING_FEATURES.map((f) => (
+          {shoppingFeatures.map((f) => (
             <FeatureCardDark key={f.title} {...f} />
           ))}
         </motion.div>
@@ -885,10 +904,10 @@ export default function AppleShowcase() {
           viewport={{ once: true }}
         >
           <PillOutline href={SHOPPING_URL} dark>
-            了解更多
+            {t("sections.shopping.primary")}
           </PillOutline>
           <PillFilled href={SHOPPING_URL} external>
-            进入商城
+            {t("sections.shopping.secondary")}
           </PillFilled>
         </motion.div>
       </section>
@@ -915,13 +934,13 @@ export default function AppleShowcase() {
             className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
             style={{ color: "#1d1d1f" }}
           >
-            课外学习预约系统
+            {t("sections.timeslot.subtitle")}
           </p>
           <p
             className="apple-body text-sm sm:text-base max-w-2xl mx-auto mb-16"
             style={{ color: "rgba(0,0,0,0.56)" }}
           >
-            支持 AP 课程、编程开发、竞赛培训等课程的在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。
+            {t("sections.timeslot.description")}
           </p>
         </motion.div>
 
@@ -932,7 +951,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {TIMESLOT_FEATURES.map((f) => (
+          {timeslotFeatures.map((f) => (
             <FeatureCardLight key={f.title} {...f} />
           ))}
         </motion.div>
@@ -944,9 +963,11 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <PillOutline href={TIMESLOT_URL}>了解更多</PillOutline>
+          <PillOutline href={TIMESLOT_URL}>
+            {t("sections.timeslot.primary")}
+          </PillOutline>
           <PillFilled href={TIMESLOT_URL} external>
-            预约课程
+            {t("sections.timeslot.secondary")}
           </PillFilled>
         </motion.div>
       </section>
@@ -961,13 +982,13 @@ export default function AppleShowcase() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="apple-headline text-3xl sm:text-4xl md:text-[40px] text-white mb-4">
-            为什么选择 Murphy 云
+            {t("sections.why.title")}
           </h2>
           <p
             className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-16"
             style={{ color: "rgba(255,255,255,0.56)" }}
           >
-            统一平台、现代技术、灵活部署——为不同规模的团队提供专业级工具
+            {t("sections.why.description")}
           </p>
         </motion.div>
 
@@ -978,7 +999,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          {ADVANTAGES.map((a) => (
+          {advantages.map((a) => (
             <FeatureCardDark key={a.title} {...a} />
           ))}
         </motion.div>
@@ -1000,13 +1021,13 @@ export default function AppleShowcase() {
             <div className="flex items-center gap-2">
               <Lock className="h-4 w-4 text-[#2997ff]" />
               <span style={{ color: "rgba(255,255,255,0.7)" }}>
-                私有部署 · 数据自主
+                {t("sections.why.metricDeploy")}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Ticket className="h-4 w-4 text-[#2997ff]" />
               <span style={{ color: "rgba(255,255,255,0.7)" }}>
-                中英双语 · 深色模式
+                {t("sections.why.metricLocale")}
               </span>
             </div>
           </div>

@@ -22,13 +22,15 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/i18n/navigation";
 import { WORKSYNC_URL } from "@/lib/product-urls";
 import ContactDialog from "../contact-dialog";
 import Footer from "../footer";
+import LocaleSwitcher from "../locale-switcher";
 import ScreenPlaceholder from "./screen-placeholder";
 
 // ---------------------------------------------------------------------------
@@ -282,7 +284,17 @@ function FloatingParticles() {
   );
 }
 
-function StickyNav({ scrolled }: { scrolled: boolean }) {
+function StickyNav({
+  scrolled,
+  navLinks,
+  tryNow,
+  brandSuffix,
+}: {
+  scrolled: boolean;
+  navLinks: typeof NAV_LINKS;
+  tryNow: string;
+  brandSuffix: string;
+}) {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -309,13 +321,13 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
                 scrolled ? "text-gray-500 dark:text-gray-400" : "text-white/55"
               }`}
             >
-              Murphy 云
+              {brandSuffix}
             </span>
           </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -330,17 +342,24 @@ function StickyNav({ scrolled }: { scrolled: boolean }) {
           ))}
         </nav>
 
-        <Button
-          size="sm"
-          className={`transition-all ${
-            scrolled
-              ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
-              : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
-          }`}
-          asChild
-        >
-          <Link href="/login">立即体验</Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <LocaleSwitcher
+            className={
+              scrolled ? "text-gray-600 dark:text-gray-300" : "text-white/70"
+            }
+          />
+          <Button
+            size="sm"
+            className={`transition-all ${
+              scrolled
+                ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
+                : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
+            }`}
+            asChild
+          >
+            <Link href="/login">{tryNow}</Link>
+          </Button>
+        </div>
       </div>
     </motion.header>
   );
@@ -449,7 +468,17 @@ function FeatureDeepDive({
   );
 }
 
-function ZoomSection() {
+function ZoomSection({
+  title,
+  lead,
+  screenTitle,
+  screenDesc,
+}: {
+  title: string;
+  lead: string;
+  screenTitle: string;
+  screenDesc: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -469,10 +498,10 @@ function ZoomSection() {
       <div className="max-w-7xl mx-auto">
         <motion.div className="text-center mb-16" style={{ opacity }}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-            全方位产品体验
+            {title}
           </h2>
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            从需求文档到任务交付，从技术图表到协作白板，一个平台覆盖项目全生命周期
+            {lead}
           </p>
         </motion.div>
 
@@ -481,8 +510,8 @@ function ZoomSection() {
           className="overflow-hidden shadow-2xl shadow-black/20"
         >
           <ScreenPlaceholder
-            title="WorkSync 全景预览"
-            description="项目协作平台完整界面 — 仪表盘、文档、任务、图表一站式管理"
+            title={screenTitle}
+            description={screenDesc}
             variant="laptop"
             imageSrc="/worksync/roles.png"
           />
@@ -492,7 +521,21 @@ function ZoomSection() {
   );
 }
 
-function PricingSection() {
+function PricingSection({
+  tiers,
+  title,
+  lead,
+  recommended,
+  cta,
+  note,
+}: {
+  tiers: typeof PRICING_TIERS;
+  title: string;
+  lead: string;
+  recommended: string;
+  cta: string;
+  note: string;
+}) {
   return (
     <section
       id="pricing"
@@ -507,15 +550,15 @@ function PricingSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-            价格方案
+            {title}
           </h2>
           <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-            按使用方式选择适合团队的方案。以下为参考报价，正式合作以合同约定为准。
+            {lead}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {PRICING_TIERS.map((tier, i) => (
+          {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 30 }}
@@ -532,7 +575,7 @@ function PricingSection() {
               >
                 {tier.highlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-linear-to-r from-violet-500 to-indigo-500 text-white text-xs font-medium">
-                    推荐
+                    {recommended}
                   </div>
                 )}
                 <CardContent className="p-8">
@@ -572,7 +615,7 @@ function PricingSection() {
                       }`}
                       variant={tier.highlighted ? "default" : "outline"}
                     >
-                      立即咨询
+                      {cta}
                     </Button>
                   </ContactDialog>
                 </CardContent>
@@ -587,7 +630,7 @@ function PricingSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          以上价格仅供参考；企业采购、定制开发与长期服务可另行洽谈。
+          {note}
         </motion.p>
       </div>
     </section>
@@ -599,6 +642,49 @@ function PricingSection() {
 // ---------------------------------------------------------------------------
 
 export default function WorkSyncShowcase() {
+  const t = useTranslations("WorkSync");
+  const navLinks = [
+    { label: t("nav.overview"), href: "#overview" },
+    { label: t("nav.features"), href: "#features" },
+    { label: t("nav.pricing"), href: "#pricing" },
+    { label: t("nav.contact"), href: "#contact" },
+  ];
+  const highlightLabels = t.raw("highlights") as string[];
+  const highlightPills = HIGHLIGHT_PILLS.map((pill, index) => ({
+    ...pill,
+    label: highlightLabels[index],
+  }));
+  const featureCopies = t.raw("features") as Array<
+    Pick<
+      FeatureSection,
+      | "badge"
+      | "title"
+      | "subtitle"
+      | "description"
+      | "bullets"
+      | "screenTitle"
+      | "screenDesc"
+    >
+  >;
+  const featureSections = FEATURE_SECTIONS.map((section, index) => ({
+    ...section,
+    ...featureCopies[index],
+  }));
+  const pricingCopies = t.raw("pricingTiers") as Array<{
+    name: string;
+    period: string;
+    detail: string;
+    features: string[];
+  }>;
+  const pricingTiers = PRICING_TIERS.map((tier, index) => ({
+    ...tier,
+    ...pricingCopies[index],
+  }));
+  const advantageCopies = t.raw("advantages") as Array<{
+    title: string;
+    desc: string;
+  }>;
+
   const [scrolled, setScrolled] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -617,7 +703,12 @@ export default function WorkSyncShowcase() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950">
-      <StickyNav scrolled={scrolled} />
+      <StickyNav
+        scrolled={scrolled}
+        navLinks={navLinks}
+        tryNow={t("tryNow")}
+        brandSuffix={t("brandSuffix")}
+      />
 
       {/* ── Hero ── */}
       <section
@@ -668,7 +759,7 @@ export default function WorkSyncShowcase() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/70 mb-8">
               <LayoutDashboard className="h-4 w-4 text-violet-400" />
-              项目文档与协作平台
+              {t("hero.badge")}
             </div>
           </motion.div>
 
@@ -689,9 +780,14 @@ export default function WorkSyncShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            文档集中、任务看板、PlantUML、AI 助手、白板
-            <br className="hidden sm:block" />
-            团队协作更高效
+            {t("hero.lead")
+              .split("\n")
+              .map((line, index) => (
+                <span key={line}>
+                  {index > 0 && <br className="hidden sm:block" />}
+                  {line}
+                </span>
+              ))}
           </motion.p>
 
           <motion.p
@@ -700,7 +796,7 @@ export default function WorkSyncShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            一个项目一套工具，从启动到收尾全程陪伴；对内对齐团队，对外连接客户
+            {t("hero.sublead")}
           </motion.p>
 
           <motion.div
@@ -715,7 +811,7 @@ export default function WorkSyncShowcase() {
               asChild
             >
               <a href={WORKSYNC_URL} target="_blank" rel="noopener noreferrer">
-                打开 WorkSync
+                {t("hero.open")}
                 <ExternalLink className="h-4 w-4 ml-2" />
               </a>
             </Button>
@@ -726,7 +822,7 @@ export default function WorkSyncShowcase() {
               asChild
             >
               <Link href="/login">
-                立即体验
+                {t("tryNow")}
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
@@ -736,7 +832,7 @@ export default function WorkSyncShowcase() {
               className="text-white/80 hover:text-white hover:bg-white/10"
               asChild
             >
-              <a href="#features">了解更多</a>
+              <a href="#features">{t("hero.learnMore")}</a>
             </Button>
           </motion.div>
         </div>
@@ -754,8 +850,8 @@ export default function WorkSyncShowcase() {
             className="overflow-hidden"
           >
             <ScreenPlaceholder
-              title="WorkSync Dashboard"
-              description="项目协作平台 — 仪表盘、文档、任务、图表集中管理"
+              title={t("hero.screenTitle")}
+              description={t("hero.screenDesc")}
               imageSrc="/worksync/hero.png"
               variant="laptop"
             />
@@ -776,7 +872,7 @@ export default function WorkSyncShowcase() {
               visible: { transition: { staggerChildren: 0.08 } },
             }}
           >
-            {HIGHLIGHT_PILLS.map((pill) => {
+            {highlightPills.map((pill) => {
               const Icon = pill.icon;
               return (
                 <motion.div
@@ -801,13 +897,18 @@ export default function WorkSyncShowcase() {
 
       {/* ── Feature Deep-Dive Sections ── */}
       <div id="features">
-        {FEATURE_SECTIONS.map((section, i) => (
+        {featureSections.map((section, i) => (
           <FeatureDeepDive key={section.id} section={section} index={i} />
         ))}
       </div>
 
       {/* ── Full-Width Zoom Section ── */}
-      <ZoomSection />
+      <ZoomSection
+        title={t("zoom.title")}
+        lead={t("zoom.lead")}
+        screenTitle={t("zoom.screenTitle")}
+        screenDesc={t("zoom.screenDesc")}
+      />
 
       {/* ── Advantages summary ── */}
       <section className="py-24 px-4">
@@ -820,10 +921,10 @@ export default function WorkSyncShowcase() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-              为什么选择 WorkSync
+              {t("why.title")}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-              云原生与容器化部署，让资料集中、进度透明、沟通有据可依
+              {t("why.lead")}
             </p>
           </motion.div>
 
@@ -831,37 +932,30 @@ export default function WorkSyncShowcase() {
             {[
               {
                 icon: FileText,
-                title: "一站式协作",
-                desc: "文档、任务、图表、白板统一平台，减少工具切换",
                 color: "text-violet-500",
                 bg: "bg-violet-50 dark:bg-violet-950/30",
               },
               {
                 icon: Shield,
-                title: "数据安全",
-                desc: "在线备份、一键还原，传输加密，权限与审计可控",
                 color: "text-amber-500",
                 bg: "bg-amber-50 dark:bg-amber-950/30",
               },
               {
                 icon: Cloud,
-                title: "云原生部署",
-                desc: "容器化架构，支持私有云与指定环境部署，弹性扩展",
                 color: "text-sky-500",
                 bg: "bg-sky-50 dark:bg-sky-950/30",
               },
               {
                 icon: Users,
-                title: "团队协作",
-                desc: "对内对齐研发与产品，对外可与客户共享只读空间",
                 color: "text-emerald-500",
                 bg: "bg-emerald-50 dark:bg-emerald-950/30",
               },
             ].map((item, i) => {
+              const copy = advantageCopies[i];
               const Icon = item.icon;
               return (
                 <motion.div
-                  key={item.title}
+                  key={copy.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -875,10 +969,10 @@ export default function WorkSyncShowcase() {
                         <Icon className={`h-6 w-6 ${item.color}`} />
                       </div>
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                        {item.title}
+                        {copy.title}
                       </h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                        {item.desc}
+                        {copy.desc}
                       </p>
                     </CardContent>
                   </Card>
@@ -890,7 +984,14 @@ export default function WorkSyncShowcase() {
       </section>
 
       {/* ── Pricing ── */}
-      <PricingSection />
+      <PricingSection
+        tiers={pricingTiers}
+        title={t("pricing.title")}
+        lead={t("pricing.lead")}
+        recommended={t("pricing.recommended")}
+        cta={t("pricing.cta")}
+        note={t("pricing.note")}
+      />
 
       {/* ── CTA ── */}
       <section className="py-24 relative overflow-hidden">
@@ -921,11 +1022,9 @@ export default function WorkSyncShowcase() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              准备好提升团队协作效率了吗？
+              {t("cta.title")}
             </h2>
-            <p className="text-xl text-white/80 mb-10">
-              立即体验 WorkSync，让文档、任务、图表在同一空间高效流转
-            </p>
+            <p className="text-xl text-white/80 mb-10">{t("cta.lead")}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactDialog>
                 <motion.div
@@ -936,7 +1035,7 @@ export default function WorkSyncShowcase() {
                     size="lg"
                     className="bg-white text-violet-600 hover:bg-white/90 shadow-xl shadow-black/20 px-8"
                   >
-                    立即咨询
+                    {t("pricing.cta")}
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
                       transition={{
@@ -959,7 +1058,7 @@ export default function WorkSyncShowcase() {
                   className="border-2 border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                   asChild
                 >
-                  <a href="#contact">了解更多</a>
+                  <a href="#contact">{t("cta.learnMore")}</a>
                 </Button>
               </motion.div>
             </div>

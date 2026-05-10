@@ -1,6 +1,8 @@
 "use client";
 
 import { Mail, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import {
   CHESS_URL,
   SHOPPING_URL,
@@ -24,11 +26,11 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 const products = [
-  { id: "worksync", title: "WorkSync（文档与协作）", url: WORKSYNC_URL },
-  { id: "sign", title: "Sign（活动互动平台）", url: SIGN_URL },
-  { id: "chess", title: "小卒（象棋 AI 辅助）", url: CHESS_URL },
-  { id: "shopping", title: "小商城（H5 电商）", url: SHOPPING_URL },
-  { id: "timeslot", title: "TimeSlot（课程预约）", url: TIMESLOT_URL },
+  { id: "worksync", url: WORKSYNC_URL },
+  { id: "sign", url: SIGN_URL },
+  { id: "chess", url: CHESS_URL },
+  { id: "shopping", url: SHOPPING_URL },
+  { id: "timeslot", url: TIMESLOT_URL },
 ];
 
 interface FooterProps {
@@ -36,6 +38,9 @@ interface FooterProps {
 }
 
 export default function Footer({ showContactId = true }: FooterProps) {
+  const t = useTranslations("Footer");
+  const common = useTranslations("Common");
+
   return (
     <footer
       id={showContactId ? "contact" : undefined}
@@ -49,12 +54,10 @@ export default function Footer({ showContactId = true }: FooterProps) {
               <div className="h-9 w-9 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Murphy 云</span>
+              <span className="text-xl font-bold">{common("brand")}</span>
             </div>
             <p className="text-muted-foreground max-w-md mb-6">
-              WorkSync
-              项目文档与协作平台为主力产品；并提供 Sign
-              活动互动平台、小卒象棋 AI 辅助、小商城 H5 电商与 TimeSlot 课程预约等在线服务。
+              {t("description")}
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -76,7 +79,7 @@ export default function Footer({ showContactId = true }: FooterProps) {
 
           {/* 产品链接 */}
           <div>
-            <h4 className="font-semibold mb-4">产品</h4>
+            <h4 className="font-semibold mb-4">{t("products")}</h4>
             <ul className="space-y-3 text-muted-foreground">
               {products.map((product) => (
                 <li key={product.id}>
@@ -86,24 +89,24 @@ export default function Footer({ showContactId = true }: FooterProps) {
                     rel="noopener noreferrer"
                     className="hover:text-foreground transition-colors"
                   >
-                    {product.title}
+                    {t(`productTitles.${product.id}`)}
                   </a>
                 </li>
               ))}
               <li>
-                <a
+                <Link
                   href="/products"
                   className="hover:text-foreground transition-colors"
                 >
-                  产品总览
-                </a>
+                  {common("productOverview")}
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* 联系方式 */}
           <div>
-            <h4 className="font-semibold mb-4">联系我们</h4>
+            <h4 className="font-semibold mb-4">{t("contact")}</h4>
             <ul className="space-y-3 text-muted-foreground">
               <li>
                 <a
@@ -137,7 +140,7 @@ export default function Footer({ showContactId = true }: FooterProps) {
               鄂ICP2024043283号-2
             </a>
             <span className="text-muted-foreground/50">|</span>
-            <span>Made with ❤️ by Murphy</span>
+            <span>{t("madeWith")}</span>
           </div>
         </div>
       </div>

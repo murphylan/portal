@@ -9,9 +9,10 @@ import {
   Swords,
   Ticket,
 } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/i18n/navigation";
 import {
   CHESS_URL,
   SHOPPING_URL,
@@ -21,8 +22,14 @@ import {
 } from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
+import LocaleSwitcher from "./locale-switcher";
 
 export default function ProductHub() {
+  const t = useTranslations("ProductHub");
+  const common = useTranslations("Common");
+  const capabilities = t.raw("worksyncCapabilities") as string[];
+  const pricingLabel = t("pricingLabel");
+
   return (
     <main className="min-h-screen flex flex-col bg-linear-to-b from-background to-muted/30">
       <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-lg">
@@ -31,18 +38,19 @@ export default function ProductHub() {
             href="/"
             className="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity"
           >
-            Murphy 云
+            {common("brand")}
           </Link>
-          <nav className="flex items-center gap-4 text-sm text-muted-foreground">
+          <nav className="flex items-center gap-3 text-sm text-muted-foreground">
             <Link
               href="/worksync"
               className="hover:text-foreground transition-colors"
             >
               WorkSync
             </Link>
+            <LocaleSwitcher className="text-muted-foreground" />
             <ContactDialog>
               <Button size="sm" variant="outline">
-                联系我们
+                {common("contact")}
               </Button>
             </ContactDialog>
           </nav>
@@ -57,12 +65,9 @@ export default function ProductHub() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-            产品总览
+            {t("title")}
           </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Murphy 云旗下五款 SaaS：文档协作、Sign 活动互动、象棋 AI
-            辅助、H5 小商城、课程预约。点击即可访问线上环境。
-          </p>
+          <p className="text-muted-foreground max-w-xl mx-auto">{t("lead")}</p>
         </motion.div>
 
         <div className="flex flex-col lg:flex-row lg:items-stretch gap-6">
@@ -79,22 +84,25 @@ export default function ProductHub() {
                     <LayoutDashboard className="h-5 w-5 text-white" />
                   </div>
                   <p className="text-sm font-medium text-violet-600 dark:text-violet-400 mb-1">
-                    主力产品
+                    {t("flagship")}
                   </p>
                   <h2 className="text-xl font-bold mb-2">WorkSync</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    项目文档与协作：知识库、任务看板、PlantUML、白板、AI 图表助手与数据统计，团队与客户在同一空间对齐交付。适合产研与交付团队，支持云端订阅或按项目私有化部署。
+                    {t("worksyncDescription")}
+                  </p>
+                  <p className="mt-3 rounded-lg bg-violet-50 px-3 py-2 text-xs font-medium leading-relaxed text-violet-700 dark:bg-violet-950/40 dark:text-violet-300">
+                    {pricingLabel}: {t("pricing.worksync")}
                   </p>
                 </div>
                 <div className="flex-1 flex flex-col justify-center min-h-0 py-3">
                   <div className="rounded-lg border border-violet-100 bg-violet-50/70 dark:border-violet-900/50 dark:bg-violet-950/40 px-3 py-2.5">
                     <p className="text-[11px] font-medium text-violet-700 dark:text-violet-300 mb-1.5 uppercase tracking-wide">
-                      核心能力
+                      {t("capabilities")}
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-1.5 leading-snug">
-                      <li>知识沉淀：树形目录 + Markdown，权限可调、可追溯</li>
-                      <li>交付跟踪：看板 / 列表、分配与状态，与大屏统计</li>
-                      <li>研发协同：PlantUML、白板与 AI 图表助手，方案对齐更省力</li>
+                      {capabilities.map((capability) => (
+                        <li key={capability}>{capability}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -108,12 +116,12 @@ export default function ProductHub() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      打开 WorkSync
+                      {t("openWorksync")}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </a>
                   </Button>
                   <Button variant="outline" asChild>
-                    <Link href="/worksync">查看介绍</Link>
+                    <Link href="/worksync">{t("viewIntro")}</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -133,11 +141,13 @@ export default function ProductHub() {
                     <Ticket className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-1">
-                    Sign 活动互动平台
+                    {t("signTitle")}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
-                    签到、投票、抽奖、表单一站式覆盖；扫码即用零门槛，大屏秒级同步，3
-                    分钟创建活动。
+                    {t("signDescription")}
+                  </p>
+                  <p className="mb-4 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-medium leading-relaxed text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+                    {pricingLabel}: {t("pricing.sign")}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2 shrink-0 mt-auto">
                     <Button
@@ -150,11 +160,13 @@ export default function ProductHub() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        打开线上产品
+                        {t("openProduct")}
                       </a>
                     </Button>
                     <Button size="sm" variant="outline" asChild>
-                      <Link href="/products/activity">功能介绍</Link>
+                      <Link href="/products/activity">
+                        {t("activityIntro")}
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -173,12 +185,13 @@ export default function ProductHub() {
                     <Swords className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-1">
-                    小卒 — 象棋智能辅助
+                    {t("chessTitle")}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
-                    基于顶级引擎
-                    Pikafish，提供实时流式局面分析、最佳走法推荐与在线实时对弈，让每一步棋都有
-                    AI 把关。
+                    {t("chessDescription")}
+                  </p>
+                  <p className="mb-4 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium leading-relaxed text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+                    {pricingLabel}: {t("pricing.chess")}
                   </p>
                   <Button
                     size="sm"
@@ -191,7 +204,7 @@ export default function ProductHub() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      打开象棋站点
+                      {t("openChess")}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </a>
                   </Button>
@@ -213,11 +226,13 @@ export default function ProductHub() {
                   <ShoppingCart className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold mb-1">
-                  小商城 — H5 移动电商
+                  {t("shoppingTitle")}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4 flex-1">
-                  基于 Next.js 16 的 H5
-                  小商城，支持商品浏览与搜索、购物车管理、订单跟踪。移动端优先设计，随时随地轻松购物。
+                  {t("shoppingDescription")}
+                </p>
+                <p className="mb-4 rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium leading-relaxed text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+                  {pricingLabel}: {t("pricing.shopping")}
                 </p>
                 <Button
                   size="sm"
@@ -229,7 +244,7 @@ export default function ProductHub() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    进入商城
+                    {t("openShopping")}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
@@ -248,10 +263,13 @@ export default function ProductHub() {
                   <CalendarClock className="h-5 w-5 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold mb-1">
-                  TimeSlot — 课外学习预约
+                  {t("timeslotTitle")}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4 flex-1">
-                  AP 课程、编程开发、竞赛培训等课程在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。
+                  {t("timeslotDescription")}
+                </p>
+                <p className="mb-4 rounded-lg bg-cyan-50 px-3 py-2 text-xs font-medium leading-relaxed text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-300">
+                  {pricingLabel}: {t("pricing.timeslot")}
                 </p>
                 <Button
                   size="sm"
@@ -263,7 +281,7 @@ export default function ProductHub() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    预约课程
+                    {t("bookCourse")}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </a>
                 </Button>

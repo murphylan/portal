@@ -1,0 +1,625 @@
+{
+  "Metadata": {
+    "rootTitle": "Murphy 云 - WorkSync 文档协作与更多在线工具",
+    "rootDescription": "Murphy 云：WorkSync 项目文档与协作平台（主力，含文档、任务、PlantUML、AI 图表助手与协作白板），Sign 活动互动平台（签到、投票、抽奖、表单），小卒 — 基于 Pikafish 引擎的中国象棋 AI 辅助平台，小商城 H5 移动电商，以及 TimeSlot 课外学习预约系统。按需访问对应子站即可使用。",
+    "ogTitle": "Murphy 云 - WorkSync 文档协作与更多在线工具",
+    "ogDescription": "WorkSync 项目文档与协作；Sign 活动互动；小卒象棋 AI；小商城 H5 电商；TimeSlot 课程预约。",
+    "twitterTitle": "Murphy 云 - WorkSync 文档协作与更多在线工具",
+    "twitterDescription": "WorkSync 文档协作；Sign 活动互动；小卒象棋 AI；小商城 H5 电商与 TimeSlot 课程预约等在线 SaaS。",
+    "worksyncTitle": "WorkSync — 项目文档与协作平台",
+    "worksyncDescription": "文档集中、任务管理、PlantUML 技术图表、协作白板，一站式项目协作，让团队专注交付。"
+  },
+  "LocaleSwitcher": {
+    "label": "语言",
+    "zh": "中文",
+    "en": "English"
+  },
+  "Common": {
+    "brand": "Murphy 云",
+    "contact": "联系我们",
+    "learnMore": "了解更多",
+    "consultNow": "立即咨询",
+    "productOverview": "产品总览",
+    "openProduct": "打开线上产品"
+  },
+  "ContactDialog": {
+    "title": "联系我们",
+    "description": "欢迎咨询 Murphy 云服务，我们将竭诚为您服务",
+    "email": "邮箱",
+    "phone": "电话 / 微信",
+    "sendEmail": "发送邮件",
+    "call": "拨打电话",
+    "tipTitle": "温馨提示",
+    "tipBody": "工作时间：周一至周五 9:00 - 18:00，其他时间可发送邮件或添加微信咨询"
+  },
+  "Footer": {
+    "description": "WorkSync 项目文档与协作平台为主力产品；并提供 Sign 活动互动平台、小卒象棋 AI 辅助、小商城 H5 电商与 TimeSlot 课程预约等在线服务。",
+    "products": "产品",
+    "contact": "联系我们",
+    "madeWith": "Made with love by Murphy",
+    "productTitles": {
+      "worksync": "WorkSync（文档与协作）",
+      "sign": "Sign（活动互动平台）",
+      "chess": "小卒（象棋 AI 辅助）",
+      "shopping": "小商城（H5 电商）",
+      "timeslot": "TimeSlot（课程预约）"
+    }
+  },
+  "Login": {
+    "iframeTitle": "WorkSync 项目文档与协作平台"
+  },
+  "Home": {
+    "nav": {
+      "worksync": "WorkSync",
+      "xiaozu": "小卒",
+      "sign": "Sign",
+      "shopping": "小商城",
+      "timeslot": "TimeSlot",
+      "products": "产品总览",
+      "contact": "联系我们"
+    },
+    "hero": {
+      "title": "Murphy 云",
+      "subtitle": "五款 SaaS 产品，一站式云端解决方案",
+      "description": "文档协作 · 活动互动 · 象棋 AI · H5 商城 · 课程预约 — 为团队协作、企业活动、个人棋艺、在线购物与教育培训而生",
+      "explore": "探索产品",
+      "contact": "联系我们"
+    },
+    "preview": {
+      "worksync": "文档 · 看板 · 图表 · 白板 · AI",
+      "xiaozu": "AI 引擎 · 实时分析 · 在线对弈",
+      "sign": "签到 · 投票 · 抽奖 · 表单",
+      "shopping": "商品 · 购物车 · 订单",
+      "timeslot": "课程 · 预约 · 管理"
+    },
+    "sections": {
+      "worksync": {
+        "subtitle": "项目文档与协作平台",
+        "description": "将文档管理、任务看板、PlantUML 技术图表、协作白板与 AI 图表助手整合在同一个工作区。一个 WorkSync，覆盖项目全生命周期的协作需求。",
+        "primary": "了解更多",
+        "secondary": "立即使用"
+      },
+      "xiaozu": {
+        "title": "小卒",
+        "subtitle": "中国象棋智能辅助平台",
+        "tagline": "小卒过河顶大车",
+        "description": "基于顶级象棋引擎 Pikafish，为中国象棋爱好者打造的一站式 AI 教练与对弈助手。无论你是在微信小程序中对弈、与朋友在线切磋，还是独自复盘研究——小卒都能在每一步棋为你提供专业级的分析与走法建议。",
+        "primary": "了解更多",
+        "secondary": "开始下棋"
+      },
+      "sign": {
+        "subtitle": "活动互动平台",
+        "tagline": "Sign in. Stand out. 扫码集结，全场互动。",
+        "description": "签到、投票、抽奖、表单——企业活动最常见的四大互动需求一站式覆盖。参与者无需下载任何 APP，手机扫码即可参与，大屏实时展示互动数据。组织者 3 分钟即可创建活动，一个短码贯穿全流程。",
+        "primary": "了解更多",
+        "secondary": "创建活动"
+      },
+      "shopping": {
+        "title": "小商城",
+        "subtitle": "H5 移动电商平台",
+        "description": "基于 Next.js 16 打造的 H5 小商城，支持商品浏览、购物车、订单管理与商品搜索。移动端优先设计，随时随地轻松购物。",
+        "primary": "了解更多",
+        "secondary": "进入商城"
+      },
+      "timeslot": {
+        "subtitle": "课外学习预约系统",
+        "description": "支持 AP 课程、编程开发、竞赛培训等课程的在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。",
+        "primary": "了解更多",
+        "secondary": "预约课程"
+      },
+      "why": {
+        "title": "为什么选择 Murphy 云",
+        "description": "统一平台、现代技术、灵活部署——为不同规模的团队提供专业级工具",
+        "metricDeploy": "私有部署 · 数据自主",
+        "metricLocale": "中英双语 · 深色模式"
+      }
+    },
+    "features": {
+      "worksync": [
+        {
+          "title": "文档集中管理",
+          "desc": "Markdown 与富文本双模式，结构化目录与全文检索，告别散落在聊天群与邮件中的文档"
+        },
+        {
+          "title": "任务看板",
+          "desc": "看板 + 列表视图，按优先级与负责人组织任务，里程碑与迭代节奏清晰可追踪"
+        },
+        {
+          "title": "PlantUML 图表",
+          "desc": "内置编辑器支持时序图、类图、流程图、架构图，实时预览，图表直接嵌入文档"
+        },
+        {
+          "title": "AI 图表助手",
+          "desc": "用一句话描述需求，AI 即可生成完整 PlantUML 代码并一键应用到编辑器，流式输出、可中断与重新生成"
+        },
+        {
+          "title": "协作白板",
+          "desc": "基于 Excalidraw 的手绘风格白板，支持头脑风暴、评审与标注，远程会议也能指着图说"
+        },
+        {
+          "title": "数据安全",
+          "desc": "RBAC 权限控制、操作日志全程审计、数据在线备份与一键还原"
+        }
+      ],
+      "chess": [
+        {
+          "title": "顶级 AI 引擎",
+          "desc": "搭载 Pikafish 引擎，基于 Stockfish 架构为中国象棋深度优化，大师级棋力"
+        },
+        {
+          "title": "实时流式分析",
+          "desc": "SSE 流式传输，实时展示搜索深度、局面评分与候选走法，所想即所见"
+        },
+        {
+          "title": "在线实时对弈",
+          "desc": "创建房间邀请好友对弈，步时控制、断线重连，紧张刺激的竞技体验"
+        },
+        {
+          "title": "移动端优先",
+          "desc": "手机端紧凑高效，桌面端三栏布局，随时随地享受流畅的象棋体验"
+        }
+      ],
+      "sign": [
+        {
+          "title": "扫码签到",
+          "desc": "参与者扫码即签，大屏弹幕实时欢迎，自定义收集字段与白名单模式"
+        },
+        {
+          "title": "多样投票",
+          "desc": "简单投票、图文投票、候选人投票、PK 对决四种模板，结果实时可视化"
+        },
+        {
+          "title": "炫酷抽奖",
+          "desc": "转盘、老虎机、翻牌、九宫格四种动画模式，自定义奖品与中奖概率"
+        },
+        {
+          "title": "灵活表单",
+          "desc": "10+ 字段类型，提交前预览，CSV 一键导出，手机扫码填写即可"
+        }
+      ],
+      "shopping": [
+        {
+          "title": "商品与购物车",
+          "desc": "清晰的商品展示与分类浏览，购物车增删改查与库存校验，流畅的移动端购物体验"
+        },
+        {
+          "title": "商品搜索与筛选",
+          "desc": "关键词搜索、分类筛选、价格排序，帮助用户快速定位心仪商品"
+        },
+        {
+          "title": "用户与订单管理",
+          "desc": "NextAuth v5 登录体系，订单创建与状态跟踪，购买记录一目了然"
+        },
+        {
+          "title": "H5 移动优先",
+          "desc": "专为手机端设计的紧凑布局，响应式适配各尺寸屏幕，随时随地下单"
+        }
+      ],
+      "timeslot": [
+        {
+          "title": "课程预约",
+          "desc": "按日期与时段浏览可用课程，一键预约，自动冲突检测与容量控制"
+        },
+        {
+          "title": "丰富课程体系",
+          "desc": "AP 课程、编程开发、竞赛培训等多类目支持，灵活配置课程与教师信息"
+        },
+        {
+          "title": "教师与学员管理",
+          "desc": "教师排课与学员预约记录全程可追溯，支持取消与改约操作"
+        },
+        {
+          "title": "移动端扫码预约",
+          "desc": "H5 移动优先设计，家长手机扫码即可为孩子预约课程，操作零门槛"
+        }
+      ],
+      "advantages": [
+        {
+          "title": "现代技术栈",
+          "desc": "Next.js 16 + React 19 + TypeScript 全栈，PostgreSQL + Drizzle ORM，前沿框架保障性能与开发效率"
+        },
+        {
+          "title": "灵活部署",
+          "desc": "支持云端订阅与私有化部署，数据完全自主掌控，容器化架构弹性扩展"
+        },
+        {
+          "title": "一站式平台",
+          "desc": "文档协作、活动互动、智能棋艺、H5 商城、课程预约五大产品，统一品牌体验"
+        }
+      ]
+    }
+  },
+  "WorkSync": {
+    "brandSuffix": "Murphy 云",
+    "nav": {
+      "overview": "产品概览",
+      "features": "核心功能",
+      "pricing": "定价",
+      "contact": "联系我们"
+    },
+    "tryNow": "立即体验",
+    "hero": {
+      "badge": "项目文档与协作平台",
+      "lead": "文档集中、任务看板、PlantUML、AI 助手、白板\n团队协作更高效",
+      "sublead": "一个项目一套工具，从启动到收尾全程陪伴；对内对齐团队，对外连接客户",
+      "open": "打开 WorkSync",
+      "learnMore": "了解更多",
+      "screenTitle": "WorkSync Dashboard",
+      "screenDesc": "项目协作平台 — 仪表盘、文档、任务、图表集中管理"
+    },
+    "zoom": {
+      "title": "全方位产品体验",
+      "lead": "从需求文档到任务交付，从技术图表到协作白板，一个平台覆盖项目全生命周期",
+      "screenTitle": "WorkSync 全景预览",
+      "screenDesc": "项目协作平台完整界面 — 仪表盘、文档、任务、图表一站式管理"
+    },
+    "pricing": {
+      "title": "价格方案",
+      "lead": "按使用方式选择适合团队的方案。以下为参考报价，正式合作以合同约定为准。",
+      "recommended": "推荐",
+      "cta": "立即咨询",
+      "note": "以上价格仅供参考；企业采购、定制开发与长期服务可另行洽谈。"
+    },
+    "why": {
+      "title": "为什么选择 WorkSync",
+      "lead": "云原生与容器化部署，让资料集中、进度透明、沟通有据可依"
+    },
+    "cta": {
+      "title": "准备好提升团队协作效率了吗？",
+      "lead": "立即体验 WorkSync，让文档、任务、图表在同一空间高效流转",
+      "learnMore": "了解更多"
+    },
+    "highlights": [
+      "文档集中管理",
+      "任务看板",
+      "PlantUML 图表",
+      "AI 图表助手",
+      "协作白板",
+      "数据分析",
+      "权限管理"
+    ],
+    "features": [
+      {
+        "badge": "数据分析",
+        "title": "数据驱动决策",
+        "subtitle": "仪表盘总览",
+        "description": "项目全局一目了然：文档分类、任务状态、用户统计三大维度，搭配多时段活跃度分析，让团队效率看得见。",
+        "bullets": [
+          "文档分类与任务状态实时统计",
+          "用户活跃度多维分析",
+          "PlantUML 与白板使用趋势",
+          "团队工作量可视化"
+        ],
+        "screenTitle": "Dashboard 仪表盘",
+        "screenDesc": "多维度数据统计与可视化分析"
+      },
+      {
+        "badge": "知识管理",
+        "title": "文档集中管理",
+        "subtitle": "统一知识库",
+        "description": "设计文档、操作手册、规范与通知统一沉淀，树形结构组织、Markdown 在线编辑，媲美 Confluence 的文档体验。",
+        "bullets": [
+          "树形目录结构，支持多级文档组织",
+          "Markdown 在线编辑器，所见即所得",
+          "设计文档、手册、规范分类归档",
+          "精细化权限控制，读写分离"
+        ],
+        "screenTitle": "文档管理",
+        "screenDesc": "树形结构 + Markdown 编辑器"
+      },
+      {
+        "badge": "项目管理",
+        "title": "敏捷任务管理",
+        "subtitle": "看板与列表双视图",
+        "description": "任务分类、分配与状态跟踪，进度一目了然。看板视图拖拽操作，列表视图批量管理，项目管理能力向 Jira 看齐。",
+        "bullets": [
+          "三列看板：待办、进行中、已完成",
+          "优先级标记与颜色编码",
+          "列表与看板视图自由切换",
+          "任务分配与负责人管理"
+        ],
+        "screenTitle": "任务看板",
+        "screenDesc": "看板拖拽 + 列表批量管理"
+      },
+      {
+        "badge": "技术图表",
+        "title": "PlantUML 技术图表",
+        "subtitle": "代码生成图表",
+        "description": "时序图、类图、流程图、架构图一键生成，技术方案讨论与评审不再靠「口头描述」。",
+        "bullets": [
+          "PlantUML 语法实时渲染",
+          "支持时序图、类图、流程图等",
+          "图表库集中管理与检索",
+          "一键分享与嵌入文档"
+        ],
+        "screenTitle": "PlantUML 图表",
+        "screenDesc": "代码编辑器 + 实时渲染预览"
+      },
+      {
+        "badge": "AI 助手",
+        "title": "AI 图表助手",
+        "subtitle": "自然语言生成 PlantUML",
+        "description": "无需记忆 PlantUML 语法。在编辑器侧边栏用一句话描述需求，AI 即可生成完整图表代码并一键应用，让架构图与时序图的产出从「分钟级」走向「秒级」。",
+        "bullets": [
+          "对话式生成：描述需求即可产出完整 PlantUML 代码",
+          "上下文感知：基于当前编辑器代码做增量修改",
+          "流式输出 · 可中断 · 可重新生成 · 可清空对话",
+          "支持时序图、类图、用例图、活动图、状态图、组件图、ER 图等全部类型"
+        ],
+        "screenTitle": "AI 图表助手",
+        "screenDesc": "对话生成 PlantUML，一键应用到编辑器"
+      },
+      {
+        "badge": "协作工具",
+        "title": "协作白板",
+        "subtitle": "实时协作画布",
+        "description": "基于 Excalidraw 的协作白板，支持手写、绘图、标注，头脑风暴与方案评审触手可及。",
+        "bullets": [
+          "自由绘图与手写标注",
+          "多人实时协作",
+          "可嵌入文档与任务",
+          "导出 PNG / SVG 格式"
+        ],
+        "screenTitle": "协作白板",
+        "screenDesc": "Excalidraw 实时协作画布"
+      }
+    ],
+    "pricingTiers": [
+      {
+        "name": "在线会员",
+        "period": "/ 年",
+        "detail": "含最多 10 人同时使用（按年订阅）",
+        "features": [
+          "全功能在线使用",
+          "最多 10 位成员",
+          "云端数据备份",
+          "标准技术支持"
+        ]
+      },
+      {
+        "name": "客户内网安装",
+        "period": "",
+        "detail": "部署在您指定内网环境，不限人数",
+        "features": [
+          "私有化部署",
+          "不限成员数量",
+          "数据完全自主",
+          "一年免费升级"
+        ]
+      },
+      {
+        "name": "源码授权",
+        "period": "",
+        "detail": "完整源代码交付，便于二次开发与自主运维",
+        "features": [
+          "完整源代码交付",
+          "二次开发授权",
+          "架构咨询支持",
+          "终身使用权"
+        ]
+      }
+    ],
+    "advantages": [
+      {
+        "title": "一站式协作",
+        "desc": "文档、任务、图表、白板统一平台，减少工具切换"
+      },
+      {
+        "title": "数据安全",
+        "desc": "在线备份、一键还原，传输加密，权限与审计可控"
+      },
+      {
+        "title": "云原生部署",
+        "desc": "容器化架构，支持私有云与指定环境部署，弹性扩展"
+      },
+      {
+        "title": "团队协作",
+        "desc": "对内对齐研发与产品，对外可与客户共享只读空间"
+      }
+    ]
+  },
+  "Activity": {
+    "backHome": "Murphy 云首页",
+    "brand": "Murphy Activity",
+    "consult": "立即咨询",
+    "heroBadge": "签到 · 投票 · 抽奖 · 表单 —— 一站式活动互动解决方案",
+    "heroLead": "扫码集结，全场互动 — 让每一场活动都精彩纷呈",
+    "heroDesc": "无需下载 APP，手机扫码即可参与，大屏秒级同步互动数据，3 分钟创建活动，一个短码贯穿全流程",
+    "open": "前往线上产品",
+    "viewFeatures": "查看功能",
+    "videoFallback": "您的浏览器不支持视频播放",
+    "homeShowcaseTitle": "产品首页展示",
+    "homeShowcaseLead": "简洁的产品首页，一目了然地展示核心功能模块",
+    "coreTitle": "核心优势",
+    "coreLead": "一站式解决活动互动的各种需求",
+    "adminTitle": "管理后台",
+    "adminLead": "统一管理所有活动，快速创建新活动，一站式操控",
+    "loginCaption": "安全的账号登录系统，支持邮箱账号登录",
+    "dashboardCaption": "统一管理所有活动，快速创建新活动",
+    "mobileCheckinTitle": "手机端签到体验",
+    "mobileCheckinCaption": "用户扫码后的签到界面",
+    "mobileCheckinFilledCaption": "填写信息后提交签到",
+    "voteTemplatesTitle": "四种投票模板",
+    "lotteryModesTitle": "四种抽奖模式",
+    "mobileLotteryTitle": "手机端参与抽奖",
+    "mobileLotteryCaption": "用户扫码参与抽奖的界面",
+    "fieldTypesTitle": "丰富的字段类型",
+    "scenariosTitle": "🎯 应用场景",
+    "scenariosLead": "适用于各类活动场景",
+    "scenarioFeatures": "功能组合：",
+    "scenarioEffect": "效果：",
+    "ctaTitle": "让活动互动更精彩 ✨",
+    "ctaLead": "立即体验 Sign，开启精彩活动之旅",
+    "overview": "产品总览",
+    "altHomeHero": "首页 Hero",
+    "altFeatureModules": "功能模块",
+    "altLogin": "登录页面",
+    "altDashboard": "控制台",
+    "altMobileCheckin": "手机端签到",
+    "altMobileCheckinFilled": "填写签到信息",
+    "altMobileLottery": "手机端抽奖",
+    "coreAdvantages": [
+      {
+        "title": "一码通用",
+        "description": "每个活动生成唯一短码，扫码即参与"
+      },
+      { "title": "实时互动", "description": "SSE 技术推送，大屏数据秒级更新" },
+      { "title": "视觉震撼", "description": "弹幕欢迎、动画抽奖、图表可视化" },
+      { "title": "灵活配置", "description": "二维码9宫格定位、多种展示模式" },
+      { "title": "零门槛", "description": "无需下载APP，手机扫码直接参与" },
+      { "title": "安全可靠", "description": "账号登录保护、验证码防刷" }
+    ],
+    "checkin": {
+      "title": "📝 签到功能",
+      "subtitle": "扫码即签，实时弹幕，专业范十足",
+      "highlights": [
+        "独立创建签到活动，获得唯一短码",
+        "大屏展示，二维码位置可配置（9宫格任意位置）",
+        "手机扫码签到，支持收集姓名、部门等信息",
+        "签到后可配置：显示成功消息、跳转指定URL、无操作",
+        "实时弹幕欢迎、统计展示",
+        "3位验证码防止恶意修改"
+      ],
+      "screenshots": [
+        {
+          "title": "创建签到",
+          "desc": "简单配置签到标题、收集信息、签到后行为等选项"
+        },
+        { "title": "签到详情", "desc": "查看二维码、签到链接、统计数据" },
+        { "title": "签到设置", "desc": "背景样式、大屏布局、字段配置等" },
+        { "title": "大屏展示", "desc": "实时显示签到动态，弹幕效果震撼全场" }
+      ]
+    },
+    "vote": {
+      "title": "📊 投票功能",
+      "subtitle": "多种模板，实时可视化，PK对决",
+      "highlights": [
+        "定制化投票主题",
+        "单选/多选支持",
+        "实时结果展示（SSE推送）",
+        "多种图表可视化（饼图、柱状图、进度条、对决模式）",
+        "允许修改投票、匿名投票等规则配置",
+        "大屏二维码位置可配置"
+      ],
+      "templates": [
+        { "name": "简单投票", "desc": "快速创建文字选项投票" },
+        { "name": "图文投票", "desc": "支持图片展示的投票" },
+        { "name": "候选人投票", "desc": "适合人物评选场景" },
+        { "name": "PK对决", "desc": "两个选项的对决模式" }
+      ],
+      "screenshots": [
+        { "title": "投票模板", "desc": "四种投票模板可选" },
+        { "title": "简单投票", "desc": "配置投票标题和选项" },
+        { "title": "PK对决", "desc": "二选一的投票场景" }
+      ]
+    },
+    "lottery": {
+      "title": "🎁 抽奖功能",
+      "subtitle": "四种动画模式，精彩刺激，公正透明",
+      "highlights": [
+        "多种抽奖模式（转盘、老虎机、翻牌、九宫格）",
+        "精彩动画效果",
+        "自定义奖品和概率",
+        "每人抽奖次数限制",
+        "实时中奖推送和名单展示",
+        "大屏中奖弹幕效果"
+      ],
+      "modes": [
+        { "name": "转盘抽奖", "desc": "经典大转盘效果，适合年会现场" },
+        { "name": "老虎机抽奖", "desc": "三列滚动效果，依次停止揭晓" },
+        { "name": "翻牌抽奖", "desc": "神秘感十足的3D翻牌揭晓效果" },
+        { "name": "九宫格抽奖", "desc": "跑马灯效果，顺时针旋转抽奖" }
+      ]
+    },
+    "form": {
+      "title": "📋 表单功能",
+      "subtitle": "灵活字段，实时统计，CSV导出",
+      "highlights": [
+        "定制化表单字段（文本、数字、手机号、邮箱、单选、多选、下拉、日期、时间、评分等）",
+        "提交前预览确认",
+        "提交后成功反馈、跳转支持",
+        "每人限提交一次、需要手机号等规则",
+        "SSE 实时推送新提交",
+        "CSV 数据导出"
+      ],
+      "fieldTypes": [
+        "文本输入",
+        "数字输入",
+        "手机号",
+        "邮箱",
+        "单选题",
+        "多选题",
+        "下拉选择",
+        "日期选择",
+        "时间选择",
+        "评分"
+      ],
+      "screenshots": [
+        { "title": "创建表单", "desc": "配置表单标题和描述" },
+        { "title": "字段类型", "desc": "丰富的字段类型可选" }
+      ]
+    },
+    "scenarios": [
+      {
+        "title": "🎉 年会活动",
+        "features": "签到 + 抽奖",
+        "effect": "气氛拉满，大奖刺激"
+      },
+      {
+        "title": "📚 培训会议",
+        "features": "签到 + 表单",
+        "effect": "签到统计，问卷收集"
+      },
+      {
+        "title": "🏆 评选活动",
+        "features": "投票（候选人模式）",
+        "effect": "公开透明，实时PK"
+      },
+      {
+        "title": "🚀 产品发布",
+        "features": "投票 + 表单",
+        "effect": "需求调研，即时反馈"
+      },
+      {
+        "title": "📊 信息收集",
+        "features": "表单",
+        "effect": "员工信息收集，导出Excel"
+      }
+    ]
+  },
+  "ProductHub": {
+    "title": "产品总览",
+    "lead": "Murphy 云旗下五款 SaaS：文档协作、Sign 活动互动、象棋 AI 辅助、H5 小商城、课程预约。点击即可访问线上环境。",
+    "flagship": "主力产品",
+    "capabilities": "核心能力",
+    "openWorksync": "打开 WorkSync",
+    "viewIntro": "查看介绍",
+    "openProduct": "打开线上产品",
+    "activityIntro": "功能介绍",
+    "openChess": "打开象棋站点",
+    "openShopping": "进入商城",
+    "bookCourse": "预约课程",
+    "pricingLabel": "报价",
+    "pricing": {
+      "worksync": "在线会员 ¥199/年；客户内网安装 ¥1,999 一次性；源码授权 ¥19,999 一次性",
+      "sign": "Free ¥0；Pro ¥39/月（年付 ¥374，8 折）；Team ¥99/月（年付 ¥950，8 折）",
+      "chess": "会员订阅 ¥19.9/月，解锁全部功能",
+      "shopping": "Free ¥0；Pro ¥39/月（年付 ¥374，8 折）；Team ¥99/月（年付 ¥950，8 折）",
+      "timeslot": "Free ¥0；Pro ¥39/月（年付 ¥374，8 折）；Team ¥99/月（年付 ¥950，8 折）"
+    },
+    "worksyncDescription": "项目文档与协作：知识库、任务看板、PlantUML、白板、AI 图表助手与数据统计，团队与客户在同一空间对齐交付。适合产研与交付团队，支持云端订阅或按项目私有化部署。",
+    "worksyncCapabilities": [
+      "知识沉淀：树形目录 + Markdown，权限可调、可追溯",
+      "交付跟踪：看板 / 列表、分配与状态，与大屏统计",
+      "研发协同：PlantUML、白板与 AI 图表助手，方案对齐更省力"
+    ],
+    "signTitle": "Sign 活动互动平台",
+    "signDescription": "签到、投票、抽奖、表单一站式覆盖；扫码即用零门槛，大屏秒级同步，3 分钟创建活动。",
+    "chessTitle": "小卒 — 象棋智能辅助",
+    "chessDescription": "基于顶级引擎 Pikafish，提供实时流式局面分析、最佳走法推荐与在线实时对弈，让每一步棋都有 AI 把关。",
+    "shoppingTitle": "小商城 — H5 移动电商",
+    "shoppingDescription": "基于 Next.js 16 的 H5 小商城，支持商品浏览与搜索、购物车管理、订单跟踪。移动端优先设计，随时随地轻松购物。",
+    "timeslotTitle": "TimeSlot — 课外学习预约",
+    "timeslotDescription": "AP 课程、编程开发、竞赛培训等课程在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。"
+  }
+}

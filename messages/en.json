@@ -1,0 +1,670 @@
+{
+  "Metadata": {
+    "rootTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
+    "rootDescription": "Murphy Cloud brings together five SaaS products: WorkSync for project documentation and collaboration, Sign for event engagement, Xiaozu for AI-assisted Chinese chess, a mobile H5 store, and TimeSlot for course booking.",
+    "ogTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
+    "ogDescription": "WorkSync collaboration, Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking.",
+    "twitterTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
+    "twitterDescription": "Online SaaS products for documentation, events, chess AI, mobile shopping, and course booking.",
+    "worksyncTitle": "WorkSync - Project Documentation and Collaboration",
+    "worksyncDescription": "Centralized docs, task management, PlantUML diagrams, and collaborative whiteboards in one workspace."
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "zh": "中文",
+    "en": "English"
+  },
+  "Common": {
+    "brand": "Murphy Cloud",
+    "contact": "Contact us",
+    "learnMore": "Learn more",
+    "consultNow": "Contact us",
+    "productOverview": "Products",
+    "openProduct": "Open product"
+  },
+  "ContactDialog": {
+    "title": "Contact us",
+    "description": "Tell us what you need from Murphy Cloud. We will get back to you soon.",
+    "email": "Email",
+    "phone": "Phone / WeChat",
+    "sendEmail": "Send email",
+    "call": "Call",
+    "tipTitle": "Note",
+    "tipBody": "Business hours: Monday to Friday, 9:00-18:00. You can also email us or add WeChat outside business hours."
+  },
+  "Footer": {
+    "description": "WorkSync is the flagship project documentation and collaboration platform. Murphy Cloud also provides Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking services.",
+    "products": "Products",
+    "contact": "Contact",
+    "madeWith": "Made with love by Murphy",
+    "productTitles": {
+      "worksync": "WorkSync (Docs & collaboration)",
+      "sign": "Sign (Event engagement)",
+      "chess": "Xiaozu (Chess AI assistant)",
+      "shopping": "Mobile Store (H5 commerce)",
+      "timeslot": "TimeSlot (Course booking)"
+    }
+  },
+  "Login": {
+    "iframeTitle": "WorkSync project documentation and collaboration platform"
+  },
+  "Home": {
+    "nav": {
+      "worksync": "WorkSync",
+      "xiaozu": "Xiaozu",
+      "sign": "Sign",
+      "shopping": "Store",
+      "timeslot": "TimeSlot",
+      "products": "Products",
+      "contact": "Contact us"
+    },
+    "hero": {
+      "title": "Murphy Cloud",
+      "subtitle": "Five SaaS products, one cloud solution suite",
+      "description": "Docs collaboration · event engagement · chess AI · H5 commerce · course booking - built for teams, events, learning, shopping, and training",
+      "explore": "Explore products",
+      "contact": "Contact us"
+    },
+    "preview": {
+      "worksync": "Docs · boards · diagrams · whiteboards · AI",
+      "xiaozu": "AI engine · live analysis · online matches",
+      "sign": "Check-in · voting · lottery · forms",
+      "shopping": "Products · cart · orders",
+      "timeslot": "Courses · booking · management"
+    },
+    "sections": {
+      "worksync": {
+        "subtitle": "Project documentation and collaboration platform",
+        "description": "WorkSync brings document management, task boards, PlantUML diagrams, collaborative whiteboards, and an AI diagram assistant into one workspace for the full project lifecycle.",
+        "primary": "Learn more",
+        "secondary": "Use now"
+      },
+      "xiaozu": {
+        "title": "Xiaozu",
+        "subtitle": "Chinese chess AI assistant",
+        "tagline": "A small pawn can change the game",
+        "description": "Powered by the Pikafish chess engine, Xiaozu gives Chinese chess players professional analysis, move suggestions, reviews, and online play support.",
+        "primary": "Learn more",
+        "secondary": "Start playing"
+      },
+      "sign": {
+        "subtitle": "Event engagement platform",
+        "tagline": "Sign in. Stand out. Scan, gather, and engage.",
+        "description": "Sign covers check-in, voting, lottery, and forms for enterprise events. Participants scan with their phones, organizers get live big-screen updates, and an event can be created in minutes.",
+        "primary": "Learn more",
+        "secondary": "Create event"
+      },
+      "shopping": {
+        "title": "Mobile Store",
+        "subtitle": "H5 mobile commerce platform",
+        "description": "A Next.js 16 mobile commerce app with product browsing, cart management, order tracking, and search. Mobile-first and ready for shopping anywhere.",
+        "primary": "Learn more",
+        "secondary": "Enter store"
+      },
+      "timeslot": {
+        "subtitle": "Course booking system",
+        "description": "TimeSlot supports online booking for AP courses, programming, contest training, and more. Parents can scan to book on mobile while teachers manage schedules and students.",
+        "primary": "Learn more",
+        "secondary": "Book courses"
+      },
+      "why": {
+        "title": "Why Murphy Cloud",
+        "description": "A unified platform, modern engineering, and flexible deployment for teams of different sizes",
+        "metricDeploy": "Private deployment · data ownership",
+        "metricLocale": "Bilingual · dark mode"
+      }
+    },
+    "features": {
+      "worksync": [
+        {
+          "title": "Centralized docs",
+          "desc": "Markdown and rich text modes, structured folders, and full-text search keep knowledge out of chats and inboxes."
+        },
+        {
+          "title": "Task boards",
+          "desc": "Kanban and list views organize work by priority and owner so milestones stay visible."
+        },
+        {
+          "title": "PlantUML diagrams",
+          "desc": "Built-in editor for sequence, class, flow, and architecture diagrams with live previews."
+        },
+        {
+          "title": "AI diagram assistant",
+          "desc": "Describe a diagram in natural language and generate PlantUML code with streaming output and one-click apply."
+        },
+        {
+          "title": "Collaborative whiteboards",
+          "desc": "Excalidraw-style whiteboards for brainstorming, reviews, and visual discussion."
+        },
+        {
+          "title": "Data security",
+          "desc": "RBAC, audit logs, online backups, and one-click restore."
+        }
+      ],
+      "chess": [
+        {
+          "title": "Top AI engine",
+          "desc": "Pikafish brings Stockfish-level architecture optimized for Chinese chess."
+        },
+        {
+          "title": "Live streaming analysis",
+          "desc": "SSE delivers search depth, evaluation, and candidate moves in real time."
+        },
+        {
+          "title": "Online play",
+          "desc": "Create rooms, invite friends, control time, and reconnect after interruptions."
+        },
+        {
+          "title": "Mobile first",
+          "desc": "Compact mobile layouts and richer desktop views make analysis smooth anywhere."
+        }
+      ],
+      "sign": [
+        {
+          "title": "Scan check-in",
+          "desc": "Participants scan to check in, big screens show live welcomes, and organizers can collect custom fields."
+        },
+        {
+          "title": "Flexible voting",
+          "desc": "Simple, image, candidate, and versus voting templates with live results."
+        },
+        {
+          "title": "Animated lottery",
+          "desc": "Wheel, slot, card flip, and grid modes with custom prizes and probabilities."
+        },
+        {
+          "title": "Smart forms",
+          "desc": "10+ field types, preview before submit, CSV export, and phone-friendly scanning."
+        }
+      ],
+      "shopping": [
+        {
+          "title": "Products and cart",
+          "desc": "Clear product displays, categories, cart operations, and inventory checks."
+        },
+        {
+          "title": "Search and filtering",
+          "desc": "Keyword search, category filters, and price sorting help shoppers find products quickly."
+        },
+        {
+          "title": "Users and orders",
+          "desc": "NextAuth v5 login, order creation, order status, and purchase history."
+        },
+        {
+          "title": "H5 mobile first",
+          "desc": "Compact responsive layouts designed for phones and easy mobile ordering."
+        }
+      ],
+      "timeslot": [
+        {
+          "title": "Course booking",
+          "desc": "Browse available dates and slots, book with one click, and prevent conflicts automatically."
+        },
+        {
+          "title": "Rich course catalog",
+          "desc": "Supports AP courses, programming, contest training, teachers, and course metadata."
+        },
+        {
+          "title": "Teacher and student management",
+          "desc": "Track teacher schedules and student bookings with cancellation and rescheduling support."
+        },
+        {
+          "title": "Mobile scan booking",
+          "desc": "Parents scan on mobile to book courses with minimal friction."
+        }
+      ],
+      "advantages": [
+        {
+          "title": "Modern stack",
+          "desc": "Next.js 16, React 19, TypeScript, PostgreSQL, and Drizzle ORM for reliable delivery."
+        },
+        {
+          "title": "Flexible deployment",
+          "desc": "Cloud subscription or private deployment with data ownership and containerized scaling."
+        },
+        {
+          "title": "One suite",
+          "desc": "Docs collaboration, events, chess AI, H5 commerce, and course booking under one brand."
+        }
+      ]
+    }
+  },
+  "WorkSync": {
+    "brandSuffix": "Murphy Cloud",
+    "nav": {
+      "overview": "Overview",
+      "features": "Features",
+      "pricing": "Pricing",
+      "contact": "Contact"
+    },
+    "tryNow": "Try now",
+    "hero": {
+      "badge": "Project documentation and collaboration platform",
+      "lead": "Centralized docs, task boards, PlantUML, AI assistant, and whiteboards\nfor more efficient teamwork",
+      "sublead": "One toolset per project, from kickoff to delivery, aligning teams internally and clients externally.",
+      "open": "Open WorkSync",
+      "learnMore": "Learn more",
+      "screenTitle": "WorkSync Dashboard",
+      "screenDesc": "Project collaboration platform - dashboards, docs, tasks, and diagrams in one place"
+    },
+    "zoom": {
+      "title": "Complete Product Experience",
+      "lead": "From requirements to delivery, from technical diagrams to whiteboards, one platform covers the full project lifecycle.",
+      "screenTitle": "WorkSync Full Preview",
+      "screenDesc": "A complete project collaboration interface with dashboards, docs, tasks, and diagrams"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "lead": "Choose the option that fits how your team works. Prices are references; final terms follow the contract.",
+      "recommended": "Recommended",
+      "cta": "Contact us",
+      "note": "Prices are for reference. Enterprise purchasing, custom development, and long-term support can be discussed separately."
+    },
+    "why": {
+      "title": "Why WorkSync",
+      "lead": "Cloud-native and containerized deployment keeps knowledge centralized, progress transparent, and communication traceable."
+    },
+    "cta": {
+      "title": "Ready to improve team collaboration?",
+      "lead": "Try WorkSync and keep docs, tasks, and diagrams flowing in one workspace.",
+      "learnMore": "Learn more"
+    },
+    "highlights": [
+      "Centralized docs",
+      "Task boards",
+      "PlantUML diagrams",
+      "AI diagram assistant",
+      "Whiteboards",
+      "Analytics",
+      "Permissions"
+    ],
+    "features": [
+      {
+        "badge": "Analytics",
+        "title": "Data-driven decisions",
+        "subtitle": "Dashboard overview",
+        "description": "See the whole project at a glance across document categories, task status, and user activity.",
+        "bullets": [
+          "Live document and task statistics",
+          "Multi-dimensional user activity",
+          "PlantUML and whiteboard usage trends",
+          "Team workload visualization"
+        ],
+        "screenTitle": "Dashboard",
+        "screenDesc": "Multi-dimensional statistics and visual analytics"
+      },
+      {
+        "badge": "Knowledge",
+        "title": "Centralized docs",
+        "subtitle": "Unified knowledge base",
+        "description": "Keep design docs, manuals, standards, and notices in a structured tree with online Markdown editing.",
+        "bullets": [
+          "Tree folders for multi-level organization",
+          "Online Markdown editor with live preview",
+          "Design docs, manuals, and standards in one place",
+          "Fine-grained read/write permissions"
+        ],
+        "screenTitle": "Document management",
+        "screenDesc": "Tree folders + Markdown editor"
+      },
+      {
+        "badge": "Project management",
+        "title": "Agile task management",
+        "subtitle": "Board and list views",
+        "description": "Categorize, assign, and track tasks with clear progress. Drag on boards or manage in lists.",
+        "bullets": [
+          "Three-column boards: todo, doing, done",
+          "Priority labels and color coding",
+          "Switch freely between list and board views",
+          "Task assignment and owner management"
+        ],
+        "screenTitle": "Task board",
+        "screenDesc": "Kanban drag-and-drop + batch list management"
+      },
+      {
+        "badge": "Technical diagrams",
+        "title": "PlantUML diagrams",
+        "subtitle": "Generate diagrams from code",
+        "description": "Create sequence, class, flow, and architecture diagrams for technical discussions and reviews.",
+        "bullets": [
+          "Live PlantUML rendering",
+          "Support for sequence, class, and flow diagrams",
+          "Centralized diagram library and search",
+          "Share and embed diagrams in docs"
+        ],
+        "screenTitle": "PlantUML diagrams",
+        "screenDesc": "Code editor + live preview"
+      },
+      {
+        "badge": "AI assistant",
+        "title": "AI diagram assistant",
+        "subtitle": "Natural language to PlantUML",
+        "description": "Describe what you need and let AI generate complete diagram code that can be applied to the editor.",
+        "bullets": [
+          "Conversational generation from natural language",
+          "Context-aware edits based on current code",
+          "Streaming output, interrupt, regenerate, and clear chat",
+          "Supports sequence, class, use case, activity, state, component, and ER diagrams"
+        ],
+        "screenTitle": "AI diagram assistant",
+        "screenDesc": "Generate PlantUML in chat and apply with one click"
+      },
+      {
+        "badge": "Collaboration",
+        "title": "Collaborative whiteboards",
+        "subtitle": "Realtime shared canvas",
+        "description": "Excalidraw-based whiteboards for sketching, annotation, brainstorming, and solution reviews.",
+        "bullets": [
+          "Freehand drawing and annotations",
+          "Realtime multi-user collaboration",
+          "Embed in docs and tasks",
+          "Export PNG / SVG"
+        ],
+        "screenTitle": "Whiteboard",
+        "screenDesc": "Excalidraw realtime collaborative canvas"
+      }
+    ],
+    "pricingTiers": [
+      {
+        "name": "Online membership",
+        "period": "/ year",
+        "detail": "Up to 10 concurrent members on annual subscription",
+        "features": [
+          "All online features",
+          "Up to 10 members",
+          "Cloud data backup",
+          "Standard support"
+        ]
+      },
+      {
+        "name": "Private intranet deployment",
+        "period": "",
+        "detail": "Deploy in your chosen intranet environment with unlimited users",
+        "features": [
+          "Private deployment",
+          "Unlimited members",
+          "Full data ownership",
+          "One year of free upgrades"
+        ]
+      },
+      {
+        "name": "Source license",
+        "period": "",
+        "detail": "Full source code delivery for secondary development and self-hosted operations",
+        "features": [
+          "Full source code",
+          "Secondary development license",
+          "Architecture consulting support",
+          "Lifetime usage rights"
+        ]
+      }
+    ],
+    "advantages": [
+      {
+        "title": "One collaboration hub",
+        "desc": "Docs, tasks, diagrams, and whiteboards in one platform to reduce tool switching."
+      },
+      {
+        "title": "Data security",
+        "desc": "Online backup, one-click restore, encrypted transfer, permissions, and audit controls."
+      },
+      {
+        "title": "Cloud-native deployment",
+        "desc": "Containerized architecture for private cloud or specified environments with elastic scaling."
+      },
+      {
+        "title": "Team collaboration",
+        "desc": "Align product and engineering internally and share read-only spaces with clients."
+      }
+    ]
+  },
+  "Activity": {
+    "backHome": "Murphy Cloud Home",
+    "brand": "Murphy Activity",
+    "consult": "Contact us",
+    "heroBadge": "Check-in · voting · lottery · forms - one event engagement solution",
+    "heroLead": "Scan to gather, engage the whole room",
+    "heroDesc": "No app download required. Participants scan on mobile, big-screen data syncs in seconds, and organizers can create an event in minutes with one short code.",
+    "open": "Open product",
+    "viewFeatures": "View features",
+    "videoFallback": "Your browser does not support video playback",
+    "homeShowcaseTitle": "Homepage Showcase",
+    "homeShowcaseLead": "A clean product homepage that presents the core modules at a glance.",
+    "coreTitle": "Core Advantages",
+    "coreLead": "A one-stop answer for event engagement needs.",
+    "adminTitle": "Admin Console",
+    "adminLead": "Manage all events, create new ones quickly, and control everything in one place.",
+    "loginCaption": "Secure account login with email support.",
+    "dashboardCaption": "Manage all events and create new ones quickly.",
+    "mobileCheckinTitle": "Mobile Check-in Experience",
+    "mobileCheckinCaption": "The check-in screen after users scan the code.",
+    "mobileCheckinFilledCaption": "Submit check-in after filling information.",
+    "voteTemplatesTitle": "Four Voting Templates",
+    "lotteryModesTitle": "Four Lottery Modes",
+    "mobileLotteryTitle": "Mobile Lottery Participation",
+    "mobileLotteryCaption": "The mobile screen for users joining the lottery.",
+    "fieldTypesTitle": "Rich Field Types",
+    "scenariosTitle": "🎯 Use Cases",
+    "scenariosLead": "Works for many event scenarios.",
+    "scenarioFeatures": "Feature mix:",
+    "scenarioEffect": "Effect:",
+    "ctaTitle": "Make event engagement shine ✨",
+    "ctaLead": "Try Sign and start a more engaging event journey.",
+    "overview": "Products",
+    "altHomeHero": "Homepage hero",
+    "altFeatureModules": "Feature modules",
+    "altLogin": "Login page",
+    "altDashboard": "Dashboard",
+    "altMobileCheckin": "Mobile check-in",
+    "altMobileCheckinFilled": "Filled check-in form",
+    "altMobileLottery": "Mobile lottery",
+    "coreAdvantages": [
+      {
+        "title": "One code for all",
+        "description": "Each event gets a unique short code. Scan and join instantly."
+      },
+      {
+        "title": "Realtime engagement",
+        "description": "SSE pushes data to big screens within seconds."
+      },
+      {
+        "title": "Visual impact",
+        "description": "Welcome walls, animated lottery, and live charts."
+      },
+      {
+        "title": "Flexible setup",
+        "description": "Nine-position QR layout and multiple display modes."
+      },
+      {
+        "title": "Zero friction",
+        "description": "No app download. Scan on mobile and participate."
+      },
+      {
+        "title": "Secure and reliable",
+        "description": "Account protection and verification codes reduce abuse."
+      }
+    ],
+    "checkin": {
+      "title": "📝 Check-in",
+      "subtitle": "Scan to check in with live welcome screens.",
+      "highlights": [
+        "Create an independent check-in event with a unique short code",
+        "Big-screen display with configurable QR position",
+        "Mobile check-in with custom fields such as name and department",
+        "Configurable after-check-in behavior: message, redirect, or no action",
+        "Live welcome wall and statistics",
+        "Three-digit verification code to prevent abuse"
+      ],
+      "screenshots": [
+        {
+          "title": "Create check-in",
+          "desc": "Configure title, collected fields, and post-check-in behavior."
+        },
+        {
+          "title": "Check-in details",
+          "desc": "View QR code, link, and statistics."
+        },
+        {
+          "title": "Check-in settings",
+          "desc": "Configure background, big-screen layout, and fields."
+        },
+        {
+          "title": "Big-screen display",
+          "desc": "Show check-in activity live with a strong visual effect."
+        }
+      ]
+    },
+    "vote": {
+      "title": "📊 Voting",
+      "subtitle": "Multiple templates, live visualization, and versus mode.",
+      "highlights": [
+        "Custom voting topics",
+        "Single and multiple choice support",
+        "Live result updates with SSE",
+        "Multiple visualization styles: pie, bar, progress, and versus",
+        "Optional vote modification and anonymous voting rules",
+        "Configurable big-screen QR position"
+      ],
+      "templates": [
+        { "name": "Simple vote", "desc": "Quick text-option voting." },
+        { "name": "Image vote", "desc": "Voting with image display." },
+        {
+          "name": "Candidate vote",
+          "desc": "Ideal for people selection scenarios."
+        },
+        { "name": "Versus", "desc": "A head-to-head two-option voting mode." }
+      ],
+      "screenshots": [
+        {
+          "title": "Voting templates",
+          "desc": "Choose from four voting templates."
+        },
+        { "title": "Simple vote", "desc": "Configure title and options." },
+        { "title": "Versus", "desc": "A two-choice voting scenario." }
+      ]
+    },
+    "lottery": {
+      "title": "🎁 Lottery",
+      "subtitle": "Four animated modes that are exciting and transparent.",
+      "highlights": [
+        "Multiple lottery modes: wheel, slot, card flip, and grid",
+        "Engaging animation effects",
+        "Custom prizes and probabilities",
+        "Limit draw count per participant",
+        "Live winner push and winner list",
+        "Big-screen winner bullet effects"
+      ],
+      "modes": [
+        {
+          "name": "Wheel lottery",
+          "desc": "Classic wheel effect for annual meetings."
+        },
+        {
+          "name": "Slot lottery",
+          "desc": "Three scrolling columns stop in sequence to reveal winners."
+        },
+        {
+          "name": "Card flip lottery",
+          "desc": "A mysterious 3D card-flip reveal."
+        },
+        {
+          "name": "Grid lottery",
+          "desc": "Marquee-style clockwise grid drawing."
+        }
+      ]
+    },
+    "form": {
+      "title": "📋 Forms",
+      "subtitle": "Flexible fields, live stats, and CSV export.",
+      "highlights": [
+        "Custom fields: text, number, phone, email, radio, checkbox, dropdown, date, time, rating, and more",
+        "Preview before submit",
+        "Success feedback and redirect support",
+        "One submission per person and phone-required rules",
+        "SSE live push for new submissions",
+        "CSV data export"
+      ],
+      "fieldTypes": [
+        "Text",
+        "Number",
+        "Phone",
+        "Email",
+        "Radio",
+        "Checkbox",
+        "Dropdown",
+        "Date",
+        "Time",
+        "Rating"
+      ],
+      "screenshots": [
+        {
+          "title": "Create form",
+          "desc": "Configure form title and description."
+        },
+        { "title": "Field types", "desc": "Choose from rich field types." }
+      ]
+    },
+    "scenarios": [
+      {
+        "title": "🎉 Annual meeting",
+        "features": "Check-in + lottery",
+        "effect": "High energy and exciting prizes"
+      },
+      {
+        "title": "📚 Training meeting",
+        "features": "Check-in + forms",
+        "effect": "Attendance stats and survey collection"
+      },
+      {
+        "title": "🏆 Selection event",
+        "features": "Voting (candidate mode)",
+        "effect": "Transparent results and live matchups"
+      },
+      {
+        "title": "🚀 Product launch",
+        "features": "Voting + forms",
+        "effect": "Demand research and instant feedback"
+      },
+      {
+        "title": "📊 Information collection",
+        "features": "Forms",
+        "effect": "Collect employee information and export Excel"
+      }
+    ]
+  },
+  "ProductHub": {
+    "title": "Product Overview",
+    "lead": "Murphy Cloud includes five SaaS products: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
+    "flagship": "Flagship product",
+    "capabilities": "Core capabilities",
+    "openWorksync": "Open WorkSync",
+    "viewIntro": "View intro",
+    "openProduct": "Open product",
+    "activityIntro": "Feature intro",
+    "openChess": "Open chess site",
+    "openShopping": "Enter store",
+    "bookCourse": "Book courses",
+    "pricingLabel": "Pricing",
+    "pricing": {
+      "worksync": "Online membership ¥199/year; private intranet install ¥1,999 one-time; source license ¥19,999 one-time",
+      "sign": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)",
+      "chess": "Membership ¥19.9/month, unlock all features",
+      "shopping": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)",
+      "timeslot": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)"
+    },
+    "worksyncDescription": "Project documentation and collaboration: knowledge base, task boards, PlantUML, whiteboards, AI diagram assistant, and analytics so teams and clients stay aligned in one workspace. Ideal for product, engineering, and delivery teams with cloud or private deployment options.",
+    "worksyncCapabilities": [
+      "Knowledge: tree folders + Markdown, adjustable permissions, traceable changes",
+      "Delivery tracking: boards / lists, assignments, statuses, and large-screen metrics",
+      "Engineering collaboration: PlantUML, whiteboards, and AI diagrams for faster alignment"
+    ],
+    "signTitle": "Sign event engagement platform",
+    "signDescription": "Check-in, voting, lottery, and forms in one place. Scan to join, sync to big screens in seconds, and create events in minutes.",
+    "chessTitle": "Xiaozu - Chess AI assistant",
+    "chessDescription": "Powered by Pikafish, with live position analysis, best move suggestions, and online matches so every move gets AI support.",
+    "shoppingTitle": "Mobile Store - H5 commerce",
+    "shoppingDescription": "A Next.js 16 mobile store with product browsing, search, cart management, and order tracking. Mobile-first and easy to shop anywhere.",
+    "timeslotTitle": "TimeSlot - Course booking",
+    "timeslotDescription": "Online booking for AP courses, programming, contest training, and more. Parents scan on mobile while teachers manage schedules and students."
+  }
+}

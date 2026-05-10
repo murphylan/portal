@@ -1,10 +1,14 @@
-export default function LoginPage() {
+import { getTranslations } from "next-intl/server";
+
+export default async function LoginPage() {
+  const t = await getTranslations("Login");
+
   return (
     <iframe
       allowFullScreen
       scrolling="no"
       src="/visme/form.html"
-      title="WorkSync 项目文档与协作平台"
+      title={t("iframeTitle")}
       className="vismeForms"
       style={{
         border: "none",
