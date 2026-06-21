@@ -41,6 +41,7 @@ import {
 } from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
+import FreeAppsSection from "./free-apps-section";
 import LocaleSwitcher from "./locale-switcher";
 
 // ---------------------------------------------------------------------------
@@ -220,57 +221,30 @@ function AppleNav() {
           {common("brand")}
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
-          <a
-            href="#worksync"
-            className="text-white/70 text-base hover:text-white transition-colors"
-          >
-            {t("worksync")}
-          </a>
-          <a
-            href="#xiaozu"
-            className="text-white/70 text-base hover:text-white transition-colors"
-          >
-            {t("xiaozu")}
-          </a>
-          <a
-            href="#sign"
-            className="text-white/70 text-base hover:text-white transition-colors"
-          >
-            {t("sign")}
-          </a>
-          <a
-            href="#shopping"
-            className="text-white/70 text-base hover:text-white transition-colors"
-          >
-            {t("shopping")}
-          </a>
-          <a
-            href="#timeslot"
-            className="text-white/70 text-base hover:text-white transition-colors"
-          >
-            {t("timeslot")}
-          </a>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <LocaleSwitcher className="hidden sm:inline-flex text-white/70" />
-          <Link
-            href="/enterprise"
-            className="text-white/70 text-base hover:text-white transition-colors hidden sm:inline"
-          >
-            {t("enterprise")}
-          </Link>
+        <div className="flex items-center gap-5">
           <Link
             href="/products"
-            className="text-white/70 text-base hover:text-white transition-colors hidden sm:inline"
+            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
           >
             {t("products")}
           </Link>
+          <Link
+            href="/apps"
+            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
+          >
+            {t("apps")}
+          </Link>
+          <Link
+            href="/enterprise"
+            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
+          >
+            {t("enterprise")}
+          </Link>
+          <LocaleSwitcher className="hidden sm:inline-flex text-white/70" />
           <ContactDialog>
             <button
               type="button"
-              className="apple-btn-accent text-base py-1! px-3! cursor-pointer"
+              className="apple-btn-accent text-sm py-1! px-3! cursor-pointer"
             >
               {t("contact")}
             </button>
@@ -1045,6 +1019,9 @@ export default function AppleShowcase() {
 
         <PricingNote text={t("pricing.timeslot")} />
       </section>
+
+      {/* ===== 6.5 Free PWA apps ===== */}
+      <FreeAppsSection />
 
       {/* ===== 7. Why Murphy Cloud ===== */}
       <section className="apple-section-dark py-24 md:py-32 px-6">

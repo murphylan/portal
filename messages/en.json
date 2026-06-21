@@ -35,6 +35,7 @@
   "Footer": {
     "description": "WorkSync is the flagship project documentation and collaboration platform. Murphy Cloud also provides Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking services.",
     "products": "Products",
+    "freeApps": "Free apps",
     "enterprise": "Enterprise & self-hosting",
     "contact": "Contact",
     "madeWith": "Made with love by Murphy",
@@ -57,6 +58,7 @@
       "shopping": "Store",
       "timeslot": "TimeSlot",
       "products": "Products",
+      "apps": "Free apps",
       "enterprise": "Enterprise",
       "contact": "Contact us"
     },
@@ -684,6 +686,48 @@
     "shoppingDescription": "A Next.js 16 mobile store with product browsing, search, cart management, and order tracking. Mobile-first and easy to shop anywhere.",
     "timeslotTitle": "TimeSlot - Course booking",
     "timeslotDescription": "Online booking for AP courses, programming, contest training, and more. Parents scan on mobile while teachers manage schedules and students."
+  },
+  "FreeApps": {
+    "badge": "Free · lead-in",
+    "title": "Free mini-apps, ready on your home screen",
+    "lead": "No sign-up, no app store — open and use instantly, add to your phone's home screen in one tap, and keep learning offline. The lightest way to feel what Murphy Cloud can build.",
+    "tagFree": "Completely free",
+    "tagInstall": "Installable",
+    "tagOffline": "Works offline",
+    "open": "Open",
+    "comingSoon": "Coming soon",
+    "viewAll": "See all · install guide",
+    "items": {
+      "english": {
+        "name": "IT English Trainer",
+        "tagline": "Learn tech English like flashcards",
+        "desc": "1000 curated technical English terms, grouped by topic with spaced repetition — build your tech vocabulary in spare moments."
+      },
+      "versebe": {
+        "name": "Versebe · Poetry Trainer",
+        "tagline": "Read, memorize, and savor classical poems",
+        "desc": "A pocket poetry library for everyone who loves verse — from school must-learns to the great Tang and Song classics, with translations, notes, and analysis; five modes (cards, completion, recognition, fill-in, scenario) to read, memorize, and truly savor poems that stay fresh."
+      },
+      "speaker": {
+        "name": "One-Minute Speaker",
+        "tagline": "Coming soon",
+        "desc": "One-minute impromptu speaking practice with random topics, a timer, and structure prompts to sharpen your on-the-spot expression. Coming soon."
+      }
+    }
+  },
+  "Apps": {
+    "metaTitle": "Free apps — Murphy Cloud",
+    "metaDescription": "Murphy Cloud's free mini-apps: IT English Trainer, Versebe poetry trainer, and more. No sign-up, installable to your home screen, works offline.",
+    "title": "Free apps",
+    "lead": "Free mini-apps by Murphy Cloud — no sign-up, instant to use, installable to your phone's home screen like a native app, and usable offline.",
+    "open": "Open",
+    "scanHint": "Scan with your phone, then follow the guide below to install",
+    "installTitle": "How to add to your home screen",
+    "installLead": "These are PWAs (Progressive Web Apps) — no app store needed; just open the page and add it as a home-screen icon.",
+    "iosTitle": "iPhone / iPad (Safari)",
+    "iosSteps": "Open the app in Safari → tap the Share button → choose \"Add to Home Screen\" → done. The icon appears on your home screen and opens like a native app.",
+    "androidTitle": "Android (Chrome)",
+    "androidSteps": "Open the app in Chrome → tap the top-right menu → choose \"Install app / Add to Home screen\" → done. An \"Install\" prompt may also appear in the address bar."
   },
   "Enterprise": {
     "metaTitle": "Enterprise & self-hosting — Murphy Cloud",

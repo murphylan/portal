@@ -7,6 +7,7 @@ const routes = [
   "/products/activity",
   "/worksync",
   "/enterprise",
+  "/apps",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

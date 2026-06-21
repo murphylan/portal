@@ -103,6 +103,14 @@ export default function Footer({ showContactId = true }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href="/apps"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {t("freeApps")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/enterprise"
                   className="hover:text-foreground transition-colors"
                 >
