@@ -1,0 +1,14 @@
+---
+description: Cursor rules、skills、plans 的职责边界
+alwaysApply: true
+---
+
+# Cursor 文件组织
+
+- `rules/` 放必须执行的短约束，不放长教程。
+- `skills/` 放按需读取的具体做法、示例和领域知识。
+- `plans/` 放阶段性计划和历史上下文，不作为当前权威规范。
+- 通用 Murphy Cloud 做法放在 `murphy-*` skills。
+- 产品专属差异放在 `{product}-product-patterns` skill。
+- 如果规则文件开始包含大量步骤、示例或表格，应迁移到 skill，并在 rule 中只保留触发条件。
+- 调整 `.cursor` 结构时，优先复用 `/Users/murphy/work/projects/murphy-cloud/.cursor-template`。

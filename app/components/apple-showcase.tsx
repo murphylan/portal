@@ -256,6 +256,12 @@ function AppleNav() {
         <div className="flex items-center gap-4">
           <LocaleSwitcher className="hidden sm:inline-flex text-white/70" />
           <Link
+            href="/enterprise"
+            className="text-white/70 text-base hover:text-white transition-colors hidden sm:inline"
+          >
+            {t("enterprise")}
+          </Link>
+          <Link
             href="/products"
             className="text-white/70 text-base hover:text-white transition-colors hidden sm:inline"
           >
@@ -423,6 +429,25 @@ function PillFilled({
 }
 
 // ---------------------------------------------------------------------------
+// Inline pricing note (per product section)
+// ---------------------------------------------------------------------------
+
+function PricingNote({ text, dark = false }: { text: string; dark?: boolean }) {
+  return (
+    <motion.p
+      className="max-w-[980px] mx-auto text-center text-xs mt-8 px-4"
+      style={{ color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)" }}
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {text}
+    </motion.p>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
@@ -507,19 +532,28 @@ export default function AppleShowcase() {
             {t("hero.description")}
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <PillOutline href="#worksync" dark>
+            <a
+              href="#worksync"
+              className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal"
+            >
               {t("hero.explore")}
-            </PillOutline>
-            <ContactDialog>
-              <button
-                type="button"
-                className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
-              >
-                {t("hero.contact")}
-                <ChevronRight className="h-3.5 w-3.5" />
-              </button>
-            </ContactDialog>
+              <ChevronRight className="h-3.5 w-3.5" />
+            </a>
+            <Link
+              href="/enterprise"
+              className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
+              style={{ color: "#ffffff", borderColor: "#ffffff" }}
+            >
+              {t("hero.enterprise")}
+              <ChevronRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
+          <p
+            className="apple-body text-xs mt-4"
+            style={{ color: "rgba(255,255,255,0.4)" }}
+          >
+            {t("hero.enterpriseHint")}
+          </p>
         </motion.div>
 
         {/* Product preview cards */}
@@ -675,6 +709,33 @@ export default function AppleShowcase() {
         </motion.div>
       </section>
 
+      {/* ===== 1.5 Trust band ===== */}
+      <section className="apple-section-dark border-t border-white/5 py-14 px-6">
+        <motion.div
+          className="max-w-[980px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {(t.raw("trust") as Array<{ value: string; label: string }>).map(
+            (stat) => (
+              <motion.div key={stat.label} variants={cardVariants}>
+                <div className="text-3xl sm:text-4xl font-semibold text-white mb-1">
+                  {stat.value}
+                </div>
+                <div
+                  className="text-xs sm:text-sm"
+                  style={{ color: "rgba(255,255,255,0.55)" }}
+                >
+                  {stat.label}
+                </div>
+              </motion.div>
+            ),
+          )}
+        </motion.div>
+      </section>
+
       {/* ===== 2. WorkSync ===== */}
       <section
         id="worksync"
@@ -687,6 +748,9 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
+          <span className="inline-block mb-4 rounded-full bg-[#0071e3]/10 px-4 py-1 text-sm font-medium text-[#0071e3]">
+            {t("sections.worksync.flagship")}
+          </span>
           <h2
             className="apple-headline text-4xl sm:text-5xl md:text-[56px] mb-2"
             style={{ color: "#1d1d1f" }}
@@ -733,6 +797,8 @@ export default function AppleShowcase() {
             {t("sections.worksync.secondary")}
           </PillFilled>
         </motion.div>
+
+        <PricingNote text={t("pricing.worksync")} />
       </section>
 
       {/* ===== 3. 小卒 ===== */}
@@ -793,6 +859,8 @@ export default function AppleShowcase() {
             {t("sections.xiaozu.secondary")}
           </PillFilled>
         </motion.div>
+
+        <PricingNote text={t("pricing.chess")} dark />
       </section>
 
       {/* ===== 4. Sign ===== */}
@@ -856,6 +924,8 @@ export default function AppleShowcase() {
             {t("sections.sign.secondary")}
           </PillFilled>
         </motion.div>
+
+        <PricingNote text={t("pricing.sign")} />
       </section>
 
       {/* ===== 5. Shopping ===== */}
@@ -910,6 +980,8 @@ export default function AppleShowcase() {
             {t("sections.shopping.secondary")}
           </PillFilled>
         </motion.div>
+
+        <PricingNote text={t("pricing.shopping")} dark />
       </section>
 
       {/* ===== 6. TimeSlot ===== */}
@@ -970,6 +1042,8 @@ export default function AppleShowcase() {
             {t("sections.timeslot.secondary")}
           </PillFilled>
         </motion.div>
+
+        <PricingNote text={t("pricing.timeslot")} />
       </section>
 
       {/* ===== 7. Why Murphy Cloud ===== */}

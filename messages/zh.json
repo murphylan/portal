@@ -35,6 +35,7 @@
   "Footer": {
     "description": "WorkSync 项目文档与协作平台为主力产品；并提供 Sign 活动互动平台、小卒象棋 AI 辅助、小商城 H5 电商与 TimeSlot 课程预约等在线服务。",
     "products": "产品",
+    "enterprise": "企业 / 私有化方案",
     "contact": "联系我们",
     "madeWith": "Made with love by Murphy",
     "productTitles": {
@@ -56,6 +57,7 @@
       "shopping": "小商城",
       "timeslot": "TimeSlot",
       "products": "产品总览",
+      "enterprise": "企业方案",
       "contact": "联系我们"
     },
     "hero": {
@@ -63,7 +65,22 @@
       "subtitle": "五款 SaaS 产品，一站式云端解决方案",
       "description": "文档协作 · 活动互动 · 象棋 AI · H5 商城 · 课程预约 — 为团队协作、企业活动、个人棋艺、在线购物与教育培训而生",
       "explore": "探索产品",
+      "enterprise": "企业私有化方案",
+      "enterpriseHint": "需要私有化部署 / 源码授权？点上方查看企业方案。",
       "contact": "联系我们"
+    },
+    "trust": [
+      { "value": "5 款", "label": "产品已上线运行" },
+      { "value": "一键", "label": "私有化部署交付" },
+      { "value": "中英", "label": "双语 · 深色模式" },
+      { "value": "Next.js 16", "label": "现代全栈技术" }
+    ],
+    "pricing": {
+      "worksync": "在线会员 ¥199/年 · 客户内网安装 ¥1,999 · 源码授权 ¥19,999（一次性）",
+      "chess": "会员订阅 ¥19.9 / 月，解锁全部 AI 分析功能",
+      "sign": "Free ¥0 · Pro ¥39/月 · Team ¥99/月（年付 8 折）",
+      "shopping": "Free ¥0 · Pro ¥39/月 · Team ¥99/月（年付 8 折）",
+      "timeslot": "Free ¥0 · Pro ¥39/月 · Team ¥99/月（年付 8 折）"
     },
     "preview": {
       "worksync": "文档 · 看板 · 图表 · 白板 · AI",
@@ -74,6 +91,7 @@
     },
     "sections": {
       "worksync": {
+        "flagship": "旗舰产品",
         "subtitle": "项目文档与协作平台",
         "description": "将文档管理、任务看板、PlantUML 技术图表、协作白板与 AI 图表助手整合在同一个工作区。一个 WorkSync，覆盖项目全生命周期的协作需求。",
         "primary": "了解更多",
@@ -621,5 +639,100 @@
     "shoppingDescription": "基于 Next.js 16 的 H5 小商城，支持商品浏览与搜索、购物车管理、订单跟踪。移动端优先设计，随时随地轻松购物。",
     "timeslotTitle": "TimeSlot — 课外学习预约",
     "timeslotDescription": "AP 课程、编程开发、竞赛培训等课程在线预约管理。家长手机扫码即可为孩子预约课程，教师排课与学员管理全程可追溯。"
+  },
+  "Enterprise": {
+    "metaTitle": "企业私有化方案 — Murphy 云",
+    "metaDescription": "把 Murphy 云装进你自己的服务器：私有化部署、源码授权与 UI 定制，数据完全自主，一次性付费，一年免费升级。",
+    "nav": {
+      "quote": "获取报价"
+    },
+    "hero": {
+      "badge": "企业 / 私有化方案",
+      "title": "把 Murphy 云装进你自己的服务器",
+      "subtitle": "私有化部署 · 源码授权 · UI 定制",
+      "description": "在你指定的内网环境一键部署，数据完全自主、不限人数、一次性付费。适合对数据合规与自主可控有要求的企业与机构。",
+      "quote": "获取报价单",
+      "viewPricing": "查看方案与价格"
+    },
+    "values_title": "为什么选择私有化",
+    "values_lead": "把数据和系统牢牢握在自己手里",
+    "values": [
+      {
+        "title": "数据完全自主",
+        "desc": "系统部署在你指定的服务器或内网，数据不出企业边界，满足合规与安全审计要求"
+      },
+      {
+        "title": "不限人数",
+        "desc": "一次部署，团队成员无上限，无需按席位续费，规模扩张零额外授权成本"
+      },
+      {
+        "title": "一次性付费",
+        "desc": "买断式授权，告别长期订阅，预算清晰、决策门槛低，财务更省心"
+      },
+      {
+        "title": "定制与支持",
+        "desc": "可选 UI 定制与二次开发，架构咨询全程支持，一年免费升级"
+      }
+    ],
+    "pricing": {
+      "title": "方案与价格",
+      "lead": "从云端订阅到完整源码交付，按你的自主可控程度选择。以下为参考报价，正式合作以合同约定为准。",
+      "recommended": "最受欢迎",
+      "cta": "获取报价",
+      "note": "以上价格仅供参考；UI 定制 +¥5,000 起，企业采购、定制开发与长期维护可另行洽谈。"
+    },
+    "tiers": {
+      "online": {
+        "name": "在线会员",
+        "period": "/ 年",
+        "detail": "无需部署，开通即用，含最多 10 人同时使用（按年订阅）",
+        "features": [
+          "全功能在线使用",
+          "最多 10 位成员",
+          "云端数据备份",
+          "标准技术支持"
+        ]
+      },
+      "intranet": {
+        "name": "客户内网安装",
+        "period": "起 / 一次性",
+        "detail": "部署在你指定的内网环境，数据自主、不限人数",
+        "features": [
+          "私有化部署",
+          "不限成员数量",
+          "数据完全自主",
+          "一年免费升级"
+        ]
+      },
+      "source": {
+        "name": "源码授权",
+        "period": "起 / 一次性",
+        "detail": "完整源代码交付，便于二次开发与自主运维",
+        "features": [
+          "完整源代码交付",
+          "二次开发授权",
+          "架构咨询支持",
+          "终身使用权"
+        ]
+      }
+    },
+    "delivery": {
+      "title": "交付与运维能力",
+      "lead": "成熟的工程化交付，让私有化部署的边际成本接近于零",
+      "items": [
+        {
+          "title": "一键安装脚本",
+          "desc": "install.sh 一键拉起完整环境，从零到可访问只需几分钟，降低交付与升级门槛"
+        },
+        {
+          "title": "容器化架构",
+          "desc": "Docker / Standalone 容器化打包，环境一致、弹性扩展，迁移与扩容无痛"
+        },
+        {
+          "title": "证书与安全",
+          "desc": "通配符 SSL、Nginx 反向代理、RBAC 权限与操作审计，开箱即用的安全基线"
+        }
+      ]
+    }
   }
 }

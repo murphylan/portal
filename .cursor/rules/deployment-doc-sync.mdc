@@ -1,0 +1,20 @@
+---
+description: 代码变更后同步检查部署工程与 Murphy Cloud 文档
+alwaysApply: true
+---
+
+# 部署与文档同步
+
+修订代码后，必须检查变更是否影响部署工程或产品部署文档，并按需同步更新。
+
+## 必查位置
+
+- 设计和部署文档：`/Users/murphy/work/projects/main/docs/product/murphy-cloud`
+- 部署工程：`/Users/murphy/work/projects/murphy-cloud/murphy-deploy`
+
+## 执行要求
+
+- 涉及环境变量、端口、镜像、容器、卷挂载、上传/备份目录、数据库迁移、启动命令、反代配置、种子数据或运维脚本时，必须同步检查上述两个位置。
+- 如果需要更新，直接修改对应文档或部署脚本，并在最终回复中说明更新了哪些位置。
+- 如果检查后无需更新，也要在最终回复中说明“已检查部署工程和 Murphy Cloud 文档，无需变更”。
+- 不要只改应用代码而遗漏部署目录或部署文档的行为说明。

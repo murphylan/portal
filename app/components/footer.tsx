@@ -101,6 +101,14 @@ export default function Footer({ showContactId = true }: FooterProps) {
                   {common("productOverview")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/enterprise"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {t("enterprise")}
+                </Link>
+              </li>
             </ul>
           </div>
 

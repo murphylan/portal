@@ -35,6 +35,7 @@
   "Footer": {
     "description": "WorkSync is the flagship project documentation and collaboration platform. Murphy Cloud also provides Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking services.",
     "products": "Products",
+    "enterprise": "Enterprise & self-hosting",
     "contact": "Contact",
     "madeWith": "Made with love by Murphy",
     "productTitles": {
@@ -56,6 +57,7 @@
       "shopping": "Store",
       "timeslot": "TimeSlot",
       "products": "Products",
+      "enterprise": "Enterprise",
       "contact": "Contact us"
     },
     "hero": {
@@ -63,7 +65,22 @@
       "subtitle": "Five SaaS products, one cloud solution suite",
       "description": "Docs collaboration · event engagement · chess AI · H5 commerce · course booking - built for teams, events, learning, shopping, and training",
       "explore": "Explore products",
+      "enterprise": "Self-hosting & licensing",
+      "enterpriseHint": "Need private deployment or a source license? See the enterprise plans above.",
       "contact": "Contact us"
+    },
+    "trust": [
+      { "value": "5", "label": "products live in production" },
+      { "value": "1-click", "label": "private deployment" },
+      { "value": "EN/中", "label": "bilingual · dark mode" },
+      { "value": "Next.js 16", "label": "modern full stack" }
+    ],
+    "pricing": {
+      "worksync": "Online ¥199/yr · Intranet install ¥1,999 · Source license ¥19,999 (one-time)",
+      "chess": "Membership ¥19.9 / month, unlocks all AI analysis",
+      "sign": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)",
+      "shopping": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)",
+      "timeslot": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)"
     },
     "preview": {
       "worksync": "Docs · boards · diagrams · whiteboards · AI",
@@ -74,6 +91,7 @@
     },
     "sections": {
       "worksync": {
+        "flagship": "Flagship product",
         "subtitle": "Project documentation and collaboration platform",
         "description": "WorkSync brings document management, task boards, PlantUML diagrams, collaborative whiteboards, and an AI diagram assistant into one workspace for the full project lifecycle.",
         "primary": "Learn more",
@@ -666,5 +684,100 @@
     "shoppingDescription": "A Next.js 16 mobile store with product browsing, search, cart management, and order tracking. Mobile-first and easy to shop anywhere.",
     "timeslotTitle": "TimeSlot - Course booking",
     "timeslotDescription": "Online booking for AP courses, programming, contest training, and more. Parents scan on mobile while teachers manage schedules and students."
+  },
+  "Enterprise": {
+    "metaTitle": "Enterprise & self-hosting — Murphy Cloud",
+    "metaDescription": "Run Murphy Cloud on your own servers: private deployment, source licensing, and UI customization. Full data ownership, one-time payment, one year of free upgrades.",
+    "nav": {
+      "quote": "Get a quote"
+    },
+    "hero": {
+      "badge": "Enterprise & self-hosting",
+      "title": "Run Murphy Cloud on your own servers",
+      "subtitle": "Private deployment · source licensing · UI customization",
+      "description": "One-click deployment into your own intranet, with full data ownership, unlimited users, and a one-time payment. Built for organizations with compliance and control requirements.",
+      "quote": "Request a quote",
+      "viewPricing": "See plans & pricing"
+    },
+    "values_title": "Why self-host",
+    "values_lead": "Keep your data and system fully in your own hands",
+    "values": [
+      {
+        "title": "Full data ownership",
+        "desc": "Deployed on your own servers or intranet, data never leaves your boundary — meeting compliance and security audit requirements"
+      },
+      {
+        "title": "Unlimited users",
+        "desc": "Deploy once with no seat cap and no per-seat renewals; scaling up adds zero licensing cost"
+      },
+      {
+        "title": "One-time payment",
+        "desc": "Perpetual license instead of an ongoing subscription — clear budgeting and an easy approval decision"
+      },
+      {
+        "title": "Customization & support",
+        "desc": "Optional UI customization and bespoke development, architecture consulting throughout, and one year of free upgrades"
+      }
+    ],
+    "pricing": {
+      "title": "Plans & pricing",
+      "lead": "From cloud subscription to full source delivery — choose by how much control you need. Prices below are for reference; final terms are set by contract.",
+      "recommended": "Most popular",
+      "cta": "Get a quote",
+      "note": "Prices are for reference only; UI customization from +¥5,000. Enterprise procurement, custom development, and long-term maintenance can be arranged separately."
+    },
+    "tiers": {
+      "online": {
+        "name": "Online membership",
+        "period": "/ year",
+        "detail": "No deployment needed, ready on signup; up to 10 concurrent users (annual subscription)",
+        "features": [
+          "Full online functionality",
+          "Up to 10 members",
+          "Cloud data backup",
+          "Standard support"
+        ]
+      },
+      "intranet": {
+        "name": "Intranet install",
+        "period": "from / one-time",
+        "detail": "Deployed in your own intranet, with data ownership and unlimited users",
+        "features": [
+          "Private deployment",
+          "Unlimited members",
+          "Full data ownership",
+          "One year of free upgrades"
+        ]
+      },
+      "source": {
+        "name": "Source license",
+        "period": "from / one-time",
+        "detail": "Full source code delivery for in-house development and operations",
+        "features": [
+          "Full source code delivery",
+          "Modification rights",
+          "Architecture consulting",
+          "Perpetual license"
+        ]
+      }
+    },
+    "delivery": {
+      "title": "Delivery & operations",
+      "lead": "Mature engineering delivery brings the marginal cost of self-hosting close to zero",
+      "items": [
+        {
+          "title": "One-click installer",
+          "desc": "install.sh brings up the full environment in minutes — from zero to live — lowering delivery and upgrade overhead"
+        },
+        {
+          "title": "Containerized",
+          "desc": "Docker / standalone container packaging keeps environments consistent and scaling painless"
+        },
+        {
+          "title": "Certs & security",
+          "desc": "Wildcard SSL, Nginx reverse proxy, RBAC, and audit logging — a security baseline out of the box"
+        }
+      ]
+    }
   }
 }

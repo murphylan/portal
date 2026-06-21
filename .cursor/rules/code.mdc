@@ -1,0 +1,49 @@
+---
+description: Murphy Cloud Next.js 核心约束 - 每次任务都必须遵守
+alwaysApply: true
+---
+
+# Murphy Cloud Next.js 核心规则
+
+本文件只保留每次任务都必须遵守的边界。具体实现模板、长示例和专项流程放在 `.cursor/skills/`。
+
+## 技术栈
+
+- Next.js App Router、React、TypeScript。
+- Radix UI + Tailwind CSS + shadcn/ui 风格组件。
+- Portal 当前以主站展示和产品入口为主；引入数据层时再遵循 Murphy Cloud 通用数据规则。
+
+## 基本代码约束
+
+- 使用路径别名，避免深层相对路径。
+- 写操作完成后必须用 toast 给出成功或失败反馈。
+- React Query mutation 状态使用 `isPending`。
+- 复杂列定义、复杂计算和回调按需使用 `useMemo` / `useCallback`。
+- 不在 `useState` 初始化中访问 `localStorage`。
+
+## 权限与安全
+
+- 前端权限只做体验保护，Server Action 写操作必须做服务端权限校验。
+- 权限 ID 使用集中常量，禁止散落字符串字面量。
+- 禁止在客户端存储密码、token 等敏感凭据。
+- 服务端输入必须 trim、做长度/格式校验；错误消息不要回显用户原始输入。
+- 不要降低安全响应头配置。
+
+## 数据调用边界
+
+- 页面组件通过 hooks 调用数据，不直接散落调用 Server Action。
+- Server Action 返回 `{ success, data?, error? }`。
+- Mock 数据如需使用，放在统一数据源，不在页面中重复定义。
+- 禁止用本项目 API 路由作为内部数据接口；认证、下载、渲染等边界型路由除外。
+
+## 部署与文档同步
+
+- 修改环境变量、端口、镜像、容器、卷挂载、上传/备份目录、数据库迁移、启动命令、反代配置、种子数据或运维脚本时，必须检查部署工程和 Murphy Cloud 文档。
+- 检查位置见 `deployment-doc-sync.mdc`。
+
+## 何时读取 Skills
+
+- UI、动效、响应式页面、按钮、Tooltip、搜索框等细节：读 `.cursor/skills/murphy-nextjs-ui-patterns/SKILL.md`。
+- 引入 Drizzle、Server Actions、React Query hooks、权限实现、类型建模等细节时：读 `.cursor/skills/murphy-nextjs-data-patterns/SKILL.md`。
+- PM2、Nginx、环境变量、部署排错等运维细节：读 `.cursor/skills/murphy-deployment-ops/SKILL.md`。
+- Portal 主站、产品入口、3D/动效、现网 PM2 部署等产品差异：读 `.cursor/skills/portal-product-patterns/SKILL.md`。

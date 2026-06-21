@@ -1,7 +1,13 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl = "https://murphylan.cloud";
-const routes = ["/", "/products", "/products/activity", "/worksync"];
+const routes = [
+  "/",
+  "/products",
+  "/products/activity",
+  "/worksync",
+  "/enterprise",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
