@@ -270,7 +270,7 @@ function AppleNav() {
           <ContactDialog>
             <button
               type="button"
-              className="apple-btn-blue text-base py-1! px-3! cursor-pointer"
+              className="apple-btn-accent text-base py-1! px-3! cursor-pointer"
             >
               {t("contact")}
             </button>
@@ -328,7 +328,7 @@ function FeatureCardLight({
       variants={cardVariants}
       className="bg-white rounded-lg p-6 shadow-[rgba(0,0,0,0.04)_0px_2px_12px]"
     >
-      <Icon className="h-6 w-6 text-[#0071e3] mb-3" />
+      <Icon className="h-6 w-6 text-[#059669] mb-3" />
       <h4
         className="text-lg font-semibold mb-2"
         style={{
@@ -364,7 +364,7 @@ function FeatureCardDark({
 }) {
   return (
     <motion.div variants={cardVariants} className="apple-card-dark p-6">
-      <Icon className="h-6 w-6 text-[#2997ff] mb-3" />
+      <Icon className="h-6 w-6 text-[#34c759] mb-3" />
       <h4
         className="text-lg font-semibold text-white mb-2"
         style={{ letterSpacing: "0.196px", lineHeight: 1.14 }}
@@ -394,7 +394,7 @@ function PillOutline({
   children: React.ReactNode;
   dark?: boolean;
 }) {
-  const color = dark ? "#ffffff" : "#0066cc";
+  const color = dark ? "#ffffff" : "#047857";
   return (
     <a
       href={href}
@@ -419,7 +419,7 @@ function PillFilled({
   return (
     <a
       href={href}
-      className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal"
+      className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal"
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       {children}
@@ -486,7 +486,7 @@ export default function AppleShowcase() {
               width: "800px",
               height: "800px",
               background:
-                "radial-gradient(circle, rgba(0,113,227,0.08) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(5,150,105,0.08) 0%, transparent 70%)",
             }}
           />
           <div
@@ -534,7 +534,7 @@ export default function AppleShowcase() {
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <a
               href="#worksync"
-              className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal"
+              className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal"
             >
               {t("hero.explore")}
               <ChevronRight className="h-3.5 w-3.5" />
@@ -572,8 +572,8 @@ export default function AppleShowcase() {
               style={{ backgroundImage: "url('/worksync-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
-              <FileText className="h-5 w-5 text-[#2997ff]" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#059669]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <FileText className="h-5 w-5 text-[#34c759]" />
             </div>
             <h3
               className="relative z-10 text-sm font-semibold text-white mb-1"
@@ -587,7 +587,7 @@ export default function AppleShowcase() {
             >
               {t("preview.worksync")}
             </p>
-            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#34c759] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
@@ -599,8 +599,8 @@ export default function AppleShowcase() {
               style={{ backgroundImage: "url('/xiaozu-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
-              <Swords className="h-5 w-5 text-[#2997ff]" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#059669]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <Swords className="h-5 w-5 text-[#34c759]" />
             </div>
             <h3
               className="relative z-10 text-sm font-semibold text-white mb-1"
@@ -614,7 +614,7 @@ export default function AppleShowcase() {
             >
               {t("preview.xiaozu")}
             </p>
-            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#34c759] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
@@ -626,8 +626,8 @@ export default function AppleShowcase() {
               style={{ backgroundImage: "url('/sign-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
-              <Ticket className="h-5 w-5 text-[#2997ff]" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#059669]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <Ticket className="h-5 w-5 text-[#34c759]" />
             </div>
             <h3
               className="relative z-10 text-sm font-semibold text-white mb-1"
@@ -641,7 +641,7 @@ export default function AppleShowcase() {
             >
               {t("preview.sign")}
             </p>
-            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#34c759] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
@@ -653,8 +653,8 @@ export default function AppleShowcase() {
               style={{ backgroundImage: "url('/shopping-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
-              <ShoppingCart className="h-5 w-5 text-[#2997ff]" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#059669]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <ShoppingCart className="h-5 w-5 text-[#34c759]" />
             </div>
             <h3
               className="relative z-10 text-sm font-semibold text-white mb-1"
@@ -668,7 +668,7 @@ export default function AppleShowcase() {
             >
               {t("preview.shopping")}
             </p>
-            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#34c759] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
 
           <a
@@ -680,8 +680,8 @@ export default function AppleShowcase() {
               style={{ backgroundImage: "url('/timeslot-bg.jpg')" }}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#0071e3]/20 backdrop-blur-sm flex items-center justify-center mb-3">
-              <CalendarClock className="h-5 w-5 text-[#2997ff]" />
+            <div className="relative z-10 h-10 w-10 rounded-xl bg-[#059669]/20 backdrop-blur-sm flex items-center justify-center mb-3">
+              <CalendarClock className="h-5 w-5 text-[#34c759]" />
             </div>
             <h3
               className="relative z-10 text-sm font-semibold text-white mb-1"
@@ -695,7 +695,7 @@ export default function AppleShowcase() {
             >
               {t("preview.timeslot")}
             </p>
-            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#2997ff] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ChevronRight className="relative z-10 h-3.5 w-3.5 text-[#34c759] mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
           </a>
         </motion.div>
 
@@ -748,7 +748,7 @@ export default function AppleShowcase() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <span className="inline-block mb-4 rounded-full bg-[#0071e3]/10 px-4 py-1 text-sm font-medium text-[#0071e3]">
+          <span className="inline-block mb-4 rounded-full bg-[#059669]/10 px-4 py-1 text-sm font-medium text-[#059669]">
             {t("sections.worksync.flagship")}
           </span>
           <h2
@@ -1087,19 +1087,19 @@ export default function AppleShowcase() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-[#2997ff]" />
+              <BarChart3 className="h-4 w-4 text-[#34c759]" />
               <span style={{ color: "rgba(255,255,255,0.7)" }}>
                 Next.js 16 + React 19
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Lock className="h-4 w-4 text-[#2997ff]" />
+              <Lock className="h-4 w-4 text-[#34c759]" />
               <span style={{ color: "rgba(255,255,255,0.7)" }}>
                 {t("sections.why.metricDeploy")}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Ticket className="h-4 w-4 text-[#2997ff]" />
+              <Ticket className="h-4 w-4 text-[#34c759]" />
               <span style={{ color: "rgba(255,255,255,0.7)" }}>
                 {t("sections.why.metricLocale")}
               </span>

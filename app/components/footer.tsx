@@ -51,7 +51,7 @@ export default function Footer({ showContactId = true }: FooterProps) {
           {/* Logo & 简介 */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-9 w-9 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="h-9 w-9 rounded-xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold">{common("brand")}</span>

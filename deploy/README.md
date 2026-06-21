@@ -1,5 +1,18 @@
 # Murphy Portal 部署指南
 
+> ⚠️ **现网实况（2026-06 核实）——本目录脚本与现网不一致，部署请勿直接套用**
+>
+> 生产 portal **实际运行在 `/home/ubuntu/work/requirement`**，由 PM2 进程 **`portal`** 以 `pnpm start`（`next start`）方式启动，监听 3000。
+>
+> - 本文/`deploy.sh` 里的 `/home/ubuntu/apps/portal` 是**历史遗留副本，不对外服务**。
+> - `deploy.sh` + `ecosystem.config.js` 用的是 standalone + 进程名 `murphy-portal`，与现网不同；**直接跑会起第二个进程抢占 3000，新代码不生效**。
+> - 正确的更新流程见权威文档：`docs/product/murphy-cloud/deployment/deploy-portal.md`。简版：
+>   ```bash
+>   rsync -avz --exclude node_modules --exclude .git --exclude .next --exclude .env \
+>     <本地>/portal/ ubuntu@159.75.253.245:/home/ubuntu/work/requirement/
+>   ssh ubuntu@159.75.253.245 "cd /home/ubuntu/work/requirement && pnpm install --frozen-lockfile && pnpm build && pm2 reload portal && pm2 save"
+>   ```
+
 ## 服务器环境准备
 
 ### 1. 安装 Node.js 22

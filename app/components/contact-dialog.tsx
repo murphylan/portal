@@ -66,8 +66,8 @@ export default function ContactDialog({
           {/* 邮箱 */}
           <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center">
-                <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                <Mail className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">

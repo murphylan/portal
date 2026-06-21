@@ -461,8 +461,8 @@
   text-decoration: underline;
 }
 
-.apple-btn-blue {
-  background-color: #0071e3;
+.apple-btn-accent {
+  background-color: #059669;
   color: #ffffff;
   border-radius: 980px;
   padding: 8px 20px;
@@ -470,8 +470,8 @@
   transition: background-color 0.3s ease;
 }
 
-.apple-btn-blue:hover {
-  background-color: #0077ed;
+.apple-btn-accent:hover {
+  background-color: #10b981;
 }
 
 @keyframes apple-scroll-hint {

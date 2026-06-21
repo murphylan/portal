@@ -85,7 +85,7 @@ function EnterpriseNav() {
           <ContactDialog>
             <button
               type="button"
-              className="apple-btn-blue text-base py-1! px-3! cursor-pointer"
+              className="apple-btn-accent text-base py-1! px-3! cursor-pointer"
             >
               {t("nav.quote")}
             </button>
@@ -135,7 +135,7 @@ export default function EnterpriseShowcase() {
               width: "800px",
               height: "800px",
               background:
-                "radial-gradient(circle, rgba(0,113,227,0.1) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(5,150,105,0.1) 0%, transparent 70%)",
             }}
           />
         </div>
@@ -171,7 +171,7 @@ export default function EnterpriseShowcase() {
             <ContactDialog>
               <button
                 type="button"
-                className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
+                className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
               >
                 <FileDown className="h-3.5 w-3.5" />
                 {t("hero.quote")}
@@ -225,7 +225,7 @@ export default function EnterpriseShowcase() {
               variants={cardVariants}
               className="bg-white rounded-lg p-6 shadow-[rgba(0,0,0,0.04)_0px_2px_12px]"
             >
-              <Icon className="h-6 w-6 text-[#0071e3] mb-3" />
+              <Icon className="h-6 w-6 text-[#059669] mb-3" />
               <h4
                 className="text-lg font-semibold mb-2"
                 style={{
@@ -281,11 +281,11 @@ export default function EnterpriseShowcase() {
                 key={tier.key}
                 variants={cardVariants}
                 className={`apple-card-dark relative p-8 ${
-                  tier.highlighted ? "ring-2 ring-[#2997ff]" : ""
+                  tier.highlighted ? "ring-2 ring-[#34c759]" : ""
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0071e3] text-white text-xs font-medium">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#059669] text-white text-xs font-medium">
                     {t("pricing.recommended")}
                   </div>
                 )}
@@ -315,7 +315,7 @@ export default function EnterpriseShowcase() {
                       className="flex items-center gap-2 text-sm"
                       style={{ color: "rgba(255,255,255,0.8)" }}
                     >
-                      <CheckCircle2 className="h-4 w-4 text-[#2997ff] shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-[#34c759] shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -324,7 +324,7 @@ export default function EnterpriseShowcase() {
                   <button
                     type="button"
                     className={`w-full inline-flex items-center justify-center gap-1 text-sm font-normal cursor-pointer ${
-                      tier.highlighted ? "apple-btn-blue" : "apple-pill"
+                      tier.highlighted ? "apple-btn-accent" : "apple-pill"
                     }`}
                     style={
                       tier.highlighted
@@ -387,7 +387,7 @@ export default function EnterpriseShowcase() {
               variants={cardVariants}
               className="bg-white rounded-lg p-6 shadow-[rgba(0,0,0,0.04)_0px_2px_12px]"
             >
-              <Icon className="h-6 w-6 text-[#0071e3] mb-3" />
+              <Icon className="h-6 w-6 text-[#059669] mb-3" />
               <h4
                 className="text-lg font-semibold mb-2"
                 style={{
@@ -418,7 +418,7 @@ export default function EnterpriseShowcase() {
           <ContactDialog>
             <button
               type="button"
-              className="apple-btn-blue inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
+              className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal cursor-pointer"
             >
               <FileDown className="h-3.5 w-3.5" />
               {t("hero.quote")}
