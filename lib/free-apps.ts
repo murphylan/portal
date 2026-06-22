@@ -1,4 +1,4 @@
-import { ENGLISH_URL, VERSEBE_URL } from "@/lib/product-urls";
+import { ENGLISH_URL, SPEAKBE_URL, VERSEBE_URL } from "@/lib/product-urls";
 
 /**
  * 免费 PWA 引流小应用配置（数据驱动）。
@@ -44,12 +44,11 @@ export const FREE_APPS: FreeApp[] = [
     status: "live",
   },
   {
-    // 后续上线：一分钟演说家。上线后改 status:"live" 并补 url/icon 即可。
-    id: "speaker",
-    url: null,
-    icon: "/apps/speaker/app-icon-192.png",
+    id: "speakbe",
+    url: SPEAKBE_URL,
+    icon: "/apps/speakbe/app-icon-192.png",
     theme: "#1d4ed8",
     bg: "#dbeafe",
-    status: "coming",
+    status: "live",
   },
 ];

@@ -708,10 +708,10 @@
         "tagline": "Read, memorize, and savor classical poems",
         "desc": "A pocket poetry library for everyone who loves verse — from school must-learns to the great Tang and Song classics, with translations, notes, and analysis; five modes (cards, completion, recognition, fill-in, scenario) to read, memorize, and truly savor poems that stay fresh."
       },
-      "speaker": {
-        "name": "One-Minute Speaker",
-        "tagline": "Coming soon",
-        "desc": "One-minute impromptu speaking practice with random topics, a timer, and structure prompts to sharpen your on-the-spot expression. Coming soon."
+      "speakbe": {
+        "name": "Speakbe · A Topic a Day",
+        "tagline": "A topic a day — speak it out",
+        "desc": "Impromptu speaking and public-speaking practice: a fresh topic every day with a timer and structure prompts, helping you build clear, ready-to-go expression — from icebreaker intros to making your point, level up your speaking and communication in spare moments."
       }
     }
   },

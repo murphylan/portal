@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="speakbe-icon-title">
+  <title id="speakbe-icon-title">开腔 Speakbe 应用图标</title>
+  <rect width="512" height="512" rx="112" fill="#dbeafe" />
+  <circle cx="396" cy="120" r="60" fill="#bfdbfe" opacity="0.85" />
+  <circle cx="116" cy="392" r="50" fill="#93c5fd" opacity="0.6" />
+  <path d="M152 96h208c30 0 54 24 54 54v176c0 30-24 54-54 54H236l-58 56v-56h-26c-30 0-54-24-54-54V150c0-30 24-54 54-54Z" fill="#1d4ed8" />
+  <text x="256" y="290" font-family="STHeiti, Hiragino Sans GB, PingFang SC, sans-serif" font-size="180" font-weight="700" fill="#ffffff" text-anchor="middle">开</text>
+  <text x="256" y="470" font-family="STHeiti, Hiragino Sans GB, PingFang SC, sans-serif" font-size="50" font-weight="700" fill="#1e3a8a" text-anchor="middle" letter-spacing="10">每日一篇</text>
+</svg>

@@ -8,3 +8,4 @@ export const TIMESLOT_URL = "https://timeslot.murphylan.cloud";
 /** 免费 PWA 引流小应用 */
 export const ENGLISH_URL = "https://english.murphylan.cloud";
 export const VERSEBE_URL = "https://versebe.murphylan.cloud";
+export const SPEAKBE_URL = "https://speakbe.murphylan.cloud";
