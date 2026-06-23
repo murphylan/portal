@@ -78,60 +78,89 @@ export default function AppsShowcase({ qr }: { qr: Record<string, string> }) {
       <AppsNav />
 
       {/* ===== Hero ===== */}
-      <section className="apple-section-dark relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 pt-12 overflow-hidden">
+      <section className="apple-section-dark relative overflow-hidden px-6 pt-24 pb-16 md:pt-28 md:pb-20">
         <div className="absolute inset-0 pointer-events-none">
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:left-auto md:right-[14%] md:translate-x-0 rounded-full"
             style={{
-              width: "720px",
-              height: "720px",
+              width: "620px",
+              height: "620px",
               background:
-                "radial-gradient(circle, rgba(5,150,105,0.12) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(5,150,105,0.16) 0%, transparent 70%)",
             }}
           />
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-[760px] relative z-10"
-        >
-          <h1
-            className="apple-headline text-4xl sm:text-5xl md:text-[52px] mb-4"
-            style={{ color: "#ffffff" }}
+        <div className="max-w-[980px] mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12 md:gap-14">
+          {/* Left: copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 text-center md:text-left"
           >
-            {t("title")}
-          </h1>
-          <p
-            className="apple-body text-base sm:text-lg max-w-xl mx-auto mb-8"
-            style={{ color: "rgba(255,255,255,0.6)" }}
+            <h1
+              className="apple-headline text-4xl sm:text-5xl md:text-[52px] mb-4"
+              style={{ color: "#ffffff" }}
+            >
+              {t("title")}
+            </h1>
+            <p
+              className="apple-body text-base sm:text-lg max-w-xl mx-auto md:mx-0 mb-8"
+              style={{ color: "rgba(255,255,255,0.6)" }}
+            >
+              {t("lead")}
+            </p>
+            <div className="flex items-center justify-center md:justify-start gap-5 flex-wrap text-sm">
+              <span
+                className="inline-flex items-center gap-1.5"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                <Sparkles className="h-4 w-4 text-[#34c759]" />
+                {f("tagFree")}
+              </span>
+              <span
+                className="inline-flex items-center gap-1.5"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                <Download className="h-4 w-4 text-[#34c759]" />
+                {f("tagInstall")}
+              </span>
+              <span
+                className="inline-flex items-center gap-1.5"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                <WifiOff className="h-4 w-4 text-[#34c759]" />
+                {f("tagOffline")}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Right: iOS home-screen mockup */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="shrink-0"
           >
-            {t("lead")}
-          </p>
-          <div className="flex items-center justify-center gap-5 flex-wrap text-sm">
-            <span
-              className="inline-flex items-center gap-1.5"
-              style={{ color: "rgba(255,255,255,0.7)" }}
+            <div
+              className="relative rounded-[2.7rem] p-2.5 bg-[#0a0a0a]"
+              style={{
+                width: "264px",
+                boxShadow:
+                  "0 40px 90px -25px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 0 2px rgba(255,255,255,0.04)",
+              }}
             >
-              <Sparkles className="h-4 w-4 text-[#34c759]" />
-              {f("tagFree")}
-            </span>
-            <span
-              className="inline-flex items-center gap-1.5"
-              style={{ color: "rgba(255,255,255,0.7)" }}
-            >
-              <Download className="h-4 w-4 text-[#34c759]" />
-              {f("tagInstall")}
-            </span>
-            <span
-              className="inline-flex items-center gap-1.5"
-              style={{ color: "rgba(255,255,255,0.7)" }}
-            >
-              <WifiOff className="h-4 w-4 text-[#34c759]" />
-              {f("tagOffline")}
-            </span>
-          </div>
-        </motion.div>
+              {/* notch */}
+              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-10 h-6 w-[34%] rounded-b-2xl bg-[#0a0a0a]" />
+              {/* biome-ignore lint/performance/noImgElement: 自托管展示截图 */}
+              <img
+                src="/apps/showcase/home-screen.jpg"
+                alt={t("title")}
+                className="block w-full rounded-[2.1rem]"
+              />
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ===== App cards ===== */}
