@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "rootTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
-    "rootDescription": "Murphy Cloud brings together five SaaS products: WorkSync for project documentation and collaboration, Sign for event engagement, Xiaozu for AI-assisted Chinese chess, a mobile H5 store, and TimeSlot for course booking.",
+    "rootDescription": "Murphy Cloud brings together 8+ products, with core SaaS including WorkSync for project documentation and collaboration, Sign for event engagement, Xiaozu for AI-assisted Chinese chess, a mobile H5 store, and TimeSlot for course booking.",
     "ogTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
     "ogDescription": "WorkSync collaboration, Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking.",
     "twitterTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
@@ -64,7 +64,7 @@
     },
     "hero": {
       "title": "Murphy Cloud",
-      "subtitle": "Five SaaS products, one cloud solution suite",
+      "subtitle": "8+ products, one cloud solution suite",
       "description": "Docs collaboration · event engagement · chess AI · H5 commerce · course booking - built for teams, events, learning, shopping, and training",
       "explore": "Explore products",
       "enterprise": "Self-hosting & licensing",
@@ -72,10 +72,10 @@
       "contact": "Contact us"
     },
     "trust": [
-      { "value": "5", "label": "products live in production" },
+      { "value": "8+", "label": "products live in production" },
       { "value": "1-click", "label": "private deployment" },
       { "value": "EN/中", "label": "bilingual · dark mode" },
-      { "value": "Next.js 16", "label": "modern full stack" }
+      { "value": "Modern", "label": "clean, fast experience" }
     ],
     "pricing": {
       "worksync": "Online ¥199/yr · Intranet install ¥1,999 · Source license ¥19,999 (one-time)",
@@ -86,7 +86,7 @@
     },
     "preview": {
       "worksync": "Docs · boards · diagrams · whiteboards · AI",
-      "xiaozu": "AI engine · live analysis · online matches",
+      "xiaozu": "AI coach · auto-move · online matches",
       "sign": "Check-in · voting · lottery · forms",
       "shopping": "Products · cart · orders",
       "timeslot": "Courses · booking · management"
@@ -103,7 +103,7 @@
         "title": "Xiaozu",
         "subtitle": "Chinese chess AI assistant",
         "tagline": "A small pawn can change the game",
-        "description": "Powered by the Pikafish chess engine, Xiaozu gives Chinese chess players professional analysis, move suggestions, reviews, and online play support.",
+        "description": "A personal AI coach and playing partner for every Chinese chess lover. Before you commit a move, Xiaozu reads the position and lights up the strongest option — play with more confidence, review with more clarity, and sharpen your game one match at a time.",
         "primary": "Learn more",
         "secondary": "Start playing"
       },
@@ -117,7 +117,7 @@
       "shopping": {
         "title": "Mobile Store",
         "subtitle": "H5 mobile commerce platform",
-        "description": "A Next.js 16 mobile commerce app with product browsing, cart management, order tracking, and search. Mobile-first and ready for shopping anywhere.",
+        "description": "A mobile-first H5 commerce app with product browsing, cart management, order tracking, and search. Ready for shopping anywhere.",
         "primary": "Learn more",
         "secondary": "Enter store"
       },
@@ -130,6 +130,7 @@
       "why": {
         "title": "Why Murphy Cloud",
         "description": "A unified platform, modern engineering, and flexible deployment for teams of different sizes",
+        "metricStack": "Modern architecture · reliable",
         "metricDeploy": "Private deployment · data ownership",
         "metricLocale": "Bilingual · dark mode"
       }
@@ -154,29 +155,29 @@
         },
         {
           "title": "Collaborative whiteboards",
-          "desc": "Excalidraw-style whiteboards for brainstorming, reviews, and visual discussion."
+          "desc": "Hand-drawn style whiteboards for brainstorming, reviews, and visual discussion."
         },
         {
           "title": "Data security",
-          "desc": "RBAC, audit logs, online backups, and one-click restore."
+          "desc": "Fine-grained role permissions, audit logs, online backups, and one-click restore."
         }
       ],
       "chess": [
         {
-          "title": "Top AI engine",
-          "desc": "Pikafish brings Stockfish-level architecture optimized for Chinese chess."
+          "title": "Master-level strength",
+          "desc": "Rock-solid from opening to endgame — every suggested move holds up to scrutiny, like a master sitting beside you."
         },
         {
-          "title": "Live streaming analysis",
-          "desc": "SSE delivers search depth, evaluation, and candidate moves in real time."
+          "title": "Real-time position insight",
+          "desc": "Analyzes as you play, instantly showing who stands better, the win balance, and the recommended move."
         },
         {
-          "title": "Online play",
-          "desc": "Create rooms, invite friends, control time, and reconnect after interruptions."
+          "title": "One-tap auto-move",
+          "desc": "Turn on auto-move and let Xiaozu place your pieces, so you can focus on thinking and learning — practice and review made effortless."
         },
         {
-          "title": "Mobile first",
-          "desc": "Compact mobile layouts and richer desktop views make analysis smooth anywhere."
+          "title": "Online play, anywhere",
+          "desc": "Create a room and invite friends; play seamlessly across phone, tablet, and desktop."
         }
       ],
       "sign": [
@@ -208,7 +209,7 @@
         },
         {
           "title": "Users and orders",
-          "desc": "NextAuth v5 login, order creation, order status, and purchase history."
+          "desc": "Secure account login, order creation, order status, and purchase history."
         },
         {
           "title": "H5 mobile first",
@@ -235,12 +236,12 @@
       ],
       "advantages": [
         {
-          "title": "Modern stack",
-          "desc": "Next.js 16, React 19, TypeScript, PostgreSQL, and Drizzle ORM for reliable delivery."
+          "title": "Modern architecture",
+          "desc": "A modern architecture built for performance, stability, and fast, reliable delivery."
         },
         {
           "title": "Flexible deployment",
-          "desc": "Cloud subscription or private deployment with data ownership and containerized scaling."
+          "desc": "Cloud subscription or private deployment with full data ownership and elastic scaling."
         },
         {
           "title": "One suite",
@@ -373,7 +374,7 @@
         "badge": "Collaboration",
         "title": "Collaborative whiteboards",
         "subtitle": "Realtime shared canvas",
-        "description": "Excalidraw-based whiteboards for sketching, annotation, brainstorming, and solution reviews.",
+        "description": "Hand-drawn style whiteboards for sketching, annotation, brainstorming, and solution reviews.",
         "bullets": [
           "Freehand drawing and annotations",
           "Realtime multi-user collaboration",
@@ -381,7 +382,7 @@
           "Export PNG / SVG"
         ],
         "screenTitle": "Whiteboard",
-        "screenDesc": "Excalidraw realtime collaborative canvas"
+        "screenDesc": "Realtime collaborative whiteboard canvas"
       }
     ],
     "pricingTiers": [
@@ -654,7 +655,7 @@
   },
   "ProductHub": {
     "title": "Product Overview",
-    "lead": "Murphy Cloud includes five SaaS products: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
+    "lead": "Murphy Cloud includes 8+ products, with core SaaS: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
     "flagship": "Flagship product",
     "capabilities": "Core capabilities",
     "openWorksync": "Open WorkSync",
@@ -681,9 +682,9 @@
     "signTitle": "Sign event engagement platform",
     "signDescription": "Check-in, voting, lottery, and forms in one place. Scan to join, sync to big screens in seconds, and create events in minutes.",
     "chessTitle": "Xiaozu - Chess AI assistant",
-    "chessDescription": "Powered by Pikafish, with live position analysis, best move suggestions, and online matches so every move gets AI support.",
+    "chessDescription": "Real-time position analysis, best-move suggestions, one-tap auto-move, and online play — so every move gets AI support.",
     "shoppingTitle": "Mobile Store - H5 commerce",
-    "shoppingDescription": "A Next.js 16 mobile store with product browsing, search, cart management, and order tracking. Mobile-first and easy to shop anywhere.",
+    "shoppingDescription": "A mobile-first H5 store with product browsing, search, cart management, and order tracking. Easy to shop anywhere.",
     "timeslotTitle": "TimeSlot - Course booking",
     "timeslotDescription": "Online booking for AP courses, programming, contest training, and more. Parents scan on mobile while teachers manage schedules and students."
   },
@@ -819,7 +820,7 @@
         },
         {
           "title": "Certs & security",
-          "desc": "Wildcard SSL, Nginx reverse proxy, RBAC, and audit logging — a security baseline out of the box"
+          "desc": "Site-wide HTTPS, reverse proxy, fine-grained permissions, and audit logging — a security baseline out of the box"
         }
       ]
     }

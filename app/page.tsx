@@ -47,8 +47,8 @@ function getStructuredData(locale: string) {
       name: "小卒",
       alternateName: "Xiaozu",
       description: isZh
-        ? "基于 Pikafish 引擎的中国象棋 AI 辅助平台，支持实时分析与在线对弈。"
-        : "Chinese chess AI assistant powered by Pikafish, with realtime analysis and online play.",
+        ? "中国象棋智能辅助平台：AI 教练实时分析、走法建议、一键自动代走与在线对弈。"
+        : "Chinese chess AI assistant: real-time analysis, move suggestions, one-tap auto-move, and online play.",
       url: CHESS_URL,
       offers: {
         "@type": "Offer",
