@@ -9,3 +9,4 @@ export const TIMESLOT_URL = "https://timeslot.murphylan.cloud";
 export const ENGLISH_URL = "https://english.murphylan.cloud";
 export const VERSEBE_URL = "https://versebe.murphylan.cloud";
 export const SPEAKBE_URL = "https://speakbe.murphylan.cloud";
+export const SCAN3_URL = "https://scan3.murphylan.cloud";

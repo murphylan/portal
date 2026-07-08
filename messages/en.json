@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "rootTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
-    "rootDescription": "Murphy Cloud brings together 8+ products, with core SaaS including WorkSync for project documentation and collaboration, Sign for event engagement, Xiaozu for AI-assisted Chinese chess, a mobile H5 store, and TimeSlot for course booking.",
+    "rootDescription": "Murphy Cloud brings together 9+ products, with core SaaS including WorkSync for project documentation and collaboration, Sign for event engagement, Xiaozu for AI-assisted Chinese chess, a mobile H5 store, and TimeSlot for course booking.",
     "ogTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
     "ogDescription": "WorkSync collaboration, Sign event engagement, Xiaozu chess AI, mobile commerce, and TimeSlot course booking.",
     "twitterTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
@@ -64,7 +64,7 @@
     },
     "hero": {
       "title": "Murphy Cloud",
-      "subtitle": "8+ products, one cloud solution suite",
+      "subtitle": "9+ products, one cloud solution suite",
       "description": "Docs collaboration · event engagement · chess AI · H5 commerce · course booking - built for teams, events, learning, shopping, and training",
       "explore": "Explore products",
       "enterprise": "Self-hosting & licensing",
@@ -72,7 +72,7 @@
       "contact": "Contact us"
     },
     "trust": [
-      { "value": "8+", "label": "products live in production" },
+      { "value": "9+", "label": "products live in production" },
       { "value": "1-click", "label": "private deployment" },
       { "value": "EN/中", "label": "bilingual · dark mode" },
       { "value": "Modern", "label": "clean, fast experience" }
@@ -655,7 +655,16 @@
   },
   "ProductHub": {
     "title": "Product Overview",
-    "lead": "Murphy Cloud includes 8+ products, with core SaaS: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
+    "lead": "Murphy Cloud includes 9+ products, with core SaaS: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
+    "freeAppsLabel": "Free apps · no sign-up, open instantly",
+    "worksyncHighlights": [
+      "Knowledge base",
+      "Task boards",
+      "PlantUML diagrams",
+      "Online whiteboard",
+      "AI diagram assistant",
+      "Data analytics"
+    ],
     "flagship": "Flagship product",
     "capabilities": "Core capabilities",
     "openWorksync": "Open WorkSync",
@@ -713,6 +722,11 @@
         "name": "Speakbe · A Topic a Day",
         "tagline": "A topic a day — speak it out",
         "desc": "Impromptu speaking and public-speaking practice: a fresh topic every day with a timer and structure prompts, helping you build clear, ready-to-go expression — from icebreaker intros to making your point, level up your speaking and communication in spare moments."
+      },
+      "scan3": {
+        "name": "Scan3 · Party Card Game",
+        "tagline": "Scan to play — drinks as chips",
+        "desc": "A three-card party game as an H5 app: one person hosts a room as dealer, everyone else scans a QR code to take a seat, and drinks stand in for chips. No sign-up, no download, no backend — just tap on your phone to deal and get the party going."
       }
     }
   },

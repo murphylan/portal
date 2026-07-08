@@ -3,16 +3,23 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  BarChart3,
+  BookOpen,
   CalendarClock,
+  KanbanSquare,
   LayoutDashboard,
+  PenTool,
   ShoppingCart,
+  Sparkles,
   Swords,
   Ticket,
+  Workflow,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
+import { FREE_APPS } from "@/lib/free-apps";
 import {
   CHESS_URL,
   SHOPPING_URL,
@@ -24,10 +31,22 @@ import ContactDialog from "./contact-dialog";
 import Footer from "./footer";
 import LocaleSwitcher from "./locale-switcher";
 
+/** WorkSync 功能模块网格图标，顺序对应 ProductHub.worksyncHighlights */
+const WORKSYNC_HIGHLIGHT_ICONS = [
+  BookOpen,
+  KanbanSquare,
+  Workflow,
+  PenTool,
+  Sparkles,
+  BarChart3,
+];
+
 export default function ProductHub() {
   const t = useTranslations("ProductHub");
+  const f = useTranslations("FreeApps");
   const common = useTranslations("Common");
   const capabilities = t.raw("worksyncCapabilities") as string[];
+  const worksyncHighlights = t.raw("worksyncHighlights") as string[];
   const pricingLabel = t("pricingLabel");
 
   return (
@@ -94,7 +113,25 @@ export default function ProductHub() {
                     {pricingLabel}: {t("pricing.worksync")}
                   </p>
                 </div>
-                <div className="flex-1 flex flex-col justify-center min-h-0 py-3">
+                <div className="flex-1 flex flex-col justify-center min-h-0 py-3 gap-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    {worksyncHighlights.map((highlight, idx) => {
+                      const Icon = WORKSYNC_HIGHLIGHT_ICONS[idx];
+                      return (
+                        <div
+                          key={highlight}
+                          className="flex items-center gap-2 rounded-lg border border-violet-100 bg-violet-50/50 dark:border-violet-900/50 dark:bg-violet-950/30 px-2.5 py-2"
+                        >
+                          {Icon && (
+                            <Icon className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400" />
+                          )}
+                          <span className="text-xs font-medium leading-tight">
+                            {highlight}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                   <div className="rounded-lg border border-violet-100 bg-violet-50/70 dark:border-violet-900/50 dark:bg-violet-950/40 px-3 py-2.5">
                     <p className="text-[11px] font-medium text-violet-700 dark:text-violet-300 mb-1.5 uppercase tracking-wide">
                       {t("capabilities")}
@@ -288,6 +325,93 @@ export default function ProductHub() {
               </CardContent>
             </Card>
           </motion.div>
+        </div>
+
+        {/* ===== Free apps (same-style cards) ===== */}
+        <div className="mt-10">
+          <div className="flex items-baseline justify-between gap-4 mb-4">
+            <p className="text-sm font-medium text-muted-foreground">
+              {t("freeAppsLabel")}
+            </p>
+            <Link
+              href="/apps"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
+            >
+              {f("viewAll")}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {FREE_APPS.map((app, i) => (
+              <motion.div
+                key={app.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.36 + i * 0.06 }}
+              >
+                <Card className="h-full flex flex-col">
+                  <CardContent className="p-6 flex flex-col h-full flex-1">
+                    <div
+                      className="h-10 w-10 rounded-lg flex items-center justify-center mb-4 overflow-hidden shrink-0"
+                      style={{ backgroundColor: app.bg }}
+                    >
+                      {app.status === "coming" ? (
+                        <span className="text-xl" style={{ color: app.theme }}>
+                          ✦
+                        </span>
+                      ) : (
+                        // biome-ignore lint/performance/noImgElement: 自托管小图标
+                        <img
+                          src={app.icon}
+                          alt=""
+                          className="h-7 w-7 object-contain"
+                        />
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-lg font-semibold">
+                        {f(`items.${app.id}.name`)}
+                      </h3>
+                      <span
+                        className="rounded-full px-2 py-0.5 text-[11px] font-medium"
+                        style={{
+                          backgroundColor: `${app.theme}14`,
+                          color: app.theme,
+                        }}
+                      >
+                        {app.status === "coming"
+                          ? f("comingSoon")
+                          : f("tagFree")}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {f(`items.${app.id}.tagline`)}
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-4 flex-1">
+                      {f(`items.${app.id}.desc`)}
+                    </p>
+                    {app.status !== "coming" && app.url && (
+                      <Button
+                        size="sm"
+                        className="text-white shrink-0 mt-auto"
+                        style={{ backgroundColor: app.theme }}
+                        asChild
+                      >
+                        <a
+                          href={app.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {f("open")}
+                          <ArrowRight className="h-4 w-4 ml-2" />
+                        </a>
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -154,7 +154,7 @@ export default function AppsShowcase({ qr }: { qr: Record<string, string> }) {
               <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-10 h-6 w-[34%] rounded-b-2xl bg-[#0a0a0a]" />
               {/* biome-ignore lint/performance/noImgElement: 自托管展示截图 */}
               <img
-                src="/apps/showcase/home-screen.jpg"
+                src="/apps/showcase/home-screen.webp"
                 alt={t("title")}
                 className="block w-full rounded-[2.1rem]"
               />

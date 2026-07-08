@@ -1,4 +1,9 @@
-import { ENGLISH_URL, SPEAKBE_URL, VERSEBE_URL } from "@/lib/product-urls";
+import {
+  ENGLISH_URL,
+  SCAN3_URL,
+  SPEAKBE_URL,
+  VERSEBE_URL,
+} from "@/lib/product-urls";
 
 /**
  * 免费 PWA 引流小应用配置（数据驱动）。
@@ -49,6 +54,14 @@ export const FREE_APPS: FreeApp[] = [
     icon: "/apps/speakbe/app-icon-192.png",
     theme: "#1d4ed8",
     bg: "#dbeafe",
+    status: "live",
+  },
+  {
+    id: "scan3",
+    url: SCAN3_URL,
+    icon: "/apps/scan3/app-icon-192.png",
+    theme: "#c2410c",
+    bg: "#ffedd5",
     status: "live",
   },
 ];
