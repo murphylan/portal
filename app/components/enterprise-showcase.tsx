@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import {
-  CheckCircle2,
-  ChevronRight,
   Container,
   Database,
   FileDown,
@@ -25,13 +23,6 @@ import LocaleSwitcher from "./locale-switcher";
 
 const VALUE_ICONS = [Database, InfinityIcon, ShieldCheck, Wrench];
 const DELIVERY_ICONS = [TerminalSquare, Container, Lock];
-
-// Pricing tier visual config; copy (name/detail/features) comes from i18n.
-const PRICING_TIERS = [
-  { key: "online", price: "¥199", highlighted: false },
-  { key: "intranet", price: "¥1,999", highlighted: true },
-  { key: "source", price: "¥19,999", highlighted: false },
-];
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -108,10 +99,6 @@ export default function EnterpriseShowcase() {
     title: string;
     desc: string;
   }>;
-  const tierCopy = t.raw("tiers") as Record<
-    string,
-    { name: string; period: string; detail: string; features: string[] }
-  >;
 
   const values = valueCopy.map((copy, i) => ({
     Icon: VALUE_ICONS[i],
@@ -177,14 +164,6 @@ export default function EnterpriseShowcase() {
                 {t("hero.quote")}
               </button>
             </ContactDialog>
-            <a
-              href="#pricing"
-              className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
-              style={{ color: "#ffffff", borderColor: "#ffffff" }}
-            >
-              {t("hero.viewPricing")}
-              <ChevronRight className="h-3.5 w-3.5" />
-            </a>
           </div>
         </motion.div>
       </section>
@@ -245,110 +224,6 @@ export default function EnterpriseShowcase() {
             </motion.div>
           ))}
         </motion.div>
-      </section>
-
-      {/* ===== Pricing ===== */}
-      <section id="pricing" className="apple-section-dark py-24 md:py-32 px-6">
-        <motion.div
-          className="max-w-[980px] mx-auto text-center"
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <h2 className="apple-headline text-3xl sm:text-4xl md:text-[40px] text-white mb-4">
-            {t("pricing.title")}
-          </h2>
-          <p
-            className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-16"
-            style={{ color: "rgba(255,255,255,0.56)" }}
-          >
-            {t("pricing.lead")}
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="max-w-[980px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {PRICING_TIERS.map((tier) => {
-            const copy = tierCopy[tier.key];
-            return (
-              <motion.div
-                key={tier.key}
-                variants={cardVariants}
-                className={`apple-card-dark relative p-8 ${
-                  tier.highlighted ? "ring-2 ring-[#34c759]" : ""
-                }`}
-              >
-                {tier.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#059669] text-white text-xs font-medium">
-                    {t("pricing.recommended")}
-                  </div>
-                )}
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {copy.name}
-                </h3>
-                <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-4xl font-bold text-white">
-                    {tier.price}
-                  </span>
-                  {copy.period && (
-                    <span style={{ color: "rgba(255,255,255,0.5)" }}>
-                      {copy.period}
-                    </span>
-                  )}
-                </div>
-                <p
-                  className="text-sm mb-6"
-                  style={{ color: "rgba(255,255,255,0.56)" }}
-                >
-                  {copy.detail}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {copy.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2 text-sm"
-                      style={{ color: "rgba(255,255,255,0.8)" }}
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-[#34c759] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <ContactDialog>
-                  <button
-                    type="button"
-                    className={`w-full inline-flex items-center justify-center gap-1 text-sm font-normal cursor-pointer ${
-                      tier.highlighted ? "apple-btn-accent" : "apple-pill"
-                    }`}
-                    style={
-                      tier.highlighted
-                        ? undefined
-                        : { color: "#ffffff", borderColor: "#ffffff" }
-                    }
-                  >
-                    {t("pricing.cta")}
-                  </button>
-                </ContactDialog>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        <motion.p
-          className="text-center text-xs mt-8"
-          style={{ color: "rgba(255,255,255,0.4)" }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          {t("pricing.note")}
-        </motion.p>
       </section>
 
       {/* ===== Delivery capability (trust) ===== */}

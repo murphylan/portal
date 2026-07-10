@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Sparkles } from "lucide-react";
+import { Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import {
@@ -51,8 +51,10 @@ export default function Footer({ showContactId = true }: FooterProps) {
           {/* Logo & 简介 */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-9 w-9 rounded-xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-white" />
+              <div className="flex h-9 w-9 items-center justify-center gap-[3px] rounded-xl bg-[#0e1012] p-2.5">
+                <span className="h-full flex-1 rounded-full bg-[#00794c]" />
+                <span className="h-full flex-1 rounded-full bg-[#f58220]" />
+                <span className="h-full flex-1 rounded-full bg-[#e11b22]" />
               </div>
               <span className="text-xl font-bold">{common("brand")}</span>
             </div>

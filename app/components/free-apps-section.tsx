@@ -33,7 +33,7 @@ export default function FreeAppsSection() {
   const t = useTranslations("FreeApps");
 
   return (
-    <section id="apps" className="apple-section-light py-24 md:py-32 px-6">
+    <section id="apps" className="apple-section-light py-16 md:py-24 px-6">
       <motion.div
         className="max-w-[980px] mx-auto text-center"
         variants={sectionVariants}
@@ -41,7 +41,7 @@ export default function FreeAppsSection() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <span className="inline-block mb-4 rounded-full bg-[#059669]/10 px-4 py-1 text-sm font-medium text-[#059669]">
+        <span className="inline-block mb-4 rounded-full bg-[#00794c]/10 px-4 py-1 text-sm font-medium text-[#00794c]">
           {t("badge")}
         </span>
         <h2
@@ -62,21 +62,21 @@ export default function FreeAppsSection() {
             className="inline-flex items-center gap-1.5"
             style={{ color: "rgba(0,0,0,0.6)" }}
           >
-            <Sparkles className="h-4 w-4 text-[#059669]" />
+            <Sparkles className="h-4 w-4 text-[#00794c]" />
             {t("tagFree")}
           </span>
           <span
             className="inline-flex items-center gap-1.5"
             style={{ color: "rgba(0,0,0,0.6)" }}
           >
-            <Download className="h-4 w-4 text-[#059669]" />
+            <Download className="h-4 w-4 text-[#00794c]" />
             {t("tagInstall")}
           </span>
           <span
             className="inline-flex items-center gap-1.5"
             style={{ color: "rgba(0,0,0,0.6)" }}
           >
-            <WifiOff className="h-4 w-4 text-[#059669]" />
+            <WifiOff className="h-4 w-4 text-[#00794c]" />
             {t("tagOffline")}
           </span>
         </div>
@@ -173,7 +173,7 @@ export default function FreeAppsSection() {
         <Link
           href="/apps"
           className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
-          style={{ color: "#047857", borderColor: "#047857" }}
+          style={{ color: "#00794c", borderColor: "#00794c" }}
         >
           {t("viewAll")}
           <ChevronRight className="h-3.5 w-3.5" />

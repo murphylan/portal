@@ -1,9 +1,29 @@
 "use client";
 
 // ---------------------------------------------------------------------------
-// Crisp, per-product vector illustrations (flat "UI mockup" style, brand green).
-// Vector = sharp at any size, so it never goes blurry like the old stock photos.
-// One scene per product, tone-aware (light / dark section backgrounds).
+// Per-product vector illustrations — friendly "flat UI" scenes that make each
+// product legible at a glance, painted in the 7-Eleven tri-color (green leads,
+// orange + red add rhythm). Vector = sharp at any size, never blurry.
+// Tone-aware: `light` for the paper-canvas sections, `dark` for the single
+// night-surface scene (小卒).
+//
+// ── Swapping a product to a REAL screenshot ────────────────────────────────
+// Each product renders through the ART[id] map below. To replace one product
+// with a real product shot, change only that product's entry to return an
+// <Image>, e.g.:
+//
+//   import Image from "next/image";
+//   const ART = {
+//     worksync: () => (
+//       <Image src="/worksync/dashboard.png" alt="WorkSync" width={1998}
+//              height={1254} className="w-full h-auto rounded-xl" />
+//     ),
+//     ...
+//   };
+//
+// The callers (apple-showcase.tsx) don't need to change — they just call
+// <ProductArt id="worksync" tone="light" />. Screenshots already live under
+// public/worksync/* and public/products/activity/*.
 // ---------------------------------------------------------------------------
 
 type Tone = "light" | "dark";
@@ -12,13 +32,16 @@ function palette(tone: Tone) {
   const dark = tone === "dark";
   return {
     card: dark ? "#14392c" : "#ffffff",
-    edge: dark ? "#2a5f49" : "#e2f0ea",
+    edge: dark ? "#2a5f49" : "#dfeee7",
     ink: dark ? "#eafff6" : "#153e30",
-    accent: dark ? "#34c759" : "#059669",
-    accent2: dark ? "#7ce39b" : "#34c759",
-    soft: dark ? "rgba(52,199,89,0.16)" : "rgba(5,150,105,0.10)",
+    accent: dark ? "#3ab27f" : "#00794c", // green — primary
+    accent2: dark ? "#6fd7a6" : "#3ab27f", // green — light
+    soft: dark ? "rgba(58,178,127,0.16)" : "rgba(0,121,76,0.09)",
     line: dark ? "rgba(255,255,255,0.16)" : "rgba(21,62,48,0.14)",
     chip: dark ? "#1b4736" : "#eef8f3",
+    // 7-Eleven rhythm colors — used sparingly for accents (see DESIGN.md §2)
+    orange: "#f58220",
+    red: "#e11b22",
   };
 }
 
@@ -30,7 +53,7 @@ const SVG_PROPS = {
   fill: "none" as const,
 };
 
-// --- WorkSync: docs sidebar + kanban board -------------------------------
+// --- WorkSync: docs sidebar + kanban board + AI assist -------------------
 function WorkSyncArt(c: P) {
   return (
     <svg {...SVG_PROPS} role="img" aria-label="WorkSync">
@@ -45,75 +68,103 @@ function WorkSyncArt(c: P) {
         strokeWidth="2"
       />
       <line x1="34" y1="72" x2="386" y2="72" stroke={c.edge} strokeWidth="2" />
-      <circle cx="54" cy="55" r="4" fill={c.accent} />
-      <circle cx="70" cy="55" r="4" fill={c.edge} />
-      <circle cx="86" cy="55" r="4" fill={c.edge} />
-      {/* sidebar / doc list */}
+      {/* window traffic lights — the tri-color as chrome dots */}
+      <circle cx="54" cy="55" r="4" fill={c.red} />
+      <circle cx="70" cy="55" r="4" fill={c.orange} />
+      <circle cx="86" cy="55" r="4" fill={c.accent} />
+      {/* doc sidebar */}
       <rect x="50" y="86" width="80" height="180" rx="10" fill={c.soft} />
       <rect x="62" y="100" width="52" height="9" rx="4" fill={c.accent} />
       <rect x="62" y="120" width="56" height="7" rx="3.5" fill={c.line} />
       <rect x="62" y="136" width="44" height="7" rx="3.5" fill={c.line} />
       <rect x="62" y="152" width="56" height="7" rx="3.5" fill={c.line} />
       <rect x="62" y="168" width="38" height="7" rx="3.5" fill={c.line} />
-      {/* kanban columns */}
-      {[146, 226, 306].map((x, col) => (
-        <g key={x}>
-          <rect x={x} y="92" width="68" height="14" rx="7" fill={c.chip} />
-          {[0, 1, 2].slice(0, col === 1 ? 3 : col === 2 ? 1 : 2).map((r) => {
-            const y = 116 + r * 46;
-            const hot = col === 1 && r === 0;
-            return (
-              <g key={r}>
-                <rect
-                  x={x}
-                  y={y}
-                  width="68"
-                  height="38"
-                  rx="9"
-                  fill={c.card}
-                  stroke={hot ? c.accent : c.edge}
-                  strokeWidth={hot ? 2.5 : 1.5}
-                />
-                <rect
-                  x={x + 10}
-                  y={y + 10}
-                  width="34"
-                  height="6"
-                  rx="3"
-                  fill={hot ? c.accent : c.line}
-                />
-                <rect
-                  x={x + 10}
-                  y={y + 22}
-                  width="46"
-                  height="5"
-                  rx="2.5"
-                  fill={c.line}
-                />
-              </g>
-            );
-          })}
-        </g>
-      ))}
-      {/* AI sparkle */}
-      <g transform="translate(352 96)">
+
+      {/* kanban columns — headers use green / orange / red rhythm */}
+      {[146, 226, 306].map((x, col) => {
+        const headFill = [c.chip, c.orange, c.red][col];
+        const headOpacity = col === 0 ? 1 : 0.85;
+        return (
+          <g key={x}>
+            <rect
+              x={x}
+              y="92"
+              width="68"
+              height="14"
+              rx="7"
+              fill={headFill}
+              opacity={headOpacity}
+            />
+            {[0, 1, 2].slice(0, col === 1 ? 3 : col === 2 ? 1 : 2).map((r) => {
+              const y = 116 + r * 46;
+              const hot = col === 1 && r === 0;
+
+              return (
+                <g key={r}>
+                  <rect
+                    x={x}
+                    y={y}
+                    width="68"
+                    height="38"
+                    rx="9"
+                    fill={c.card}
+                    stroke={hot ? c.accent : c.edge}
+                    strokeWidth={hot ? 2.5 : 1.5}
+                  />
+                  <rect
+                    x={x + 10}
+                    y={y + 10}
+                    width="34"
+                    height="6"
+                    rx="3"
+                    fill={hot ? c.accent : c.line}
+                  />
+                  <rect
+                    x={x + 10}
+                    y={y + 22}
+                    width="46"
+                    height="5"
+                    rx="2.5"
+                    fill={c.line}
+                  />
+                </g>
+              );
+            })}
+          </g>
+        );
+      })}
+
+      {/* AI assist badge — sparkle + label */}
+      <g transform="translate(330 250)">
+        <rect x="-42" y="-15" width="84" height="30" rx="15" fill={c.accent} />
         <path
-          d="M0 -11 L3 -3 L11 0 L3 3 L0 11 L-3 3 L-11 0 L-3 -3 Z"
-          fill={c.accent2}
+          d="M-24 0 L-21 -6 L-15 -9 L-21 -12 L-24 -18 L-27 -12 L-33 -9 L-27 -6 Z"
+          fill="#ffffff"
         />
+        <text
+          x="6"
+          y="5"
+          textAnchor="middle"
+          fontSize="13"
+          fontWeight="700"
+          fill="#ffffff"
+        >
+          AI
+        </text>
       </g>
     </svg>
   );
 }
 
-// --- Xiaozu: xiangqi board + AI suggested move ---------------------------
+// --- Xiaozu: xiangqi board + AI suggested move (red vs black pieces) ------
 function XiaozuArt(c: P) {
-  const pieces: Array<[number, number, string, boolean]> = [
-    [96, 92, "車", false],
-    [188, 92, "馬", false],
-    [280, 118, "炮", false],
-    [142, 176, "卒", true],
-    [232, 214, "帥", false],
+  // Xiangqi is played red-vs-black — lean into that for authentic tri-color.
+  const pieces: Array<[number, number, string, "green" | "red" | "ink"]> = [
+    [96, 92, "車", "red"],
+    [188, 92, "馬", "ink"],
+    [280, 118, "炮", "red"],
+    [142, 176, "卒", "green"], // AI-suggested piece — brand green
+    [232, 214, "帥", "ink"],
   ];
   return (
     <svg {...SVG_PROPS} role="img" aria-label="小卒">
@@ -151,36 +202,43 @@ function XiaozuArt(c: P) {
       ))}
       {/* river */}
       <rect x="78" y="150" width="264" height="20" fill={c.soft} />
-      {/* suggested move arrow */}
+      {/* suggested move arrow — orange so it reads as guidance, not a piece */}
       <path
         d="M142 176 C 175 150, 205 150, 232 118"
-        stroke={c.accent2}
-        strokeWidth="2.5"
+        stroke={c.orange}
+        strokeWidth="3"
         strokeDasharray="6 6"
         strokeLinecap="round"
       />
-      {pieces.map(([x, y, ch, hot]) => (
-        <g key={ch}>
-          <circle
-            cx={x}
-            cy={y}
-            r="18"
-            fill={hot ? c.accent : c.card}
-            stroke={hot ? c.accent : c.edge}
-            strokeWidth="2.5"
-          />
-          <text
-            x={x}
-            y={y + 6}
-            textAnchor="middle"
-            fontSize="18"
-            fontWeight="700"
-            fill={hot ? "#ffffff" : c.ink}
-          >
-            {ch}
-          </text>
-        </g>
-      ))}
+      {pieces.map(([x, y, ch, kind]) => {
+        const green = kind === "green";
+        const red = kind === "red";
+        const stroke = green ? c.accent : red ? c.red : c.edge;
+        const fill = green ? c.accent : c.card;
+        const textFill = green ? "#ffffff" : red ? c.red : c.ink;
+        return (
+          <g key={ch}>
+            <circle
+              cx={x}
+              cy={y}
+              r="18"
+              fill={fill}
+              stroke={stroke}
+              strokeWidth="2.5"
+            />
+            <text
+              x={x}
+              y={y + 6}
+              textAnchor="middle"
+              fontSize="18"
+              fontWeight="700"
+              fill={textFill}
+            >
+              {ch}
+            </text>
+          </g>
+        );
+      })}
       {/* AI badge */}
       <g transform="translate(320 66)">
         <rect x="-30" y="-14" width="60" height="28" rx="14" fill={c.accent} />
@@ -199,11 +257,11 @@ function XiaozuArt(c: P) {
   );
 }
 
-// --- Sign: phone check-in QR + vote / form / gift chips -------------------
+// --- Sign: phone check-in QR + vote bars + lottery gift + form ------------
 function SignArt(c: P) {
   return (
     <svg {...SVG_PROPS} role="img" aria-label="Sign">
-      {/* phone */}
+      {/* phone — check-in with QR */}
       <rect
         x="164"
         y="46"
@@ -240,7 +298,7 @@ function SignArt(c: P) {
       </g>
       <rect x="184" y="198" width="56" height="10" rx="5" fill={c.accent} />
       <rect x="192" y="220" width="40" height="7" rx="3.5" fill={c.line} />
-      {/* vote chip top-left */}
+      {/* vote chip top-left — three bars in the tri-color */}
       <g transform="translate(54 70)">
         <rect
           x="0"
@@ -252,9 +310,9 @@ function SignArt(c: P) {
           stroke={c.edge}
           strokeWidth="1.5"
         />
-        <rect x="14" y="44" width="12" height="14" rx="3" fill={c.line} />
-        <rect x="37" y="30" width="12" height="28" rx="3" fill={c.accent2} />
-        <rect x="60" y="20" width="12" height="38" rx="3" fill={c.accent} />
+        <rect x="14" y="34" width="12" height="24" rx="3" fill={c.accent} />
+        <rect x="37" y="24" width="12" height="34" rx="3" fill={c.orange} />
+        <rect x="60" y="42" width="12" height="16" rx="3" fill={c.red} />
       </g>
       {/* form chip bottom-left */}
       <g transform="translate(58 176)">
@@ -291,7 +349,7 @@ function SignArt(c: P) {
           </g>
         ))}
       </g>
-      {/* gift chip right */}
+      {/* lottery gift chip right — red box, orange ribbon */}
       <g transform="translate(284 150)">
         <rect
           x="0"
@@ -303,18 +361,19 @@ function SignArt(c: P) {
           stroke={c.edge}
           strokeWidth="1.5"
         />
-        <rect x="0" y="30" width="74" height="14" fill={c.accent} rx="3" />
-        <rect x="30" y="16" width="14" height="66" fill={c.accent2} />
+        <rect x="8" y="42" width="58" height="34" rx="4" fill={c.red} />
+        <rect x="30" y="42" width="14" height="34" fill={c.orange} />
+        <rect x="8" y="36" width="58" height="10" rx="3" fill={c.red} />
         <path
-          d="M37 16 C 24 2, 8 12, 37 22 C 66 12, 50 2, 37 16 Z"
-          fill={c.accent}
+          d="M37 36 C 24 22, 8 32, 37 40 C 66 32, 50 22, 37 36 Z"
+          fill={c.orange}
         />
       </g>
     </svg>
   );
 }
 
-// --- Shopping: phone storefront + cart + buy ------------------------------
+// --- Shopping: phone storefront + cart + price/sale tags ------------------
 function ShoppingArt(c: P) {
   return (
     <svg {...SVG_PROPS} role="img" aria-label="小商城">
@@ -343,8 +402,8 @@ function ShoppingArt(c: P) {
             cx={x + 26}
             cy={y + 21}
             r="12"
-            fill={i === 0 ? c.accent : c.accent2}
-            opacity={i === 0 ? 1 : 0.55}
+            fill={[c.accent, c.orange, c.accent2, c.red][i]}
+            opacity={i === 0 ? 1 : 0.7}
           />
           <rect
             x={x + 8}
@@ -394,22 +453,34 @@ function ShoppingArt(c: P) {
           fill="none"
           strokeLinecap="round"
         />
+        {/* item count badge — red */}
+        <circle cx="20" cy="-20" r="10" fill={c.red} />
+        <text
+          x="20"
+          y="-16"
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill="#ffffff"
+        >
+          3
+        </text>
       </g>
-      {/* price tag */}
+      {/* sale price tag — orange */}
       <g transform="translate(96 176)">
         <path
           d="M0 0 L34 0 L48 16 L20 42 L-8 16 Z"
-          fill={c.card}
-          stroke={c.edge}
+          fill={c.orange}
+          stroke={c.card}
           strokeWidth="2"
         />
-        <circle cx="10" cy="12" r="5" fill={c.accent} />
+        <circle cx="10" cy="12" r="5" fill="#ffffff" />
       </g>
     </svg>
   );
 }
 
-// --- TimeSlot: calendar + clock + booked check ----------------------------
+// --- TimeSlot: calendar + clock + booked / today markers ------------------
 function TimeSlotArt(c: P) {
   return (
     <svg {...SVG_PROPS} role="img" aria-label="TimeSlot">
@@ -438,8 +509,17 @@ function TimeSlotArt(c: P) {
       ))}
       {[0, 1, 2, 3].map((row) =>
         [0, 1, 2, 3, 4, 5, 6].map((col) => {
-          const booked = (row === 1 && col === 2) || (row === 2 && col === 4);
-          const today = row === 2 && col === 4;
+          const booked = row === 1 && col === 2; // confirmed — green
+          const today = row === 2 && col === 4; // today — orange
+          const full = row === 0 && col === 5; // full — red
+          const fill = booked
+            ? c.accent
+            : today
+              ? c.orange
+              : full
+                ? c.red
+                : c.chip;
+          const solid = booked || today || full;
           return (
             <rect
               key={`${row}-${col}`}
@@ -448,10 +528,10 @@ function TimeSlotArt(c: P) {
               width="30"
               height="26"
               rx="7"
-              fill={booked ? c.accent : c.chip}
+              fill={fill}
               stroke={c.edge}
               strokeWidth="1"
-              opacity={today ? 1 : booked ? 0.55 : 1}
+              opacity={solid ? 0.92 : 1}
             />
           );
         }),

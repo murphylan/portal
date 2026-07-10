@@ -47,7 +47,6 @@ export default function ProductHub() {
   const common = useTranslations("Common");
   const capabilities = t.raw("worksyncCapabilities") as string[];
   const worksyncHighlights = t.raw("worksyncHighlights") as string[];
-  const pricingLabel = t("pricingLabel");
 
   return (
     <main className="min-h-screen flex flex-col bg-linear-to-b from-background to-muted/30">
@@ -108,9 +107,6 @@ export default function ProductHub() {
                   <h2 className="text-xl font-bold mb-2">WorkSync</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {t("worksyncDescription")}
-                  </p>
-                  <p className="mt-3 rounded-lg bg-violet-50 px-3 py-2 text-xs font-medium leading-relaxed text-violet-700 dark:bg-violet-950/40 dark:text-violet-300">
-                    {pricingLabel}: {t("pricing.worksync")}
                   </p>
                 </div>
                 <div className="flex-1 flex flex-col justify-center min-h-0 py-3 gap-3">
@@ -183,9 +179,6 @@ export default function ProductHub() {
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
                     {t("signDescription")}
                   </p>
-                  <p className="mb-4 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-medium leading-relaxed text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
-                    {pricingLabel}: {t("pricing.sign")}
-                  </p>
                   <div className="flex flex-col sm:flex-row gap-2 shrink-0 mt-auto">
                     <Button
                       size="sm"
@@ -227,9 +220,6 @@ export default function ProductHub() {
                   <p className="text-sm text-muted-foreground mb-4 flex-1 min-h-0">
                     {t("chessDescription")}
                   </p>
-                  <p className="mb-4 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium leading-relaxed text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
-                    {pricingLabel}: {t("pricing.chess")}
-                  </p>
                   <Button
                     size="sm"
                     variant="secondary"
@@ -268,9 +258,6 @@ export default function ProductHub() {
                 <p className="text-sm text-muted-foreground mb-4 flex-1">
                   {t("shoppingDescription")}
                 </p>
-                <p className="mb-4 rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium leading-relaxed text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
-                  {pricingLabel}: {t("pricing.shopping")}
-                </p>
                 <Button
                   size="sm"
                   className="bg-rose-600 hover:bg-rose-700 text-white shrink-0 mt-auto"
@@ -304,9 +291,6 @@ export default function ProductHub() {
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4 flex-1">
                   {t("timeslotDescription")}
-                </p>
-                <p className="mb-4 rounded-lg bg-cyan-50 px-3 py-2 text-xs font-medium leading-relaxed text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-300">
-                  {pricingLabel}: {t("pricing.timeslot")}
                 </p>
                 <Button
                   size="sm"

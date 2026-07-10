@@ -77,13 +77,6 @@
       { "value": "EN/中", "label": "bilingual · dark mode" },
       { "value": "Modern", "label": "clean, fast experience" }
     ],
-    "pricing": {
-      "worksync": "Online ¥199/yr · Intranet install ¥1,999 · Source license ¥19,999 (one-time)",
-      "chess": "Membership ¥19.9 / month, unlocks all AI analysis",
-      "sign": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)",
-      "shopping": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)",
-      "timeslot": "Free ¥0 · Pro ¥39/mo · Team ¥99/mo (20% off yearly)"
-    },
     "preview": {
       "worksync": "Docs · boards · diagrams · whiteboards · AI",
       "xiaozu": "AI coach · auto-move · online matches",
@@ -92,10 +85,12 @@
       "timeslot": "Courses · booking · management"
     },
     "sections": {
+      "audienceLabel": "Best for",
       "worksync": {
         "flagship": "Flagship product",
         "subtitle": "Project documentation and collaboration platform",
-        "description": "WorkSync brings document management, task boards, PlantUML diagrams, collaborative whiteboards, and an AI diagram assistant into one workspace for the full project lifecycle.",
+        "description": "WorkSync brings document management, task boards, PlantUML diagrams, collaborative whiteboards, and an AI diagram assistant into one workspace — from kickoff to delivery.",
+        "audience": "Product, engineering & delivery teams",
         "primary": "Learn more",
         "secondary": "Use now"
       },
@@ -104,6 +99,7 @@
         "subtitle": "Chinese chess AI assistant",
         "tagline": "A small pawn can change the game",
         "description": "A personal AI coach and playing partner for every Chinese chess lover. Before you commit a move, Xiaozu reads the position and lights up the strongest option — play with more confidence, review with more clarity, and sharpen your game one match at a time.",
+        "audience": "Chess players, coaching & practice",
         "primary": "Learn more",
         "secondary": "Start playing"
       },
@@ -111,6 +107,7 @@
         "subtitle": "Event engagement platform",
         "tagline": "Sign in. Stand out. Scan, gather, and engage.",
         "description": "Sign covers check-in, voting, lottery, and forms for enterprise events. Participants scan with their phones, organizers get live big-screen updates, and an event can be created in minutes.",
+        "audience": "Corporate events & on-site interaction",
         "primary": "Learn more",
         "secondary": "Create event"
       },
@@ -118,12 +115,14 @@
         "title": "Mobile Store",
         "subtitle": "H5 mobile commerce platform",
         "description": "A mobile-first H5 commerce app with product browsing, cart management, order tracking, and search. Ready for shopping anywhere.",
+        "audience": "Quick storefronts & mobile selling",
         "primary": "Learn more",
         "secondary": "Enter store"
       },
       "timeslot": {
         "subtitle": "Course booking system",
         "description": "TimeSlot supports online booking for AP courses, programming, contest training, and more. Parents can scan to book on mobile while teachers manage schedules and students.",
+        "audience": "Training centers & after-school education",
         "primary": "Learn more",
         "secondary": "Book courses"
       },
@@ -255,7 +254,6 @@
     "nav": {
       "overview": "Overview",
       "features": "Features",
-      "pricing": "Pricing",
       "contact": "Contact"
     },
     "tryNow": "Try now",
@@ -274,13 +272,6 @@
       "screenTitle": "WorkSync Full Preview",
       "screenDesc": "A complete project collaboration interface with dashboards, docs, tasks, and diagrams"
     },
-    "pricing": {
-      "title": "Pricing",
-      "lead": "Choose the option that fits how your team works. Prices are references; final terms follow the contract.",
-      "recommended": "Recommended",
-      "cta": "Contact us",
-      "note": "Prices are for reference. Enterprise purchasing, custom development, and long-term support can be discussed separately."
-    },
     "why": {
       "title": "Why WorkSync",
       "lead": "Cloud-native and containerized deployment keeps knowledge centralized, progress transparent, and communication traceable."
@@ -288,6 +279,7 @@
     "cta": {
       "title": "Ready to improve team collaboration?",
       "lead": "Try WorkSync and keep docs, tasks, and diagrams flowing in one workspace.",
+      "action": "Contact us",
       "learnMore": "Learn more"
     },
     "highlights": [
@@ -383,41 +375,6 @@
         ],
         "screenTitle": "Whiteboard",
         "screenDesc": "Realtime collaborative whiteboard canvas"
-      }
-    ],
-    "pricingTiers": [
-      {
-        "name": "Online membership",
-        "period": "/ year",
-        "detail": "Up to 10 concurrent members on annual subscription",
-        "features": [
-          "All online features",
-          "Up to 10 members",
-          "Cloud data backup",
-          "Standard support"
-        ]
-      },
-      {
-        "name": "Private intranet deployment",
-        "period": "",
-        "detail": "Deploy in your chosen intranet environment with unlimited users",
-        "features": [
-          "Private deployment",
-          "Unlimited members",
-          "Full data ownership",
-          "One year of free upgrades"
-        ]
-      },
-      {
-        "name": "Source license",
-        "period": "",
-        "detail": "Full source code delivery for secondary development and self-hosted operations",
-        "features": [
-          "Full source code",
-          "Secondary development license",
-          "Architecture consulting support",
-          "Lifetime usage rights"
-        ]
       }
     ],
     "advantages": [
@@ -674,14 +631,6 @@
     "openChess": "Open chess site",
     "openShopping": "Enter store",
     "bookCourse": "Book courses",
-    "pricingLabel": "Pricing",
-    "pricing": {
-      "worksync": "Online membership ¥199/year; private intranet install ¥1,999 one-time; source license ¥19,999 one-time",
-      "sign": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)",
-      "chess": "Membership ¥19.9/month, unlock all features",
-      "shopping": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)",
-      "timeslot": "Free ¥0; Pro ¥39/month (¥374/year, 20% off); Team ¥99/month (¥950/year, 20% off)"
-    },
     "worksyncDescription": "Project documentation and collaboration: knowledge base, task boards, PlantUML, whiteboards, AI diagram assistant, and analytics so teams and clients stay aligned in one workspace. Ideal for product, engineering, and delivery teams with cloud or private deployment options.",
     "worksyncCapabilities": [
       "Knowledge: tree folders + Markdown, adjustable permissions, traceable changes",
@@ -755,8 +704,7 @@
       "title": "Run Murphy Cloud on your own servers",
       "subtitle": "Private deployment · source licensing · UI customization",
       "description": "One-click deployment into your own intranet, with full data ownership, unlimited users, and a one-time payment. Built for organizations with compliance and control requirements.",
-      "quote": "Request a quote",
-      "viewPricing": "See plans & pricing"
+      "quote": "Request a quote"
     },
     "values_title": "Why self-host",
     "values_lead": "Keep your data and system fully in your own hands",
@@ -778,48 +726,6 @@
         "desc": "Optional UI customization and bespoke development, architecture consulting throughout, and one year of free upgrades"
       }
     ],
-    "pricing": {
-      "title": "Plans & pricing",
-      "lead": "From cloud subscription to full source delivery — choose by how much control you need. Prices below are for reference; final terms are set by contract.",
-      "recommended": "Most popular",
-      "cta": "Get a quote",
-      "note": "Prices are for reference only; UI customization from +¥5,000. Enterprise procurement, custom development, and long-term maintenance can be arranged separately."
-    },
-    "tiers": {
-      "online": {
-        "name": "Online membership",
-        "period": "/ year",
-        "detail": "No deployment needed, ready on signup; up to 10 concurrent users (annual subscription)",
-        "features": [
-          "Full online functionality",
-          "Up to 10 members",
-          "Cloud data backup",
-          "Standard support"
-        ]
-      },
-      "intranet": {
-        "name": "Intranet install",
-        "period": "from / one-time",
-        "detail": "Deployed in your own intranet, with data ownership and unlimited users",
-        "features": [
-          "Private deployment",
-          "Unlimited members",
-          "Full data ownership",
-          "One year of free upgrades"
-        ]
-      },
-      "source": {
-        "name": "Source license",
-        "period": "from / one-time",
-        "detail": "Full source code delivery for in-house development and operations",
-        "features": [
-          "Full source code delivery",
-          "Modification rights",
-          "Architecture consulting",
-          "Perpetual license"
-        ]
-      }
-    },
     "delivery": {
       "title": "Delivery & operations",
       "lead": "Mature engineering delivery brings the marginal cost of self-hosting close to zero",

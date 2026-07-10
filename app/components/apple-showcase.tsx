@@ -1,13 +1,8 @@
 "use client";
 
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import {
-  ArrowDown,
+  ArrowRight,
   BarChart3,
   BookOpen,
   CalendarClock,
@@ -32,10 +27,9 @@ import {
   Ticket,
   Users,
   Vote,
-  Zap,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import {
   CHESS_URL,
@@ -51,154 +45,59 @@ import LocaleSwitcher from "./locale-switcher";
 import ProductArt from "./product-art";
 
 // ---------------------------------------------------------------------------
-// Data
+// Feature icon data — copy is merged in from i18n (see withCopy below)
 // ---------------------------------------------------------------------------
 
 const WORKSYNC_FEATURES = [
-  {
-    Icon: FileText,
-    title: "文档集中管理",
-    desc: "Markdown 与富文本双模式，结构化目录与全文检索，告别散落在聊天群与邮件中的文档",
-  },
-  {
-    Icon: Kanban,
-    title: "任务看板",
-    desc: "看板 + 列表视图，按优先级与负责人组织任务，里程碑与迭代节奏清晰可追踪",
-  },
-  {
-    Icon: Shapes,
-    title: "PlantUML 图表",
-    desc: "内置编辑器支持时序图、类图、流程图、架构图，实时预览，图表直接嵌入文档",
-  },
-  {
-    Icon: Sparkles,
-    title: "AI 图表助手",
-    desc: "用一句话描述需求，AI 即可生成完整 PlantUML 代码并一键应用到编辑器，流式输出、可中断与重新生成",
-  },
-  {
-    Icon: Palette,
-    title: "协作白板",
-    desc: "手绘风格的协作白板，支持头脑风暴、评审与标注，远程会议也能指着图说",
-  },
-  {
-    Icon: Lock,
-    title: "数据安全",
-    desc: "细粒度角色权限控制、操作日志全程审计、数据在线备份与一键还原",
-  },
+  { Icon: FileText },
+  { Icon: Kanban },
+  { Icon: Shapes },
+  { Icon: Sparkles },
+  { Icon: Palette },
+  { Icon: Lock },
 ];
-
-const CHESS_FEATURES = [
-  {
-    Icon: Swords,
-    title: "大师级棋力",
-    desc: "开局、中局、残局皆稳，每一手建议都经得起推敲",
-  },
-  {
-    Icon: Zap,
-    title: "实时局面洞察",
-    desc: "边走边算，即时呈现局势优劣、胜负天平与推荐走法",
-  },
-  {
-    Icon: Sparkles,
-    title: "一键自动代走",
-    desc: "开启代走，小卒替你从容落子，专注思考与学习",
-  },
-  {
-    Icon: Users,
-    title: "在线对弈 · 随处畅玩",
-    desc: "创建房间邀好友切磋，手机电脑随开随用",
-  },
-];
-
 const SIGN_FEATURES = [
-  {
-    Icon: QrCode,
-    title: "扫码签到",
-    desc: "参与者扫码即签，大屏弹幕实时欢迎，自定义收集字段与白名单模式",
-  },
-  {
-    Icon: Vote,
-    title: "多样投票",
-    desc: "简单投票、图文投票、候选人投票、PK 对决四种模板，结果实时可视化",
-  },
-  {
-    Icon: Gift,
-    title: "炫酷抽奖",
-    desc: "转盘、老虎机、翻牌、九宫格四种动画模式，自定义奖品与中奖概率",
-  },
-  {
-    Icon: ListChecks,
-    title: "灵活表单",
-    desc: "10+ 字段类型，提交前预览，CSV 一键导出，手机扫码填写即可",
-  },
+  { Icon: QrCode },
+  { Icon: Vote },
+  { Icon: Gift },
+  { Icon: ListChecks },
 ];
-
 const SHOPPING_FEATURES = [
-  {
-    Icon: ShoppingCart,
-    title: "商品与购物车",
-    desc: "清晰的商品展示与分类浏览，购物车增删改查与库存校验，流畅的移动端购物体验",
-  },
-  {
-    Icon: Tag,
-    title: "商品搜索与筛选",
-    desc: "关键词搜索、分类筛选、价格排序，帮助用户快速定位心仪商品",
-  },
-  {
-    Icon: Users,
-    title: "用户与订单管理",
-    desc: "安全的账户登录体系，订单创建与状态跟踪，购买记录一目了然",
-  },
-  {
-    Icon: Smartphone,
-    title: "H5 移动优先",
-    desc: "专为手机端设计的紧凑布局，响应式适配各尺寸屏幕，随时随地下单",
-  },
+  { Icon: ShoppingCart },
+  { Icon: Tag },
+  { Icon: Users },
+  { Icon: Smartphone },
 ];
-
 const TIMESLOT_FEATURES = [
-  {
-    Icon: CalendarClock,
-    title: "课程预约",
-    desc: "按日期与时段浏览可用课程，一键预约，自动冲突检测与容量控制",
-  },
-  {
-    Icon: BookOpen,
-    title: "丰富课程体系",
-    desc: "AP 课程、编程开发、竞赛培训等多类目支持，灵活配置课程与教师信息",
-  },
-  {
-    Icon: Star,
-    title: "教师与学员管理",
-    desc: "教师排课与学员预约记录全程可追溯，支持取消与改约操作",
-  },
-  {
-    Icon: Smartphone,
-    title: "移动端扫码预约",
-    desc: "H5 移动优先设计，家长手机扫码即可为孩子预约课程，操作零门槛",
-  },
+  { Icon: CalendarClock },
+  { Icon: BookOpen },
+  { Icon: Star },
+  { Icon: Smartphone },
 ];
-
-const ADVANTAGES = [
-  {
-    Icon: Cloud,
-    title: "现代架构",
-    desc: "前沿架构保障性能与稳定，持续迭代、快速交付，为团队提供专业级体验",
-  },
-  {
-    Icon: Server,
-    title: "灵活部署",
-    desc: "支持云端订阅与私有化部署，数据完全自主掌控，弹性扩展从容应对增长",
-  },
-  {
-    Icon: MonitorPlay,
-    title: "一站式平台",
-    desc: "文档协作、活动互动、智能棋艺、H5 商城、课程预约等 9+ 款产品，统一品牌体验",
-  },
-];
+const ADVANTAGES = [{ Icon: Cloud }, { Icon: Server }, { Icon: MonitorPlay }];
 
 // ---------------------------------------------------------------------------
-// Scroll-aware navigation
+// Motion presets (see DESIGN.md §6)
+// ---------------------------------------------------------------------------
+
+const spring = { type: "spring" as const, stiffness: 100, damping: 20 };
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: spring },
+};
+const revealProps = {
+  variants: staggerContainer,
+  initial: "hidden" as const,
+  whileInView: "visible" as const,
+  viewport: { once: true, amount: 0.15 },
+};
+
+// ---------------------------------------------------------------------------
+// Scroll-aware navigation (hide on scroll-down)
 // ---------------------------------------------------------------------------
 
 function AppleNav() {
@@ -219,34 +118,38 @@ function AppleNav() {
       animate={{ y: hidden ? -48 : 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="max-w-[980px] mx-auto w-full px-6 flex items-center justify-between">
+      <span
+        aria-hidden
+        className="brand-stripe absolute inset-x-0 bottom-0 h-[3px]"
+      />
+      <div className="max-w-[1400px] mx-auto w-full px-6 flex items-center justify-between">
         <Link
           href="/"
-          className="text-white/90 text-lg font-medium tracking-tight hover:text-white transition-colors"
+          className="text-[#16181c] text-lg font-medium tracking-tight hover:text-[#00794c] transition-colors"
         >
           {common("brand")}
         </Link>
 
         <div className="flex items-center gap-5">
-          <Link
-            href="/products"
-            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
+          <a
+            href="#suite"
+            className="text-[#5b6167] text-sm hover:text-[#16181c] transition-colors hidden sm:inline"
           >
             {t("products")}
-          </Link>
-          <Link
-            href="/apps"
-            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
+          </a>
+          <a
+            href="#apps"
+            className="text-[#5b6167] text-sm hover:text-[#16181c] transition-colors hidden sm:inline"
           >
             {t("apps")}
-          </Link>
+          </a>
           <Link
             href="/enterprise"
-            className="text-white/70 text-sm hover:text-white transition-colors hidden sm:inline"
+            className="text-[#5b6167] text-sm hover:text-[#16181c] transition-colors hidden sm:inline"
           >
             {t("enterprise")}
           </Link>
-          <LocaleSwitcher className="hidden sm:inline-flex text-white/70" />
+          <LocaleSwitcher className="hidden sm:inline-flex text-[#5b6167]" />
           <ContactDialog>
             <button
               type="button"
@@ -262,418 +165,216 @@ function AppleNav() {
 }
 
 // ---------------------------------------------------------------------------
-// Shared section animation wrapper
+// Section heading — eyebrow + brand stripe + title + lead (left-aligned)
 // ---------------------------------------------------------------------------
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-// ---------------------------------------------------------------------------
-// Feature card (dark background)
-// ---------------------------------------------------------------------------
-
-function FeatureCardDark({
-  Icon,
-  title,
-  desc,
-}: {
-  Icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <motion.div variants={cardVariants} className="apple-card-dark p-6">
-      <Icon className="h-6 w-6 text-[#34c759] mb-3" />
-      <h4
-        className="text-lg font-semibold text-white mb-2"
-        style={{ letterSpacing: "0.196px", lineHeight: 1.14 }}
-      >
-        {title}
-      </h4>
-      <p
-        className="text-sm"
-        style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.47 }}
-      >
-        {desc}
-      </p>
-    </motion.div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Feature row (scrollytelling copy column)
-// ---------------------------------------------------------------------------
-
-function FeatureRow({
-  Icon,
-  title,
-  desc,
-  dark,
-}: {
-  Icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  desc: string;
-  dark: boolean;
-}) {
-  return (
-    <motion.div variants={cardVariants} className="flex gap-4">
-      <div
-        className="flex-none flex h-11 w-11 items-center justify-center rounded-2xl"
-        style={{
-          backgroundColor: dark
-            ? "rgba(52,199,89,0.12)"
-            : "rgba(5,150,105,0.1)",
-        }}
-      >
-        <Icon
-          className={`h-5 w-5 ${dark ? "text-[#34c759]" : "text-[#059669]"}`}
-        />
-      </div>
-      <div>
-        <h4
-          className="text-lg font-semibold mb-1"
-          style={{
-            color: dark ? "#ffffff" : "#1d1d1f",
-            letterSpacing: "0.196px",
-            lineHeight: 1.2,
-          }}
-        >
-          {title}
-        </h4>
-        <p
-          className="text-sm sm:text-[15px]"
-          style={{
-            color: dark ? "rgba(255,255,255,0.62)" : "rgba(0,0,0,0.62)",
-            lineHeight: 1.5,
-          }}
-        >
-          {desc}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Product scene (sticky parallax media + scroll-revealed copy)
-// ---------------------------------------------------------------------------
-
-type Feature = {
-  Icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  desc: string;
-};
-
-type Cta = { href: string; label: string; external?: boolean };
-
-function ProductScene({
-  id,
-  tone,
-  mediaSide,
+function SectionHeading({
   eyebrow,
   title,
+  lead,
+}: {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+}) {
+  return (
+    <div className="max-w-[52ch]">
+      <span
+        className="eyebrow-mono mb-4 inline-flex items-center gap-2.5"
+        style={{ color: "#00794c" }}
+      >
+        <span
+          aria-hidden
+          className="brand-stripe inline-block h-3 w-6 rounded-[2px]"
+        />
+        {eyebrow}
+      </span>
+      <h2
+        className="apple-headline text-3xl sm:text-4xl md:text-[42px]"
+        style={{ color: "#16181c" }}
+      >
+        {title}
+      </h2>
+      {lead ? (
+        <p
+          className="apple-body mt-4 text-sm sm:text-base"
+          style={{ color: "rgba(20,24,28,0.58)" }}
+        >
+          {lead}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Suite card — a product tile in the bento grid
+// ---------------------------------------------------------------------------
+
+type IconType = React.ComponentType<{
+  className?: string;
+  style?: React.CSSProperties;
+}>;
+type Feature = { Icon: IconType; title: string; desc: string };
+
+function SuiteCard({
+  id,
+  index,
+  Icon,
+  name,
   subtitle,
-  tagline,
-  description,
+  tags,
+  href,
+  ctaLabel,
+  tone = "light",
+  banner = false,
   features,
-  primary,
-  secondary,
-  pricing,
 }: {
   id: string;
-  tone: "dark" | "light";
-  mediaSide: "left" | "right";
-  eyebrow?: string;
-  title: string;
+  index: string;
+  Icon: IconType;
+  name: string;
   subtitle: string;
-  tagline?: string;
-  description: string;
-  features: Feature[];
-  primary: Cta;
-  secondary: Cta;
-  pricing: string;
+  tags: string;
+  href: string;
+  ctaLabel: string;
+  tone?: "light" | "dark";
+  banner?: boolean;
+  features?: Feature[];
 }) {
   const dark = tone === "dark";
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  // Gentle parallax float on the illustration as the section scrolls through.
-  const scale = useTransform(scrollYProgress, [0, 1], [1.06, 0.97]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
+  const external = href.startsWith("http");
+
+  const shell = dark
+    ? "border border-white/10 bg-[#0e1012] hover:border-[#3ab27f]/50 hover:shadow-[0_28px_60px_-30px_rgba(0,0,0,0.7)]"
+    : "border border-[rgba(20,24,28,0.08)] bg-white shadow-[0_2px_16px_rgba(20,24,28,0.05)] hover:border-[#00794c]/40 hover:shadow-[0_28px_60px_-30px_rgba(0,121,76,0.4)]";
+
+  const nameColor = dark ? "#ffffff" : "#16181c";
+  const subColor = dark ? "rgba(255,255,255,0.86)" : "#16181c";
+  const tagColor = dark ? "rgba(255,255,255,0.55)" : "rgba(20,24,28,0.55)";
+  const accent = dark ? "#3ab27f" : "#00794c";
+
+  const mediaBg = dark
+    ? "radial-gradient(125% 120% at 28% 12%, #17513c 0%, #0d3126 52%, #071d16 100%)"
+    : "radial-gradient(125% 120% at 28% 12%, #ecfbf3 0%, #dcf2e6 55%, #cfeddd 100%)";
 
   const media = (
     <div
-      className={`relative overflow-hidden ${
-        mediaSide === "left" ? "lg:order-1" : "lg:order-2"
+      className={`relative flex shrink-0 items-center justify-center overflow-hidden ${
+        banner ? "sm:w-[46%] p-6" : "p-6"
       }`}
-      style={{
-        background: dark
-          ? "radial-gradient(120% 120% at 30% 20%, #14402f 0%, #0a281f 55%, #061a13 100%)"
-          : "radial-gradient(120% 120% at 30% 20%, #ecfbf3 0%, #d3efe0 55%, #bfe8d3 100%)",
-      }}
+      style={{ background: mediaBg }}
     >
-      {/* Illustration is pinned + centered in the viewport, so it stays framed
-          in the middle of the screen while the feature list scrolls past. */}
-      <div className="flex h-[54vh] items-center justify-center p-8 sm:p-12 lg:sticky lg:top-0 lg:h-screen lg:p-16">
-        {/* soft glow behind the art */}
-        <div
-          aria-hidden
-          className="absolute left-1/2 top-1/2 h-[64%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            background: dark
-              ? "radial-gradient(circle, rgba(52,199,89,0.25) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(5,150,105,0.16) 0%, transparent 70%)",
-          }}
-        />
-        <motion.div
-          className="relative z-10 w-full max-w-[620px] will-change-transform [filter:drop-shadow(0_28px_56px_rgba(0,0,0,0.14))]"
-          style={{ scale, y: imageY }}
-        >
-          <ProductArt id={id} tone={tone} />
-        </motion.div>
+      <span
+        aria-hidden
+        className="brand-stripe absolute inset-x-0 top-0 h-[2px] opacity-70"
+      />
+      <div className="w-full max-w-[300px] transition-transform duration-500 group-hover:scale-[1.03]">
+        <ProductArt id={id} tone={tone} />
       </div>
     </div>
   );
 
-  const copy = (
-    <motion.div
-      className={`flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-16 lg:py-24 ${
-        mediaSide === "left" ? "lg:order-2" : "lg:order-1"
-      }`}
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
-      <div className="max-w-md">
-        {eyebrow ? (
-          <motion.span
-            variants={cardVariants}
-            className="inline-block mb-4 rounded-full px-4 py-1 text-sm font-medium"
-            style={{
-              backgroundColor: dark
-                ? "rgba(52,199,89,0.12)"
-                : "rgba(5,150,105,0.1)",
-              color: dark ? "#34c759" : "#059669",
-            }}
-          >
-            {eyebrow}
-          </motion.span>
-        ) : null}
-        <motion.h2
-          variants={cardVariants}
-          className="apple-headline text-4xl sm:text-5xl md:text-[56px] mb-3 hidden lg:block"
-          style={{ color: dark ? "#ffffff" : "#1d1d1f" }}
-        >
-          {title}
-        </motion.h2>
-        <motion.h2
-          variants={cardVariants}
-          className="apple-headline text-4xl sm:text-5xl mb-3 lg:hidden"
-          style={{ color: dark ? "#ffffff" : "#1d1d1f" }}
-        >
-          {title}
-        </motion.h2>
-        <motion.p
-          variants={cardVariants}
-          className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-2"
-          style={{ color: dark ? "rgba(255,255,255,0.92)" : "#1d1d1f" }}
-        >
-          {subtitle}
-        </motion.p>
-        {tagline ? (
-          <motion.p
-            variants={cardVariants}
-            className="apple-body text-base mb-3"
-            style={{
-              color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.48)",
-            }}
-          >
-            {tagline}
-          </motion.p>
-        ) : null}
-        <motion.p
-          variants={cardVariants}
-          className="apple-body text-sm sm:text-base mb-10"
-          style={{
-            color: dark ? "rgba(255,255,255,0.56)" : "rgba(0,0,0,0.56)",
-          }}
-        >
-          {description}
-        </motion.p>
-
-        <div className="space-y-7">
+  const body = (
+    <div className="flex flex-1 flex-col justify-center gap-3 p-6 sm:p-7">
+      <div className="flex items-center gap-2.5">
+        <span className="font-mono text-[11px] font-semibold tracking-[0.16em] text-[#f58220]">
+          {index}
+        </span>
+        <Icon className="h-[18px] w-[18px]" style={{ color: accent }} />
+        <h3 className="text-lg font-semibold" style={{ color: nameColor }}>
+          {name}
+        </h3>
+        <ArrowRight
+          className="ml-auto h-4 w-4 opacity-0 -translate-x-1 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+          style={{ color: accent }}
+        />
+      </div>
+      <p
+        className="text-sm font-medium leading-snug"
+        style={{ color: subColor }}
+      >
+        {subtitle}
+      </p>
+      {features ? (
+        <div className="mt-1 grid grid-cols-1 gap-x-5 gap-y-2.5 sm:grid-cols-2">
           {features.map((f) => (
-            <FeatureRow key={f.title} {...f} dark={dark} />
+            <div key={f.title} className="flex items-start gap-2">
+              <f.Icon
+                className="mt-0.5 h-4 w-4 shrink-0"
+                style={{ color: accent }}
+              />
+              <span
+                className="text-[13px] leading-snug"
+                style={{
+                  color: dark ? "rgba(255,255,255,0.7)" : "rgba(20,24,28,0.7)",
+                }}
+              >
+                {f.title}
+              </span>
+            </div>
           ))}
         </div>
-
-        <motion.div
-          variants={cardVariants}
-          className="flex items-center gap-4 mt-11 flex-wrap"
+      ) : null}
+      <div className="mt-1 flex items-center gap-3">
+        <span
+          className="inline-flex items-center gap-1 text-sm font-medium"
+          style={{ color: accent }}
         >
-          <PillOutline href={primary.href} dark={dark}>
-            {primary.label}
-          </PillOutline>
-          <PillFilled href={secondary.href} external={secondary.external}>
-            {secondary.label}
-          </PillFilled>
-        </motion.div>
-
-        <motion.p
-          variants={cardVariants}
-          className="text-xs mt-8"
-          style={{
-            color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
-          }}
-        >
-          {pricing}
-        </motion.p>
+          {ctaLabel}
+          <ChevronRight className="h-3.5 w-3.5" />
+        </span>
+        <span className="text-xs" style={{ color: tagColor }}>
+          {tags}
+        </span>
       </div>
-    </motion.div>
+    </div>
   );
 
   return (
-    <section
-      id={id}
-      ref={ref}
-      className={dark ? "apple-section-dark" : "apple-section-light"}
-    >
-      <div className="lg:grid lg:grid-cols-2 lg:items-stretch">
-        {media}
-        {copy}
-      </div>
-    </section>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Pill CTA components
-// ---------------------------------------------------------------------------
-
-function PillOutline({
-  href,
-  children,
-  dark = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  dark?: boolean;
-}) {
-  const color = dark ? "#ffffff" : "#047857";
-  return (
-    <a
+    <motion.a
+      variants={cardVariants}
       href={href}
-      className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
-      style={{ color, borderColor: color }}
-    >
-      {children}
-      <ChevronRight className="h-3.5 w-3.5" />
-    </a>
-  );
-}
-
-function PillFilled({
-  href,
-  children,
-  external = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  external?: boolean;
-}) {
-  return (
-    <a
-      href={href}
-      className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal"
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    >
-      {children}
-      <ChevronRight className="h-3.5 w-3.5" />
-    </a>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Hero preview card (vector thumbnail + label) — unifies with product scenes
-// ---------------------------------------------------------------------------
-
-function HeroPreviewCard({
-  href,
-  id,
-  Icon,
-  name,
-  preview,
-  wide = false,
-}: {
-  href: string;
-  id: string;
-  Icon: React.ComponentType<{ className?: string }>;
-  name: string;
-  preview: string;
-  wide?: boolean;
-}) {
-  return (
-    <a
-      href={href}
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#34c759]/40 ${
-        wide ? "col-span-2 sm:col-span-1" : ""
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl text-left transition-all duration-300 hover:-translate-y-1 ${shell} ${
+        banner ? "sm:flex-row sm:items-stretch" : ""
       }`}
     >
-      <div
-        className="relative flex items-center justify-center overflow-hidden p-3"
-        style={{
-          background:
-            "radial-gradient(120% 120% at 30% 20%, #14402f 0%, #0a281f 60%, #061a13 100%)",
-        }}
+      {media}
+      {body}
+    </motion.a>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Enterprise capability card
+// ---------------------------------------------------------------------------
+
+function CapabilityCard({
+  Icon,
+  title,
+  desc,
+}: {
+  Icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <motion.div
+      variants={cardVariants}
+      className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+    >
+      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#3ab27f]/14">
+        <Icon className="h-5 w-5 text-[#3ab27f]" />
+      </div>
+      <h4 className="mb-2 text-lg font-semibold text-white">{title}</h4>
+      <p
+        className="text-sm"
+        style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.5 }}
       >
-        <div className="w-full transition-transform duration-500 group-hover:scale-105">
-          <ProductArt id={id} tone="dark" />
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-1 p-4">
-        <div className="flex items-center gap-2">
-          <Icon className="h-4 w-4 text-[#34c759]" />
-          <h3
-            className="text-sm font-semibold text-white"
-            style={{ letterSpacing: "0.196px" }}
-          >
-            {name}
-          </h3>
-          <ChevronRight className="ml-auto h-3.5 w-3.5 text-[#34c759] opacity-0 transition-opacity group-hover:opacity-100" />
-        </div>
-        <p
-          className="text-xs leading-relaxed"
-          style={{ color: "rgba(255,255,255,0.55)" }}
-        >
-          {preview}
-        </p>
-      </div>
-    </a>
+        {desc}
+      </p>
+    </motion.div>
   );
 }
 
@@ -683,6 +384,7 @@ function HeroPreviewCard({
 
 export default function AppleShowcase() {
   const t = useTranslations("Home");
+  const common = useTranslations("Common");
   const featureCopy = t.raw("features") as Record<
     string,
     Array<{ title: string; desc: string }>
@@ -690,366 +392,502 @@ export default function AppleShowcase() {
   const withCopy = (
     iconItems: Array<{ Icon: React.ComponentType<{ className?: string }> }>,
     key: string,
-  ) =>
-    featureCopy[key].map((copy, index) => ({
-      ...iconItems[index],
-      ...copy,
-    }));
+  ) => featureCopy[key].map((copy, i) => ({ ...iconItems[i], ...copy }));
+
   const worksyncFeatures = withCopy(WORKSYNC_FEATURES, "worksync");
-  const chessFeatures = withCopy(CHESS_FEATURES, "chess");
   const signFeatures = withCopy(SIGN_FEATURES, "sign");
   const shoppingFeatures = withCopy(SHOPPING_FEATURES, "shopping");
   const timeslotFeatures = withCopy(TIMESLOT_FEATURES, "timeslot");
   const advantages = withCopy(ADVANTAGES, "advantages");
 
-  const scenes: Array<React.ComponentProps<typeof ProductScene>> = [
-    {
-      id: "worksync",
-      tone: "light",
-      mediaSide: "right",
-      eyebrow: t("sections.worksync.flagship"),
-      title: "WorkSync",
-      subtitle: t("sections.worksync.subtitle"),
-      description: t("sections.worksync.description"),
-      features: worksyncFeatures,
-      primary: { href: "/worksync", label: t("sections.worksync.primary") },
-      secondary: {
-        href: WORKSYNC_URL,
-        label: t("sections.worksync.secondary"),
-        external: true,
-      },
-      pricing: t("pricing.worksync"),
-    },
+  const trust = t.raw("trust") as Array<{ value: string; label: string }>;
+
+  // Product suite — asymmetric bento (no equal 3-across rows, see DESIGN.md §5)
+  const heroTiles = [
+    { id: "worksync", Icon: FileText, name: "WorkSync", key: "worksync" },
     {
       id: "xiaozu",
-      tone: "dark",
-      mediaSide: "left",
-      title: t("sections.xiaozu.title"),
-      subtitle: t("sections.xiaozu.subtitle"),
-      tagline: t("sections.xiaozu.tagline"),
-      description: t("sections.xiaozu.description"),
-      features: chessFeatures,
-      primary: { href: CHESS_URL, label: t("sections.xiaozu.primary") },
-      secondary: {
-        href: CHESS_URL,
-        label: t("sections.xiaozu.secondary"),
-        external: true,
-      },
-      pricing: t("pricing.chess"),
+      Icon: Swords,
+      name: t("sections.xiaozu.title"),
+      key: "xiaozu",
     },
-    {
-      id: "sign",
-      tone: "light",
-      mediaSide: "right",
-      title: "Sign",
-      subtitle: t("sections.sign.subtitle"),
-      tagline: t("sections.sign.tagline"),
-      description: t("sections.sign.description"),
-      features: signFeatures,
-      primary: {
-        href: "/products/activity",
-        label: t("sections.sign.primary"),
-      },
-      secondary: {
-        href: SIGN_URL,
-        label: t("sections.sign.secondary"),
-        external: true,
-      },
-      pricing: t("pricing.sign"),
-    },
+    { id: "sign", Icon: Ticket, name: "Sign", key: "sign" },
     {
       id: "shopping",
-      tone: "dark",
-      mediaSide: "left",
-      title: t("sections.shopping.title"),
-      subtitle: t("sections.shopping.subtitle"),
-      description: t("sections.shopping.description"),
-      features: shoppingFeatures,
-      primary: { href: SHOPPING_URL, label: t("sections.shopping.primary") },
-      secondary: {
-        href: SHOPPING_URL,
-        label: t("sections.shopping.secondary"),
-        external: true,
-      },
-      pricing: t("pricing.shopping"),
+      Icon: ShoppingCart,
+      name: t("sections.shopping.title"),
+      key: "shopping",
     },
-    {
-      id: "timeslot",
-      tone: "light",
-      mediaSide: "right",
-      title: "TimeSlot",
-      subtitle: t("sections.timeslot.subtitle"),
-      description: t("sections.timeslot.description"),
-      features: timeslotFeatures,
-      primary: { href: TIMESLOT_URL, label: t("sections.timeslot.primary") },
-      secondary: {
-        href: TIMESLOT_URL,
-        label: t("sections.timeslot.secondary"),
-        external: true,
-      },
-      pricing: t("pricing.timeslot"),
-    },
+    { id: "timeslot", Icon: CalendarClock, name: "TimeSlot", key: "timeslot" },
   ];
-
-  // Hero scroll narrative: rings zoom + fade, content lifts + fades as you leave.
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const ringsScale = useTransform(heroProgress, [0, 1], [1, 1.5]);
-  const ringsOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
-  const heroContentY = useTransform(heroProgress, [0, 1], [0, -80]);
-  const heroContentOpacity = useTransform(heroProgress, [0, 0.6], [1, 0]);
 
   return (
     <div className="overflow-x-hidden">
       <AppleNav />
 
-      {/* ===== 1. Hero ===== */}
-      <section
-        ref={heroRef}
-        className="apple-section-dark relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-12 overflow-hidden"
-      >
-        {/* Background decorative rings */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{ scale: ringsScale, opacity: ringsOpacity }}
-        >
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              width: "800px",
-              height: "800px",
-              background:
-                "radial-gradient(circle, rgba(5,150,105,0.08) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border"
-            style={{
-              width: "600px",
-              height: "600px",
-              borderColor: "rgba(255,255,255,0.03)",
-            }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border"
-            style={{
-              width: "400px",
-              height: "400px",
-              borderColor: "rgba(255,255,255,0.04)",
-            }}
-          />
-        </motion.div>
+      {/* ===== 1. Hero — asymmetric, compact (see DESIGN.md §5) ===== */}
+      <section className="apple-section-light relative overflow-hidden px-6 pt-28 pb-14 lg:pt-32">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-24 right-[-10%] h-[560px] w-[560px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,121,76,0.13) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-14%] left-[-8%] h-[440px] w-[440px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(245,130,32,0.11) 0%, transparent 72%)",
+          }}
+        />
 
-        <motion.div
-          className="relative z-10 w-full flex flex-col items-center"
-          style={{ y: heroContentY, opacity: heroContentOpacity }}
-        >
+        <div className="relative z-10 mx-auto grid max-w-[1400px] items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Left — copy */}
           <motion.div
+            className="lg:col-span-5"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-[980px] relative z-10"
+            transition={spring}
           >
+            <span
+              className="eyebrow-mono mb-5 inline-flex items-center gap-3"
+              style={{ color: "#00794c" }}
+            >
+              <span
+                aria-hidden
+                className="brand-stripe inline-block h-3.5 w-9 rounded-[2px]"
+              />
+              {common("brand")}
+            </span>
             <h1
-              className="apple-headline text-5xl sm:text-6xl md:text-[56px] mb-4"
-              style={{ color: "#ffffff" }}
+              className="apple-headline mb-5"
+              style={{
+                color: "#16181c",
+                fontSize: "clamp(2.5rem, 5.5vw, 4rem)",
+              }}
             >
               {t("hero.title")}
             </h1>
             <p
-              className="apple-subhead text-lg sm:text-xl md:text-[21px] mb-4"
-              style={{ color: "rgba(255,255,255,0.8)" }}
+              className="apple-subhead mb-4 text-xl sm:text-2xl"
+              style={{ color: "#16181c" }}
             >
               {t("hero.subtitle")}
             </p>
             <p
-              className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-8"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              className="apple-body mb-8 max-w-[46ch] text-[15px] sm:text-base"
+              style={{ color: "rgba(20,24,28,0.6)" }}
             >
               {t("hero.description")}
             </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
+            <div className="flex flex-wrap items-center gap-4">
               <a
-                href="#worksync"
-                className="apple-btn-accent inline-flex items-center gap-1 text-sm font-normal"
+                href="#suite"
+                className="apple-btn-accent inline-flex items-center gap-1.5 text-sm font-medium"
               >
                 {t("hero.explore")}
-                <ChevronRight className="h-3.5 w-3.5" />
+                <ChevronRight className="h-4 w-4" />
               </a>
               <Link
                 href="/enterprise"
                 className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
-                style={{ color: "#ffffff", borderColor: "#ffffff" }}
+                style={{ color: "#00794c", borderColor: "#00794c" }}
               >
                 {t("hero.enterprise")}
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-            <p
-              className="apple-body text-xs mt-4"
-              style={{ color: "rgba(255,255,255,0.4)" }}
-            >
-              {t("hero.enterpriseHint")}
-            </p>
+
+            {/* Inline trust strip — tri-color left borders, compact */}
+            <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              {trust.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="border-l-2 pl-3"
+                  style={{
+                    borderColor: ["#00925c", "#f58220", "#e11b22", "#00925c"][
+                      i
+                    ],
+                  }}
+                >
+                  <div
+                    className="font-mono text-xl font-semibold"
+                    style={{ color: "#16181c", letterSpacing: "-0.02em" }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    className="text-xs"
+                    style={{ color: "rgba(20,24,28,0.55)" }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Product preview cards */}
+          {/* Right — product bento preview */}
           <motion.div
-            className="relative z-10 max-w-[1100px] w-full mt-16 mb-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-2"
+            className="lg:col-span-7"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ ...spring, delay: 0.12 }}
           >
-            <HeroPreviewCard
-              href="#worksync"
-              id="worksync"
-              Icon={FileText}
-              name="WorkSync"
-              preview={t("preview.worksync")}
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {heroTiles.map((tile, i) => {
+                const dark = tile.id === "xiaozu";
+                return (
+                  <a
+                    key={tile.id}
+                    href="#suite"
+                    className={`group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+                      i === 0 ? "col-span-2 sm:col-span-2 sm:row-span-2" : ""
+                    } ${
+                      dark
+                        ? "border border-white/10 bg-[#0e1012]"
+                        : "border border-[rgba(20,24,28,0.08)] bg-white shadow-[0_2px_14px_rgba(20,24,28,0.05)]"
+                    }`}
+                  >
+                    <div
+                      className="relative flex flex-1 items-center justify-center p-4"
+                      style={{
+                        background: dark
+                          ? "radial-gradient(125% 120% at 28% 12%, #17513c 0%, #0d3126 55%, #071d16 100%)"
+                          : "radial-gradient(125% 120% at 28% 12%, #ecfbf3 0%, #dcf2e6 55%, #cfeddd 100%)",
+                      }}
+                    >
+                      <span
+                        aria-hidden
+                        className="brand-stripe absolute inset-x-0 top-0 h-[2px] opacity-70"
+                      />
+                      <div
+                        className={`w-full transition-transform duration-500 group-hover:scale-[1.04] ${i === 0 ? "max-w-[320px]" : "max-w-[150px]"}`}
+                      >
+                        <ProductArt
+                          id={tile.id}
+                          tone={dark ? "dark" : "light"}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 px-3.5 py-2.5">
+                      <tile.Icon
+                        className="h-4 w-4"
+                        style={{ color: dark ? "#3ab27f" : "#00794c" }}
+                      />
+                      <span
+                        className="text-[13px] font-semibold"
+                        style={{ color: dark ? "#ffffff" : "#16181c" }}
+                      >
+                        {tile.name}
+                      </span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== 2. Product suite — bento grid ===== */}
+      <section id="suite" className="apple-section-light px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <SectionHeading
+            eyebrow={common("productOverview")}
+            title={t("hero.subtitle")}
+            lead={t("hero.description")}
+          />
+
+          <motion.div
+            className="mt-10 grid gap-5 lg:grid-cols-6"
+            {...revealProps}
+          >
+            {/* Flagship — spans 4, with feature bullets */}
+            <div className="lg:col-span-4">
+              <SuiteCard
+                id="worksync"
+                index="01"
+                Icon={FileText}
+                name="WorkSync"
+                subtitle={t("sections.worksync.subtitle")}
+                tags={t("preview.worksync")}
+                href="/worksync"
+                ctaLabel={t("sections.worksync.primary")}
+                features={worksyncFeatures.slice(0, 4)}
+              />
+            </div>
+            {/* 小卒 — the single dark night-surface tile, spans 2 */}
+            <div className="lg:col-span-2">
+              <SuiteCard
+                id="xiaozu"
+                index="02"
+                Icon={Swords}
+                name={t("sections.xiaozu.title")}
+                subtitle={t("sections.xiaozu.subtitle")}
+                tags={t("preview.xiaozu")}
+                href={CHESS_URL}
+                ctaLabel={t("sections.xiaozu.secondary")}
+                tone="dark"
+              />
+            </div>
+            {/* Sign + 小商城 — spans 3 each */}
+            <div className="lg:col-span-3">
+              <SuiteCard
+                id="sign"
+                index="03"
+                Icon={Ticket}
+                name="Sign"
+                subtitle={t("sections.sign.subtitle")}
+                tags={t("preview.sign")}
+                href={SIGN_URL}
+                ctaLabel={t("sections.sign.secondary")}
+                banner
+                features={signFeatures.slice(0, 4)}
+              />
+            </div>
+            <div className="lg:col-span-3">
+              <SuiteCard
+                id="shopping"
+                index="04"
+                Icon={ShoppingCart}
+                name={t("sections.shopping.title")}
+                subtitle={t("sections.shopping.subtitle")}
+                tags={t("preview.shopping")}
+                href={SHOPPING_URL}
+                ctaLabel={t("sections.shopping.secondary")}
+                banner
+                features={shoppingFeatures.slice(0, 4)}
+              />
+            </div>
+            {/* TimeSlot — wide banner spans 4, + free-apps teaser spans 2 */}
+            <div className="lg:col-span-4">
+              <SuiteCard
+                id="timeslot"
+                index="05"
+                Icon={CalendarClock}
+                name="TimeSlot"
+                subtitle={t("sections.timeslot.subtitle")}
+                tags={t("preview.timeslot")}
+                href={TIMESLOT_URL}
+                ctaLabel={t("sections.timeslot.secondary")}
+                banner
+                features={timeslotFeatures.slice(0, 4)}
+              />
+            </div>
+            <motion.a
+              variants={cardVariants}
+              href="#apps"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[rgba(20,24,28,0.08)] bg-[#00794c] p-7 text-left transition-all duration-300 hover:-translate-y-1 lg:col-span-2"
+            >
+              <span
+                aria-hidden
+                className="brand-stripe absolute inset-x-0 top-0 h-[3px]"
+              />
+              <Sparkles className="h-7 w-7 text-white/90" />
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-white">
+                  {t("nav.apps")}
+                </h3>
+                <p className="mt-2 text-sm text-white/80">
+                  {t("preview.worksync")}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-white">
+                  {common("learnMore")}
+                  <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </div>
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== 3. Flagship deep-dive — WorkSync full capability grid ===== */}
+      <section className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-16 md:py-24">
+        <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              eyebrow={t("sections.worksync.flagship")}
+              title="WorkSync"
+              lead={t("sections.worksync.description")}
             />
-            <HeroPreviewCard
-              href="#xiaozu"
-              id="xiaozu"
-              Icon={Swords}
-              name={t("sections.xiaozu.title")}
-              preview={t("preview.xiaozu")}
-            />
-            <HeroPreviewCard
-              href="#sign"
-              id="sign"
-              Icon={Ticket}
-              name="Sign"
-              preview={t("preview.sign")}
-            />
-            <HeroPreviewCard
-              href="#shopping"
-              id="shopping"
-              Icon={ShoppingCart}
-              name={t("sections.shopping.title")}
-              preview={t("preview.shopping")}
-            />
-            <HeroPreviewCard
-              href="#timeslot"
-              id="timeslot"
-              Icon={CalendarClock}
-              name="TimeSlot"
-              preview={t("preview.timeslot")}
-              wide
-            />
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/worksync"
+                className="apple-btn-accent inline-flex items-center gap-1.5 text-sm font-medium"
+              >
+                {t("sections.worksync.primary")}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <a
+                href={WORKSYNC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
+                style={{ color: "#00794c", borderColor: "#00794c" }}
+              >
+                {t("sections.worksync.secondary")}
+                <ChevronRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+            <div className="mt-8 rounded-2xl bg-[#eef8f3] p-5">
+              <div className="w-full max-w-[420px]">
+                <ProductArt id="worksync" tone="light" />
+              </div>
+            </div>
+          </div>
+
+          <motion.div
+            className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:col-span-7"
+            {...revealProps}
+          >
+            {worksyncFeatures.map((f) => (
+              <motion.div
+                key={f.title}
+                variants={cardVariants}
+                className="flex gap-3.5"
+              >
+                <div className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[#00794c]/10">
+                  <f.Icon className="h-5 w-5 text-[#00794c]" />
+                </div>
+                <div>
+                  <h4
+                    className="mb-1 text-[15px] font-semibold"
+                    style={{ color: "#16181c" }}
+                  >
+                    {f.title}
+                  </h4>
+                  <p
+                    className="text-[13px]"
+                    style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.5 }}
+                  >
+                    {f.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== 4. Enterprise band — dark, high-contrast (see DESIGN.md §2) ===== */}
+      <section className="apple-section-dark px-6 py-20 md:py-28">
+        <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-12 lg:gap-16">
+          <motion.div className="lg:col-span-5" {...revealProps}>
+            <motion.span
+              variants={cardVariants}
+              className="eyebrow-mono mb-4 inline-flex items-center gap-2.5"
+              style={{ color: "#3ab27f" }}
+            >
+              <span
+                aria-hidden
+                className="brand-stripe inline-block h-3 w-6 rounded-[2px]"
+              />
+              {t("nav.enterprise")}
+            </motion.span>
+            <motion.h2
+              variants={cardVariants}
+              className="apple-headline mb-5 text-3xl sm:text-4xl md:text-[42px] text-white"
+            >
+              {t("sections.why.title")}
+            </motion.h2>
+            <motion.p
+              variants={cardVariants}
+              className="apple-body mb-9 max-w-[44ch] text-sm sm:text-base"
+              style={{ color: "rgba(255,255,255,0.6)" }}
+            >
+              {t("sections.why.description")}
+            </motion.p>
+            <div className="space-y-4">
+              {[
+                { Icon: BarChart3, label: t("sections.why.metricStack") },
+                { Icon: Lock, label: t("sections.why.metricDeploy") },
+                { Icon: Ticket, label: t("sections.why.metricLocale") },
+              ].map(({ Icon, label }) => (
+                <motion.div
+                  key={label}
+                  variants={cardVariants}
+                  className="flex items-center gap-3 text-sm"
+                >
+                  <Icon className="h-4 w-4 shrink-0 text-[#3ab27f]" />
+                  <span style={{ color: "rgba(255,255,255,0.72)" }}>
+                    {label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div variants={cardVariants} className="mt-9">
+              <Link
+                href="/enterprise"
+                className="apple-btn-accent inline-flex items-center gap-1.5 text-sm font-medium"
+              >
+                {t("hero.enterprise")}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
           </motion.div>
 
           <motion.div
-            className="mb-8 apple-scroll-hint"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7"
+            {...revealProps}
           >
-            <ArrowDown className="h-5 w-5 text-white/40" />
+            {advantages.map((a, i) => (
+              <div key={a.title} className={i === 0 ? "sm:col-span-2" : ""}>
+                <CapabilityCard {...a} />
+              </div>
+            ))}
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* ===== 1.5 Trust band ===== */}
-      <section className="apple-section-dark border-t border-white/5 py-14 px-6">
-        <motion.div
-          className="max-w-[980px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {(t.raw("trust") as Array<{ value: string; label: string }>).map(
-            (stat) => (
-              <motion.div key={stat.label} variants={cardVariants}>
-                <div className="text-3xl sm:text-4xl font-semibold text-white mb-1">
-                  {stat.value}
-                </div>
-                <div
-                  className="text-xs sm:text-sm"
-                  style={{ color: "rgba(255,255,255,0.55)" }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-            ),
-          )}
-        </motion.div>
-      </section>
-
-      {/* ===== 2-6. Product scenes (sticky media + scrollytelling copy) ===== */}
-      {scenes.map((scene) => (
-        <ProductScene key={scene.id} {...scene} />
-      ))}
-
-      {/* ===== 6.5 Free PWA apps ===== */}
+      {/* ===== 5. Free PWA apps ===== */}
       <FreeAppsSection />
 
-      {/* ===== 7. Why Murphy Cloud ===== */}
-      <section className="apple-section-dark py-24 md:py-32 px-6">
-        <motion.div
-          className="max-w-[980px] mx-auto text-center"
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <h2 className="apple-headline text-3xl sm:text-4xl md:text-[40px] text-white mb-4">
-            {t("sections.why.title")}
+      {/* ===== 6. Conversion CTA band ===== */}
+      <section className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-[900px] text-center">
+          <span
+            aria-hidden
+            className="brand-stripe mx-auto mb-6 block h-[3px] w-24 rounded-full"
+          />
+          <h2
+            className="apple-headline text-3xl sm:text-4xl md:text-[44px]"
+            style={{ color: "#16181c" }}
+          >
+            {t("hero.subtitle")}
           </h2>
           <p
-            className="apple-body text-sm sm:text-base max-w-xl mx-auto mb-16"
-            style={{ color: "rgba(255,255,255,0.56)" }}
+            className="apple-body mx-auto mt-4 max-w-[52ch] text-sm sm:text-base"
+            style={{ color: "rgba(20,24,28,0.6)" }}
           >
-            {t("sections.why.description")}
+            {t("hero.description")}
           </p>
-        </motion.div>
-
-        <motion.div
-          className="max-w-[980px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {advantages.map((a) => (
-            <FeatureCardDark key={a.title} {...a} />
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="max-w-[980px] mx-auto text-center mt-16"
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-[#34c759]" />
-              <span style={{ color: "rgba(255,255,255,0.7)" }}>
-                {t("sections.why.metricStack")}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Lock className="h-4 w-4 text-[#34c759]" />
-              <span style={{ color: "rgba(255,255,255,0.7)" }}>
-                {t("sections.why.metricDeploy")}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Ticket className="h-4 w-4 text-[#34c759]" />
-              <span style={{ color: "rgba(255,255,255,0.7)" }}>
-                {t("sections.why.metricLocale")}
-              </span>
-            </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <ContactDialog>
+              <button
+                type="button"
+                className="apple-btn-accent inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium"
+              >
+                {common("consultNow")}
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </ContactDialog>
+            <Link
+              href="/enterprise"
+              className="apple-pill inline-flex items-center gap-1 text-sm font-normal"
+              style={{ color: "#00794c", borderColor: "#00794c" }}
+            >
+              {t("hero.enterprise")}
+              <ChevronRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* ===== 6. Footer ===== */}
+      {/* ===== 7. Footer ===== */}
       <Footer showContactId />
     </div>
   );

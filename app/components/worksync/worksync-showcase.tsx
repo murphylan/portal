@@ -40,7 +40,6 @@ import ScreenPlaceholder from "./screen-placeholder";
 const NAV_LINKS = [
   { label: "产品概览", href: "#overview" },
   { label: "核心功能", href: "#features" },
-  { label: "定价", href: "#pricing" },
   { label: "联系我们", href: "#contact" },
 ];
 
@@ -189,38 +188,6 @@ const FEATURE_SECTIONS: FeatureSection[] = [
     iconColor: "text-amber-500",
     Icon: Palette,
     imageSrc: "/worksync/whiteboard.png",
-  },
-];
-
-const PRICING_TIERS = [
-  {
-    name: "在线会员",
-    price: "¥199",
-    period: "/ 年",
-    detail: "含最多 10 人同时使用（按年订阅）",
-    features: [
-      "全功能在线使用",
-      "最多 10 位成员",
-      "云端数据备份",
-      "标准技术支持",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "客户内网安装",
-    price: "¥1,999",
-    period: "",
-    detail: "部署在您指定内网环境，不限人数",
-    features: ["私有化部署", "不限成员数量", "数据完全自主", "一年免费升级"],
-    highlighted: true,
-  },
-  {
-    name: "源码授权",
-    price: "¥19,999",
-    period: "",
-    detail: "完整源代码交付，便于二次开发与自主运维",
-    features: ["完整源代码交付", "二次开发授权", "架构咨询支持", "终身使用权"],
-    highlighted: false,
   },
 ];
 
@@ -521,122 +488,6 @@ function ZoomSection({
   );
 }
 
-function PricingSection({
-  tiers,
-  title,
-  lead,
-  recommended,
-  cta,
-  note,
-}: {
-  tiers: typeof PRICING_TIERS;
-  title: string;
-  lead: string;
-  recommended: string;
-  cta: string;
-  note: string;
-}) {
-  return (
-    <section
-      id="pricing"
-      className="py-24 px-4 bg-gray-50/50 dark:bg-gray-900/30"
-    >
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-            {title}
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-            {lead}
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {tiers.map((tier, i) => (
-            <motion.div
-              key={tier.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <Card
-                className={`relative h-full transition-shadow hover:shadow-xl ${
-                  tier.highlighted
-                    ? "border-violet-300 dark:border-violet-700 shadow-lg shadow-violet-500/10"
-                    : ""
-                }`}
-              >
-                {tier.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-linear-to-r from-violet-500 to-indigo-500 text-white text-xs font-medium">
-                    {recommended}
-                  </div>
-                )}
-                <CardContent className="p-8">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    {tier.name}
-                  </h3>
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-4xl font-bold text-gray-900 dark:text-white">
-                      {tier.price}
-                    </span>
-                    {tier.period && (
-                      <span className="text-gray-500 dark:text-gray-400">
-                        {tier.period}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                    {tier.detail}
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    {tier.features.map((f) => (
-                      <li
-                        key={f}
-                        className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
-                      >
-                        <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <ContactDialog>
-                    <Button
-                      className={`w-full ${
-                        tier.highlighted
-                          ? "bg-linear-to-r from-violet-600 to-indigo-600 text-white hover:from-violet-700 hover:to-indigo-700"
-                          : ""
-                      }`}
-                      variant={tier.highlighted ? "default" : "outline"}
-                    >
-                      {cta}
-                    </Button>
-                  </ContactDialog>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.p
-          className="text-center text-xs text-gray-400 dark:text-gray-500 mt-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          {note}
-        </motion.p>
-      </div>
-    </section>
-  );
-}
-
 // ---------------------------------------------------------------------------
 // Main Component
 // ---------------------------------------------------------------------------
@@ -646,7 +497,6 @@ export default function WorkSyncShowcase() {
   const navLinks = [
     { label: t("nav.overview"), href: "#overview" },
     { label: t("nav.features"), href: "#features" },
-    { label: t("nav.pricing"), href: "#pricing" },
     { label: t("nav.contact"), href: "#contact" },
   ];
   const highlightLabels = t.raw("highlights") as string[];
@@ -669,16 +519,6 @@ export default function WorkSyncShowcase() {
   const featureSections = FEATURE_SECTIONS.map((section, index) => ({
     ...section,
     ...featureCopies[index],
-  }));
-  const pricingCopies = t.raw("pricingTiers") as Array<{
-    name: string;
-    period: string;
-    detail: string;
-    features: string[];
-  }>;
-  const pricingTiers = PRICING_TIERS.map((tier, index) => ({
-    ...tier,
-    ...pricingCopies[index],
   }));
   const advantageCopies = t.raw("advantages") as Array<{
     title: string;
@@ -983,16 +823,6 @@ export default function WorkSyncShowcase() {
         </div>
       </section>
 
-      {/* ── Pricing ── */}
-      <PricingSection
-        tiers={pricingTiers}
-        title={t("pricing.title")}
-        lead={t("pricing.lead")}
-        recommended={t("pricing.recommended")}
-        cta={t("pricing.cta")}
-        note={t("pricing.note")}
-      />
-
       {/* ── CTA ── */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 animated-gradient-bg" />
@@ -1035,7 +865,7 @@ export default function WorkSyncShowcase() {
                     size="lg"
                     className="bg-white text-violet-600 hover:bg-white/90 shadow-xl shadow-black/20 px-8"
                   >
-                    {t("pricing.cta")}
+                    {t("cta.action")}
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
                       transition={{
