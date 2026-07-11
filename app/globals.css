@@ -529,3 +529,88 @@
 .apple-scroll-hint {
   animation: apple-scroll-hint 2s ease-in-out infinite;
 }
+
+/* ===== Ambient background embellishment (light retail canvas) ===== */
+
+/* Slow, physical drift for brand-color orbs — transform/opacity only so the
+   paper canvas feels alive without decorative noise (see DESIGN.md §6). */
+@keyframes orb-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(42px, -34px, 0) scale(1.1);
+  }
+}
+
+@keyframes orb-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-38px, 30px, 0) scale(1.07);
+  }
+}
+
+@keyframes orb-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(26px, 34px, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.orb-a {
+  animation: orb-drift-a 22s ease-in-out infinite;
+}
+.orb-b {
+  animation: orb-drift-b 27s ease-in-out infinite;
+}
+.orb-c {
+  animation: orb-drift-c 19s ease-in-out infinite;
+}
+
+/* Faint tactile dot grid — breaks up large flat paper areas. Sits behind
+   content; edges fade via mask so it never reads as a hard pattern. */
+.paper-dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    rgba(20, 24, 28, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 30%,
+    #000 0%,
+    transparent 80%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 30%,
+    #000 0%,
+    transparent 80%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-a,
+  .orb-b,
+  .orb-c {
+    animation: none;
+  }
+}

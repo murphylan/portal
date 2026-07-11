@@ -426,21 +426,30 @@ export default function AppleShowcase() {
       <AppleNav />
 
       {/* ===== 1. Hero — asymmetric, compact (see DESIGN.md §5) ===== */}
-      <section className="apple-section-light relative overflow-hidden px-6 pt-28 pb-14 lg:pt-32">
+      <section className="paper-dots apple-section-light relative overflow-hidden px-6 pt-28 pb-14 lg:pt-32">
+        {/* Ambient brand orbs — slow tri-color drift enlivens the paper canvas */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 right-[-10%] h-[560px] w-[560px] rounded-full"
+          className="orb orb-a -top-28 right-[-10%] h-[560px] w-[560px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(0,121,76,0.13) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(0,121,76,0.16) 0%, transparent 70%)",
           }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute bottom-[-14%] left-[-8%] h-[440px] w-[440px] rounded-full"
+          className="orb orb-b bottom-[-16%] left-[-8%] h-[460px] w-[460px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(245,130,32,0.11) 0%, transparent 72%)",
+              "radial-gradient(circle, rgba(245,130,32,0.13) 0%, transparent 72%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="orb orb-c top-[24%] left-[38%] h-[320px] w-[320px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(225,27,34,0.08) 0%, transparent 72%)",
           }}
         />
 
@@ -594,8 +603,19 @@ export default function AppleShowcase() {
       </section>
 
       {/* ===== 2. Product suite — bento grid ===== */}
-      <section id="suite" className="apple-section-light px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section
+        id="suite"
+        className="paper-dots apple-section-light relative overflow-hidden px-6 py-16 md:py-24"
+      >
+        <div
+          aria-hidden
+          className="orb orb-b pointer-events-none absolute -right-[6%] top-[10%] h-[420px] w-[420px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,121,76,0.1) 0%, transparent 72%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1400px]">
           <SectionHeading
             eyebrow={common("productOverview")}
             title={t("hero.subtitle")}
@@ -847,8 +867,16 @@ export default function AppleShowcase() {
       <FreeAppsSection />
 
       {/* ===== 6. Conversion CTA band ===== */}
-      <section className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-[900px] text-center">
+      <section className="paper-dots apple-section-light relative overflow-hidden border-t border-[rgba(20,24,28,0.06)] px-6 py-20 md:py-28">
+        <div
+          aria-hidden
+          className="orb orb-a pointer-events-none absolute left-1/2 top-[-30%] h-[520px] w-[520px] -translate-x-1/2"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,121,76,0.1) 0%, transparent 70%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-[900px] text-center">
           <span
             aria-hidden
             className="brand-stripe mx-auto mb-6 block h-[3px] w-24 rounded-full"
