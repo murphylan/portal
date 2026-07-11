@@ -385,6 +385,7 @@ function CapabilityCard({
 export default function AppleShowcase() {
   const t = useTranslations("Home");
   const common = useTranslations("Common");
+  const fa = useTranslations("FreeApps");
   const featureCopy = t.raw("features") as Record<
     string,
     Array<{ title: string; desc: string }>
@@ -714,7 +715,7 @@ export default function AppleShowcase() {
                   {t("nav.apps")}
                 </h3>
                 <p className="mt-2 text-sm text-white/80">
-                  {t("preview.worksync")}
+                  {`${fa("tagFree")} · ${fa("tagInstall")} · ${fa("tagOffline")}`}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-white">
                   {common("learnMore")}

@@ -52,7 +52,7 @@ export default function ContactDialog({
   return (
     <Dialog>
       <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-md rounded-lg">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">
             {t("title")}
@@ -64,57 +64,26 @@ export default function ContactDialog({
 
         <div className="space-y-4 py-4">
           {/* 邮箱 */}
-          <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                <Mail className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+          <div className="flex flex-col gap-3 p-4 rounded-lg bg-muted/50 border sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="h-10 w-10 shrink-0 rounded-full bg-[#00794c]/10 flex items-center justify-center">
+                <Mail className="h-5 w-5 text-[#00794c]" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-medium text-muted-foreground">
                   {t("email")}
                 </p>
-                <p className="font-medium">{email}</p>
+                <p className="font-medium break-all">{email}</p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 shrink-0">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => copyToClipboard(email, "email")}
               >
                 {copiedEmail ? (
-                  <Check className="h-4 w-4 text-green-600" />
-                ) : (
-                  <Copy className="h-4 w-4" />
-                )}
-              </Button>
-              <Button size="sm" asChild>
-                <a href={`mailto:${email}`}>{t("sendEmail")}</a>
-              </Button>
-            </div>
-          </div>
-
-          {/* 电话/微信 */}
-          <div className="flex items-center justify-between p-4 rounded-lg bg-muted/50 border">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
-                <Phone className="h-5 w-5 text-green-600 dark:text-green-400" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">
-                  {t("phone")}
-                </p>
-                <p className="font-medium">{phone}</p>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => copyToClipboard(phone, "phone")}
-              >
-                {copiedPhone ? (
-                  <Check className="h-4 w-4 text-green-600" />
+                  <Check className="h-4 w-4 text-[#00794c]" />
                 ) : (
                   <Copy className="h-4 w-4" />
                 )}
@@ -122,7 +91,42 @@ export default function ContactDialog({
               <Button
                 size="sm"
                 asChild
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-[#00794c] hover:bg-[#00925c] text-white"
+              >
+                <a href={`mailto:${email}`}>{t("sendEmail")}</a>
+              </Button>
+            </div>
+          </div>
+
+          {/* 电话/微信 */}
+          <div className="flex flex-col gap-3 p-4 rounded-lg bg-muted/50 border sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="h-10 w-10 shrink-0 rounded-full bg-[#00794c]/10 flex items-center justify-center">
+                <Phone className="h-5 w-5 text-[#00794c]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-muted-foreground">
+                  {t("phone")}
+                </p>
+                <p className="font-medium break-all">{phone}</p>
+              </div>
+            </div>
+            <div className="flex gap-2 shrink-0">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(phone, "phone")}
+              >
+                {copiedPhone ? (
+                  <Check className="h-4 w-4 text-[#00794c]" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
+              </Button>
+              <Button
+                size="sm"
+                asChild
+                className="bg-[#00794c] hover:bg-[#00925c] text-white"
               >
                 <a href={`tel:${phone}`}>{t("call")}</a>
               </Button>
