@@ -51,7 +51,7 @@ export default function Footer({ showContactId = true }: FooterProps) {
           {/* Logo & 简介 */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center gap-[3px] rounded-xl bg-[#0e1012] p-2.5">
+              <div className="flex h-9 w-9 items-center justify-center gap-[3px] p-1">
                 <span className="h-full flex-1 rounded-full bg-[#00794c]" />
                 <span className="h-full flex-1 rounded-full bg-[#f58220]" />
                 <span className="h-full flex-1 rounded-full bg-[#e11b22]" />

@@ -591,10 +591,10 @@
   inset: 0;
   pointer-events: none;
   background-image: radial-gradient(
-    rgba(20, 24, 28, 0.05) 1px,
-    transparent 1px
+    rgba(20, 24, 28, 0.09) 1.3px,
+    transparent 1.3px
   );
-  background-size: 24px 24px;
+  background-size: 22px 22px;
   -webkit-mask-image: radial-gradient(
     ellipse 90% 80% at 50% 30%,
     #000 0%,

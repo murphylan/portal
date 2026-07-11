@@ -433,7 +433,7 @@ export default function AppleShowcase() {
           className="orb orb-a -top-28 right-[-10%] h-[560px] w-[560px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(0,121,76,0.16) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(0,121,76,0.2) 0%, transparent 70%)",
           }}
         />
         <div
@@ -441,15 +441,16 @@ export default function AppleShowcase() {
           className="orb orb-b bottom-[-16%] left-[-8%] h-[460px] w-[460px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(245,130,32,0.13) 0%, transparent 72%)",
+              "radial-gradient(circle, rgba(58,178,127,0.18) 0%, transparent 72%)",
           }}
         />
+        {/* faint warm accent so the wash isn't monochrome — kept small */}
         <div
           aria-hidden
-          className="orb orb-c top-[24%] left-[38%] h-[320px] w-[320px]"
+          className="orb orb-c top-[24%] left-[38%] h-[300px] w-[300px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(225,27,34,0.08) 0%, transparent 72%)",
+              "radial-gradient(circle, rgba(245,130,32,0.07) 0%, transparent 72%)",
           }}
         />
 
