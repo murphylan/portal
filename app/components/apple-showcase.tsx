@@ -32,7 +32,6 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import {
-  CHESS_URL,
   SHOPPING_URL,
   SIGN_URL,
   TIMESLOT_URL,
@@ -651,8 +650,8 @@ export default function AppleShowcase() {
                 name={t("sections.xiaozu.title")}
                 subtitle={t("sections.xiaozu.subtitle")}
                 tags={t("preview.xiaozu")}
-                href={CHESS_URL}
-                ctaLabel={t("sections.xiaozu.secondary")}
+                href="/xiaozu"
+                ctaLabel={t("sections.xiaozu.primary")}
                 tone="dark"
               />
             </div>

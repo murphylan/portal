@@ -7,7 +7,95 @@
     "twitterTitle": "Murphy Cloud - WorkSync Docs Collaboration and More Online Tools",
     "twitterDescription": "Online SaaS products for documentation, events, chess AI, mobile shopping, and course booking.",
     "worksyncTitle": "WorkSync - Project Documentation and Collaboration",
-    "worksyncDescription": "Centralized docs, task management, PlantUML diagrams, and collaborative whiteboards in one workspace."
+    "worksyncDescription": "Centralized docs, task management, PlantUML diagrams, and collaborative whiteboards in one workspace.",
+    "xiaozuTitle": "Xiaozu - Chinese Chess AI Assistant",
+    "xiaozuDescription": "Xiaozu: an AI coach and playing partner for chess lovers. Sync moves by hand on any platform, mirror your screen for whole-board recognition every second, or share a link to play a friend live — lighting up the strongest move before you commit."
+  },
+  "Xiaozu": {
+    "nav": {
+      "usage": "How it works",
+      "capabilities": "Capabilities",
+      "backHome": "Back to home"
+    },
+    "hero": {
+      "eyebrow": "Xiaozu",
+      "title": "Chinese Chess AI Assistant",
+      "tagline": "A small pawn can change the game",
+      "description": "A personal AI coach and playing partner for every Chinese chess lover. Before you commit a move, Xiaozu reads the position and lights up the strongest option — play with more confidence, review with more clarity, and sharpen your game one match at a time.",
+      "openChess": "Start playing",
+      "learnUsage": "See how it works"
+    },
+    "usage": {
+      "eyebrow": "How it works",
+      "title": "Three ways, your choice",
+      "lead": "Whatever platform you play on, Xiaozu keeps up: enter moves by hand with zero setup, or mirror your screen and let it read the whole board every second and tell you exactly what to play — or spin up a link and play a friend live from anywhere.",
+      "methods": [
+        {
+          "index": "01",
+          "title": "Manual sync",
+          "badge": "Built in · zero setup",
+          "summary": "Play your moves and enter your opponent's on Xiaozu's web board — the engine recommends in real time.",
+          "bullets": [
+            "Works on any platform, from WeChat mini-programs to JJ Xiangqi",
+            "No extra tools to install — zero dependencies",
+            "You move, you log the opponent's move, the position syncs instantly",
+            "The engine analyzes and recommends your best move live"
+          ]
+        },
+        {
+          "index": "02",
+          "title": "Screen-mirror recognition",
+          "badge": "Local sidecar",
+          "summary": "Mirror your phone to your computer; a local sidecar reads the whole board every second, syncs to the web, and gives you your move.",
+          "bullets": [
+            "Play normally on your phone — the board is recognized about once a second",
+            "Auto-synced to the web, no manual entry",
+            "Any position or endgame works — no need to start from move one",
+            "Always guides your side; red/black switches automatically"
+          ]
+        },
+        {
+          "index": "03",
+          "title": "Live remote match",
+          "badge": "Scan to play · AI stand-in",
+          "summary": "Send a link or QR code to a friend — one tap and they're seated for a live remote match; the host can hand any move to the AI at any time.",
+          "bullets": [
+            "Share a link or QR code — no install, your opponent taps in and sits down",
+            "Both sides sync in real time; every move shows instantly, like playing in person",
+            "The host can switch on AI stand-in anytime and let the engine respond",
+            "Perfect for far-away friends and long-distance matches — start anytime"
+          ]
+        }
+      ]
+    },
+    "capabilities": {
+      "eyebrow": "Capabilities",
+      "title": "More than moving pieces",
+      "items": [
+        {
+          "title": "AI coach",
+          "desc": "Real-time position analysis powered by the Pikafish engine, explaining every move."
+        },
+        {
+          "title": "Best move",
+          "desc": "Lights up the strongest option before you commit, so you play with confidence."
+        },
+        {
+          "title": "Auto-move",
+          "desc": "In mirror mode it reads your side and tells you exactly what to play."
+        },
+        {
+          "title": "Online play",
+          "desc": "Create a room and play a live match with friends anytime."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Start a game now",
+      "lead": "Pick the way that fits you and let Xiaozu help you play every move with confidence.",
+      "action": "Start playing",
+      "contact": "Contact us"
+    }
   },
   "LocaleSwitcher": {
     "label": "Language",
