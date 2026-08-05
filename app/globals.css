@@ -607,10 +607,42 @@
   );
 }
 
+/* ===== DPP page ===== */
+
+/* Passport scan sweep — transform-only so it stays cheap (see DESIGN.md §6).
+   Travels the height of the product stage inside passport-art.tsx. */
+@keyframes dpp-scan {
+  0%,
+  100% {
+    transform: translateY(-58px);
+  }
+  50% {
+    transform: translateY(58px);
+  }
+}
+
+.dpp-scan {
+  animation: dpp-scan 3.4s ease-in-out infinite;
+}
+
+/* Console toast — matches the entry motion of the rest of the system */
+@keyframes dpp-toast-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+.dpp-toast {
+  animation: dpp-toast-in 0.2s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orb-a,
   .orb-b,
-  .orb-c {
+  .orb-c,
+  .dpp-scan,
+  .dpp-toast {
     animation: none;
   }
 }

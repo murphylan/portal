@@ -125,6 +125,7 @@
     "products": "Products",
     "freeApps": "Free apps",
     "enterprise": "Enterprise & self-hosting",
+    "dpp": "DPP implementation",
     "contact": "Contact",
     "madeWith": "Made with love by Murphy",
     "productTitles": {
@@ -148,6 +149,7 @@
       "products": "Products",
       "apps": "Free apps",
       "enterprise": "Enterprise",
+      "dpp": "DPP",
       "contact": "Contact us"
     },
     "hero": {
@@ -157,7 +159,21 @@
       "explore": "Explore products",
       "enterprise": "Self-hosting & licensing",
       "enterpriseHint": "Need private deployment or a source license? See the enterprise plans above.",
-      "contact": "Contact us"
+      "contact": "Contact us",
+      "dppTile": "DPP implementation"
+    },
+    "dpp": {
+      "eyebrow": "DPP implementation",
+      "quote": "Products sold into the EU are being required to carry a digital identity anyone can scan and verify.",
+      "lead": "ESPR is already in force: batteries go first, textiles and consumer electronics phase in behind them. We turn regulatory assessment, data architecture and platform delivery into one deliverable path — this is the business Murphy Cloud is building on.",
+      "cta": "See the DPP practice",
+      "ctaSecondary": "Browse the self-check tools",
+      "facts": {
+        "deadlineValue": "2027.02",
+        "deadlineLabel": "battery passport becomes mandatory",
+        "stepsLabel": "steps from readiness assessment to go-live",
+        "toolsLabel": "self-check and developer tools ready to use"
+      }
     },
     "trust": [
       { "value": "9+", "label": "products live in production" },
@@ -831,6 +847,491 @@
           "desc": "Site-wide HTTPS, reverse proxy, fine-grained permissions, and audit logging — a security baseline out of the box"
         }
       ]
+    }
+  },
+  "Dpp": {
+    "metaTitle": "EU Digital Product Passport implementation — Murphy Cloud",
+    "metaDescription": "DPP implementation for Chinese manufacturers: readiness assessment, product data architecture, open-dpp based platform delivery, and pilot validation.",
+    "nav": {
+      "why": "Why DPP",
+      "capability": "Capabilities",
+      "path": "Implementation",
+      "resources": "Resources",
+      "tools": "Tools",
+      "consult": "Book a call"
+    },
+    "hero": {
+      "badge": "EU Digital Product Passport · implementation partner",
+      "title": "Give every product a trusted <accent>digital identity</accent>",
+      "description": "We help Chinese manufacturers meet the EU Digital Product Passport at a workable cost — from regulatory assessment and data architecture through to platform rollout.",
+      "ctaPrimary": "Start a readiness assessment",
+      "ctaSecondary": "See the implementation path",
+      "trust": [
+        {
+          "value": "15+",
+          "label": "years of enterprise architecture"
+        },
+        {
+          "value": "Open",
+          "label": "open-dpp contributor"
+        },
+        {
+          "value": "SCM",
+          "label": "cross-border supply chain digitalisation"
+        }
+      ],
+      "floatOne": {
+        "title": "ESPR validation passed",
+        "desc": "32 / 32 data points complete"
+      },
+      "floatTwo": {
+        "title": "Supply chain connected",
+        "desc": "12 nodes syncing live"
+      }
+    },
+    "industries": {
+      "label": "Built for the sectors DPP regulation reaches first",
+      "items": [
+        "Batteries",
+        "Textiles & apparel",
+        "Consumer electronics",
+        "Furniture & building materials",
+        "Steel & chemicals"
+      ]
+    },
+    "why": {
+      "eyebrow": "WHY NOW",
+      "title": "The compliance window is narrowing — now is the moment to build the data capability",
+      "lead": "DPP is not a QR-code project. It is a system upgrade spanning products, supply chain, and data governance.",
+      "items": [
+        {
+          "tag": "REGULATION",
+          "title": "The EU requires it",
+          "desc": "ESPR is now in force. Batteries, textiles, and electronics will be phased into mandatory digital product passports.",
+          "link": "See how the phase-in works"
+        },
+        {
+          "tag": "TRANSPARENCY",
+          "title": "Supply-chain transparency is the entry ticket",
+          "desc": "Traceable data from raw material to recycling is becoming a baseline requirement for selling into Europe.",
+          "link": "Explore the data architecture"
+        },
+        {
+          "tag": "CIRCULARITY",
+          "title": "Circularity creates new value",
+          "desc": "Trustworthy product data supports repair, reuse, recycling, and new service models — value that keeps compounding.",
+          "link": "See the industry guide"
+        },
+        {
+          "tag": "ESG DATA",
+          "title": "Build once, reuse everywhere",
+          "desc": "A single data foundation can serve DPP, PCF, CSRD, and CBAM disclosure requirements at the same time.",
+          "link": "Assess your data today"
+        }
+      ]
+    },
+    "authority": {
+      "eyebrow": "OUR DIFFERENCE",
+      "title": "Knowing the regulation is not enough — we know how to <accent>make it run</accent>",
+      "description": "Real DPP capability sits where regulation, engineering practice, and open-source influence meet. Fifteen years of enterprise architecture and supply-chain work, distilled into a method you can verify.",
+      "quote": "We are not observers studying DPP. We are upstream practitioners on open-dpp.",
+      "link": "See our technical contributions",
+      "items": [
+        {
+          "n": "01",
+          "title": "From regulation to running system",
+          "desc": "We translate ESPR, the Battery Regulation, and their peers into concrete data fields, processes, and system architecture."
+        },
+        {
+          "n": "02",
+          "title": "Upstream on open-dpp",
+          "desc": "We don't just explain DPP — we deliver working engineering built on public upstream contributions, code, and API evolution."
+        },
+        {
+          "n": "03",
+          "title": "Supply-chain data governance",
+          "desc": "Enterprise architecture, cross-border supply chain, and data governance experience, so the passport connects to the systems you already run."
+        },
+        {
+          "n": "04",
+          "title": "AI-assisted passport build-out",
+          "desc": "Regulatory Q&A, spec-sheet and document parsing, automatic field generation and completion, compliance checks — the repetitive data work handled by AI."
+        }
+      ]
+    },
+    "path": {
+      "eyebrow": "IMPLEMENTATION PATH",
+      "title": "Five steps from assessment to go-live",
+      "lead": "Find the real gaps first, then design and build. Every step has a defined deliverable and decision point.",
+      "cta": "Get the full implementation roadmap",
+      "featured": "Recommended start",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Readiness Assessment",
+          "desc": "Establish regulatory scope, current data state, and compliance gaps as a prioritised list."
+        },
+        {
+          "n": "02",
+          "title": "Data & Architecture",
+          "desc": "Design product master data, traceability chains, identifier schemes, and system integration."
+        },
+        {
+          "n": "03",
+          "title": "DPP Platform",
+          "desc": "Build passport authoring, validation, publishing, and access on top of open-dpp."
+        },
+        {
+          "n": "04",
+          "title": "Pilot & Validation",
+          "desc": "Pilot one product line to prove data quality, process, and public presentation."
+        },
+        {
+          "n": "05",
+          "title": "Go Live & Scale",
+          "desc": "Launch, then extend across more products, suppliers, and compliance scenarios."
+        }
+      ]
+    },
+    "resources": {
+      "eyebrow": "RESOURCE CENTER",
+      "title": "Start with one practical tool",
+      "lead": "Free assessment, validation, and reference material to take your first DPP step.",
+      "all": "All eight tools",
+      "main": {
+        "tag": "FREE ASSESSMENT",
+        "title": "DPP readiness assessment",
+        "desc": "Eight minutes to see where you stand on regulation, data, systems, and organisation.",
+        "cta": "Book a readiness assessment",
+        "score": "72",
+        "scoreOf": "/100"
+      },
+      "items": [
+        {
+          "tag": "DEVELOPER TOOL",
+          "title": "DPP JSON Validator",
+          "desc": "Check passport data structures and required fields online.",
+          "cta": "Book a session"
+        },
+        {
+          "tag": "COMPLIANCE CHECK",
+          "title": "ESPR compliance checklist",
+          "desc": "Work through exactly what ESPR mandates for your product category.",
+          "cta": "Book a session"
+        }
+      ],
+      "guide": {
+        "tag": "INDUSTRY GUIDE",
+        "title": "DPP guide for textiles",
+        "desc": "Regulatory dates, required data, and an implementation checklist.",
+        "cta": "Download the guide"
+      }
+    },
+    "tools": {
+      "metaTitle": "DPP tools — readiness assessment, passport validation, developer tools",
+      "metaDescription": "Free DPP tools: readiness assessment, ESPR and battery compliance checklists, passport validation, JSON validation, QR generation, data template generation, and AAS browsing.",
+      "eyebrow": "DPP TOOLS",
+      "title": "Eight tools, from compliance self-check to production data",
+      "lead": "You don't have to read the regulation first. Pick the tool closest to the problem in front of you and get an answer in minutes.",
+      "backToDpp": "Back to DPP implementation",
+      "request": "Book a session",
+      "notice": "The tools are opening up in batches. For now one of our engineers runs them with you \u2014 remotely or on site \u2014 and hands over the findings and the gap list in the same session. Hit \u201cBook a session\u201d on any tool to arrange a time.",
+      "groups": {
+        "selfcheck": {
+          "label": "Compliance self-check",
+          "note": "For compliance, supply chain, and management — work out what you actually have to do"
+        },
+        "developer": {
+          "label": "Developer tools",
+          "note": "For engineering teams — everyday tools for data structures, carriers, and integration"
+        }
+      },
+      "items": {
+        "readiness-assessment": {
+          "tag": "FREE ASSESSMENT",
+          "title": "DPP readiness assessment",
+          "desc": "Eight minutes, four dimensions: regulatory scope, current product data, system capability, and organisational readiness — out comes a prioritised gap list. This is also step one of every implementation we run."
+        },
+        "espr-checklist": {
+          "tag": "COMPLIANCE CHECK",
+          "title": "ESPR compliance checklist",
+          "desc": "Confirm ESPR's mandatory requirements and dates for your category."
+        },
+        "battery-checklist": {
+          "tag": "COMPLIANCE CHECK",
+          "title": "Battery regulation checklist",
+          "desc": "Check battery passport fields against the EU Battery Regulation."
+        },
+        "passport-validator": {
+          "tag": "VALIDATOR",
+          "title": "Passport validator",
+          "desc": "Point it at a passport URL or payload to check structure, identifiers, and accessibility against DPP requirements, with per-issue locations."
+        },
+        "json-validator": {
+          "tag": "VALIDATOR",
+          "title": "JSON validator",
+          "desc": "Validate passport JSON structure and required fields."
+        },
+        "qr-generator": {
+          "tag": "DATA CARRIER",
+          "title": "QR / Digital Link generator",
+          "desc": "Generate passport QR carriers to the GS1 Digital Link spec."
+        },
+        "template-generator": {
+          "tag": "GENERATOR",
+          "title": "Data template generator",
+          "desc": "Generate per-industry field templates to hand straight to suppliers."
+        },
+        "aas-explorer": {
+          "tag": "DEVELOPER",
+          "title": "AAS explorer",
+          "desc": "Browse Asset Administration Shell submodels and field mappings."
+        }
+      },
+      "cta": {
+        "eyebrow": "NEXT STEP",
+        "title": "The tool gave you an answer. Now what?",
+        "description": "An assessment tells you where the gaps are. Turning those gaps into a live passport still takes data architecture, system integration, and a validated pilot — which is the part we take on.",
+        "button": "Book a 30-minute call",
+        "secondary": "See the five-step path"
+      }
+    },
+    "cta": {
+      "badge": "DPP READINESS",
+      "title": "Is your product ready for the European market?",
+      "description": "Book a 30-minute conversation with a DPP specialist to scope which rules apply and what comes next.",
+      "button": "Book a free consultation",
+      "note": "Reply within one business day · Kept strictly confidential"
+    },
+    "console": {
+      "metaTitle": "DPP Lead Engine console (demo)",
+      "demoBanner": "Demo data — this console illustrates the DPP Lead Engine operating view; every company, lead, and metric is a sample",
+      "brandSub": "Lead Engine",
+      "navLabelWork": "Workspace",
+      "navLabelSystem": "System",
+      "nav": {
+        "overview": "Overview",
+        "leads": "Leads",
+        "content": "Content matrix",
+        "tools": "Lead tools",
+        "pipeline": "Pipeline",
+        "analytics": "Analytics",
+        "settings": "Settings",
+        "help": "Help"
+      },
+      "user": {
+        "name": "Murphy Yang",
+        "role": "Administrator"
+      },
+      "eyebrow": "GROWTH COMMAND CENTER",
+      "greeting": "Good morning, Murphy",
+      "greetingSub": "Your DPP lead engine is running well. {count} high-intent leads need follow-up today.",
+      "ranges": ["This month", "This quarter", "This year"],
+      "newLead": "New lead",
+      "kpis": [
+        {
+          "label": "New leads",
+          "value": "128",
+          "delta": "+18.6%",
+          "note": "20 more than last month"
+        },
+        {
+          "label": "Form conversion",
+          "value": "6.8%",
+          "delta": "+4.2%",
+          "note": "Industry benchmark 3.1%"
+        },
+        {
+          "label": "High-intent leads",
+          "value": "24",
+          "delta": "+12.5%",
+          "note": "8 awaiting follow-up"
+        },
+        {
+          "label": "Projected pipeline",
+          "value": "¥864k",
+          "delta": "+22.4%",
+          "note": "7 active opportunities"
+        }
+      ],
+      "funnel": {
+        "title": "Acquisition funnel",
+        "lead": "{range} · from awareness to conversion",
+        "action": "View analysis",
+        "rows": [
+          {
+            "label": "Site visits",
+            "value": "18,420"
+          },
+          {
+            "label": "Content engagement",
+            "value": "5,890"
+          },
+          {
+            "label": "Tool usage",
+            "value": "1,882"
+          },
+          {
+            "label": "Qualified leads",
+            "value": "128"
+          },
+          {
+            "label": "Opportunities",
+            "value": "24"
+          }
+        ],
+        "metas": [
+          {
+            "value": "32.0%",
+            "label": "Visit → engage"
+          },
+          {
+            "value": "10.2%",
+            "label": "Engage → tool"
+          },
+          {
+            "value": "6.8%",
+            "label": "Tool → lead"
+          },
+          {
+            "value": "18.8%",
+            "label": "Lead → opportunity"
+          }
+        ]
+      },
+      "source": {
+        "title": "Lead sources",
+        "lead": "Channel mix behind qualified leads",
+        "total": "Total leads",
+        "legend": [
+          {
+            "label": "Lead tools",
+            "value": "46",
+            "pct": "36%"
+          },
+          {
+            "label": "Organic search",
+            "value": "38",
+            "pct": "30%"
+          },
+          {
+            "label": "Industry content",
+            "value": "26",
+            "pct": "20%"
+          },
+          {
+            "label": "Direct",
+            "value": "12",
+            "pct": "9%"
+          },
+          {
+            "label": "Other",
+            "value": "6",
+            "pct": "5%"
+          }
+        ],
+        "insightTitle": "Lead tools perform best",
+        "insightBody": "The DPP readiness assessment produced 21 high-quality leads"
+      },
+      "leads": {
+        "title": "Leads needing follow-up",
+        "lead": "Sorted by intent score · 8 open",
+        "search": "Search company or contact",
+        "all": "View all",
+        "empty": "No matching leads",
+        "cols": {
+          "company": "Company / contact",
+          "source": "Source",
+          "industry": "Industry",
+          "score": "Intent score",
+          "stage": "Stage",
+          "next": "Next touch"
+        },
+        "rows": [
+          {
+            "company": "Beichen Battery Tech",
+            "contact": "Chen Siyuan",
+            "source": "Readiness assessment",
+            "industry": "Batteries",
+            "stage": "High intent",
+            "next": "Today 14:30"
+          },
+          {
+            "company": "Lanzhi Materials",
+            "contact": "Zhou Ruolin",
+            "source": "Textile industry guide",
+            "industry": "Textiles",
+            "stage": "Nurtured",
+            "next": "Aug 7"
+          },
+          {
+            "company": "Yuandai Electronics",
+            "contact": "Paul Xu",
+            "source": "JSON Validator",
+            "industry": "Consumer electronics",
+            "stage": "New",
+            "next": "Aug 8"
+          },
+          {
+            "company": "Hengzhu Building Materials",
+            "contact": "Wang Qiming",
+            "source": "ESPR checklist",
+            "industry": "Building materials",
+            "stage": "New",
+            "next": "Aug 10"
+          },
+          {
+            "company": "Zhuoyi Home",
+            "contact": "Lisa Fang",
+            "source": "Organic search",
+            "industry": "Furniture",
+            "stage": "Unconfirmed",
+            "next": "Not scheduled"
+          }
+        ]
+      },
+      "content": {
+        "title": "Content matrix progress",
+        "lead": "Stage 2 · this month's publishing target",
+        "action": "Content schedule",
+        "cards": [
+          {
+            "title": "What is DPP",
+            "note": "Primary SEO"
+          },
+          {
+            "title": "Industry solutions",
+            "note": "Long-tail coverage"
+          },
+          {
+            "title": "Technical knowledge base",
+            "note": "Technical authority"
+          },
+          {
+            "title": "Lead tools",
+            "note": "High-conversion entry"
+          }
+        ]
+      },
+      "tasks": {
+        "title": "Today's priorities",
+        "lead": "Move high-intent leads toward conversion",
+        "add": "Add task",
+        "items": [
+          "Follow up with Beichen Battery · readiness report",
+          "Confirm the textile webinar outline",
+          "Publish the open-dpp API evolution article"
+        ]
+      },
+      "toast": {
+        "switched": "Switched to {label}",
+        "newLead": "New-lead panel ready",
+        "funnel": "Funnel analysis opened",
+        "content": "Content schedule opened",
+        "all": "Opened all leads",
+        "opening": "Opening {company}",
+        "task": "Task creation opened"
+      }
     }
   }
 }

@@ -119,6 +119,14 @@ export default function Footer({ showContactId = true }: FooterProps) {
                   {t("enterprise")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/dpp"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {t("dpp")}
+                </Link>
+              </li>
             </ul>
           </div>
 

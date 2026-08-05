@@ -16,6 +16,8 @@ import {
   MonitorPlay,
   Palette,
   QrCode,
+  Quote,
+  ScanLine,
   Server,
   Shapes,
   ShoppingCart,
@@ -31,6 +33,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { DPP_TOOL_GROUPS } from "@/lib/dpp-tools";
 import {
   SHOPPING_URL,
   SIGN_URL,
@@ -38,6 +41,7 @@ import {
   WORKSYNC_URL,
 } from "@/lib/product-urls";
 import ContactDialog from "./contact-dialog";
+import PassportArt from "./dpp/passport-art";
 import Footer from "./footer";
 import FreeAppsSection from "./free-apps-section";
 import LocaleSwitcher from "./locale-switcher";
@@ -130,6 +134,13 @@ function AppleNav() {
         </Link>
 
         <div className="flex items-center gap-5">
+          {/* New business line — see DESIGN.md; homepage layout itself unchanged */}
+          <Link
+            href="/dpp"
+            className="text-[#5b6167] text-sm hover:text-[#16181c] transition-colors hidden sm:inline"
+          >
+            {t("dpp")}
+          </Link>
           <a
             href="#suite"
             className="text-[#5b6167] text-sm hover:text-[#16181c] transition-colors hidden sm:inline"
@@ -402,9 +413,43 @@ export default function AppleShowcase() {
 
   const trust = t.raw("trust") as Array<{ value: string; label: string }>;
 
+  // DPP lead-in — the step count and tool count are read from the /dpp copy and
+  // the tool registry, so the homepage can never advertise a number the DPP
+  // pages don't actually have.
+  const dppPath = useTranslations("Dpp.path");
+  const dppIndustries = useTranslations("Dpp.industries");
+  const dppStepCount = (dppPath.raw("steps") as unknown[]).length;
+  const dppToolCount = DPP_TOOL_GROUPS.reduce((n, g) => n + g.tools.length, 0);
+  const dppFacts = [
+    {
+      value: t("dpp.facts.deadlineValue"),
+      label: t("dpp.facts.deadlineLabel"),
+      tint: "#e11b22",
+    },
+    {
+      value: String(dppStepCount).padStart(2, "0"),
+      label: t("dpp.facts.stepsLabel"),
+      tint: "#3ab27f",
+    },
+    {
+      value: String(dppToolCount).padStart(2, "0"),
+      label: t("dpp.facts.toolsLabel"),
+      tint: "#f58220",
+    },
+  ];
+
   // Product suite — asymmetric bento (no equal 3-across rows, see DESIGN.md §5)
+  // The lead tile (index 0) is the 2x2 slot. DPP is the main business line now,
+  // so it holds that slot and links out to /dpp; WorkSync moves down into the
+  // slot that used to sit empty. Every other tile still scrolls to #suite.
   const heroTiles = [
-    { id: "worksync", Icon: FileText, name: "WorkSync", key: "worksync" },
+    {
+      id: "dpp",
+      Icon: ScanLine,
+      name: t("hero.dppTile"),
+      key: "dpp",
+      href: "/dpp",
+    },
     {
       id: "xiaozu",
       Icon: Swords,
@@ -419,6 +464,7 @@ export default function AppleShowcase() {
       key: "shopping",
     },
     { id: "timeslot", Icon: CalendarClock, name: "TimeSlot", key: "timeslot" },
+    { id: "worksync", Icon: FileText, name: "WorkSync", key: "worksync" },
   ];
 
   return (
@@ -550,18 +596,16 @@ export default function AppleShowcase() {
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
               {heroTiles.map((tile, i) => {
                 const dark = tile.id === "xiaozu";
-                return (
-                  <a
-                    key={tile.id}
-                    href="#suite"
-                    className={`group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
-                      i === 0 ? "col-span-2 sm:col-span-2 sm:row-span-2" : ""
-                    } ${
-                      dark
-                        ? "border border-white/10 bg-[#0e1012]"
-                        : "border border-[rgba(20,24,28,0.08)] bg-white shadow-[0_2px_14px_rgba(20,24,28,0.05)]"
-                    }`}
-                  >
+                const lead = i === 0;
+                const tileClass = `group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+                  lead ? "col-span-2 sm:col-span-2 sm:row-span-2" : ""
+                } ${
+                  dark
+                    ? "border border-white/10 bg-[#0e1012]"
+                    : "border border-[rgba(20,24,28,0.08)] bg-white shadow-[0_2px_14px_rgba(20,24,28,0.05)]"
+                }`;
+                const body = (
+                  <>
                     <div
                       className="relative flex flex-1 items-center justify-center p-4"
                       style={{
@@ -575,12 +619,24 @@ export default function AppleShowcase() {
                         className="brand-stripe absolute inset-x-0 top-0 h-[2px] opacity-70"
                       />
                       <div
-                        className={`w-full transition-transform duration-500 group-hover:scale-[1.04] ${i === 0 ? "max-w-[320px]" : "max-w-[150px]"}`}
+                        className={`w-full transition-transform duration-500 group-hover:scale-[1.04] ${
+                          tile.id === "dpp"
+                            ? // the passport art is portrait (420x470), so it
+                              // needs a tighter cap than the landscape product art
+                              "max-w-[260px]"
+                            : lead
+                              ? "max-w-[320px]"
+                              : "max-w-[150px]"
+                        }`}
                       >
-                        <ProductArt
-                          id={tile.id}
-                          tone={dark ? "dark" : "light"}
-                        />
+                        {tile.id === "dpp" ? (
+                          <PassportArt />
+                        ) : (
+                          <ProductArt
+                            id={tile.id}
+                            tone={dark ? "dark" : "light"}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 px-3.5 py-2.5">
@@ -594,7 +650,25 @@ export default function AppleShowcase() {
                       >
                         {tile.name}
                       </span>
+                      {tile.href ? (
+                        <ChevronRight
+                          aria-hidden
+                          className="ml-auto h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                          style={{ color: "#00794c" }}
+                        />
+                      ) : null}
                     </div>
+                  </>
+                );
+
+                // Tiles without an href are in-page jumps to the suite section
+                return tile.href ? (
+                  <Link key={tile.id} href={tile.href} className={tileClass}>
+                    {body}
+                  </Link>
+                ) : (
+                  <a key={tile.id} href="#suite" className={tileClass}>
+                    {body}
                   </a>
                 );
               })}
@@ -603,7 +677,126 @@ export default function AppleShowcase() {
         </div>
       </section>
 
-      {/* ===== 2. Product suite — bento grid ===== */}
+      {/* ===== 2. DPP lead-in — pull-quote band that hands off to /dpp ===== */}
+      <section className="apple-section-dark relative overflow-hidden px-6 py-16 md:py-20">
+        <div
+          aria-hidden
+          className="orb orb-c pointer-events-none absolute -left-[4%] top-[-34%] h-[440px] w-[440px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,121,76,0.24) 0%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          className="relative z-10 mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-12 lg:gap-16"
+          {...revealProps}
+        >
+          <div className="lg:col-span-7">
+            <motion.span
+              variants={cardVariants}
+              className="eyebrow-mono mb-6 inline-flex items-center gap-2.5"
+              style={{ color: "#3ab27f" }}
+            >
+              <span
+                aria-hidden
+                className="brand-stripe inline-block h-3 w-6 rounded-[2px]"
+              />
+              {t("dpp.eyebrow")}
+            </motion.span>
+            <motion.blockquote
+              variants={cardVariants}
+              className="relative pl-9"
+            >
+              <Quote
+                aria-hidden
+                className="absolute top-1.5 left-0 h-6 w-6"
+                style={{ color: "rgba(58,178,127,0.55)" }}
+              />
+              <p className="apple-headline text-2xl text-white sm:text-3xl md:text-[34px]">
+                {t("dpp.quote")}
+              </p>
+            </motion.blockquote>
+            <motion.p
+              variants={cardVariants}
+              className="apple-body mt-6 max-w-[54ch] pl-9 text-sm sm:text-base"
+              style={{ color: "rgba(255,255,255,0.6)" }}
+            >
+              {t("dpp.lead")}
+            </motion.p>
+            <motion.div
+              variants={cardVariants}
+              className="mt-9 flex flex-wrap items-center gap-4 pl-9"
+            >
+              <Link
+                href="/dpp"
+                className="apple-btn-accent inline-flex items-center gap-1.5 text-sm font-medium"
+              >
+                {t("dpp.cta")}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/dpp/tools"
+                className="apple-pill inline-flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
+              >
+                {t("dpp.ctaSecondary")}
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right rail — three facts on tri-color rules, then the industries hit
+              by the regulation (copy shared with /dpp, never re-typed) */}
+          <div className="lg:col-span-5 lg:pt-2">
+            <dl className="space-y-5">
+              {dppFacts.map((fact) => (
+                <motion.div
+                  key={fact.label}
+                  variants={cardVariants}
+                  className="border-l-2 pl-4"
+                  style={{ borderColor: fact.tint }}
+                >
+                  <dt
+                    className="font-mono text-lg text-white"
+                    style={{ letterSpacing: "-0.01em" }}
+                  >
+                    {fact.value}
+                  </dt>
+                  <dd
+                    className="mt-0.5 text-[13px]"
+                    style={{ color: "rgba(255,255,255,0.58)" }}
+                  >
+                    {fact.label}
+                  </dd>
+                </motion.div>
+              ))}
+            </dl>
+            <motion.div
+              variants={cardVariants}
+              className="mt-8 border-t border-white/10 pt-6"
+            >
+              <span
+                className="eyebrow-mono text-[0.65rem]"
+                style={{ color: "rgba(255,255,255,0.42)" }}
+              >
+                {dppIndustries("label")}
+              </span>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {(dppIndustries.raw("items") as string[]).map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/12 px-3 py-1 text-xs"
+                    style={{ color: "rgba(255,255,255,0.72)" }}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ===== 3. Product suite — bento grid ===== */}
       <section
         id="suite"
         className="paper-dots apple-section-light relative overflow-hidden px-6 py-16 md:py-24"
@@ -726,7 +919,7 @@ export default function AppleShowcase() {
         </div>
       </section>
 
-      {/* ===== 3. Flagship deep-dive — WorkSync full capability grid ===== */}
+      {/* ===== 4. Flagship deep-dive — WorkSync full capability grid ===== */}
       <section className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-16 md:py-24">
         <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -794,7 +987,7 @@ export default function AppleShowcase() {
         </div>
       </section>
 
-      {/* ===== 4. Enterprise band — dark, high-contrast (see DESIGN.md §2) ===== */}
+      {/* ===== 5. Enterprise band — dark, high-contrast (see DESIGN.md §2) ===== */}
       <section className="apple-section-dark px-6 py-20 md:py-28">
         <div className="mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-12 lg:gap-16">
           <motion.div className="lg:col-span-5" {...revealProps}>
@@ -864,10 +1057,10 @@ export default function AppleShowcase() {
         </div>
       </section>
 
-      {/* ===== 5. Free PWA apps ===== */}
+      {/* ===== 6. Free PWA apps ===== */}
       <FreeAppsSection />
 
-      {/* ===== 6. Conversion CTA band ===== */}
+      {/* ===== 7. Conversion CTA band ===== */}
       <section className="paper-dots apple-section-light relative overflow-hidden border-t border-[rgba(20,24,28,0.06)] px-6 py-20 md:py-28">
         <div
           aria-hidden
@@ -916,7 +1109,7 @@ export default function AppleShowcase() {
         </div>
       </section>
 
-      {/* ===== 7. Footer ===== */}
+      {/* ===== 8. Footer ===== */}
       <Footer showContactId />
     </div>
   );

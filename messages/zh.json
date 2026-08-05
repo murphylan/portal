@@ -122,6 +122,7 @@
     "products": "产品",
     "freeApps": "免费 App",
     "enterprise": "企业 / 私有化方案",
+    "dpp": "DPP 落地工程",
     "contact": "联系我们",
     "madeWith": "Made with love by Murphy",
     "productTitles": {
@@ -145,6 +146,7 @@
       "products": "产品总览",
       "apps": "免费 App",
       "enterprise": "企业方案",
+      "dpp": "DPP 落地",
       "contact": "联系我们"
     },
     "hero": {
@@ -154,7 +156,21 @@
       "explore": "探索产品",
       "enterprise": "企业私有化方案",
       "enterpriseHint": "需要私有化部署 / 源码授权？点上方查看企业方案。",
-      "contact": "联系我们"
+      "contact": "联系我们",
+      "dppTile": "DPP 落地工程"
+    },
+    "dpp": {
+      "eyebrow": "DPP 落地工程",
+      "quote": "出口欧盟的产品，正在被要求带上一本可以扫码验证的数字身份。",
+      "lead": "ESPR 已经生效，动力电池率先执行，纺织、消费电子等行业分阶段跟进。我们把法规评估、数据架构与平台实施做成一条可交付的路径 —— 这是 Murphy 云正在承接的主营业务。",
+      "cta": "了解 DPP 落地工程",
+      "ctaSecondary": "查看自查工具",
+      "facts": {
+        "deadlineValue": "2027.02",
+        "deadlineLabel": "动力电池数字护照强制生效",
+        "stepsLabel": "从就绪度评估到上线的实施步骤",
+        "toolsLabel": "可直接使用的自查与开发工具"
+      }
     },
     "trust": [
       { "value": "9+ 款", "label": "产品已上线运行" },
@@ -783,6 +799,485 @@
           "desc": "全站 HTTPS 加密、反向代理、细粒度权限与操作审计，开箱即用的安全基线"
         }
       ]
+    }
+  },
+  "Dpp": {
+    "metaTitle": "DPP 数字产品护照落地 — Murphy 云",
+    "metaDescription": "帮助中国制造企业低成本落地欧盟数字产品护照（EU Digital Product Passport）：法规就绪度评估、产品数据架构、基于 open-dpp 的平台实施与试点验证。",
+    "nav": {
+      "why": "为什么是 DPP",
+      "capability": "核心能力",
+      "path": "实施路径",
+      "resources": "资源中心",
+      "tools": "获客工具",
+      "consult": "预约咨询"
+    },
+    "hero": {
+      "badge": "EU Digital Product Passport · 企业落地伙伴",
+      "title": "让每一件产品拥有可信的<accent>数字身份</accent>",
+      "description": "帮助中国制造企业低成本落地欧盟数字产品护照。从法规评估、数据架构到平台实施，一条路径走向合规。",
+      "ctaPrimary": "开始 DPP 就绪度评估",
+      "ctaSecondary": "了解实施路径",
+      "trust": [
+        {
+          "value": "15+",
+          "label": "年企业架构经验"
+        },
+        {
+          "value": "Open",
+          "label": "open-dpp Contributor"
+        },
+        {
+          "value": "SCM",
+          "label": "跨境供应链数字化"
+        }
+      ],
+      "floatOne": {
+        "title": "ESPR 合规验证通过",
+        "desc": "32 / 32 项数据完整"
+      },
+      "floatTwo": {
+        "title": "供应链已连接",
+        "desc": "12 个节点实时同步"
+      }
+    },
+    "industries": {
+      "label": "面向受 DPP 法规影响的核心行业",
+      "items": ["动力电池", "纺织服装", "消费电子", "家具建材", "钢铁化工"]
+    },
+    "why": {
+      "eyebrow": "WHY NOW",
+      "title": "合规窗口正在收窄，现在是建立数据能力的最佳时机",
+      "lead": "DPP 不是一个二维码项目，而是一场覆盖产品、供应链与数据治理的系统升级。",
+      "items": [
+        {
+          "tag": "REGULATION",
+          "title": "欧盟法规强制要求",
+          "desc": "ESPR 已正式生效，电池、纺织、电子等行业将分阶段强制实施数字产品护照。",
+          "link": "查看分阶段实施节奏"
+        },
+        {
+          "tag": "TRANSPARENCY",
+          "title": "供应链透明成为门槛",
+          "desc": "从原材料到回收，全链路数据可追溯正在成为进入欧洲市场的基本要求。",
+          "link": "了解数据架构"
+        },
+        {
+          "tag": "CIRCULARITY",
+          "title": "循环经济创造新价值",
+          "desc": "可信的产品数据将支持维修、再利用、回收与新型服务，形成持续商业价值。",
+          "link": "查看行业指南"
+        },
+        {
+          "tag": "ESG DATA",
+          "title": "一次建设，多场景复用",
+          "desc": "统一的数据底座可同时服务 DPP、PCF、CSRD、CBAM 等多项合规与披露需求。",
+          "link": "评估数据现状"
+        }
+      ]
+    },
+    "authority": {
+      "eyebrow": "OUR DIFFERENCE",
+      "title": "不止懂法规，更懂如何把它<accent>运行起来</accent>",
+      "description": "真正的 DPP 能力来自法规、工程实践与开源影响力的交集。我们把十五年的企业架构与供应链经验，沉淀为可验证的落地方法。",
+      "quote": "我们不是研究 DPP 的旁观者，而是 open-dpp 的上游实践者。",
+      "link": "查看我们的技术贡献",
+      "items": [
+        {
+          "n": "01",
+          "title": "法规到系统的完整翻译",
+          "desc": "把 ESPR、Battery Regulation 等复杂要求，转化为可执行的数据字段、流程与系统架构。"
+        },
+        {
+          "n": "02",
+          "title": "open-dpp 上游实践",
+          "desc": "不仅解释 DPP，更基于公开的上游贡献、代码与 API 演进，交付可运行的工程方案。"
+        },
+        {
+          "n": "03",
+          "title": "供应链数据治理经验",
+          "desc": "融合企业架构、跨境供应链与数据治理经验，让护照真正连接企业现有系统。"
+        },
+        {
+          "n": "04",
+          "title": "AI 辅助的护照构建",
+          "desc": "法规问答、规格书与文档解析、护照字段自动生成与补全、合规检查——把重复的数据整理工作交给 AI。"
+        }
+      ]
+    },
+    "path": {
+      "eyebrow": "IMPLEMENTATION PATH",
+      "title": "从评估到上线，五步走向 DPP 合规",
+      "lead": "先识别真实差距，再设计和实施。每一步都有明确的交付物与决策点。",
+      "cta": "获取完整实施路线图",
+      "featured": "推荐起点",
+      "steps": [
+        {
+          "n": "01",
+          "title": "Readiness Assessment",
+          "desc": "识别法规适用范围、数据现状与合规差距，形成优先级清单。"
+        },
+        {
+          "n": "02",
+          "title": "Data & Architecture",
+          "desc": "设计产品主数据、追溯链路、标识体系与系统集成方案。"
+        },
+        {
+          "n": "03",
+          "title": "DPP Platform",
+          "desc": "基于 open-dpp 构建护照编辑、验证、发布与访问能力。"
+        },
+        {
+          "n": "04",
+          "title": "Pilot & Validation",
+          "desc": "选定产品线进行试点，验证数据质量、流程与对外呈现。"
+        },
+        {
+          "n": "05",
+          "title": "Go Live & Scale",
+          "desc": "上线并扩展到更多产品、供应商和合规场景。"
+        }
+      ]
+    },
+    "resources": {
+      "eyebrow": "RESOURCE CENTER",
+      "title": "先从一个实用工具开始",
+      "lead": "免费的评估、验证与知识资源，帮你迈出 DPP 第一步。",
+      "all": "查看全部 8 个工具",
+      "main": {
+        "tag": "FREE ASSESSMENT",
+        "title": "DPP 就绪度评估",
+        "desc": "用 8 分钟了解企业在法规、数据、系统与组织方面的准备程度。",
+        "cta": "预约就绪度评估",
+        "score": "72",
+        "scoreOf": "/100"
+      },
+      "items": [
+        {
+          "tag": "DEVELOPER TOOL",
+          "title": "DPP JSON Validator",
+          "desc": "在线检查产品护照数据结构与必填字段。",
+          "cta": "预约使用"
+        },
+        {
+          "tag": "COMPLIANCE CHECK",
+          "title": "ESPR 合规自查清单",
+          "desc": "逐条确认 ESPR 对你的品类提出了哪些强制要求。",
+          "cta": "预约自查"
+        }
+      ],
+      "guide": {
+        "tag": "INDUSTRY GUIDE",
+        "title": "纺织行业 DPP 指南",
+        "desc": "法规时间、必需数据与企业实施清单。",
+        "cta": "下载指南"
+      }
+    },
+    "tools": {
+      "metaTitle": "DPP 工具中心 — 就绪度评估、护照校验与开发者工具",
+      "metaDescription": "免费的 DPP 工具：就绪度评估、ESPR 与电池合规自查清单、护照校验、JSON 校验、QR 生成、数据模板生成与 AAS 浏览。",
+      "eyebrow": "DPP TOOLS",
+      "title": "八个工具，覆盖从合规自查到数据落地",
+      "lead": "不用先读完法规。选一个和你现在的问题最接近的工具，几分钟就能拿到结论。",
+      "backToDpp": "返回 DPP 落地服务",
+      "request": "预约使用",
+      "notice": "工具正在分批开放中。现阶段由我们的工程师带着工具陪你跑一遍：线上或线下都可以，结论和差距清单当场交付。点任意工具的「预约使用」即可安排时间。",
+      "groups": {
+        "selfcheck": {
+          "label": "合规自查",
+          "note": "面向合规、供应链与管理者 —— 先弄清「我要做什么」"
+        },
+        "developer": {
+          "label": "开发者工具",
+          "note": "面向技术团队 —— 数据结构、载体与集成的日常工具"
+        }
+      },
+      "items": {
+        "readiness-assessment": {
+          "tag": "FREE ASSESSMENT",
+          "title": "DPP 就绪度评估",
+          "desc": "8 分钟四个维度打分：法规适用范围、产品数据现状、系统能力与组织准备度，输出一份带优先级的差距清单。这也是我们所有落地项目的第一步。"
+        },
+        "espr-checklist": {
+          "tag": "COMPLIANCE CHECK",
+          "title": "ESPR 合规自查清单",
+          "desc": "按品类逐条确认 ESPR 的强制要求与生效时间。"
+        },
+        "battery-checklist": {
+          "tag": "COMPLIANCE CHECK",
+          "title": "电池法规自查清单",
+          "desc": "对照 EU Battery Regulation 检查电池护照的必需字段。"
+        },
+        "passport-validator": {
+          "tag": "VALIDATOR",
+          "title": "护照校验器",
+          "desc": "输入护照 URL 或数据包，检查是否符合 DPP 的结构、标识与可访问性要求，并给出逐项问题定位。"
+        },
+        "json-validator": {
+          "tag": "VALIDATOR",
+          "title": "JSON 数据校验",
+          "desc": "校验护照 JSON 的数据结构与必填字段。"
+        },
+        "qr-generator": {
+          "tag": "DATA CARRIER",
+          "title": "QR / Digital Link 生成",
+          "desc": "按 GS1 Digital Link 规范生成产品护照的二维码载体。"
+        },
+        "template-generator": {
+          "tag": "GENERATOR",
+          "title": "数据模板生成",
+          "desc": "按行业生成护照字段模板，直接交给供应商填。"
+        },
+        "aas-explorer": {
+          "tag": "DEVELOPER",
+          "title": "AAS 浏览器",
+          "desc": "浏览资产管理壳的子模型与字段映射。"
+        }
+      },
+      "cta": {
+        "eyebrow": "NEXT STEP",
+        "title": "工具给了结论，接下来怎么做？",
+        "description": "评估报告只回答「差距在哪」。要把差距变成上线的护照，还需要数据架构、系统对接和试点验证 —— 这正是我们承接的部分。",
+        "button": "预约 30 分钟专家交流",
+        "secondary": "查看五步实施路径"
+      }
+    },
+    "cta": {
+      "badge": "DPP READINESS",
+      "title": "你的产品，准备好进入欧洲市场了吗？",
+      "description": "预约一次 30 分钟的 DPP 专家交流，快速识别法规适用范围与下一步行动。",
+      "button": "预约免费咨询",
+      "note": "1 个工作日内回复 · 信息严格保密"
+    },
+    "console": {
+      "metaTitle": "DPP Lead Engine 控制台（演示）",
+      "demoBanner": "演示数据 — 该控制台用于展示 DPP Lead Engine 的运营视图，所有企业、线索与指标均为示例",
+      "brandSub": "Lead Engine",
+      "navLabelWork": "工作台",
+      "navLabelSystem": "系统",
+      "nav": {
+        "overview": "总览",
+        "leads": "线索中心",
+        "content": "内容矩阵",
+        "tools": "获客工具",
+        "pipeline": "商业管道",
+        "analytics": "数据分析",
+        "settings": "设置",
+        "help": "帮助中心"
+      },
+      "user": {
+        "name": "Murphy Yang",
+        "role": "企业管理员"
+      },
+      "eyebrow": "GROWTH COMMAND CENTER",
+      "greeting": "早上好，Murphy",
+      "greetingSub": "你的 DPP 获客引擎运转良好。今天有 {count} 条高意向线索等待跟进。",
+      "ranges": ["本月", "本季度", "今年"],
+      "newLead": "新建线索",
+      "kpis": [
+        {
+          "label": "新增线索",
+          "value": "128",
+          "delta": "+18.6%",
+          "note": "较上月增加 20 条"
+        },
+        {
+          "label": "留资转化率",
+          "value": "6.8%",
+          "delta": "+4.2%",
+          "note": "行业基准 3.1%"
+        },
+        {
+          "label": "高意向线索",
+          "value": "24",
+          "delta": "+12.5%",
+          "note": "其中 8 条待跟进"
+        },
+        {
+          "label": "预计管道价值",
+          "value": "¥ 86.4万",
+          "delta": "+22.4%",
+          "note": "7 个活跃商机"
+        }
+      ],
+      "funnel": {
+        "title": "获客漏斗",
+        "lead": "{range} · 从认知到转化的完整路径",
+        "action": "查看分析",
+        "rows": [
+          {
+            "label": "网站访问",
+            "value": "18,420"
+          },
+          {
+            "label": "内容互动",
+            "value": "5,890"
+          },
+          {
+            "label": "工具使用",
+            "value": "1,882"
+          },
+          {
+            "label": "有效留资",
+            "value": "128"
+          },
+          {
+            "label": "销售商机",
+            "value": "24"
+          }
+        ],
+        "metas": [
+          {
+            "value": "32.0%",
+            "label": "访问 → 互动"
+          },
+          {
+            "value": "10.2%",
+            "label": "互动 → 工具"
+          },
+          {
+            "value": "6.8%",
+            "label": "工具 → 留资"
+          },
+          {
+            "value": "18.8%",
+            "label": "留资 → 商机"
+          }
+        ]
+      },
+      "source": {
+        "title": "线索来源",
+        "lead": "贡献有效线索的渠道分布",
+        "total": "总线索",
+        "legend": [
+          {
+            "label": "获客工具",
+            "value": "46",
+            "pct": "36%"
+          },
+          {
+            "label": "自然搜索",
+            "value": "38",
+            "pct": "30%"
+          },
+          {
+            "label": "行业内容",
+            "value": "26",
+            "pct": "20%"
+          },
+          {
+            "label": "直接访问",
+            "value": "12",
+            "pct": "9%"
+          },
+          {
+            "label": "其他渠道",
+            "value": "6",
+            "pct": "5%"
+          }
+        ],
+        "insightTitle": "获客工具表现最佳",
+        "insightBody": "DPP 就绪度评估贡献了 21 条高质量线索"
+      },
+      "leads": {
+        "title": "需要跟进的线索",
+        "lead": "按意向评分排序 · 共 8 条待处理",
+        "search": "搜索企业或联系人",
+        "all": "查看全部",
+        "empty": "没有匹配的线索",
+        "cols": {
+          "company": "企业 / 联系人",
+          "source": "来源",
+          "industry": "行业",
+          "score": "意向评分",
+          "stage": "当前阶段",
+          "next": "下次跟进"
+        },
+        "rows": [
+          {
+            "company": "北辰电池科技",
+            "contact": "陈思远",
+            "source": "DPP 就绪度评估",
+            "industry": "动力电池",
+            "stage": "高意向",
+            "next": "今天 14:30"
+          },
+          {
+            "company": "澜织新材料",
+            "contact": "周若琳",
+            "source": "纺织行业指南",
+            "industry": "纺织",
+            "stage": "已培育",
+            "next": "8月7日"
+          },
+          {
+            "company": "远岱电子",
+            "contact": "Paul Xu",
+            "source": "JSON Validator",
+            "industry": "消费电子",
+            "stage": "新线索",
+            "next": "8月8日"
+          },
+          {
+            "company": "恒筑建材集团",
+            "contact": "王启明",
+            "source": "ESPR Checklist",
+            "industry": "建材",
+            "stage": "新线索",
+            "next": "8月10日"
+          },
+          {
+            "company": "卓椅家居",
+            "contact": "Lisa Fang",
+            "source": "自然搜索",
+            "industry": "家具",
+            "stage": "待确认",
+            "next": "未安排"
+          }
+        ]
+      },
+      "content": {
+        "title": "内容矩阵进度",
+        "lead": "Stage 2 · 本月发布目标",
+        "action": "内容排期",
+        "cards": [
+          {
+            "title": "What is DPP",
+            "note": "SEO 主战场"
+          },
+          {
+            "title": "行业方案",
+            "note": "长尾覆盖"
+          },
+          {
+            "title": "技术知识库",
+            "note": "技术权威"
+          },
+          {
+            "title": "获客工具",
+            "note": "高转化入口"
+          }
+        ]
+      },
+      "tasks": {
+        "title": "今日优先事项",
+        "lead": "推进高意向线索完成转化",
+        "add": "添加任务",
+        "items": [
+          "回访北辰电池 · Readiness 报告",
+          "确认纺织行业线上研讨会大纲",
+          "发布 open-dpp API 演进文章"
+        ]
+      },
+      "toast": {
+        "switched": "已切换至{label}",
+        "newLead": "新建线索面板已准备",
+        "funnel": "漏斗分析已打开",
+        "content": "内容排期已打开",
+        "all": "已进入全部线索",
+        "opening": "正在打开 {company}",
+        "task": "任务创建入口已打开"
+      }
     }
   }
 }

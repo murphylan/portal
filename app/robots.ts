@@ -7,6 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // Internal operations console — demo data, no public entry point
+      disallow: ["/dpp/console", "/en/dpp/console"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl = "https://murphylan.cloud";
+// /dpp/console is intentionally absent — internal demo view, see app/robots.ts
 const routes = [
   "/",
+  "/dpp",
+  "/dpp/tools",
   "/products",
   "/products/activity",
   "/worksync",
