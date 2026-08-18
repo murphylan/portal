@@ -30,6 +30,14 @@ yarn-error.log*
 coverage
 .nyc_output
 
+# AI assistant config — local only, must never reach an image or a server
+.claude
+.cursor
+.cursorrules
+.windsurf
+.aider*
+.continue
+
 # Misc
 *.md
 !README.md

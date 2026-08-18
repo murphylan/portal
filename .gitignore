@@ -47,3 +47,12 @@ next-env.d.ts
 # IDE
 .idea
 .vscode
+
+# AI assistant config — local only, never committed or deployed
+.claude/
+.cursor/
+.cursorrules
+.windsurf/
+.aider*
+.continue/
+.github/copilot*
