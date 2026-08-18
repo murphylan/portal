@@ -1420,7 +1420,7 @@
       "demo": "Book a demo"
     },
     "hero": {
-      "badge": "The WorkSync upgrade · main line 0-6 shipped",
+      "badge": "The WorkSync upgrade · the full loop is live",
       "title": "Tasks are not a list. <accent>They are a graph you can query.</accent>",
       "description": "WorkGraph treats tasks as nodes, relationships as edges and templates as the ontology. Beyond parent/child hierarchy there are dependency, blocking and reference edges - so \"who is blocking whom\" is no longer something people have to remember. It can be queried, drawn, and subscribed to by other systems.",
       "ctaPrimary": "Book a demo",
@@ -1475,37 +1475,37 @@
       "featured": "The turning point",
       "steps": [
         {
-          "n": "00",
+          "n": "01",
           "title": "Access",
           "desc": "Sign in with email and password. The project switcher in the top bar decides whose data a page lists; the sidebar is filtered by permission - entries you cannot see are not disabled, your role simply does not have them."
         },
         {
-          "n": "01",
+          "n": "02",
           "title": "Pick the ontology",
           "desc": "Choose a template before filling in a form. The template decides what the form looks like, and how this kind of task can be counted later."
         },
         {
-          "n": "02",
+          "n": "03",
           "title": "Create the task",
           "desc": "The form is generated from the template, with custom fields to cover whatever the template does not."
         },
         {
-          "n": "03",
+          "n": "04",
           "title": "Wire up the graph",
           "desc": "Attach parents (up to 8 levels, never to itself or its own descendants) and draw dependency, blocking and reference edges. This step is where the product diverges from a to-do list."
         },
         {
-          "n": "04",
+          "n": "05",
           "title": "Move it forward",
           "desc": "Four states: not started, in progress, done, blocked. The board is drag-and-drop, and progress rolls up as a plain average of direct children - deliberately unweighted, so when you need an exact figure you read the numbers, not the percentage."
         },
         {
-          "n": "05",
+          "n": "06",
           "title": "Finish",
           "desc": "Tasks with unfinished predecessors show a lock badge. There is no realtime co-editing, but saving does a version check, so nobody's edit is silently overwritten."
         },
         {
-          "n": "06",
+          "n": "07",
           "title": "Semantic projection",
           "desc": "Project the graph outward: webhook events and a JSON-LD read API let other systems subscribe to task changes."
         }
@@ -1689,7 +1689,7 @@
     "platform": {
       "eyebrow": "DEPLOYMENT",
       "title": "Runs on your own machines",
-      "lead": "The main line 0-6 is complete and running on real projects. One compose file brings up the whole stack, and data, diagram sources and files never leave your network.",
+      "lead": "The full loop runs on real projects today. One compose file brings up the whole stack, and data, diagram sources and files never leave your network.",
       "items": [
         {
           "title": "One compose file, the whole stack",

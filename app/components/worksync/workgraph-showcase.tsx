@@ -11,7 +11,7 @@
 // /dpp pages (apple-* primitives, Store Green lead, orange/red rhythm), NOT
 // the older violet worksync-showcase.
 //
-// Section order: hero → three differences → main line 0-6 → task graph (dark)
+// Section order: hero → three differences → main line 01-07 → task graph (dark)
 // → one resource mechanism → governance → subscriptions (dark) → platform
 // → CTA.
 // ---------------------------------------------------------------------------
