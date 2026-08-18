@@ -121,6 +121,14 @@ export default function Footer({ showContactId = true }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href="/worksync/workgraph"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {t("workgraph")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/dpp"
                   className="hover:text-foreground transition-colors"
                 >

@@ -126,6 +126,7 @@
     "freeApps": "Free apps",
     "enterprise": "Enterprise & self-hosting",
     "dpp": "DPP implementation",
+    "workgraph": "WorkGraph (task graph, new)",
     "contact": "Contact",
     "madeWith": "Made with love by Murphy",
     "productTitles": {
@@ -359,6 +360,12 @@
       "overview": "Overview",
       "features": "Features",
       "contact": "Contact"
+    },
+    "upgrade": {
+      "tag": "Upgrade",
+      "title": "WorkGraph - tasks as a graph, not a list",
+      "desc": "The same collaboration surface, plus dependency, blocking and reference edges between tasks - and other systems can subscribe to them.",
+      "cta": "Explore WorkGraph"
     },
     "tryNow": "Try now",
     "hero": {
@@ -1332,6 +1339,316 @@
         "opening": "Opening {company}",
         "task": "Task creation opened"
       }
+    }
+  },
+  "WorkGraph": {
+    "metaTitle": "WorkGraph - Task Graph Collaboration (the WorkSync upgrade)",
+    "metaDescription": "WorkGraph is the WorkSync upgrade: a semantic task platform where tasks are nodes, relationships are edges, and templates are the ontology. The task graph shows who is blocking whom; docs, diagrams, whiteboards, attachments and external links share one mechanism; webhooks and a JSON-LD read API project the graph to other systems.",
+    "nav": {
+      "diff": "What's different",
+      "graph": "Task graph",
+      "resources": "Collaboration",
+      "governance": "Governance",
+      "api": "Subscriptions",
+      "demo": "Book a demo"
+    },
+    "hero": {
+      "badge": "The WorkSync upgrade · main line 0-6 shipped",
+      "title": "Tasks are not a list. <accent>They are a graph you can query.</accent>",
+      "description": "WorkGraph treats tasks as nodes, relationships as edges and templates as the ontology. Beyond parent/child hierarchy there are dependency, blocking and reference edges - so \"who is blocking whom\" is no longer something people have to remember. It can be queried, drawn, and subscribed to by other systems.",
+      "ctaPrimary": "Book a demo",
+      "ctaSecondary": "See the task graph",
+      "facts": [
+        { "value": "8", "label": "Maximum hierarchy depth" },
+        { "value": "3", "label": "Edge types: depends / blocks / references" },
+        { "value": "6", "label": "Subscribable webhook events" }
+      ],
+      "shotAlt": "The WorkGraph task graph view",
+      "shotCaption": "Task graph · horizontal axis is dependency order, dashed frames are hierarchy",
+      "floatOne": {
+        "title": "Lock badge",
+        "desc": "An upstream task is unfinished"
+      },
+      "floatTwo": {
+        "title": "Red dashed edge",
+        "desc": "A dependency cycle - drawn, not thrown as an error"
+      }
+    },
+    "diff": {
+      "eyebrow": "WHAT'S DIFFERENT",
+      "title": "Three differences from list-style tools",
+      "lead": "These are not three lines on a feature list. They are three modelling decisions, and they decide which questions the product can answer.",
+      "items": [
+        {
+          "tag": "01 / ONTOLOGY",
+          "title": "A task has an ontology, not just a title",
+          "desc": "Each kind of task (bug, requirement, review...) gets a template that defines its fields, and a task is an instance of that template. Editing a template never rewrites existing tasks - every instance remembers the version it was created from.",
+          "note": "The task detail page says bug · v3"
+        },
+        {
+          "tag": "02 / GRAPH",
+          "title": "Tasks form a graph, not a list",
+          "desc": "On top of hierarchy, tasks carry dependency, blocking and reference edges. \"Who is blocking whom\" becomes something you query and draw, instead of something someone recites in a standup.",
+          "note": "Dependency order = the horizontal axis"
+        },
+        {
+          "tag": "03 / ISOLATION",
+          "title": "A project is a hard boundary",
+          "desc": "A project you are not a member of does not exist for you: the answer is 404, not 403. Global admins are no exception - task visibility always goes through project membership, so an admin has to join first, and joining is audited.",
+          "note": "404 instead of 403, on purpose"
+        }
+      ],
+      "figureAlt": "WorkGraph concept relationship diagram",
+      "figureCaption": "Concept map · every box is a real object in the product"
+    },
+    "line": {
+      "eyebrow": "MAIN LINE",
+      "title": "One main line, seven steps to a full loop",
+      "lead": "From getting in to projecting out, the product has exactly one main line. Everything else hangs off the side of it.",
+      "featured": "The turning point",
+      "steps": [
+        {
+          "n": "00",
+          "title": "Access",
+          "desc": "Sign in with email and password. The project switcher in the top bar decides whose data a page lists; the sidebar is filtered by permission - entries you cannot see are not disabled, your role simply does not have them."
+        },
+        {
+          "n": "01",
+          "title": "Pick the ontology",
+          "desc": "Choose a template before filling in a form. The template decides what the form looks like, and how this kind of task can be counted later."
+        },
+        {
+          "n": "02",
+          "title": "Create the task",
+          "desc": "The form is generated from the template, with custom fields to cover whatever the template does not."
+        },
+        {
+          "n": "03",
+          "title": "Wire up the graph",
+          "desc": "Attach parents (up to 8 levels, never to itself or its own descendants) and draw dependency, blocking and reference edges. This step is where the product diverges from a to-do list."
+        },
+        {
+          "n": "04",
+          "title": "Move it forward",
+          "desc": "Four states: not started, in progress, done, blocked. The board is drag-and-drop, and progress rolls up as a plain average of direct children - deliberately unweighted, so when you need an exact figure you read the numbers, not the percentage."
+        },
+        {
+          "n": "05",
+          "title": "Finish",
+          "desc": "Tasks with unfinished predecessors show a lock badge. There is no realtime co-editing, but saving does a version check, so nobody's edit is silently overwritten."
+        },
+        {
+          "n": "06",
+          "title": "Semantic projection",
+          "desc": "Project the graph outward: webhook events and a JSON-LD read API let other systems subscribe to task changes."
+        }
+      ],
+      "shots": [
+        {
+          "alt": "Template list view",
+          "caption": "Templates as ontology · field definitions first, instances second"
+        },
+        {
+          "alt": "Task hierarchy tree view",
+          "caption": "Hierarchy · up to 8 levels, progress averaged over direct children"
+        }
+      ]
+    },
+    "graph": {
+      "eyebrow": "THE GRAPH VIEW",
+      "title": "See <accent>who is blocking whom</accent> on one screen",
+      "lead": "Hand-drawn SVG with ELK layout - not an exported static picture. Horizontal is dependency order, dashed frames are hierarchy; node fill is status, the left bar is priority, the icon is type.",
+      "legendTitle": "Legend",
+      "legend": [
+        { "k": "Grey solid arrow", "v": "Dependency" },
+        { "k": "Red solid", "v": "Unfinished predecessor" },
+        { "k": "Red dashed", "v": "Dependency cycle" },
+        { "k": "Grey dashed", "v": "Reference" },
+        { "k": "Bold", "v": "Aggregated edge across a collapsed subtree" },
+        {
+          "k": "Blue bold",
+          "v": "Hover highlight of the whole transitive chain"
+        }
+      ],
+      "capsTitle": "Four things it does differently",
+      "caps": [
+        {
+          "title": "Filtering never deletes nodes",
+          "desc": "Non-matching nodes fade instead of disappearing, and the corner shows \"X of Y matched\". You always know which part of the whole you are looking at."
+        },
+        {
+          "title": "A screen you can send as-is",
+          "desc": "Focus mode keeps ancestors, descendants and transitive dependencies; filter, focus and collapse state all live in the URL query, so a colleague opens exactly the screen you were looking at."
+        },
+        {
+          "title": "Four export outlets",
+          "desc": "Download SVG, download PNG at 2x, copy the PlantUML source, or save it as a project diagram. The first three happen entirely in the browser - the graph never leaves it."
+        },
+        {
+          "title": "Keyboard and screen readers work",
+          "desc": "Tab and Enter navigate; clicking a node opens a peek drawer. A plain-text list of nodes and dependencies ships alongside, so a screen reader never has to chew through the SVG."
+        }
+      ],
+      "limitsTitle": "Hard limits, stated up front",
+      "limits": [
+        {
+          "value": "500",
+          "label": "Task fetch cap, with a banner when exceeded"
+        },
+        {
+          "value": "150",
+          "label": "Above this, one subtree layer auto-collapses"
+        },
+        {
+          "value": "0.2-2.5x",
+          "label": "Zoom range; the minimap turns on above 40 nodes"
+        }
+      ],
+      "shotAlt": "Task graph peek drawer",
+      "shotCaption": "Click a node for a peek drawer · the thumbnail lists predecessors | this task | successors, up to four each"
+    },
+    "resources": {
+      "eyebrow": "ONE MECHANISM",
+      "title": "Docs, diagrams, whiteboards, attachments and links are five kinds of one object",
+      "lead": "The five modules you know from WorkSync are five kinds of a single resource mechanism here: one permission model, one trash, one way to share. Not five subsystems each solving it again.",
+      "items": [
+        {
+          "kind": "markdown",
+          "title": "Document library",
+          "desc": "A tree up to 5 levels deep, autosaving about every 2 seconds. Full version history: line-level diff, preview, tagging and rollback, with history append-only. Cross-document links resolve by id, so renaming never breaks them."
+        },
+        {
+          "kind": "diagram",
+          "title": "Diagrams (PlantUML)",
+          "desc": "Rendering goes through a self-hosted PlantUML server, so source never appears in a URL, a Referer header or a proxy log. 100k character cap; syntax errors come back as an annotated error image. The project's task relationship diagram is generated automatically."
+        },
+        {
+          "kind": "whiteboard",
+          "title": "Whiteboard",
+          "desc": "An Excalidraw canvas that autosaves, storing the canvas, background and grid only. Paste accepts bitmaps only - SVG carries a script-injection risk, so it is refused. 3MB canvas cap."
+        },
+        {
+          "kind": "file",
+          "title": "Attachments",
+          "desc": "50MB by default, 1-500MB by platform policy. Virus scanning fails closed: if the scanner is unconfigured, unreachable or times out, the upload is rejected rather than waved through."
+        },
+        {
+          "kind": "external_url",
+          "title": "External links",
+          "desc": "Off-site material is registered as a resource, so it attaches to tasks, goes to trash and gets shared like everything else."
+        }
+      ],
+      "shots": [
+        {
+          "alt": "Resource library view",
+          "caption": "Resources · one object, five kinds"
+        },
+        {
+          "alt": "PlantUML diagram view",
+          "caption": "Diagrams · rendered server-side, source stays out of the URL"
+        }
+      ]
+    },
+    "governance": {
+      "eyebrow": "GOVERNANCE",
+      "title": "Permission is two layers multiplied",
+      "lead": "The global role (admin / user) decides which pages you can open; the project role (PM / collaborator / tester / observer) decides which tasks you can touch. The two multiply, and any role the system cannot resolve falls back to least privilege.",
+      "items": [
+        {
+          "title": "Admin does not mean read-everything",
+          "desc": "Governance pages - users, logs, the project list - belong to admins; project content still goes through membership. There is no back door into a project they have not joined, and joining is itself an audited event."
+        },
+        {
+          "title": "The audit log records only what matters",
+          "desc": "Five whitelisted categories: authorization, sharing, destructive actions, auth and credentials, configuration changes - plus every denied action, highlighted. Ordinary field edits go to the object's own activity feed instead. The audit log has no TTL."
+        },
+        {
+          "title": "One account, one session",
+          "desc": "The newest sign-in wins. Force-logout is not an instant disconnect and does not change the password; to actually stop someone, disable the account. Accounts are never deleted - delete one and \"who did this\" in the audit log points at nothing."
+        },
+        {
+          "title": "Two fates in the trash",
+          "desc": "Docs, diagrams, whiteboards, attachments and links are soft-deleted for 30 days. Tasks are deleted immediately and irreversibly, guarded by \"a task with children cannot be deleted directly\". Share links die on delete and do not come back on restore."
+        }
+      ],
+      "figureAlt": "Two-layer role model diagram",
+      "figureCaption": "Global role x project role · multiplied, not added",
+      "shotAlt": "Audit log view",
+      "shotCaption": "Audit log · five whitelisted categories, denied actions highlighted"
+    },
+    "api": {
+      "eyebrow": "SEMANTIC PROJECTION",
+      "title": "Other systems can <accent>subscribe</accent> to this graph",
+      "lead": "External access happens through an external principal, not a bare API key - and it is bound by the same project membership. Scopes: specific tasks, the project root task, or assigned to me.",
+      "items": [
+        {
+          "tag": "EVENTS",
+          "title": "Six event types",
+          "desc": "task.created / task.updated / task.status_changed / task.deleted, plus link.created / link.deleted. Both task and relationship changes are covered."
+        },
+        {
+          "tag": "SIGNING",
+          "title": "Verify raw bytes, dedupe by id",
+          "desc": "Consumers must verify the signature against the raw request body and dedupe on the payload id - global ordering is not promised, and duplicate deliveries are allowed by design."
+        },
+        {
+          "tag": "RETRIES",
+          "title": "A backoff ladder in the open",
+          "desc": "1 minute, 5 minutes, 30 minutes, 2 hours, 6 hours - then the delivery is dead-lettered. The delivery log carries the failure reason."
+        },
+        {
+          "tag": "READ API",
+          "title": "JSON-LD semantic projection",
+          "desc": "Two read-only endpoints: task list and task detail. Ask for JSON-LD in the Accept header and you get the semantic projection, with Vary: Accept on the response. Read only for now - there is no external write API."
+        },
+        {
+          "tag": "IMPORT",
+          "title": "One plugin per platform",
+          "desc": "GitHub is built in. Online and offline import share the same mapping and idempotency code, so results match field by field; re-running is safe, and \"created 0 / skipped 48\" is a success. One-way and read-only: changes here never flow back upstream."
+        }
+      ],
+      "headersTitle": "Delivery headers",
+      "headers": [
+        "X-TaskGraph-Signature: sha256=HMAC-SHA256(secret, raw body)",
+        "X-TaskGraph-Delivery: id of this delivery"
+      ],
+      "nameNote": "WorkGraph is the product name; the repository, the CLI and the delivery headers all identify it as TaskGraph. Integrate against the header names above verbatim.",
+      "tokenNote": "A token is shown in full exactly once at issue time; after that only an 8-character fingerprint remains. Issuing one is a critical audit event.",
+      "figureAlt": "Subscription and delivery flow diagram",
+      "figureCaption": "Subscribe, event, signed delivery, retry",
+      "shotAlt": "Subscription management view",
+      "shotCaption": "Subscriptions · external principals, scopes, token fingerprints and delivery health"
+    },
+    "status": {
+      "eyebrow": "STATUS",
+      "title": "Where it actually stands",
+      "lead": "The main line 0-6 is complete and running on real projects. The following is missing, and it is written here so you do not find out after you start.",
+      "items": [
+        {
+          "title": "No automated tests yet",
+          "desc": "Regression is manual today. It is the first gap worth closing, and not one we are going to pretend away."
+        },
+        {
+          "title": "The mobile shell below 768px is unfinished",
+          "desc": "Desktop and tablet are fine; a phone will render it, but the layout was not designed for one."
+        },
+        {
+          "title": "No full-text search over resources",
+          "desc": "Docs, diagrams and whiteboards are found by tree and title - keywords inside the body are not searchable yet."
+        },
+        {
+          "title": "The external API is read-only",
+          "desc": "A write API, plus ical and email delivery, are still contract-only. The product manual is currently Chinese-only."
+        }
+      ]
+    },
+    "cta": {
+      "badge": "WORKGRAPH",
+      "title": "Want to see it on your own schedule?",
+      "description": "Book 30 minutes: bring a real slice of your plan, we draw its dependencies and hierarchy as a graph, and you see on the spot which chain is stuck. Teams already on WorkSync can use the same call to talk through migration.",
+      "button": "Book a demo",
+      "note": "We reply within one business day",
+      "back": "Back to WorkSync"
     }
   }
 }

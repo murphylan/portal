@@ -9,6 +9,7 @@ const routes = [
   "/products",
   "/products/activity",
   "/worksync",
+  "/worksync/workgraph",
   "/enterprise",
   "/apps",
 ];

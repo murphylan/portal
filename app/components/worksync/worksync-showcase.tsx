@@ -310,6 +310,17 @@ function StickyNav({
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* 升级版入口 —— 新页面走 portal 设计系统，见 workgraph-showcase.tsx */}
+          <Link
+            href="/worksync/workgraph"
+            className={`hidden text-sm transition-colors sm:inline ${
+              scrolled
+                ? "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                : "text-white/70 hover:text-white"
+            }`}
+          >
+            WorkGraph
+          </Link>
           <LocaleSwitcher
             className={
               scrolled ? "text-gray-600 dark:text-gray-300" : "text-white/70"
@@ -697,6 +708,36 @@ export default function WorkSyncShowcase() {
             />
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* ── 升级版横幅：WorkGraph ──
+          这一条按 DESIGN.md 的配色写（Store Green + 品牌三色条），与本页其余
+          紫色段落不同色系是刻意的：它指向的是新设计系统下的页面。 */}
+      <section className="px-4 py-8">
+        <Link
+          href="/worksync/workgraph"
+          className="group relative mx-auto flex max-w-5xl flex-col gap-4 overflow-hidden rounded-2xl border border-[rgba(0,121,76,0.24)] bg-white p-6 shadow-[0_2px_16px_rgba(20,24,28,0.05)] transition-all hover:-translate-y-0.5 hover:border-[#00794c]/50 hover:shadow-[0_24px_50px_-28px_rgba(0,121,76,0.4)] sm:flex-row sm:items-center dark:bg-gray-900"
+        >
+          <span
+            aria-hidden
+            className="brand-stripe absolute inset-x-0 top-0 h-[3px]"
+          />
+          <span className="inline-flex w-max shrink-0 items-center rounded-full bg-[#00794c]/10 px-2.5 py-1 font-mono text-[10px] font-semibold tracking-[0.12em] text-[#00794c]">
+            {t("upgrade.tag")}
+          </span>
+          <span className="flex-1">
+            <span className="block text-base font-semibold text-gray-900 dark:text-white">
+              {t("upgrade.title")}
+            </span>
+            <span className="mt-1 block text-sm text-gray-500 dark:text-gray-400">
+              {t("upgrade.desc")}
+            </span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-[#00794c]">
+            {t("upgrade.cta")}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </Link>
       </section>
 
       {/* ── Feature Highlights Strip ── */}
