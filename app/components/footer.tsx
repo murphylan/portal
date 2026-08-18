@@ -97,26 +97,10 @@ export default function Footer({ showContactId = true }: FooterProps) {
               ))}
               <li>
                 <Link
-                  href="/products"
-                  className="hover:text-foreground transition-colors"
-                >
-                  {common("productOverview")}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/apps"
                   className="hover:text-foreground transition-colors"
                 >
                   {t("freeApps")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/enterprise"
-                  className="hover:text-foreground transition-colors"
-                >
-                  {t("enterprise")}
                 </Link>
               </li>
               <li>
@@ -133,6 +117,24 @@ export default function Footer({ showContactId = true }: FooterProps) {
                   className="hover:text-foreground transition-colors"
                 >
                   {t("dpp")}
+                </Link>
+              </li>
+              {/* The two index-style links close the column: products and
+                  business lines first, then "where do I see everything". */}
+              <li>
+                <Link
+                  href="/products"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {common("productOverview")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/enterprise"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {t("enterprise")}
                 </Link>
               </li>
             </ul>

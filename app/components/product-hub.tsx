@@ -8,7 +8,9 @@ import {
   CalendarClock,
   KanbanSquare,
   LayoutDashboard,
+  Network,
   PenTool,
+  ShieldCheck,
   ShoppingCart,
   Sparkles,
   Swords,
@@ -40,6 +42,32 @@ const WORKSYNC_HIGHLIGHT_ICONS = [
   Sparkles,
   BarChart3,
 ];
+
+/**
+ * The two lines that have their own marketing pages inside the portal rather
+ * than an external product URL: the DPP implementation business and WorkGraph,
+ * WorkSync's successor. Both carry brand colors (Store Green / Signal Orange)
+ * instead of this page's per-product Tailwind families, so the band reads as
+ * "these are the current focus" rather than as two more SaaS tiles.
+ */
+const FOCUS_LINES = [
+  {
+    key: "dpp",
+    href: "/dpp",
+    secondary: "/dpp/tools",
+    Icon: ShieldCheck,
+    accent: "#00794c",
+    gradient: "from-[#00794c] to-[#00925c]",
+  },
+  {
+    key: "workgraph",
+    href: "/worksync/workgraph",
+    secondary: null,
+    Icon: Network,
+    accent: "#f58220",
+    gradient: "from-[#f58220] to-[#e07011]",
+  },
+] as const;
 
 export default function ProductHub() {
   const t = useTranslations("ProductHub");
@@ -87,6 +115,89 @@ export default function ProductHub() {
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto">{t("lead")}</p>
         </motion.div>
+
+        {/* ===== Focus lines — DPP and WorkGraph, both introduced on their
+             own pages in this portal ===== */}
+        <div className="mb-10">
+          <p className="text-sm font-medium text-muted-foreground mb-4">
+            {t("focusLabel")}
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {FOCUS_LINES.map((line, i) => {
+              const highlights = t.raw(`${line.key}Highlights`) as string[];
+              return (
+                <motion.div
+                  key={line.key}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.05 + i * 0.06 }}
+                >
+                  <Card
+                    className="h-full flex flex-col border-2"
+                    style={{ borderColor: `${line.accent}33` }}
+                  >
+                    <CardContent className="p-6 flex flex-col h-full flex-1">
+                      <div className="flex items-start justify-between gap-4 mb-4">
+                        <div
+                          className={`h-10 w-10 rounded-xl bg-linear-to-br ${line.gradient} flex items-center justify-center`}
+                        >
+                          <line.Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <span
+                          className="rounded-full px-2.5 py-1 text-[11px] font-medium"
+                          style={{
+                            backgroundColor: `${line.accent}14`,
+                            color: line.accent,
+                          }}
+                        >
+                          {t(`${line.key}Badge`)}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {t(`${line.key}Title`)}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                        {t(`${line.key}Description`)}
+                      </p>
+                      <ul className="text-xs text-muted-foreground space-y-2 leading-snug mb-5 flex-1">
+                        {highlights.map((item) => (
+                          <li key={item} className="flex items-start gap-2">
+                            <span
+                              aria-hidden
+                              className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full"
+                              style={{ backgroundColor: line.accent }}
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="flex flex-col sm:flex-row gap-2 shrink-0 mt-auto">
+                        <Button
+                          size="sm"
+                          className="text-white"
+                          style={{ backgroundColor: line.accent }}
+                          asChild
+                        >
+                          <Link href={line.href}>
+                            {t(`${line.key}Cta`)}
+                            <ArrowRight className="h-4 w-4 ml-2" />
+                          </Link>
+                        </Button>
+                        {line.secondary ? (
+                          <Button size="sm" variant="outline" asChild>
+                            <Link href={line.secondary}>
+                              {t(`${line.key}CtaSecondary`)}
+                            </Link>
+                          </Button>
+                        ) : null}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
 
         <div className="flex flex-col lg:flex-row lg:items-stretch gap-6">
           <motion.div

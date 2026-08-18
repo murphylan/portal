@@ -4,14 +4,16 @@
 // WorkGraph — the WorkSync successor: a semantic task platform where tasks are
 // nodes, relationships are edges and templates are the ontology.
 //
-// Every claim on this page is taken from the product's own help center
-// (TaskGraph/docs/manual), including the honest "not done yet" section — no
-// invented metrics (DESIGN.md §7). Visual language follows the /dpp pages
-// (apple-* primitives, Store Green lead, orange/red rhythm), NOT the older
-// violet worksync-showcase.
+// Every claim on this page is taken from the product's own sources — the help
+// center (TaskGraph/docs/manual) for behaviour, and compose.prod.yml /
+// Containerfile / docs/taskgraph-design.md for the deployment and performance
+// section — no invented metrics (DESIGN.md §7). Visual language follows the
+// /dpp pages (apple-* primitives, Store Green lead, orange/red rhythm), NOT
+// the older violet worksync-showcase.
 //
 // Section order: hero → three differences → main line 0-6 → task graph (dark)
-// → one resource mechanism → governance → subscriptions (dark) → status → CTA.
+// → one resource mechanism → governance → subscriptions (dark) → platform
+// → CTA.
 // ---------------------------------------------------------------------------
 
 import { motion } from "framer-motion";
@@ -23,21 +25,21 @@ import {
   FilePlus2,
   FileText,
   Fingerprint,
+  Gauge,
   GitPullRequestArrow,
   KeyRound,
   Link2,
-  ListTree,
   Lock,
   Network,
+  PackageCheck,
   Paperclip,
   PenTool,
   Radio,
   RefreshCw,
   Route,
   ScrollText,
-  Search,
+  Server,
   ShieldCheck,
-  Smartphone,
   Sparkles,
   Trash2,
   Workflow,
@@ -86,16 +88,30 @@ const STEP_ICONS = [
 const RESOURCE_ICONS = [FileText, Workflow, PenTool, Paperclip, Link2];
 const GOVERNANCE_ICONS = [ShieldCheck, ScrollText, KeyRound, Trash2];
 const API_ICONS = [Radio, Fingerprint, RefreshCw, Braces, GitPullRequestArrow];
-const STATUS_ICONS = [Braces, Smartphone, Search, ListTree];
+const PLATFORM_ICONS = [Server, Gauge, Lock, PackageCheck];
 
-// Zig-zag spans so no row ever reads as an equal 3-up grid (DESIGN.md §5/§7)
-const DIFF_SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-12"];
+// Spans are chosen so every row fills its track and no row reads as an equal
+// 3-up grid (DESIGN.md §5/§7). A span of 12 switches the card to the wide
+// horizontal layout below, otherwise the copy would sit in the left third of a
+// full-bleed card with nothing beside it.
+const DIFF_SPANS = ["lg:col-span-6", "lg:col-span-6", "lg:col-span-12"];
 const RESOURCE_SPANS = [
-  "lg:col-span-7",
-  "lg:col-span-5",
-  "lg:col-span-5",
-  "lg:col-span-7",
+  "lg:col-span-6",
+  "lg:col-span-6",
+  "lg:col-span-6",
+  "lg:col-span-6",
   "lg:col-span-12",
+];
+// 4 + 3 cards over two rows of differing card width — 7 items in a 4-column
+// grid left an obvious hole in the second row.
+const STEP_SPANS = [
+  "lg:col-span-3",
+  "lg:col-span-3",
+  "lg:col-span-3",
+  "lg:col-span-3",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
 ];
 
 // Tri-color rotation — green leads, orange/red pace it (DESIGN.md §2)
@@ -180,6 +196,10 @@ function WorkGraphNav() {
 // Shared section heading — mirrors the homepage / DPP one
 // ---------------------------------------------------------------------------
 
+// Two-column heading: title on the left, lead sitting on the right at the
+// title's baseline. A single narrow column left the right two thirds of every
+// section empty, and clamping a 42px headline with a 16px-derived `ch` measure
+// broke it into ragged three-line wraps.
 function SectionHeading({
   eyebrow,
   title,
@@ -193,26 +213,28 @@ function SectionHeading({
 }) {
   const dark = tone === "dark";
   return (
-    <div className="max-w-[54ch]">
-      <span
-        className="eyebrow-mono mb-4 inline-flex items-center gap-2.5"
-        style={{ color: dark ? "#3ab27f" : "#00794c" }}
-      >
+    <div className="grid gap-x-14 gap-y-5 lg:grid-cols-12 lg:items-end">
+      <div className={lead ? "lg:col-span-7" : "lg:col-span-9"}>
         <span
-          aria-hidden
-          className="brand-stripe inline-block h-3 w-6 rounded-[2px]"
-        />
-        {eyebrow}
-      </span>
-      <h2
-        className="apple-headline text-3xl sm:text-4xl md:text-[42px]"
-        style={{ color: dark ? "#ffffff" : "#16181c" }}
-      >
-        {title}
-      </h2>
+          className="eyebrow-mono mb-4 inline-flex items-center gap-2.5"
+          style={{ color: dark ? "#3ab27f" : "#00794c" }}
+        >
+          <span
+            aria-hidden
+            className="brand-stripe inline-block h-3 w-6 rounded-[2px]"
+          />
+          {eyebrow}
+        </span>
+        <h2
+          className="apple-headline text-balance text-3xl sm:text-4xl md:text-[42px]"
+          style={{ color: dark ? "#ffffff" : "#16181c" }}
+        >
+          {title}
+        </h2>
+      </div>
       {lead ? (
         <p
-          className="apple-body mt-4 text-sm sm:text-base"
+          className="apple-body text-sm sm:text-base lg:col-span-5 lg:pb-1"
           style={{
             color: dark ? "rgba(255,255,255,0.62)" : "rgba(20,24,28,0.58)",
           }}
@@ -297,10 +319,14 @@ function Diagram({
   src,
   alt,
   caption,
+  // Tall portrait diagrams (the RBAC flow) would otherwise dictate the height
+  // of a whole two-column row. Cap them and let the SVG centre itself.
+  maxH,
 }: {
   src: string;
   alt: string;
   caption?: string;
+  maxH?: string;
 }) {
   return (
     <figure className="w-full">
@@ -310,7 +336,11 @@ function Diagram({
           src={src}
           alt={alt}
           loading="lazy"
-          className="h-auto w-full max-w-full"
+          className={
+            maxH
+              ? `h-auto w-auto max-w-full ${maxH}`
+              : "h-auto w-full max-w-full"
+          }
         />
       </div>
       {caption ? (
@@ -341,7 +371,7 @@ export default function WorkGraphShowcase() {
   const governanceItems = t.raw("governance.items") as Cap[];
   const apiItems = t.raw("api.items") as ApiItem[];
   const headers = t.raw("api.headers") as string[];
-  const statusItems = t.raw("status.items") as Cap[];
+  const platformItems = t.raw("platform.items") as Cap[];
 
   return (
     <div className="overflow-x-hidden">
@@ -480,7 +510,12 @@ export default function WorkGraphShowcase() {
                 sizes="(max-width: 1024px) 100vw, 820px"
               />
 
-              <div className="absolute -left-2 top-[16%] hidden items-center gap-2.5 rounded-2xl border border-[rgba(20,24,28,0.08)] bg-white px-3.5 py-2.5 shadow-[0_16px_36px_-18px_rgba(20,24,28,0.3)] sm:flex lg:-left-6">
+              {/* Kept inside the shot: at 1400-1450px viewports an outward
+                  offset put the right-hand badge under the page's
+                  overflow-x-hidden clip and it got sliced off. Both sit over
+                  the graph canvas — what they annotate — rather than across
+                  the app's own left nav, where they read as a render glitch. */}
+              <div className="absolute left-[6%] top-[22%] hidden items-center gap-2.5 rounded-2xl border border-[rgba(20,24,28,0.08)] bg-white px-3.5 py-2.5 shadow-[0_16px_36px_-18px_rgba(20,24,28,0.3)] sm:flex lg:left-[24%]">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#00794c]/10">
                   <Lock className="h-3.5 w-3.5 text-[#00794c]" />
                 </span>
@@ -494,7 +529,7 @@ export default function WorkGraphShowcase() {
                 </span>
               </div>
 
-              <div className="absolute -right-2 bottom-[12%] hidden items-center gap-2.5 rounded-2xl border border-[rgba(20,24,28,0.08)] bg-white px-3.5 py-2.5 shadow-[0_16px_36px_-18px_rgba(20,24,28,0.3)] sm:flex lg:-right-6">
+              <div className="absolute right-3 bottom-[18%] hidden items-center gap-2.5 rounded-2xl border border-[rgba(20,24,28,0.08)] bg-white px-3.5 py-2.5 shadow-[0_16px_36px_-18px_rgba(20,24,28,0.3)] sm:flex lg:right-6">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#e11b22]/10">
                   <RefreshCw className="h-3.5 w-3.5 text-[#e11b22]" />
                 </span>
@@ -531,38 +566,61 @@ export default function WorkGraphShowcase() {
             {diffItems.map((item, i) => {
               const Icon = DIFF_ICONS[i];
               const tone = DIFF_TONES[i];
+              const wide = DIFF_SPANS[i] === "lg:col-span-12";
               return (
                 <motion.article
                   key={item.tag}
                   variants={cardVariants}
-                  className={`flex flex-col rounded-3xl border border-[rgba(20,24,28,0.08)] bg-white p-7 shadow-[0_2px_16px_rgba(20,24,28,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00794c]/40 hover:shadow-[0_28px_60px_-30px_rgba(0,121,76,0.4)] ${DIFF_SPANS[i]}`}
+                  className={`rounded-3xl border border-[rgba(20,24,28,0.08)] bg-white p-7 shadow-[0_2px_16px_rgba(20,24,28,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00794c]/40 hover:shadow-[0_28px_60px_-30px_rgba(0,121,76,0.4)] ${DIFF_SPANS[i]} ${
+                    wide
+                      ? "lg:grid lg:grid-cols-12 lg:items-center lg:gap-10"
+                      : "flex flex-col"
+                  }`}
                 >
-                  <span
-                    className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl"
-                    style={{ background: tone.bg }}
+                  {/* Wide card: the icon moves beside the title instead of
+                      above it. Stacked, the left block was 120px tall against
+                      a 45px paragraph, and `items-center` then dropped the
+                      title well below the copy it belongs to. */}
+                  <div
+                    className={
+                      wide ? "flex items-center gap-4 lg:col-span-4" : undefined
+                    }
                   >
-                    <Icon className="h-5 w-5" style={{ color: tone.fg }} />
-                  </span>
-                  <span
-                    className="eyebrow-mono text-[0.65rem]"
-                    style={{ color: "rgba(20,24,28,0.4)" }}
-                  >
-                    {item.tag}
-                  </span>
-                  <h3
-                    className="mt-2 text-lg font-semibold"
-                    style={{ color: "#16181c" }}
-                  >
-                    {item.title}
-                  </h3>
+                    <span
+                      className={`flex h-11 w-11 items-center justify-center rounded-xl ${
+                        wide ? "shrink-0" : "mb-5"
+                      }`}
+                      style={{ background: tone.bg }}
+                    >
+                      <Icon className="h-5 w-5" style={{ color: tone.fg }} />
+                    </span>
+                    <div>
+                      <span
+                        className="eyebrow-mono text-[0.65rem]"
+                        style={{ color: "rgba(20,24,28,0.4)" }}
+                      >
+                        {item.tag}
+                      </span>
+                      <h3
+                        className="mt-1.5 text-lg font-semibold"
+                        style={{ color: "#16181c" }}
+                      >
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
                   <p
-                    className="mt-2.5 max-w-[62ch] text-sm"
+                    className={`text-sm ${wide ? "lg:col-span-5 lg:mt-0" : ""} mt-2.5`}
                     style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.6 }}
                   >
                     {item.desc}
                   </p>
                   <p
-                    className="mt-5 border-t border-[rgba(20,24,28,0.06)] pt-4 font-mono text-[11px]"
+                    className={`font-mono text-[11px] ${
+                      wide
+                        ? "mt-5 border-t border-[rgba(20,24,28,0.06)] pt-4 lg:col-span-3 lg:mt-0 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-6"
+                        : "mt-5 border-t border-[rgba(20,24,28,0.06)] pt-4"
+                    }`}
                     style={{ color: tone.fg }}
                   >
                     {item.note}
@@ -572,7 +630,9 @@ export default function WorkGraphShowcase() {
             })}
           </motion.div>
 
-          <div className="mt-10 max-w-[1000px]">
+          {/* Centred, not pinned left: a left-aligned 1000px figure inside a
+              1400px column read as a mistake. */}
+          <div className="mx-auto mt-12 max-w-[1120px]">
             <Diagram
               src="/workgraph/dg-concepts.svg"
               alt={t("diff.figureAlt")}
@@ -600,7 +660,7 @@ export default function WorkGraphShowcase() {
           />
 
           <motion.ol
-            className="mt-12 grid list-none gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-12 grid list-none gap-5 sm:grid-cols-2 lg:grid-cols-12"
             {...revealProps}
           >
             {steps.map((step, i) => {
@@ -610,7 +670,7 @@ export default function WorkGraphShowcase() {
                 <motion.li
                   key={step.n}
                   variants={cardVariants}
-                  className={`flex flex-col rounded-3xl border p-6 ${
+                  className={`flex flex-col rounded-3xl border p-6 ${STEP_SPANS[i]} ${
                     featured
                       ? "border-[#00794c]/45 bg-[#f2fbf6] shadow-[0_18px_44px_-24px_rgba(0,121,76,0.45)]"
                       : "border-[rgba(20,24,28,0.08)] bg-white shadow-[0_2px_16px_rgba(20,24,28,0.05)]"
@@ -650,24 +710,28 @@ export default function WorkGraphShowcase() {
             })}
           </motion.ol>
 
+          {/* Equal halves: both shots are locked to the same 16/10 frame, so a
+              7/5 split gave two different heights and left a wedge of dead
+              space beside the shorter one. 6/6 makes the row symmetric and the
+              captions land on one baseline for free. */}
           <motion.div
-            className="mt-12 grid gap-6 lg:grid-cols-12"
+            className="mt-12 grid gap-6 lg:grid-cols-2"
             {...revealProps}
           >
-            <motion.div variants={cardVariants} className="lg:col-span-7">
+            <motion.div variants={cardVariants}>
               <Shot
                 src="/workgraph/ui-templates.png"
                 alt={lineShots[0].alt}
                 caption={lineShots[0].caption}
-                sizes="(max-width: 1024px) 100vw, 780px"
+                sizes="(max-width: 1024px) 100vw, 660px"
               />
             </motion.div>
-            <motion.div variants={cardVariants} className="lg:col-span-5">
+            <motion.div variants={cardVariants}>
               <Shot
                 src="/workgraph/ui-task-tree.png"
                 alt={lineShots[1].alt}
                 caption={lineShots[1].caption}
-                sizes="(max-width: 1024px) 100vw, 540px"
+                sizes="(max-width: 1024px) 100vw, 660px"
               />
             </motion.div>
           </motion.div>
@@ -688,8 +752,12 @@ export default function WorkGraphShowcase() {
             lead={t("graph.lead")}
           />
 
+          {/* Legend + hard limits together are almost exactly as tall as the
+              screenshot beside them. The four capabilities used to sit under
+              the shot inside the same column, which is what left ~600px of
+              dead space at the bottom of the left one — they now run full
+              width below the row. */}
           <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-14">
-            {/* Legend + hard limits */}
             <motion.div className="lg:col-span-5" {...revealProps}>
               <motion.div variants={cardVariants}>
                 <p className="eyebrow-mono mb-4 text-white/45">
@@ -733,7 +801,6 @@ export default function WorkGraphShowcase() {
               </motion.div>
             </motion.div>
 
-            {/* Capabilities + the peek drawer shot */}
             <motion.div className="lg:col-span-7" {...revealProps}>
               <motion.div variants={cardVariants}>
                 <Shot
@@ -744,13 +811,17 @@ export default function WorkGraphShowcase() {
                   sizes="(max-width: 1024px) 100vw, 780px"
                 />
               </motion.div>
+            </motion.div>
+          </div>
 
-              <motion.p
-                variants={cardVariants}
-                className="eyebrow-mono mt-10 mb-1 text-white/45"
-              >
-                {t("graph.capsTitle")}
-              </motion.p>
+          <motion.div className="mt-16" {...revealProps}>
+            <motion.p
+              variants={cardVariants}
+              className="eyebrow-mono mb-2 text-white/45"
+            >
+              {t("graph.capsTitle")}
+            </motion.p>
+            <div className="grid gap-x-14 md:grid-cols-2">
               {caps.map((cap) => (
                 <motion.article
                   key={cap.title}
@@ -761,15 +832,15 @@ export default function WorkGraphShowcase() {
                     {cap.title}
                   </h3>
                   <p
-                    className="max-w-[62ch] text-sm"
+                    className="text-sm"
                     style={{ color: "rgba(255,255,255,0.62)", lineHeight: 1.6 }}
                   >
                     {cap.desc}
                   </p>
                 </motion.article>
               ))}
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -791,28 +862,51 @@ export default function WorkGraphShowcase() {
           >
             {resourceItems.map((item, i) => {
               const Icon = RESOURCE_ICONS[i];
+              const wide = RESOURCE_SPANS[i] === "lg:col-span-12";
               return (
                 <motion.article
                   key={item.kind}
                   variants={cardVariants}
-                  className={`flex flex-col rounded-3xl border border-[rgba(20,24,28,0.08)] bg-white p-7 shadow-[0_2px_16px_rgba(20,24,28,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00794c]/40 ${RESOURCE_SPANS[i]}`}
+                  className={`rounded-3xl border border-[rgba(20,24,28,0.08)] bg-white p-7 shadow-[0_2px_16px_rgba(20,24,28,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00794c]/40 ${RESOURCE_SPANS[i]} ${
+                    wide
+                      ? "lg:grid lg:grid-cols-12 lg:items-center lg:gap-10"
+                      : "flex flex-col"
+                  }`}
                 >
-                  <div className="mb-5 flex items-center justify-between gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#00794c]/10">
+                  <div
+                    className={
+                      wide
+                        ? "flex items-center gap-4 lg:col-span-5"
+                        : "mb-5 flex items-center justify-between gap-4"
+                    }
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#00794c]/10">
                       <Icon className="h-5 w-5 text-[#00794c]" />
                     </span>
-                    <code className="rounded-md bg-[#f6f7f6] px-2 py-1 font-mono text-[10px] text-[#5b6167]">
+                    {wide ? (
+                      <h3
+                        className="text-base font-semibold"
+                        style={{ color: "#16181c" }}
+                      >
+                        {item.title}
+                      </h3>
+                    ) : null}
+                    <code
+                      className={`rounded-md bg-[#f6f7f6] px-2 py-1 font-mono text-[10px] text-[#5b6167] ${wide ? "lg:ml-auto" : ""}`}
+                    >
                       {item.kind}
                     </code>
                   </div>
-                  <h3
-                    className="text-base font-semibold"
-                    style={{ color: "#16181c" }}
-                  >
-                    {item.title}
-                  </h3>
+                  {wide ? null : (
+                    <h3
+                      className="text-base font-semibold"
+                      style={{ color: "#16181c" }}
+                    >
+                      {item.title}
+                    </h3>
+                  )}
                   <p
-                    className="mt-2.5 max-w-[64ch] text-[13px]"
+                    className={`text-[13px] ${wide ? "mt-4 lg:col-span-7 lg:mt-0" : "mt-2.5"}`}
                     style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.6 }}
                   >
                     {item.desc}
@@ -822,24 +916,25 @@ export default function WorkGraphShowcase() {
             })}
           </motion.div>
 
+          {/* Equal halves, same reason as the pair in the main-line section. */}
           <motion.div
-            className="mt-10 grid gap-6 lg:grid-cols-12"
+            className="mt-10 grid gap-6 lg:grid-cols-2"
             {...revealProps}
           >
-            <motion.div variants={cardVariants} className="lg:col-span-5">
+            <motion.div variants={cardVariants}>
               <Shot
                 src="/workgraph/ui-resources.png"
                 alt={resourceShots[0].alt}
                 caption={resourceShots[0].caption}
-                sizes="(max-width: 1024px) 100vw, 540px"
+                sizes="(max-width: 1024px) 100vw, 660px"
               />
             </motion.div>
-            <motion.div variants={cardVariants} className="lg:col-span-7">
+            <motion.div variants={cardVariants}>
               <Shot
                 src="/workgraph/ui-diagrams.png"
                 alt={resourceShots[1].alt}
                 caption={resourceShots[1].caption}
-                sizes="(max-width: 1024px) 100vw, 780px"
+                sizes="(max-width: 1024px) 100vw, 660px"
               />
             </motion.div>
           </motion.div>
@@ -865,6 +960,7 @@ export default function WorkGraphShowcase() {
                   src="/workgraph/dg-rbac.svg"
                   alt={t("governance.figureAlt")}
                   caption={t("governance.figureCaption")}
+                  maxH="max-h-[680px]"
                 />
               </motion.div>
             </motion.div>
@@ -876,7 +972,13 @@ export default function WorkGraphShowcase() {
                   <motion.article
                     key={item.title}
                     variants={cardVariants}
-                    className="grid grid-cols-[auto_1fr] items-start gap-x-5 gap-y-2 border-t border-[rgba(20,24,28,0.08)] py-6"
+                    /* The last rule closes the ledger so the column reads as a
+                       finished block against the tall diagram beside it. */
+                    className={`grid grid-cols-[auto_1fr] items-start gap-x-5 gap-y-2 border-t border-[rgba(20,24,28,0.08)] py-7 ${
+                      i === governanceItems.length - 1
+                        ? "border-b border-b-[rgba(20,24,28,0.08)]"
+                        : ""
+                    }`}
                   >
                     <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#00794c]/10">
                       <Icon className="h-[18px] w-[18px] text-[#00794c]" />
@@ -888,8 +990,12 @@ export default function WorkGraphShowcase() {
                       >
                         {item.title}
                       </h3>
+                      {/* 54ch on a 14px paragraph is ~400px — a real reading
+                          measure. (Unlike the heading, the clamp and the font
+                          size live on the same element here, so `ch` means
+                          what it says.) */}
                       <p
-                        className="max-w-[62ch] text-sm"
+                        className="max-w-[54ch] text-sm"
                         style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.6 }}
                       >
                         {item.desc}
@@ -901,12 +1007,14 @@ export default function WorkGraphShowcase() {
             </motion.div>
           </div>
 
-          <div className="mt-10 max-w-[1000px]">
+          {/* A log table wants the whole measure — it was pinned to 1000px on
+              the left of a 1400px column. */}
+          <div className="mt-14">
             <Shot
               src="/workgraph/ui-admin-logs.png"
               alt={t("governance.shotAlt")}
               caption={t("governance.shotCaption")}
-              sizes="(max-width: 1024px) 100vw, 1000px"
+              sizes="(max-width: 1024px) 100vw, 1400px"
             />
           </div>
         </div>
@@ -1002,42 +1110,50 @@ export default function WorkGraphShowcase() {
                   </motion.article>
                 );
               })}
-
-              <motion.div variants={cardVariants} className="mt-8">
-                <Diagram
-                  src="/workgraph/dg-subscribe-deliver.svg"
-                  alt={t("api.figureAlt")}
-                  caption={t("api.figureCaption")}
-                />
-              </motion.div>
             </motion.div>
           </div>
+
+          {/* The widest artefact on the page: a sequence chart across six
+              lifelines. It was squeezed into 7 of 12 columns. */}
+          <motion.div className="mt-14" {...revealProps}>
+            <motion.div variants={cardVariants}>
+              <Diagram
+                src="/workgraph/dg-subscribe-deliver.svg"
+                alt={t("api.figureAlt")}
+                caption={t("api.figureCaption")}
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ===== 8. Status — what is not done yet, stated plainly ===== */}
+      {/* ===== 8. Platform — deployment shape and the performance decisions
+           behind it. Every number here is checkable in the product repo:
+           service list and published-port policy from deploy/compose.prod.yml,
+           the build posture from Containerfile, and the 200ms P95 / index /
+           pagination rules from docs/taskgraph-design.md (NFR-1, §5.3). ===== */}
       <section className="apple-section-light px-6 py-16 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <SectionHeading
-            eyebrow={t("status.eyebrow")}
-            title={t("status.title")}
-            lead={t("status.lead")}
+            eyebrow={t("platform.eyebrow")}
+            title={t("platform.title")}
+            lead={t("platform.lead")}
           />
 
           <motion.div
             className="mt-10 grid gap-5 sm:grid-cols-2"
             {...revealProps}
           >
-            {statusItems.map((item, i) => {
-              const Icon = STATUS_ICONS[i];
+            {platformItems.map((item, i) => {
+              const Icon = PLATFORM_ICONS[i];
               return (
                 <motion.article
                   key={item.title}
                   variants={cardVariants}
-                  className="flex gap-4 rounded-3xl border border-[rgba(245,130,32,0.28)] bg-[rgba(245,130,32,0.04)] p-6"
+                  className="flex gap-4 rounded-3xl border border-[rgba(20,24,28,0.08)] bg-white p-6 shadow-[0_2px_16px_rgba(20,24,28,0.05)]"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f58220]/12">
-                    <Icon className="h-[18px] w-[18px] text-[#f58220]" />
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#00794c]/10">
+                    <Icon className="h-[18px] w-[18px] text-[#00794c]" />
                   </span>
                   <div>
                     <h3

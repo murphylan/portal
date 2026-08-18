@@ -723,8 +723,28 @@
   },
   "ProductHub": {
     "title": "Product Overview",
-    "lead": "Murphy Cloud includes 9+ products, with core SaaS: docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
+    "lead": "Two focus lines - DPP implementation and the WorkGraph task graph - alongside 9+ products, with core SaaS covering docs collaboration, Sign event engagement, chess AI, mobile commerce, and course booking. Open each live product from here.",
     "freeAppsLabel": "Free apps · no sign-up, open instantly",
+    "focusLabel": "Focus lines · introduced in full on this site",
+    "dppTitle": "DPP implementation",
+    "dppBadge": "New business line",
+    "dppDescription": "EU Digital Product Passport delivery: establish regulatory scope and data gaps first, then design product master data and traceability, implement the platform on open-dpp, and take a pilot product line all the way to publishing.",
+    "dppHighlights": [
+      "Compliance gap assessment, delivered as a prioritised list",
+      "Passport data model, identifier scheme and supplier collaboration flow",
+      "Platform implementation on open-dpp, from pilot to go-live"
+    ],
+    "dppCta": "Explore DPP implementation",
+    "dppCtaSecondary": "Free tools",
+    "workgraphTitle": "WorkGraph - task graph",
+    "workgraphBadge": "WorkSync successor",
+    "workgraphDescription": "Turns a project from documents plus boards into a single task graph: dependencies, resources and progress all land on one graph, and the whole stack can run on your own machines.",
+    "workgraphHighlights": [
+      "Dependencies form a graph; progress is computed on write, never aggregated on read",
+      "Start from templates - the main feature line already runs on real projects",
+      "One compose file brings up the stack; data and files stay inside your network"
+    ],
+    "workgraphCta": "See the WorkGraph intro",
     "worksyncHighlights": [
       "Knowledge base",
       "Task boards",
@@ -997,6 +1017,53 @@
           "n": "05",
           "title": "Go Live & Scale",
           "desc": "Launch, then extend across more products, suppliers, and compliance scenarios."
+        }
+      ]
+    },
+    "platform": {
+      "eyebrow": "PLATFORM",
+      "title": "What your team actually works in",
+      "lead": "Data intake, supplier collaboration, compliance review and publishing all happen in one workspace. The screens below come from a demo environment.",
+      "note": "Demo data - the companies, products and figures shown are samples",
+      "highlights": [
+        {
+          "title": "Roles decide what is visible",
+          "desc": "Platform admins, enterprise users, suppliers and reviewers each see a different menu, a different set of actions and a different slice of the data."
+        },
+        {
+          "title": "Industry capability ships as plugins",
+          "desc": "Textiles maps to ESPR 2024/1781, industrial batteries to the EU Battery Regulation. Once an admin enables a plugin, its field pack, code lists and templates simply appear."
+        },
+        {
+          "title": "Compliance verdicts are explainable",
+          "desc": "Every passport field links back to a regulatory clause, a data source and its verification evidence. A finding names the field, the owner and the rule - not just a score."
+        }
+      ],
+      "shots": [
+        {
+          "alt": "DPP operations platform overview: six key metrics, service health and the risk queue",
+          "title": "Platform overview",
+          "desc": "Workspaces, users, passports and published DPPs on one screen, followed by 24-hour availability per service and a risk queue sorted by blast radius."
+        },
+        {
+          "alt": "Product passport list filtered by workspace, industry plugin, completeness and compliance state",
+          "title": "Product passports",
+          "desc": "Draft, in review, published and withdrawn are counted separately, and the list filters by workspace, industry plugin, completeness and compliance state."
+        },
+        {
+          "alt": "CSV bulk create: picking a product industry auto-matches the plugin, field template and regulation version",
+          "title": "CSV data intake",
+          "desc": "Business users only pick a product industry - the platform loads the matching fields, code lists, data quality rules and regulation version for them."
+        },
+        {
+          "alt": "Supplier tasks: targeted passport data requests to Tier-N suppliers with response rate and overdue tracking",
+          "title": "Supplier collaboration",
+          "desc": "Request data field by field from Tier-N suppliers. A supplier only reaches the fields assigned to it, and response rate and near-due tasks are tracked on their own."
+        },
+        {
+          "alt": "Compliance review: blocking findings pinned to a field and an owner, with the matching regulation alongside",
+          "title": "Compliance review",
+          "desc": "Each blocking finding is pinned to a field and an owner and carries the clause behind it. Reviewers send issues back for correction instead of editing business data."
         }
       ]
     },
@@ -1619,26 +1686,26 @@
       "shotAlt": "Subscription management view",
       "shotCaption": "Subscriptions · external principals, scopes, token fingerprints and delivery health"
     },
-    "status": {
-      "eyebrow": "STATUS",
-      "title": "Where it actually stands",
-      "lead": "The main line 0-6 is complete and running on real projects. The following is missing, and it is written here so you do not find out after you start.",
+    "platform": {
+      "eyebrow": "DEPLOYMENT",
+      "title": "Runs on your own machines",
+      "lead": "The main line 0-6 is complete and running on real projects. One compose file brings up the whole stack, and data, diagram sources and files never leave your network.",
       "items": [
         {
-          "title": "No automated tests yet",
-          "desc": "Regression is manual today. It is the first gap worth closing, and not one we are going to pretend away."
+          "title": "One compose file, the whole stack",
+          "desc": "Six services: the app, a single-instance worker, a MongoDB 7 replica set, object storage, upload virus scanning and PlantUML rendering. Only the app container is published - the other four are reachable on the stack network alone."
         },
         {
-          "title": "The mobile shell below 768px is unfinished",
-          "desc": "Desktop and tablet are fine; a phone will render it, but the layout was not designed for one."
+          "title": "No aggregation on the read path",
+          "desc": "P95 internal queries stay under 200ms: every compound index leads with projectId, ancestry is a materialised path, and progress is computed on write. Reads happen in server components, so the client has no requests to cache."
         },
         {
-          "title": "No full-text search over resources",
-          "desc": "Docs, diagrams and whiteboards are found by tree and title - keywords inside the body are not searchable yet."
+          "title": "Diagram sources and file bytes stay inside",
+          "desc": "PlantUML is self-hosted with its sandbox profile pinned. Object storage issues no presigned URLs - file bytes are proxied by the app, so it has no reason to be reachable from outside. The build makes no outbound calls either, and telemetry is off."
         },
         {
-          "title": "The external API is read-only",
-          "desc": "A write API, plus ical and email delivery, are still contract-only. The product manual is currently Chinese-only."
+          "title": "Upgrades are two idempotent steps",
+          "desc": "First collections, validators and indexes, then the built-in manual - both steps are idempotent, so re-running them on upgrade writes nothing twice. Mail settings bump a version counter and take effect hot, so the worker never restarts."
         }
       ]
     },

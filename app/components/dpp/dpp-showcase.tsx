@@ -7,7 +7,9 @@
 // lead, orange + red rhythm, Geist, apple-* primitives) per DESIGN.md §2/§3/§7.
 //
 // Section order mirrors the source: hero → industries → why now → authority
-// (dark band) → implementation path → resources → CTA.
+// (dark band) → implementation path → platform screens → resources → CTA.
+// The platform section is the one addition — the prototype had no product
+// screenshots, so those captures were cropped into public/dpp/console-*.png.
 // ---------------------------------------------------------------------------
 
 import { motion } from "framer-motion";
@@ -25,6 +27,7 @@ import {
   FileText,
   Flag,
   GitPullRequestArrow,
+  Info,
   Layers,
   ListChecks,
   Network,
@@ -37,6 +40,7 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { OPEN_DPP_URL } from "@/lib/dpp-tools";
@@ -95,6 +99,8 @@ type WhyItem = { tag: string; title: string; desc: string; link: string };
 type ResourceItem = { tag: string; title: string; desc: string; cta: string };
 type StepItem = { n: string; title: string; desc: string };
 type TrustItem = { value: string; label: string };
+type ShotItem = { alt: string; title: string; desc: string };
+type Highlight = { title: string; desc: string };
 
 // ---------------------------------------------------------------------------
 // Nav — same shell as AppleNav / EnterpriseNav
@@ -264,6 +270,61 @@ function ReadinessGauge({ score, of }: { score: string; of: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// Console screenshot — the portal's own window frame around a product screen.
+//
+// The source captures were full-window grabs, so the Chrome tab strip, the
+// localhost URL bar and the profile photo were cropped off before the assets
+// landed in public/dpp — the faux chrome below replaces them. The crops are
+// 2624x1460 (1.797), a hair wider than the 16/9 frame, so `object-cover`
+// trims ~7px off each side rather than distorting anything.
+// ---------------------------------------------------------------------------
+
+function ConsoleShot({
+  src,
+  shot,
+  sizes,
+}: {
+  src: string;
+  shot: ShotItem;
+  sizes: string;
+}) {
+  return (
+    <figure className="w-full">
+      <div className="overflow-hidden rounded-2xl border border-[rgba(20,24,28,0.08)] bg-white shadow-[0_30px_70px_-34px_rgba(20,24,28,0.4)]">
+        <div className="flex items-center gap-1.5 border-b border-[rgba(20,24,28,0.06)] bg-[#f6f7f6] px-3.5 py-2">
+          <span className="h-2 w-2 rounded-full bg-[#e11b22]/60" />
+          <span className="h-2 w-2 rounded-full bg-[#f58220]/60" />
+          <span className="h-2 w-2 rounded-full bg-[#00794c]/60" />
+        </div>
+        <div className="relative aspect-16/9">
+          <Image
+            src={src}
+            alt={shot.alt}
+            fill
+            sizes={sizes}
+            className="object-cover object-top"
+          />
+        </div>
+      </div>
+      <figcaption className="mt-4">
+        <span
+          className="eyebrow-mono text-[0.65rem]"
+          style={{ color: "#00794c" }}
+        >
+          {shot.title}
+        </span>
+        <p
+          className="mt-1.5 max-w-[54ch] text-[13px]"
+          style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.6 }}
+        >
+          {shot.desc}
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
@@ -276,6 +337,8 @@ export default function DppShowcase() {
   const whyItems = t.raw("why.items") as WhyItem[];
   const capabilities = t.raw("authority.items") as StepItem[];
   const steps = t.raw("path.steps") as StepItem[];
+  const platformShots = t.raw("platform.shots") as ShotItem[];
+  const highlights = t.raw("platform.highlights") as Highlight[];
   const resourceItems = t.raw("resources.items") as ResourceItem[];
 
   // The why-now cards deep-link into the sections that answer them. Labels must
@@ -711,7 +774,108 @@ export default function DppShowcase() {
         </div>
       </section>
 
-      {/* ===== 6. Resource center — uneven grid, dark lead card ===== */}
+      {/* ===== 6. Platform — the screens the delivery actually hands over.
+           Every caption describes only what is visible in the shot; the
+           figures inside the screens are demo data, which the note under the
+           heading says out loud (DESIGN.md §7 bans passing invented metrics
+           off as real). ===== */}
+      <section
+        id="platform"
+        className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-16 md:py-24"
+      >
+        <div className="mx-auto max-w-[1400px]">
+          <SectionHeading
+            eyebrow={t("platform.eyebrow")}
+            title={t("platform.title")}
+            lead={t("platform.lead")}
+          />
+          {/* Orange carries the warning; the label itself stays charcoal —
+              Signal Orange on a light tint is ~2.3:1 and would fail contrast
+              as body text. */}
+          <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-[rgba(245,130,32,0.3)] bg-[rgba(245,130,32,0.07)] px-3 py-1.5 font-mono text-[11px] text-[rgba(20,24,28,0.7)]">
+            <Info className="h-3.5 w-3.5 shrink-0 text-[#f58220]" />
+            {t("platform.note")}
+          </p>
+
+          {/* Lead shot beside the copy: text has no fixed aspect, so an
+              unequal 7/5 split is safe here — unlike the shot pairs below,
+              which stay equal halves to keep their captions on one
+              baseline. */}
+          <motion.div
+            className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-12"
+            {...revealProps}
+          >
+            <motion.div variants={cardVariants} className="lg:col-span-7">
+              <ConsoleShot
+                src="/dpp/console-overview.png"
+                shot={platformShots[0]}
+                sizes="(max-width: 1024px) 100vw, 800px"
+              />
+            </motion.div>
+            <motion.div variants={cardVariants} className="lg:col-span-5">
+              {highlights.map((item, i) => (
+                <div
+                  key={item.title}
+                  className={`border-t border-[rgba(20,24,28,0.08)] py-6 ${
+                    i === highlights.length - 1
+                      ? "border-b border-b-[rgba(20,24,28,0.08)]"
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className="h-4 w-[3px] shrink-0 rounded-full"
+                      style={{
+                        background: ["#00794c", "#3ab27f", "#f58220"][i],
+                      }}
+                    />
+                    <h3
+                      className="text-[15px] font-semibold"
+                      style={{ color: "#16181c" }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p
+                    className="mt-2 max-w-[52ch] text-[13px]"
+                    style={{ color: "rgba(20,24,28,0.6)", lineHeight: 1.6 }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* The four remaining screens run as two equal pairs, in the order
+              a customer meets them: intake → passports, then suppliers →
+              review. */}
+          <motion.div
+            className="mt-14 grid gap-x-6 gap-y-14 lg:grid-cols-2"
+            {...revealProps}
+          >
+            {(
+              [
+                ["/dpp/console-import.png", platformShots[2]],
+                ["/dpp/console-passports.png", platformShots[1]],
+                ["/dpp/console-suppliers.png", platformShots[3]],
+                ["/dpp/console-compliance.png", platformShots[4]],
+              ] as const
+            ).map(([src, shot]) => (
+              <motion.div key={src} variants={cardVariants}>
+                <ConsoleShot
+                  src={src}
+                  shot={shot}
+                  sizes="(max-width: 1024px) 100vw, 660px"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== 7. Resource center — uneven grid, dark lead card ===== */}
       <section
         id="resources"
         className="apple-section-light border-t border-[rgba(20,24,28,0.06)] px-6 py-16 md:py-24"
@@ -864,7 +1028,7 @@ export default function DppShowcase() {
         </div>
       </section>
 
-      {/* ===== 7. Conversion CTA ===== */}
+      {/* ===== 8. Conversion CTA ===== */}
       <section className="paper-dots apple-section-light relative overflow-hidden border-t border-[rgba(20,24,28,0.06)] px-6 py-20 md:py-28">
         <div
           aria-hidden
